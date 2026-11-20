@@ -5,10 +5,17 @@ const COPY = {
     langAttr: 'en',
     localeName: 'English',
     switchLabel: '中文',
-    nav: { features: 'Features', safety: 'Safety', guides: 'Guides', pricing: 'Pricing', support: 'Support' },
+    nav: { demo: 'Demo', features: 'Features', safety: 'Safety', guides: 'Guides', pricing: 'Pricing', support: 'Support' },
     ctaShort: 'Mac App Store',
     ctaMain: 'Download on the Mac App Store',
     ctaGuides: 'Read Storage Guides',
+    ctaWatch: 'Watch Demo',
+    demoEyebrow: 'Video Walkthrough',
+    demoTitle: 'See CleanBit in action on macOS',
+    demoSub: 'A quick real-screen walkthrough of Smart Scan, Build Artifacts, Space Analysis, and the Trash vs. permanent deletion confirmation dialog.',
+    demoPlay: 'Play Product Demo',
+    demoOpenYt: 'Watch on YouTube ↗',
+    demoPrivacy: 'Privacy-enhanced embed (youtube-nocookie.com) loads only when you click play.',
     heroBadge: 'macOS 15+ · Mac App Store · App Sandbox',
     heroTitleA: 'Free up Mac disk space.',
     heroTitleB: 'Know what you’re removing.',
@@ -134,10 +141,17 @@ const COPY = {
     langAttr: 'zh-Hans',
     localeName: '简体中文',
     switchLabel: 'English',
-    nav: { features: '功能', safety: '安全设计', guides: '指南', pricing: '定价', support: '支持' },
+    nav: { demo: '视频演示', features: '功能', safety: '安全设计', guides: '指南', pricing: '定价', support: '支持' },
     ctaShort: 'Mac App Store',
     ctaMain: '前往 Mac App Store 下载',
     ctaGuides: '阅读 Mac 空间清理指南',
+    ctaWatch: '观看演示视频',
+    demoEyebrow: '产品演示',
+    demoTitle: '实机录屏：看清 CleanBit 怎么扫描与确认清理',
+    demoSub: '完整演示智能扫描、项目产物、空间分析以及清理前的「废纸篓 / 永久删除」分栏确认流程。',
+    demoPlay: '播放产品演示视频',
+    demoOpenYt: '在 YouTube 打开 ↗',
+    demoPrivacy: '点击播放后才加载无跟踪嵌入式播放器（youtube-nocookie.com）。',
     heroBadge: 'macOS 15+ · Mac App Store · App 沙盒',
     heroTitleA: '释放 Mac 磁盘空间，',
     heroTitleB: '删之前清楚知道删的是什么。',
@@ -319,6 +333,7 @@ export function renderLayout({ lang = 'en', title, description, canonicalPath, a
         <span>CleanBit</span>
       </a>
       <nav class="nav" aria-label="Main navigation">
+        <a href="${escapeHtml(homeHref)}#demo">${t.nav.demo}</a>
         <a href="${escapeHtml(homeHref)}#features">${t.nav.features}</a>
         <a href="${escapeHtml(homeHref)}#safety">${t.nav.safety}</a>
         <a href="${escapeHtml(guidesHref)}" class="${activeNav === 'guides' ? 'active' : ''}">${t.nav.guides}</a>
@@ -380,6 +395,23 @@ export function renderLayout({ lang = 'en', title, description, canonicalPath, a
           btn.textContent = 'Copied';
           setTimeout(function(){ btn.textContent = old; }, 1600);
         });
+      });
+    });
+    // Click-to-load privacy-enhanced YouTube embed
+    document.querySelectorAll('[data-yt-play]').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        var id = btn.getAttribute('data-yt-play');
+        var title = btn.getAttribute('data-yt-title') || 'CleanBit Demo';
+        var wrap = btn.closest('.video-frame');
+        if (!id || !wrap) return;
+        var iframe = document.createElement('iframe');
+        iframe.src = 'https://www.youtube-nocookie.com/embed/' + encodeURIComponent(id) + '?autoplay=1&rel=0';
+        iframe.title = title;
+        iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+        iframe.allowFullscreen = true;
+        iframe.referrerPolicy = 'strict-origin-when-cross-origin';
+        wrap.innerHTML = '';
+        wrap.appendChild(iframe);
       });
     });
   })();
@@ -471,6 +503,7 @@ export function renderHome(lang, guides, ctx) {
       <p class="hero-sub">${escapeHtml(t.heroSub)}</p>
       <div class="hero-cta">
         <a class="pill pill-primary" href="${escapeHtml(appStoreHref)}" target="_blank" rel="noopener noreferrer">${escapeHtml(t.ctaMain)}</a>
+        ${ctx.config.youtubeVideoId ? `<a class="pill pill-secondary" href="#demo">▶ ${escapeHtml(t.ctaWatch)}</a>` : ''}
         <a class="pill pill-secondary" href="${escapeHtml(guidesHref)}">${escapeHtml(t.ctaGuides)}</a>
       </div>
       <div class="hero-trust">${escapeHtml(t.heroTrust)}</div>
@@ -484,6 +517,33 @@ export function renderHome(lang, guides, ctx) {
       </div>
     </div>
   </section>
+
+  ${ctx.config.youtubeVideoId ? `<section class="section" id="demo">
+    <div class="container">
+      <div class="section-head">
+        <div class="section-eyebrow">${escapeHtml(t.demoEyebrow)}</div>
+        <h2>${escapeHtml(t.demoTitle)}</h2>
+        <p>${escapeHtml(t.demoSub)}</p>
+      </div>
+      <div class="video-shell">
+        <div class="video-frame">
+          <button type="button" class="video-poster" data-yt-play="${escapeHtml(ctx.config.youtubeVideoId)}" data-yt-title="${escapeHtml(t.demoTitle)}" aria-label="${escapeHtml(t.demoPlay)}">
+            <img src="${escapeHtml(ctx.relUrl(`/assets/screens/${screenPrefix}-smart-scan.webp`))}" alt="${escapeHtml(t.demoTitle)}" loading="lazy" decoding="async" />
+            <span class="video-overlay">
+              <span class="video-play" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.14v13.72a1 1 0 0 0 1.53.85l11.02-6.86a1 1 0 0 0 0-1.7L9.53 4.29A1 1 0 0 0 8 5.14z"/></svg>
+              </span>
+              <span class="video-play-label">${escapeHtml(t.demoPlay)}</span>
+            </span>
+          </button>
+        </div>
+        <div class="video-foot">
+          <span>${escapeHtml(t.demoPrivacy)}</span>
+          <a href="https://www.youtube.com/watch?v=${escapeHtml(ctx.config.youtubeVideoId)}" target="_blank" rel="noopener noreferrer">${escapeHtml(t.demoOpenYt)}</a>
+        </div>
+      </div>
+    </div>
+  </section>` : ''}
 
   <section class="section" id="safety">
     <div class="container">
@@ -577,6 +637,22 @@ export function renderHome(lang, guides, ctx) {
     }))
   };
 
+  const videoLd = ctx.config.youtubeVideoId
+    ? {
+        '@context': 'https://schema.org',
+        '@type': 'VideoObject',
+        name: t.demoTitle,
+        description: t.demoSub,
+        thumbnailUrl: [
+          `https://i.ytimg.com/vi/${ctx.config.youtubeVideoId}/hqdefault.jpg`,
+          ctx.absUrl('/assets/og-cover.png')
+        ],
+        uploadDate: '2026-11-21',
+        contentUrl: `https://www.youtube.com/watch?v=${ctx.config.youtubeVideoId}`,
+        embedUrl: `https://www.youtube-nocookie.com/embed/${ctx.config.youtubeVideoId}`
+      }
+    : null;
+
   return renderLayout({
     lang,
     title: lang === 'en'
@@ -585,7 +661,7 @@ export function renderHome(lang, guides, ctx) {
     description: t.heroSub,
     canonicalPath: lang === 'en' ? '/' : '/zh/',
     altPath: lang === 'en' ? '/zh/' : '/',
-    jsonLd: [softwareLd, faqLd],
+    jsonLd: [softwareLd, faqLd, videoLd],
     bodyHtml,
     ctx
   });

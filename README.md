@@ -7,6 +7,7 @@ CleanBit is a native SwiftUI disk space cleaner built for macOS 15+ and distribu
 - **Website:** https://ceelog.github.io/CleanBit-Mac-App/
 - **简体中文:** https://ceelog.github.io/CleanBit-Mac-App/zh/
 - **Mac App Store:** https://apps.apple.com/app/apple-store/id6829159531?pt=127116872&ct=github-readme&mt=8
+- **Video Demo (YouTube):** https://www.youtube.com/watch?v=SQDQhvJGRfY
 - **Storage Guides:** https://ceelog.github.io/CleanBit-Mac-App/guides/
 
 ![CleanBit Smart Scan](assets/screens/en-smart-scan.webp)
