@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Is Xcode DerivedData Safe to Delete? What Happens and How to Clean It — CleanBit</title>
+  <meta name="description" content="Yes, Xcode DerivedData is safe to delete. Learn what lives inside DerivedData, what actually happens after removing it, and how to clean Xcode caches safely." />
+  <link rel="canonical" href="https://ceelog.github.io/CleanBit-Mac-App/guides/is-xcode-deriveddata-safe-to-delete/" />
+  <link rel="alternate" hreflang="en" href="https://ceelog.github.io/CleanBit-Mac-App/guides/is-xcode-deriveddata-safe-to-delete/" />
+  <link rel="alternate" hreflang="zh-Hans" href="https://ceelog.github.io/CleanBit-Mac-App/zh/guides/" />
+  <link rel="alternate" hreflang="x-default" href="https://ceelog.github.io/CleanBit-Mac-App/guides/is-xcode-deriveddata-safe-to-delete/" />
+  <link rel="icon" type="image/png" href="/CleanBit-Mac-App/assets/favicon.png" />
+  <link rel="apple-touch-icon" href="/CleanBit-Mac-App/assets/icon.png" />
+  <link rel="alternate" type="application/rss+xml" title="CleanBit Guides (English)" href="https://ceelog.github.io/CleanBit-Mac-App/feed.xml" />
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="CleanBit" />
+  <meta property="og:title" content="Is Xcode DerivedData Safe to Delete? What Happens and How to Clean It — CleanBit" />
+  <meta property="og:description" content="Yes, Xcode DerivedData is safe to delete. Learn what lives inside DerivedData, what actually happens after removing it, and how to clean Xcode caches safely." />
+  <meta property="og:url" content="https://ceelog.github.io/CleanBit-Mac-App/guides/is-xcode-deriveddata-safe-to-delete/" />
+  <meta property="og:image" content="https://ceelog.github.io/CleanBit-Mac-App/assets/screens/en-smart-scan.webp" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Is Xcode DerivedData Safe to Delete? What Happens and How to Clean It — CleanBit" />
+  <meta name="twitter:description" content="Yes, Xcode DerivedData is safe to delete. Learn what lives inside DerivedData, what actually happens after removing it, and how to clean Xcode caches safely." />
+  <meta name="twitter:image" content="https://ceelog.github.io/CleanBit-Mac-App/assets/screens/en-smart-scan.webp" />
+  <meta name="theme-color" content="#111419" />
+  <link rel="stylesheet" href="/CleanBit-Mac-App/styles.css" />
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Is Xcode DerivedData Safe to Delete? What Happens and How to Clean It","description":"Yes, Xcode DerivedData is safe to delete. Learn what lives inside DerivedData, what actually happens after removing it, and how to clean Xcode caches safely.","datePublished":"2026-11-21","dateModified":"2026-11-21","inLanguage":"en","author":{"@type":"Organization","name":"CleanBit Developer","url":"https://ceelog.github.io/CleanBit-Mac-App/"},"publisher":{"@type":"Organization","name":"CleanBit","logo":{"@type":"ImageObject","url":"https://ceelog.github.io/CleanBit-Mac-App/assets/icon.png"}},"mainEntityOfPage":"https://ceelog.github.io/CleanBit-Mac-App/guides/is-xcode-deriveddata-safe-to-delete/","image":"https://ceelog.github.io/CleanBit-Mac-App/assets/screens/en-smart-scan.webp"}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"CleanBit","item":"https://ceelog.github.io/CleanBit-Mac-App/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://ceelog.github.io/CleanBit-Mac-App/guides/"},{"@type":"ListItem","position":3,"name":"Is Xcode DerivedData Safe to Delete? What Happens and How to Clean It","item":"https://ceelog.github.io/CleanBit-Mac-App/guides/is-xcode-deriveddata-safe-to-delete/"}]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Will deleting DerivedData delete my source code or Git history?","acceptedAnswer":{"@type":"Answer","text":"No. Your source code and .git repository live in your project directory, not in ~/Library/Developer/Xcode/DerivedData."}},{"@type":"Question","name":"How often should I clear Xcode DerivedData?","acceptedAnswer":{"@type":"Answer","text":"You don't need to clear it on a strict schedule. Clearing it once every few weeks—or whenever you finish a major project, upgrade Xcode, or see unexplained build glitches—is usually enough."}},{"@type":"Question","name":"Does deleting DerivedData break Swift Package Manager dependencies?","acceptedAnswer":{"@type":"Answer","text":"No, your package list is defined in Package.swift or your .xcodeproj and Package.resolved. Xcode will re-resolve and rebuild packages automatically the next time you open the project (an internet connection may be required if packages are not cached elsewhere)."}}]}</script>
+  
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="/CleanBit-Mac-App/">
+        <img src="/CleanBit-Mac-App/assets/icon.png" alt="CleanBit icon" width="28" height="28" />
+        <span>CleanBit</span>
+      </a>
+      <nav class="nav" aria-label="Main navigation">
+        <a href="/CleanBit-Mac-App/#features">Features</a>
+        <a href="/CleanBit-Mac-App/#safety">Safety</a>
+        <a href="/CleanBit-Mac-App/guides/" class="active">Guides</a>
+        <a href="/CleanBit-Mac-App/#pricing">Pricing</a>
+        <a href="/CleanBit-Mac-App/support/" class="">Support</a>
+      </nav>
+      <div class="header-actions">
+        <a class="lang-switch" href="/CleanBit-Mac-App/zh/guides/" hreflang="zh-Hans">中文</a>
+        <a class="pill pill-primary pill-sm" href="https://apps.apple.com/app/apple-store/id6829159531?pt=127116872&amp;ct=website-guides&amp;mt=8" target="_blank" rel="noopener noreferrer">Mac App Store</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+  <article class="article-shell">
+    <div class="container">
+      <div class="breadcrumbs">
+        <a href="/CleanBit-Mac-App/">CleanBit</a>
+        <span>/</span>
+        <a href="/CleanBit-Mac-App/guides/">Guides</a>
+        <span>/</span>
+        <span>Developer Storage</span>
+      </div>
+      <div class="article-grid">
+        <div>
+          <header class="article-header">
+            <div class="badge">Developer Storage</div>
+            <h1>Is Xcode DerivedData Safe to Delete? What Happens and How to Clean It</h1>
+            <p class="article-lead">Yes, Xcode DerivedData is safe to delete. Learn what lives inside DerivedData, what actually happens after removing it, and how to clean Xcode caches safely.</p>
+            <div class="article-meta">
+              <span>CleanBit Developer</span>
+              <span>·</span>
+              <span>Updated 2026-11-21</span>
+              <span>·</span>
+              <span>3 min read</span>
+            </div>
+          </header>
+
+          <div class="prose">
+            <p><strong>Yes—Xcode&#39;s <code>DerivedData</code> folder is completely safe to delete.</strong> Xcode automatically regenerates everything inside it the next time you open and build a project. The only trade-off is that your next build and index for each project will start from scratch and take longer.</p>
+<p>On one developer Mac we measured, <code>~/Library/Developer/Xcode/DerivedData</code> occupied <strong>15.3 GB</strong> (and adjacent Xcode storage was even larger: <strong>24.1 GB</strong> in <code>iOS DeviceSupport</code> and <strong>43.0 GB</strong> in <code>CoreSimulator/Devices</code>). Your numbers will differ depending on how many projects and iOS SDKs you work with.</p>
+<h2 id="what-is-inside-librarydeveloperxcodederiveddata">What is inside <code>~/Library/Developer/Xcode/DerivedData</code>?<a class="heading-anchor" href="#what-is-inside-librarydeveloperxcodederiveddata" aria-label="Link to section">#</a></h2>
+<p>Whenever you open a project or workspace in Xcode, it creates a subfolder inside <code>DerivedData</code> containing:</p>
+<ul><li><strong>Build intermediates and compiled binaries</strong> (<code>Build/Intermediates.noindex</code>, <code>Build/Products</code>)</li><li><strong>Code completion and navigation indexes</strong> (<code>Index.noindex</code>)</li><li><strong>Build and test logs</strong> (<code>Logs</code>)</li><li><strong>Resolved Swift Package checkouts</strong> (<code>SourcePackages</code>) when using SwiftPM inside Xcode</li></ul>
+<p>None of your source code lives in <code>DerivedData</code>. It is purely generated build output and cache data.</p>
+<h2 id="when-should-you-quit-xcode-before-deleting-it">When should you quit Xcode before deleting it?<a class="heading-anchor" href="#when-should-you-quit-xcode-before-deleting-it" aria-label="Link to section">#</a></h2>
+<p>Always <strong>quit Xcode first</strong> before deleting <code>DerivedData</code>. Removing files while Xcode is actively indexing or compiling can cause failed builds or stale editor warnings until you restart Xcode.</p>
+<p>Also keep in mind: if a project pulls Swift Packages from the internet, the next open after clearing <code>DerivedData</code> will re-fetch or re-resolve those packages, so avoid wiping it right before boarding a flight without Wi-Fi.</p>
+<h2 id="how-to-check-and-delete-deriveddata-manually">How to check and delete <code>DerivedData</code> manually<a class="heading-anchor" href="#how-to-check-and-delete-deriveddata-manually" aria-label="Link to section">#</a></h2>
+<h3 id="check-how-much-space-xcode-folders-occupy-read-only">Check how much space Xcode folders occupy (read-only)<a class="heading-anchor" href="#check-how-much-space-xcode-folders-occupy-read-only" aria-label="Link to section">#</a></h3>
+<div class="code-block"><div class="code-head"><span class="code-lang">bash</span><button type="button" class="code-copy" data-copy>Copy</button></div><pre><code>du -sh \
+  ~/Library/Developer/Xcode/DerivedData \
+  ~/Library/Developer/Xcode/iOS\ DeviceSupport \
+  ~/Library/Developer/CoreSimulator/Devices \
+  ~/Library/Developer/Xcode/Archives 2&gt;/dev/null</code></pre></div>
+<h3 id="option-1-remove-via-finder">Option 1: Remove via Finder<a class="heading-anchor" href="#option-1-remove-via-finder" aria-label="Link to section">#</a></h3>
+<ol><li>Quit Xcode.</li><li>In Finder, press <code>Shift + Command + G</code>.</li><li>Paste <code>~/Library/Developer/Xcode/DerivedData</code> and press Return.</li><li>Select the project folders you no longer need (or everything inside <code>DerivedData</code>) and move them to the Trash, then empty the Trash.</li></ol>
+<h3 id="option-2-remove-via-terminal">Option 2: Remove via Terminal<a class="heading-anchor" href="#option-2-remove-via-terminal" aria-label="Link to section">#</a></h3>
+<div class="code-block"><div class="code-head"><span class="code-lang">bash</span><button type="button" class="code-copy" data-copy>Copy</button></div><pre><code># Quit Xcode first, then clear the contents of DerivedData
+rm -rf ~/Library/Developer/Xcode/DerivedData/*</code></pre></div>
+<h3 id="option-3-check-other-xcode-folders-carefully">Option 3: Check other Xcode folders carefully<a class="heading-anchor" href="#option-3-check-other-xcode-folders-carefully" aria-label="Link to section">#</a></h3>
+<div class="table-wrap"><table><thead><tr><th style="text-align:left">Folder</th><th style="text-align:left">Safe to delete?</th><th style="text-align:left">What happens</th></tr></thead><tbody><tr><td style="text-align:left"><code>DerivedData</code></td><td style="text-align:left">Yes (rebuilt automatically)</td><td style="text-align:left">Next build &amp; index takes longer</td></tr><tr><td style="text-align:left"><code>iOS DeviceSupport</code> (older versions)</td><td style="text-align:left">Usually yes</td><td style="text-align:left">Xcode re-copies symbols if you reconnect an older iOS device</td></tr><tr><td style="text-align:left"><code>CoreSimulator/Caches</code></td><td style="text-align:left">Yes (when simulators are shut down)</td><td style="text-align:left">Simulator regenerates caches as needed</td></tr><tr><td style="text-align:left"><code>Xcode/Archives</code></td><td style="text-align:left"><strong>Review carefully</strong></td><td style="text-align:left">Contains <code>.xcarchive</code> builds &amp; dSYMs used to symbolicate App Store crash logs—do not delete blindly</td></tr></tbody></table></div>
+<aside class="callout callout-note"><div class="callout-title">NOTE</div><p><code>DerivedData</code> is only one piece of developer storage. Before deleting <code>Archives</code>, make sure you no longer need the dSYM files for shipped app versions.</p></aside>
+<h2 id="how-cleanbit-handles-xcode-storage">How CleanBit handles Xcode storage<a class="heading-anchor" href="#how-cleanbit-handles-xcode-storage" aria-label="Link to section">#</a></h2>
+<p>I&#39;m the developer of <strong>CleanBit</strong>, a sandboxed Mac App Store disk space cleaner for macOS 15+. CleanBit separates Xcode folders by risk instead of lumping them together:</p>
+<ul><li><strong>Recommended</strong> (rebuilds automatically): <code>Xcode DerivedData</code>, old <code>iOS DeviceSupport</code> versions (keeping the 2 most recent), SwiftUI Preview Data, and caches inside shut-down Simulator devices. Caches of apps that are currently running are blocked automatically.</li><li><strong>Review</strong> (not pre-selected, always moved to Trash): <code>Xcode Archives</code>, so you don&#39;t accidentally wipe shipped build archives.</li><li>Before confirming, CleanBit splits how much will be permanently deleted vs. moved to the Trash—and you can switch Recommended caches to Trash in Settings if you prefer.</li></ul>
+<figure class="prose-figure"><img src="/CleanBit-Mac-App/assets/screens/en-smart-scan.webp" alt="CleanBit Smart Scan showing Xcode DerivedData, Old iOS DeviceSupport, and impact notes" loading="lazy" decoding="async" /><figcaption>CleanBit Smart Scan explains the impact of each Xcode cache before you confirm.</figcaption></figure>
+<h2 id="frequently-asked-questions">Frequently Asked Questions<a class="heading-anchor" href="#frequently-asked-questions" aria-label="Link to section">#</a></h2>
+<h3 id="will-deleting-deriveddata-delete-my-source-code-or-git-history">Will deleting <code>DerivedData</code> delete my source code or Git history?<a class="heading-anchor" href="#will-deleting-deriveddata-delete-my-source-code-or-git-history" aria-label="Link to section">#</a></h3>
+<p>No. Your source code and <code>.git</code> repository live in your project directory, not in <code>~/Library/Developer/Xcode/DerivedData</code>.</p>
+<h3 id="how-often-should-i-clear-xcode-deriveddata">How often should I clear Xcode <code>DerivedData</code>?<a class="heading-anchor" href="#how-often-should-i-clear-xcode-deriveddata" aria-label="Link to section">#</a></h3>
+<p>You don&#39;t need to clear it on a strict schedule. Clearing it once every few weeks—or whenever you finish a major project, upgrade Xcode, or see unexplained build glitches—is usually enough.</p>
+<h3 id="does-deleting-deriveddata-break-swift-package-manager-dependencies">Does deleting <code>DerivedData</code> break Swift Package Manager dependencies?<a class="heading-anchor" href="#does-deleting-deriveddata-break-swift-package-manager-dependencies" aria-label="Link to section">#</a></h3>
+<p>No, your package list is defined in <code>Package.swift</code> or your <code>.xcodeproj</code> and <code>Package.resolved</code>. Xcode will re-resolve and rebuild packages automatically the next time you open the project (an internet connection may be required if packages are not cached elsewhere).</p>
+          </div>
+
+          <aside class="article-cta">
+            <div>
+              <h3>Prefer to inspect and clean visually?</h3>
+              <p>CleanBit is a sandboxed Mac App Store utility. Every item shows what it is and what happens if you remove it—scanning and your first 2 cleans are free.</p>
+            </div>
+            <a class="pill pill-primary" href="https://apps.apple.com/app/apple-store/id6829159531?pt=127116872&amp;ct=website-guides&amp;mt=8" target="_blank" rel="noopener noreferrer">Download on the Mac App Store</a>
+          </aside>
+
+          <p class="disclosure-note">Written by the CleanBit developer with AI assistance. All measurements were taken on a real developer Mac.</p>
+          <section style="margin-top:44px">
+        <h2 style="font-size:20px;margin:0 0 16px">Related guides</h2>
+        <div class="grid-2">
+          <a class="card guide-card" href="/CleanBit-Mac-App/guides/how-to-find-and-delete-old-node-modules-on-mac/">
+                <div>
+                  <div class="guide-meta"><span>Developer Storage</span><span>·</span><span>3 min read</span></div>
+                  <h3 style="margin-top:6px;font-size:16px">How to Find and Delete Old node_modules Folders on a Mac</h3>
+                </div>
+                <span class="guide-more">Read guide →</span>
+              </a>
+        </div>
+      </section>
+        </div>
+        <aside class="toc-aside" aria-label="Table of contents">
+        <div class="toc-title">On this page</div>
+        <ul class="toc-list">
+          <li class="toc-h2"><a href="#what-is-inside-librarydeveloperxcodederiveddata">What is inside ~/Library/Developer/Xcode/DerivedData?</a></li><li class="toc-h2"><a href="#when-should-you-quit-xcode-before-deleting-it">When should you quit Xcode before deleting it?</a></li><li class="toc-h2"><a href="#how-to-check-and-delete-deriveddata-manually">How to check and delete DerivedData manually</a></li><li class="toc-h3"><a href="#check-how-much-space-xcode-folders-occupy-read-only">Check how much space Xcode folders occupy (read-only)</a></li><li class="toc-h3"><a href="#option-1-remove-via-finder">Option 1: Remove via Finder</a></li><li class="toc-h3"><a href="#option-2-remove-via-terminal">Option 2: Remove via Terminal</a></li><li class="toc-h3"><a href="#option-3-check-other-xcode-folders-carefully">Option 3: Check other Xcode folders carefully</a></li><li class="toc-h2"><a href="#how-cleanbit-handles-xcode-storage">How CleanBit handles Xcode storage</a></li><li class="toc-h2"><a href="#frequently-asked-questions">Frequently Asked Questions</a></li><li class="toc-h3"><a href="#will-deleting-deriveddata-delete-my-source-code-or-git-history">Will deleting DerivedData delete my source code or Git history?</a></li><li class="toc-h3"><a href="#how-often-should-i-clear-xcode-deriveddata">How often should I clear Xcode DerivedData?</a></li><li class="toc-h3"><a href="#does-deleting-deriveddata-break-swift-package-manager-dependencies">Does deleting DerivedData break Swift Package Manager dependencies?</a></li>
+        </ul>
+      </aside>
+      </div>
+    </div>
+  </article>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div>
+        <strong style="color:var(--text)">CleanBit</strong> · macOS 15+ · Available exclusively on the Mac App Store.
+        <div style="margin-top:6px">© 2026 Dongguan Aibeike AI Co., Ltd.</div>
+      </div>
+      <div class="footer-links">
+        <a href="/CleanBit-Mac-App/guides/">Guides</a>
+        <a href="/CleanBit-Mac-App/support/">Support</a>
+        <a href="/CleanBit-Mac-App/privacy/">Privacy</a>
+        <a href="/CleanBit-Mac-App/terms/">Terms</a>
+        <a href="/CleanBit-Mac-App/feed.xml">RSS</a>
+        <a href="https://github.com/Ceelog/CleanBit-Mac-App" target="_blank" rel="noopener noreferrer">GitHub</a>
+        <a href="https://apps.apple.com/app/apple-store/id6829159531?pt=127116872&amp;ct=website-guides&amp;mt=8" target="_blank" rel="noopener noreferrer">Mac App Store</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+  (function(){
+    // Interactive module-tinted screenshot switcher
+    var frame = document.getElementById('showcase-frame');
+    var img = document.getElementById('showcase-img');
+    var cap = document.getElementById('showcase-caption');
+    document.querySelectorAll('[data-tab-btn]').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        document.querySelectorAll('[data-tab-btn]').forEach(function(b){ b.classList.remove('is-active'); b.setAttribute('aria-selected','false'); });
+        btn.classList.add('is-active');
+        btn.setAttribute('aria-selected','true');
+        if (img) { img.src = btn.dataset.src; img.alt = btn.dataset.alt; }
+        if (cap) cap.textContent = btn.dataset.caption;
+        if (frame) frame.setAttribute('data-tint', btn.dataset.tint);
+      });
+    });
+    // One-click code block copy
+    document.querySelectorAll('[data-copy]').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        var pre = btn.closest('.code-block').querySelector('pre code');
+        if (!pre || !navigator.clipboard) return;
+        navigator.clipboard.writeText(pre.textContent || '').then(function(){
+          var old = btn.textContent;
+          btn.textContent = 'Copied';
+          setTimeout(function(){ btn.textContent = old; }, 1600);
+        });
+      });
+    });
+  })();
+  </script>
+</body>
+</html>

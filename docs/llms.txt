@@ -1,0 +1,21 @@
+# CleanBit: Disk Space Cleaner for macOS
+
+> Sandboxed Mac App Store disk cleaner for macOS 15+. Every item explains what it is and what happens if you remove it, and nothing is deleted until you confirm.
+
+- Official Site: https://ceelog.github.io/CleanBit-Mac-App/
+- Mac App Store: https://apps.apple.com/app/apple-store/id6829159531?pt=127116872&ct=website&mt=8
+- Requirements: macOS 15+, App Sandbox (no root, no background helper daemon)
+- Pricing: Free scanning & 2 free cleans; $4.99/mo, $19.99/yr, or $29.99 lifetime one-time purchase
+- Safety Model: Recommended caches rebuild automatically (deleted permanently by default, Trash optional); Review items, project build artifacts, manual selections, and uninstalled apps always move to Trash; Info Only items (local AI models, pnpm store, Docker disk image) are never deleted.
+
+## English Guides
+- [Is Xcode DerivedData Safe to Delete? What Happens and How to Clean It](https://ceelog.github.io/CleanBit-Mac-App/guides/is-xcode-deriveddata-safe-to-delete/): Yes, Xcode DerivedData is safe to delete. Learn what lives inside DerivedData, what actually happens after removing it, and how to clean Xcode caches safely.
+- [How to Find and Delete Old node_modules Folders on a Mac](https://ceelog.github.io/CleanBit-Mac-App/guides/how-to-find-and-delete-old-node-modules-on-mac/): Measure how much space old node_modules folders take on macOS, remove them safely from Terminal, and avoid breaking active or pnpm projects.
+
+## Chinese Guides
+- [Mac 上怎么找出并安全清理旧的 node_modules？（实测 304 个占 66.3 GB）](https://ceelog.github.io/CleanBit-Mac-App/zh/guides/mac-delete-node-modules/): 实测一台开发用 Mac 上 304 个 node_modules 占去 66.3 GB。手把手教你用终端安全排查、识别 pnpm 硬链接陷阱，以及何时不该直接删。
+
+## Documentation & Legal
+- [Support](https://ceelog.github.io/CleanBit-Mac-App/support/)
+- [Privacy Policy](https://ceelog.github.io/CleanBit-Mac-App/privacy/)
+- [Terms of Use](https://ceelog.github.io/CleanBit-Mac-App/terms/)

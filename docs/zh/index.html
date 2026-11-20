@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CleanBit — Mac App Store 沙盒磁盘清理工具，看得见删什么</title>
+  <meta name="description" content="CleanBit 在你授权的个人文件夹里找出缓存、日志、项目构建产物和卸载残留。每一项都写明是什么、删了有什么影响，你确认之前什么都不删。" />
+  <link rel="canonical" href="https://ceelog.github.io/CleanBit-Mac-App/zh/" />
+  <link rel="alternate" hreflang="en" href="https://ceelog.github.io/CleanBit-Mac-App/" />
+  <link rel="alternate" hreflang="zh-Hans" href="https://ceelog.github.io/CleanBit-Mac-App/zh/" />
+  <link rel="alternate" hreflang="x-default" href="https://ceelog.github.io/CleanBit-Mac-App/" />
+  <link rel="icon" type="image/png" href="/CleanBit-Mac-App/assets/favicon.png" />
+  <link rel="apple-touch-icon" href="/CleanBit-Mac-App/assets/icon.png" />
+  <link rel="alternate" type="application/rss+xml" title="CleanBit Guides (简体中文)" href="https://ceelog.github.io/CleanBit-Mac-App/zh/feed.xml" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="CleanBit" />
+  <meta property="og:title" content="CleanBit — Mac App Store 沙盒磁盘清理工具，看得见删什么" />
+  <meta property="og:description" content="CleanBit 在你授权的个人文件夹里找出缓存、日志、项目构建产物和卸载残留。每一项都写明是什么、删了有什么影响，你确认之前什么都不删。" />
+  <meta property="og:url" content="https://ceelog.github.io/CleanBit-Mac-App/zh/" />
+  <meta property="og:image" content="https://ceelog.github.io/CleanBit-Mac-App/assets/og-cover.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="CleanBit — Mac App Store 沙盒磁盘清理工具，看得见删什么" />
+  <meta name="twitter:description" content="CleanBit 在你授权的个人文件夹里找出缓存、日志、项目构建产物和卸载残留。每一项都写明是什么、删了有什么影响，你确认之前什么都不删。" />
+  <meta name="twitter:image" content="https://ceelog.github.io/CleanBit-Mac-App/assets/og-cover.png" />
+  <meta name="theme-color" content="#111419" />
+  <link rel="stylesheet" href="/CleanBit-Mac-App/styles.css" />
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"CleanBit: Disk Space Cleaner","operatingSystem":"macOS 15+","applicationCategory":"UtilitiesApplication","downloadUrl":"https://apps.apple.com/app/apple-store/id6829159531?pt=127116872&ct=website&mt=8","url":"https://ceelog.github.io/CleanBit-Mac-App/zh/","image":"https://ceelog.github.io/CleanBit-Mac-App/assets/icon.png","screenshot":"https://ceelog.github.io/CleanBit-Mac-App/assets/screens/zh-smart-scan.webp","description":"CleanBit 在你授权的个人文件夹里找出缓存、日志、项目构建产物和卸载残留。每一项都写明是什么、删了有什么影响，你确认之前什么都不删。","offers":[{"@type":"Offer","price":"0","priceCurrency":"USD","description":"Free scan and first 2 cleans free"},{"@type":"Offer","price":"4.99","priceCurrency":"USD","description":"Monthly subscription"},{"@type":"Offer","price":"19.99","priceCurrency":"USD","description":"Yearly subscription"},{"@type":"Offer","price":"29.99","priceCurrency":"USD","description":"One-time lifetime purchase"}]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"为什么 CleanBit 只上架 Mac App Store 且坚持使用沙盒？","acceptedAnswer":{"@type":"Answer","text":"App Sandbox 保证了 CleanBit 不需要 root 权限、不安装常驻后台的 helper，只能访问你在系统打开面板中明确授权的文件夹。完全磁盘访问权限是可选的，仅在需要清理废纸篓、Safari 和其他应用容器时才需要打开。"}},{"@type":"Question","name":"删掉的文件还能恢复吗？","acceptedAnswer":{"@type":"Answer","text":"按风险分级处理，确认前会写清楚。「建议清理」中会自动重建的缓存默认直接删除以立即腾出空间（你也可以在设置里改为移到废纸篓）；「需要确认」项、项目产物、手动选择的文件和卸载的应用一律移到废纸篓，可以放回原处。"}},{"@type":"Question","name":"为什么 CleanBit 不清理 APFS 本地快照或系统缓存？","acceptedAnswer":{"@type":"Answer","text":"这些位置受 macOS 系统保护，沙盒应用无法触碰。我们不要求 root 权限，也不假装能清理系统自己管理的空间，只专注处理个人文件夹内明确可安全检查的缓存、开发产物和残留。"}},{"@type":"Question","name":"CleanBit 会上传我的文件名或路径吗？","acceptedAnswer":{"@type":"Answer","text":"不会。扫描、重复文件校验和清理全部在你的 Mac 本地完成，文件名、路径、内容和已安装应用列表从不离开电脑。CleanBit 仅通过 Firebase Analytics 收集匿名使用统计（规则 ID、数量与体积）。"}},{"@type":"Question","name":"支持哪些 macOS 版本？","acceptedAnswer":{"@type":"Answer","text":"CleanBit 使用 SwiftUI 原生开发，支持 macOS 15 及以上版本。"}}]}</script>
+  
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="/CleanBit-Mac-App/zh/">
+        <img src="/CleanBit-Mac-App/assets/icon.png" alt="CleanBit icon" width="28" height="28" />
+        <span>CleanBit</span>
+      </a>
+      <nav class="nav" aria-label="Main navigation">
+        <a href="/CleanBit-Mac-App/zh/#features">功能</a>
+        <a href="/CleanBit-Mac-App/zh/#safety">安全设计</a>
+        <a href="/CleanBit-Mac-App/zh/guides/" class="">指南</a>
+        <a href="/CleanBit-Mac-App/zh/#pricing">定价</a>
+        <a href="/CleanBit-Mac-App/support/" class="">支持</a>
+      </nav>
+      <div class="header-actions">
+        <a class="lang-switch" href="/CleanBit-Mac-App/" hreflang="en">English</a>
+        <a class="pill pill-primary pill-sm" href="https://apps.apple.com/app/apple-store/id6829159531?pt=127116872&amp;ct=website&amp;mt=8" target="_blank" rel="noopener noreferrer">Mac App Store</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+  <section class="hero">
+    <div class="container">
+      <div class="badge"><span class="badge-dot"></span>macOS 15+ · Mac App Store · App 沙盒</div>
+      <h1>释放 Mac 磁盘空间，<br /><span class="accent">删之前清楚知道删的是什么。</span></h1>
+      <p class="hero-sub">CleanBit 在你授权的个人文件夹里找出缓存、日志、项目构建产物和卸载残留。每一项都写明是什么、删了有什么影响，你确认之前什么都不删。</p>
+      <div class="hero-cta">
+        <a class="pill pill-primary" href="https://apps.apple.com/app/apple-store/id6829159531?pt=127116872&amp;ct=website&amp;mt=8" target="_blank" rel="noopener noreferrer">前往 Mac App Store 下载</a>
+        <a class="pill pill-secondary" href="/CleanBit-Mac-App/zh/guides/">阅读 Mac 空间清理指南</a>
+      </div>
+      <div class="hero-trust">不要 root · 不装后台 helper · 扫描免费、前 2 次清理免费 · 支持一次买断</div>
+
+      <div class="showcase">
+        <div class="showcase-tabs" role="tablist"><button type="button" class="tab-btn is-active" role="tab" aria-selected="true" data-tab-btn data-tint="brand" data-src="/CleanBit-Mac-App/assets/screens/zh-smart-scan.webp" data-alt="CleanBit 智能扫描" data-caption="结果分为「建议清理」「需要确认」「仅展示」三类，每一项写明删除影响，正在运行的应用缓存自动锁定。"><span class="tab-dot dot-brand"></span>智能扫描</button><button type="button" class="tab-btn" role="tab" aria-selected="false" data-tab-btn data-tint="coral" data-src="/CleanBit-Mac-App/assets/screens/zh-confirm.webp" data-alt="CleanBit 删除前确认" data-caption="确认框明确分开显示多少移到废纸篓、多少永久删除；真正删除前每一项都会再次校验。"><span class="tab-dot dot-coral"></span>删除前确认</button><button type="button" class="tab-btn" role="tab" aria-selected="false" data-tab-btn data-tint="amber" data-src="/CleanBit-Mac-App/assets/screens/zh-artifacts.webp" data-alt="CleanBit 项目产物" data-caption="找出项目里的 node_modules、target、.build、.venv，显示每个项目最后改动时间；被 Git 跟踪的内容一律跳过。"><span class="tab-dot dot-amber"></span>项目产物</button><button type="button" class="tab-btn" role="tab" aria-selected="false" data-tab-btn data-tint="ocean" data-src="/CleanBit-Mac-App/assets/screens/zh-space.webp" data-alt="CleanBit 空间分析" data-caption="一张图看清个人文件夹或任意文件夹的占用分布，点进去逐层查看空间去向。"><span class="tab-dot dot-ocean"></span>空间分析</button><button type="button" class="tab-btn" role="tab" aria-selected="false" data-tab-btn data-tint="sky" data-src="/CleanBit-Mac-App/assets/screens/zh-uninstall.webp" data-alt="CleanBit 卸载应用" data-caption="连同缓存、偏好设置、日志和窗口状态一起卸载；可能含用户文档的应用数据单独列出且默认不勾选。"><span class="tab-dot dot-sky"></span>卸载应用</button></div>
+        <div class="showcase-frame" id="showcase-frame" data-tint="brand">
+          <img id="showcase-img" src="/CleanBit-Mac-App/assets/screens/zh-smart-scan.webp" alt="CleanBit 智能扫描" width="1800" height="1125" fetchpriority="high" />
+        </div>
+        <p class="showcase-caption" id="showcase-caption">结果分为「建议清理」「需要确认」「仅展示」三类，每一项写明删除影响，正在运行的应用缓存自动锁定。</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="safety">
+    <div class="container">
+      <div class="section-head">
+        <div class="section-eyebrow">安全设计</div>
+        <h2>不做盲目的「一键清理」，按风险决定怎么删</h2>
+        <p>市面上很多清理工具只给一个大数字和一键按钮。CleanBit 把每一项按风险分成三档，把选择权交给你。</p>
+      </div>
+      <div class="grid-3"><article class="card">
+        <div class="card-top"><span class="level-chip level-safe">建议清理</span></div>
+        <h3>会自动重建的缓存</h3>
+        <p>应用缓存、浏览器缓存（不碰 Cookie、历史记录和密码）、Xcode DerivedData 及包管理器缓存。默认直接删除让空间立刻回来，也可在设置中改为移到废纸篓。</p>
+      </article><article class="card">
+        <div class="card-top"><span class="level-chip level-review">需要确认</span></div>
+        <h3>默认不勾选，一律进废纸篓</h3>
+        <p>项目构建目录（node_modules、target、.venv）、旧安装包（.dmg、.pkg）、应用残留、AI 旧会话与卸载的应用。一律移到废纸篓，随时可以放回原处。</p>
+      </article><article class="card">
+        <div class="card-top"><span class="level-chip level-info">仅展示</span></div>
+        <h3>只列出体积，永远不删除</h3>
+        <p>本地 AI 模型（Hugging Face、Ollama、LM Studio）、pnpm store（硬链接存储）和 Docker 虚拟磁盘。只告诉你占了多大，并提示更稳妥的官方清理命令。</p>
+      </article></div>
+      <div class="boundary-box">
+        <h3>坦诚说明 App 沙盒边界</h3>
+        <p>CleanBit 运行在 macOS App Sandbox 内，不要 root 权限，不安装常驻后台的 helper，也不假装能清理系统保护区域：</p>
+        <ul class="boundary-list"><li>不碰系统缓存和 APFS 本地快照</li><li>不删除 iCloud Drive 云盘文件（由访达处理）</li><li>不做「释放内存」「加速 Mac」或杀毒</li><li>不在后台静默自动删除任何文件</li><li>文件名、路径和文件内容从不离开你的 Mac</li></ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="features">
+    <div class="container">
+      <div class="section-head">
+        <div class="section-eyebrow">为开发者与 AI 编程打造</div>
+        <h2>看清 Xcode、包管理器和 AI 工具悄悄占掉的空间</h2>
+        <p>无论是写原生应用，还是用 Claude Code / Codex 做一堆实验项目，开发缓存和旧依赖都会在几周内涨到几十 GB。</p>
+      </div>
+      <div class="grid-2"><article class="card">
+        <div class="card-top"><span class="icon-tile tile-amber">{}</span></div>
+        <h3>项目产物（Build Artifacts）</h3>
+        <p>扫描 node_modules、target、.build、.venv、Pods 等构建目录，标出每个项目的最后修改时间。被 Git 跟踪的内容一律跳过，删除时移到废纸篓。</p>
+      </article><article class="card">
+        <div class="card-top"><span class="icon-tile tile-brand">⌘</span></div>
+        <h3>Xcode 与 12+ 包管理器缓存</h3>
+        <p>覆盖 Xcode DerivedData、旧版 iOS DeviceSupport、SwiftUI 预览、已关机模拟器缓存，以及 npm、Yarn、pnpm、Bun、pip、uv、SwiftPM、CocoaPods、Homebrew、Go、Cargo、Gradle。</p>
+      </article><article class="card">
+        <div class="card-top"><span class="icon-tile tile-violet">AI</span></div>
+        <h3>AI 工具与旧会话</h3>
+        <p>清理 Claude Code 旧版本与 Claude 桌面版缓存，按时间范围查看 Claude Code 和 Codex 旧会话；Ollama、LM Studio、Hugging Face 本地模型只展示大小、不删除。</p>
+      </article><article class="card">
+        <div class="card-top"><span class="icon-tile tile-ocean">◫</span></div>
+        <h3>空间分析、大文件与重复文件</h3>
+        <p>逐层下钻的文件夹占用视图、按大小和上次打开时间筛选的大文件、按内容完全一致比对的重复文件查找（每组至少保留一份），以及完整的应用卸载。</p>
+      </article></div>
+    </div>
+  </section>
+
+  <section class="section" id="pricing">
+    <div class="container">
+      <div class="section-head">
+        <div class="section-eyebrow">透明定价</div>
+        <h2>扫描免费，支持订阅或一次买断</h2>
+        <p>全部购买与恢复均通过 Mac App Store 处理，无需注册账号；中国区等店面实际价格以 App Store 显示为准。</p>
+      </div>
+      <div class="grid-3"><article class="card price-card">
+        <div>
+          <h3>免费体验</h3>
+          <div class="price-num">免费 <span class="price-unit">扫描无限次</span></div>
+          <ul class="price-list"><li>无限次扫描与空间分析</li><li>前 2 次清理完全免费</li><li>先看清每项细节再决定</li><li>内置演练模式（Dry Run）随时试用</li></ul>
+        </div>
+      </article><article class="card price-card">
+        <div>
+          <h3>按月 / 按年订阅</h3>
+          <div class="price-num">$4.99 <span class="price-unit">/ 月 · 或 $19.99 / 年</span></div>
+          <ul class="price-list"><li>解锁全部模块无限次清理</li><li>Apple 账户设置中随时取消</li><li>包含后续规则库更新</li><li>价格以当地 App Store 显示为准</li></ul>
+        </div>
+      </article><article class="card price-card featured">
+        <div>
+          <h3>终身买断</h3>
+          <div class="price-num">$29.99 <span class="price-unit">一次付费 · 无续费</span></div>
+          <ul class="price-list"><li>一次购买，无需持续订阅</li><li>解锁全部模块无限次清理</li><li>包含后续规则库更新</li><li>通过 Mac App Store 随时恢复购买</li></ul>
+        </div>
+      </article></div>
+      <div style="margin-top:24px">
+        <a class="pill pill-primary" href="https://apps.apple.com/app/apple-store/id6829159531?pt=127116872&amp;ct=website&amp;mt=8" target="_blank" rel="noopener noreferrer">前往 Mac App Store 下载</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="guides">
+    <div class="container">
+      <div class="section-head">
+        <div class="section-eyebrow">Mac 存储清理指南</div>
+        <h2>先给不依赖工具的手动方案，再用真实数据说话</h2>
+        <p>每一篇指南都包含完整可用的终端命令与访达路径，即使不装 CleanBit 也能直接解决问题。</p>
+      </div>
+      <div class="grid-2"><a class="card guide-card" href="/CleanBit-Mac-App/zh/guides/mac-delete-node-modules/">
+        <div>
+          <div class="guide-meta">
+            <span>开发者存储</span>
+            <span>·</span>
+            <span>2026-11-21</span>
+            <span>·</span>
+            <span>3 分钟阅读</span>
+          </div>
+          <h3 style="margin-top:8px">Mac 上怎么找出并安全清理旧的 node_modules？（实测 304 个占 66.3 GB）</h3>
+          <p style="margin-top:8px">实测一台开发用 Mac 上 304 个 node_modules 占去 66.3 GB。手把手教你用终端安全排查、识别 pnpm 硬链接陷阱，以及何时不该直接删。</p>
+        </div>
+        <span class="guide-more">阅读指南 →</span>
+      </a></div>
+      <div style="margin-top:22px"><a class="pill pill-secondary" href="/CleanBit-Mac-App/zh/guides/">查看全部指南 →</a></div>
+    </div>
+  </section>
+
+  <section class="section" id="faq">
+    <div class="container">
+      <div class="section-head">
+        <div class="section-eyebrow">常见问题</div>
+        <h2>你可能会关心的问题</h2>
+      </div>
+      <div class="faq-list"><details class="faq-item" open>
+        <summary>为什么 CleanBit 只上架 Mac App Store 且坚持使用沙盒？</summary>
+        <p>App Sandbox 保证了 CleanBit 不需要 root 权限、不安装常驻后台的 helper，只能访问你在系统打开面板中明确授权的文件夹。完全磁盘访问权限是可选的，仅在需要清理废纸篓、Safari 和其他应用容器时才需要打开。</p>
+      </details><details class="faq-item">
+        <summary>删掉的文件还能恢复吗？</summary>
+        <p>按风险分级处理，确认前会写清楚。「建议清理」中会自动重建的缓存默认直接删除以立即腾出空间（你也可以在设置里改为移到废纸篓）；「需要确认」项、项目产物、手动选择的文件和卸载的应用一律移到废纸篓，可以放回原处。</p>
+      </details><details class="faq-item">
+        <summary>为什么 CleanBit 不清理 APFS 本地快照或系统缓存？</summary>
+        <p>这些位置受 macOS 系统保护，沙盒应用无法触碰。我们不要求 root 权限，也不假装能清理系统自己管理的空间，只专注处理个人文件夹内明确可安全检查的缓存、开发产物和残留。</p>
+      </details><details class="faq-item">
+        <summary>CleanBit 会上传我的文件名或路径吗？</summary>
+        <p>不会。扫描、重复文件校验和清理全部在你的 Mac 本地完成，文件名、路径、内容和已安装应用列表从不离开电脑。CleanBit 仅通过 Firebase Analytics 收集匿名使用统计（规则 ID、数量与体积）。</p>
+      </details><details class="faq-item">
+        <summary>支持哪些 macOS 版本？</summary>
+        <p>CleanBit 使用 SwiftUI 原生开发，支持 macOS 15 及以上版本。</p>
+      </details></div>
+    </div>
+  </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div>
+        <strong style="color:var(--text)">CleanBit</strong> · macOS 15+ · 仅在 Mac App Store 上架。
+        <div style="margin-top:6px">© 2026 Dongguan Aibeike AI Co., Ltd.</div>
+      </div>
+      <div class="footer-links">
+        <a href="/CleanBit-Mac-App/zh/guides/">指南</a>
+        <a href="/CleanBit-Mac-App/support/">支持</a>
+        <a href="/CleanBit-Mac-App/privacy/">Privacy</a>
+        <a href="/CleanBit-Mac-App/terms/">Terms</a>
+        <a href="/CleanBit-Mac-App/zh/feed.xml">RSS</a>
+        <a href="https://github.com/Ceelog/CleanBit-Mac-App" target="_blank" rel="noopener noreferrer">GitHub</a>
+        <a href="https://apps.apple.com/app/apple-store/id6829159531?pt=127116872&amp;ct=website&amp;mt=8" target="_blank" rel="noopener noreferrer">Mac App Store</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+  (function(){
+    // Interactive module-tinted screenshot switcher
+    var frame = document.getElementById('showcase-frame');
+    var img = document.getElementById('showcase-img');
+    var cap = document.getElementById('showcase-caption');
+    document.querySelectorAll('[data-tab-btn]').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        document.querySelectorAll('[data-tab-btn]').forEach(function(b){ b.classList.remove('is-active'); b.setAttribute('aria-selected','false'); });
+        btn.classList.add('is-active');
+        btn.setAttribute('aria-selected','true');
+        if (img) { img.src = btn.dataset.src; img.alt = btn.dataset.alt; }
+        if (cap) cap.textContent = btn.dataset.caption;
+        if (frame) frame.setAttribute('data-tint', btn.dataset.tint);
+      });
+    });
+    // One-click code block copy
+    document.querySelectorAll('[data-copy]').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        var pre = btn.closest('.code-block').querySelector('pre code');
+        if (!pre || !navigator.clipboard) return;
+        navigator.clipboard.writeText(pre.textContent || '').then(function(){
+          var old = btn.textContent;
+          btn.textContent = 'Copied';
+          setTimeout(function(){ btn.textContent = old; }, 1600);
+        });
+      });
+    });
+  })();
+  </script>
+</body>
+</html>

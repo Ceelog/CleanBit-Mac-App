@@ -1,0 +1,23 @@
+{
+  "name": "CleanBit",
+  "origin": "https://ceelog.github.io",
+  "basePath": "/CleanBit-Mac-App",
+  "repoUrl": "https://github.com/Ceelog/CleanBit-Mac-App",
+  "appStoreId": "6829159531",
+  "providerToken": "127116872",
+  "appStoreBase": "https://apps.apple.com/app/apple-store/id6829159531",
+  "supportEmail": "support@pokiai.com",
+  "company": "Dongguan Aibeike AI Co., Ltd.",
+  "author": {
+    "en": "CleanBit Developer",
+    "zh": "CleanBit 开发者"
+  },
+  "pricing": {
+    "freeCleans": 2,
+    "monthlyUsd": "$4.99",
+    "yearlyUsd": "$19.99",
+    "lifetimeUsd": "$29.99"
+  },
+  "minMacOS": "macOS 15+",
+  "gaMeasurementId": ""
+}

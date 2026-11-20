@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CleanBit — Sandboxed Mac App Store Disk Space Cleaner</title>
+  <meta name="description" content="CleanBit finds caches, logs, build artifacts, and app leftovers in your home folder. Every item explains what it is and what happens if you remove it—nothing is deleted until you confirm." />
+  <link rel="canonical" href="https://ceelog.github.io/CleanBit-Mac-App/" />
+  <link rel="alternate" hreflang="en" href="https://ceelog.github.io/CleanBit-Mac-App/" />
+  <link rel="alternate" hreflang="zh-Hans" href="https://ceelog.github.io/CleanBit-Mac-App/zh/" />
+  <link rel="alternate" hreflang="x-default" href="https://ceelog.github.io/CleanBit-Mac-App/" />
+  <link rel="icon" type="image/png" href="/CleanBit-Mac-App/assets/favicon.png" />
+  <link rel="apple-touch-icon" href="/CleanBit-Mac-App/assets/icon.png" />
+  <link rel="alternate" type="application/rss+xml" title="CleanBit Guides (English)" href="https://ceelog.github.io/CleanBit-Mac-App/feed.xml" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="CleanBit" />
+  <meta property="og:title" content="CleanBit — Sandboxed Mac App Store Disk Space Cleaner" />
+  <meta property="og:description" content="CleanBit finds caches, logs, build artifacts, and app leftovers in your home folder. Every item explains what it is and what happens if you remove it—nothing is deleted until you confirm." />
+  <meta property="og:url" content="https://ceelog.github.io/CleanBit-Mac-App/" />
+  <meta property="og:image" content="https://ceelog.github.io/CleanBit-Mac-App/assets/og-cover.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="CleanBit — Sandboxed Mac App Store Disk Space Cleaner" />
+  <meta name="twitter:description" content="CleanBit finds caches, logs, build artifacts, and app leftovers in your home folder. Every item explains what it is and what happens if you remove it—nothing is deleted until you confirm." />
+  <meta name="twitter:image" content="https://ceelog.github.io/CleanBit-Mac-App/assets/og-cover.png" />
+  <meta name="theme-color" content="#111419" />
+  <link rel="stylesheet" href="/CleanBit-Mac-App/styles.css" />
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"CleanBit: Disk Space Cleaner","operatingSystem":"macOS 15+","applicationCategory":"UtilitiesApplication","downloadUrl":"https://apps.apple.com/app/apple-store/id6829159531?pt=127116872&ct=website&mt=8","url":"https://ceelog.github.io/CleanBit-Mac-App/","image":"https://ceelog.github.io/CleanBit-Mac-App/assets/icon.png","screenshot":"https://ceelog.github.io/CleanBit-Mac-App/assets/screens/en-smart-scan.webp","description":"CleanBit finds caches, logs, build artifacts, and app leftovers in your home folder. Every item explains what it is and what happens if you remove it—nothing is deleted until you confirm.","offers":[{"@type":"Offer","price":"0","priceCurrency":"USD","description":"Free scan and first 2 cleans free"},{"@type":"Offer","price":"4.99","priceCurrency":"USD","description":"Monthly subscription"},{"@type":"Offer","price":"19.99","priceCurrency":"USD","description":"Yearly subscription"},{"@type":"Offer","price":"29.99","priceCurrency":"USD","description":"One-time lifetime purchase"}]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Why is CleanBit only on the Mac App Store and sandboxed?","acceptedAnswer":{"@type":"Answer","text":"Running inside Apple’s App Sandbox means CleanBit never asks for root access, never installs a persistent background helper daemon, and can only read folders you explicitly grant in a standard macOS open panel. Full Disk Access is optional and only needed for the Trash, Safari caches, and other apps’ containers."}},{"@type":"Question","name":"Can deleted items be recovered?","acceptedAnswer":{"@type":"Answer","text":"It depends on the risk tier, and CleanBit tells you before you confirm. Recommended caches that apps rebuild automatically are deleted permanently by default (you can switch them to Trash in Settings). Review items, build artifacts, manually picked files, and uninstalled apps always move to the Trash so you can put them back."}},{"@type":"Question","name":"Why doesn’t CleanBit clean APFS local snapshots or system caches?","acceptedAnswer":{"@type":"Answer","text":"macOS protects system locations and APFS snapshots outside the App Sandbox. Rather than asking for root privileges or claiming to clean things macOS manages itself, CleanBit focuses strictly on the user-space caches, developer files, and leftovers inside your home folder."}},{"@type":"Question","name":"Does CleanBit collect or upload my file names?","acceptedAnswer":{"@type":"Answer","text":"Never. Scanning, duplicate hashing, and cleaning happen entirely locally on your Mac. File names, paths, contents, and installed app lists never leave your device. CleanBit uses Firebase Analytics only for anonymous product telemetry (built-in rule IDs, counts, and sizes rounded to MB)."}},{"@type":"Question","name":"What macOS version is required?","acceptedAnswer":{"@type":"Answer","text":"CleanBit is built natively with SwiftUI for macOS 15 (Sequoia) and later."}}]}</script>
+  
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="/CleanBit-Mac-App/">
+        <img src="/CleanBit-Mac-App/assets/icon.png" alt="CleanBit icon" width="28" height="28" />
+        <span>CleanBit</span>
+      </a>
+      <nav class="nav" aria-label="Main navigation">
+        <a href="/CleanBit-Mac-App/#features">Features</a>
+        <a href="/CleanBit-Mac-App/#safety">Safety</a>
+        <a href="/CleanBit-Mac-App/guides/" class="">Guides</a>
+        <a href="/CleanBit-Mac-App/#pricing">Pricing</a>
+        <a href="/CleanBit-Mac-App/support/" class="">Support</a>
+      </nav>
+      <div class="header-actions">
+        <a class="lang-switch" href="/CleanBit-Mac-App/zh/" hreflang="zh-Hans">中文</a>
+        <a class="pill pill-primary pill-sm" href="https://apps.apple.com/app/apple-store/id6829159531?pt=127116872&amp;ct=website&amp;mt=8" target="_blank" rel="noopener noreferrer">Mac App Store</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+  <section class="hero">
+    <div class="container">
+      <div class="badge"><span class="badge-dot"></span>macOS 15+ · Mac App Store · App Sandbox</div>
+      <h1>Free up Mac disk space.<br /><span class="accent">Know what you’re removing.</span></h1>
+      <p class="hero-sub">CleanBit finds caches, logs, build artifacts, and app leftovers in your home folder. Every item explains what it is and what happens if you remove it—nothing is deleted until you confirm.</p>
+      <div class="hero-cta">
+        <a class="pill pill-primary" href="https://apps.apple.com/app/apple-store/id6829159531?pt=127116872&amp;ct=website&amp;mt=8" target="_blank" rel="noopener noreferrer">Download on the Mac App Store</a>
+        <a class="pill pill-secondary" href="/CleanBit-Mac-App/guides/">Read Storage Guides</a>
+      </div>
+      <div class="hero-trust">No root · No background helper · Free scan &amp; 2 free cleans · One-time purchase option</div>
+
+      <div class="showcase">
+        <div class="showcase-tabs" role="tablist"><button type="button" class="tab-btn is-active" role="tab" aria-selected="true" data-tab-btn data-tint="brand" data-src="/CleanBit-Mac-App/assets/screens/en-smart-scan.webp" data-alt="CleanBit Smart Scan" data-caption="Every group is labeled Recommended, Review, or Info Only, with plain-language impact notes and active apps blocked automatically."><span class="tab-dot dot-brand"></span>Smart Scan</button><button type="button" class="tab-btn" role="tab" aria-selected="false" data-tab-btn data-tint="coral" data-src="/CleanBit-Mac-App/assets/screens/en-confirm.webp" data-alt="CleanBit Confirmation" data-caption="Before anything is deleted, CleanBit splits what goes to the Trash from what is deleted permanently—and re-checks every item."><span class="tab-dot dot-coral"></span>Confirmation</button><button type="button" class="tab-btn" role="tab" aria-selected="false" data-tab-btn data-tint="amber" data-src="/CleanBit-Mac-App/assets/screens/en-artifacts.webp" data-alt="CleanBit Build Artifacts" data-caption="Find node_modules, target, .build, and .venv across projects with last-modified dates. Anything tracked by Git is skipped."><span class="tab-dot dot-amber"></span>Build Artifacts</button><button type="button" class="tab-btn" role="tab" aria-selected="false" data-tab-btn data-tint="ocean" data-src="/CleanBit-Mac-App/assets/screens/en-space.webp" data-alt="CleanBit Space Analysis" data-caption="Drill down into your home folder or any folder you grant to see where your gigabytes actually went."><span class="tab-dot dot-ocean"></span>Space Analysis</button><button type="button" class="tab-btn" role="tab" aria-selected="false" data-tab-btn data-tint="sky" data-src="/CleanBit-Mac-App/assets/screens/en-uninstall.webp" data-alt="CleanBit Uninstall Apps" data-caption="Remove an app with its caches, preferences, and logs. Personal app data is listed separately and never pre-selected."><span class="tab-dot dot-sky"></span>Uninstall Apps</button></div>
+        <div class="showcase-frame" id="showcase-frame" data-tint="brand">
+          <img id="showcase-img" src="/CleanBit-Mac-App/assets/screens/en-smart-scan.webp" alt="CleanBit Smart Scan" width="1800" height="1125" fetchpriority="high" />
+        </div>
+        <p class="showcase-caption" id="showcase-caption">Every group is labeled Recommended, Review, or Info Only, with plain-language impact notes and active apps blocked automatically.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="safety">
+    <div class="container">
+      <div class="section-head">
+        <div class="section-eyebrow">Safe by Design</div>
+        <h2>No blind &quot;one-click clean.&quot; Every deletion is explained and classified.</h2>
+        <p>Most Mac cleaners hand you one giant number and a single button. CleanBit shows three clear tiers and lets you decide.</p>
+      </div>
+      <div class="grid-3"><article class="card">
+        <div class="card-top"><span class="level-chip level-safe">Recommended</span></div>
+        <h3>Caches that rebuild themselves</h3>
+        <p>App caches, browser caches (never touching cookies, history, or passwords), Xcode DerivedData, and package manager caches. Deleted permanently by default so space returns immediately—or send them to Trash in Settings.</p>
+      </article><article class="card">
+        <div class="card-top"><span class="level-chip level-review">Review</span></div>
+        <h3>Not pre-selected. Always goes to Trash.</h3>
+        <p>Project build folders (node_modules, target, .venv), old installers (.dmg, .pkg), uninstalled app leftovers, AI sessions, and uninstalled apps. Always moved to the Trash so you can put them back.</p>
+      </article><article class="card">
+        <div class="card-top"><span class="level-chip level-info">Info Only</span></div>
+        <h3>Shown for awareness. Never deletable.</h3>
+        <p>Local AI models (Hugging Face, Ollama, LM Studio), pnpm store (hard-linked), and Docker Desktop disk images. CleanBit shows how much space they take and points you to the right command.</p>
+      </article></div>
+      <div class="boundary-box">
+        <h3>Honest about App Sandbox boundaries</h3>
+        <p>CleanBit runs strictly inside the macOS App Sandbox with no root privileges and no background daemon. We do not pretend to clean what macOS protects:</p>
+        <ul class="boundary-list"><li>No APFS local snapshots or system caches</li><li>No iCloud Drive items (handled safely in Finder)</li><li>No &quot;RAM freeing&quot;, &quot;Mac speed-up&quot;, or antivirus claims</li><li>No silent background deletions</li><li>No file names or paths ever leave your Mac</li></ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="features">
+    <div class="container">
+      <div class="section-head">
+        <div class="section-eyebrow">Built for Developers &amp; AI Coding</div>
+        <h2>Clean up what Xcode, package managers, and AI tools leave behind.</h2>
+        <p>Whether you ship Swift apps or build side projects with Claude Code and Codex, developer caches quietly grow to tens of gigabytes.</p>
+      </div>
+      <div class="grid-2"><article class="card">
+        <div class="card-top"><span class="icon-tile tile-amber">{}</span></div>
+        <h3>Project Build Artifacts</h3>
+        <p>Finds node_modules, target, .build, .venv, Pods, and more—showing when you last touched each project. Anything tracked by Git is automatically skipped, and removed folders go to the Trash.</p>
+      </article><article class="card">
+        <div class="card-top"><span class="icon-tile tile-brand">⌘</span></div>
+        <h3>Xcode &amp; 12+ Package Managers</h3>
+        <p>Covers Xcode DerivedData, old DeviceSupport versions, SwiftUI previews, shut-down simulator caches, plus npm, Yarn, pnpm, Bun, pip, uv, SwiftPM, CocoaPods, Homebrew, Go, Cargo, and Gradle.</p>
+      </article><article class="card">
+        <div class="card-top"><span class="icon-tile tile-violet">AI</span></div>
+        <h3>AI Tools &amp; Old Sessions</h3>
+        <p>Cleans old Claude Code versions and Claude desktop caches, and lets you review old Claude Code and Codex sessions by date range. Local models from Ollama, LM Studio, and Hugging Face are listed without risk.</p>
+      </article><article class="card">
+        <div class="card-top"><span class="icon-tile tile-ocean">◫</span></div>
+        <h3>Space Map, Large Files &amp; Duplicates</h3>
+        <p>Drill-down folder map, large files filtered by size and last-opened date, byte-identical duplicate finder (always keeping at least one copy), and clean app uninstaller.</p>
+      </article></div>
+    </div>
+  </section>
+
+  <section class="section" id="pricing">
+    <div class="container">
+      <div class="section-head">
+        <div class="section-eyebrow">Transparent Pricing</div>
+        <h2>Scan for free. Pay once if you want.</h2>
+        <p>Every purchase is handled securely by Apple through the Mac App Store. No accounts, no dark patterns.</p>
+      </div>
+      <div class="grid-3"><article class="card price-card">
+        <div>
+          <h3>Free to Try</h3>
+          <div class="price-num">$0 <span class="price-unit">forever</span></div>
+          <ul class="price-list"><li>Unlimited scanning &amp; space analysis</li><li>First 2 cleans completely free</li><li>Inspect every item &amp; impact before buying</li><li>Dry Run Mode available anytime</li></ul>
+        </div>
+      </article><article class="card price-card">
+        <div>
+          <h3>Monthly / Yearly</h3>
+          <div class="price-num">$4.99 <span class="price-unit">/ mo · or $19.99 / yr</span></div>
+          <ul class="price-list"><li>Unlimited cleaning across all modules</li><li>Cancel anytime in Apple Account settings</li><li>All future rule updates included</li><li>Family Sharing supported via App Store</li></ul>
+        </div>
+      </article><article class="card price-card featured">
+        <div>
+          <h3>Lifetime</h3>
+          <div class="price-num">$29.99 <span class="price-unit">one-time purchase</span></div>
+          <ul class="price-list"><li>Pay once, no recurring subscription</li><li>Unlimited cleaning across all modules</li><li>All future rule updates included</li><li>Restorable anytime via Mac App Store</li></ul>
+        </div>
+      </article></div>
+      <div style="margin-top:24px">
+        <a class="pill pill-primary" href="https://apps.apple.com/app/apple-store/id6829159531?pt=127116872&amp;ct=website&amp;mt=8" target="_blank" rel="noopener noreferrer">Download on the Mac App Store</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="guides">
+    <div class="container">
+      <div class="section-head">
+        <div class="section-eyebrow">Mac Storage Guides</div>
+        <h2>Practical guides backed by real measurements</h2>
+        <p>Step-by-step manual terminal &amp; Finder solutions first—so every guide is useful even if you never install CleanBit.</p>
+      </div>
+      <div class="grid-2"><a class="card guide-card" href="/CleanBit-Mac-App/guides/is-xcode-deriveddata-safe-to-delete/">
+        <div>
+          <div class="guide-meta">
+            <span>Developer Storage</span>
+            <span>·</span>
+            <span>2026-11-21</span>
+            <span>·</span>
+            <span>3 min read</span>
+          </div>
+          <h3 style="margin-top:8px">Is Xcode DerivedData Safe to Delete? What Happens and How to Clean It</h3>
+          <p style="margin-top:8px">Yes, Xcode DerivedData is safe to delete. Learn what lives inside DerivedData, what actually happens after removing it, and how to clean Xcode caches safely.</p>
+        </div>
+        <span class="guide-more">Read guide →</span>
+      </a><a class="card guide-card" href="/CleanBit-Mac-App/guides/how-to-find-and-delete-old-node-modules-on-mac/">
+        <div>
+          <div class="guide-meta">
+            <span>Developer Storage</span>
+            <span>·</span>
+            <span>2026-11-21</span>
+            <span>·</span>
+            <span>3 min read</span>
+          </div>
+          <h3 style="margin-top:8px">How to Find and Delete Old node_modules Folders on a Mac</h3>
+          <p style="margin-top:8px">Measure how much space old node_modules folders take on macOS, remove them safely from Terminal, and avoid breaking active or pnpm projects.</p>
+        </div>
+        <span class="guide-more">Read guide →</span>
+      </a></div>
+      <div style="margin-top:22px"><a class="pill pill-secondary" href="/CleanBit-Mac-App/guides/">View all guides →</a></div>
+    </div>
+  </section>
+
+  <section class="section" id="faq">
+    <div class="container">
+      <div class="section-head">
+        <div class="section-eyebrow">FAQ</div>
+        <h2>Common questions</h2>
+      </div>
+      <div class="faq-list"><details class="faq-item" open>
+        <summary>Why is CleanBit only on the Mac App Store and sandboxed?</summary>
+        <p>Running inside Apple’s App Sandbox means CleanBit never asks for root access, never installs a persistent background helper daemon, and can only read folders you explicitly grant in a standard macOS open panel. Full Disk Access is optional and only needed for the Trash, Safari caches, and other apps’ containers.</p>
+      </details><details class="faq-item">
+        <summary>Can deleted items be recovered?</summary>
+        <p>It depends on the risk tier, and CleanBit tells you before you confirm. Recommended caches that apps rebuild automatically are deleted permanently by default (you can switch them to Trash in Settings). Review items, build artifacts, manually picked files, and uninstalled apps always move to the Trash so you can put them back.</p>
+      </details><details class="faq-item">
+        <summary>Why doesn’t CleanBit clean APFS local snapshots or system caches?</summary>
+        <p>macOS protects system locations and APFS snapshots outside the App Sandbox. Rather than asking for root privileges or claiming to clean things macOS manages itself, CleanBit focuses strictly on the user-space caches, developer files, and leftovers inside your home folder.</p>
+      </details><details class="faq-item">
+        <summary>Does CleanBit collect or upload my file names?</summary>
+        <p>Never. Scanning, duplicate hashing, and cleaning happen entirely locally on your Mac. File names, paths, contents, and installed app lists never leave your device. CleanBit uses Firebase Analytics only for anonymous product telemetry (built-in rule IDs, counts, and sizes rounded to MB).</p>
+      </details><details class="faq-item">
+        <summary>What macOS version is required?</summary>
+        <p>CleanBit is built natively with SwiftUI for macOS 15 (Sequoia) and later.</p>
+      </details></div>
+    </div>
+  </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div>
+        <strong style="color:var(--text)">CleanBit</strong> · macOS 15+ · Available exclusively on the Mac App Store.
+        <div style="margin-top:6px">© 2026 Dongguan Aibeike AI Co., Ltd.</div>
+      </div>
+      <div class="footer-links">
+        <a href="/CleanBit-Mac-App/guides/">Guides</a>
+        <a href="/CleanBit-Mac-App/support/">Support</a>
+        <a href="/CleanBit-Mac-App/privacy/">Privacy</a>
+        <a href="/CleanBit-Mac-App/terms/">Terms</a>
+        <a href="/CleanBit-Mac-App/feed.xml">RSS</a>
+        <a href="https://github.com/Ceelog/CleanBit-Mac-App" target="_blank" rel="noopener noreferrer">GitHub</a>
+        <a href="https://apps.apple.com/app/apple-store/id6829159531?pt=127116872&amp;ct=website&amp;mt=8" target="_blank" rel="noopener noreferrer">Mac App Store</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+  (function(){
+    // Interactive module-tinted screenshot switcher
+    var frame = document.getElementById('showcase-frame');
+    var img = document.getElementById('showcase-img');
+    var cap = document.getElementById('showcase-caption');
+    document.querySelectorAll('[data-tab-btn]').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        document.querySelectorAll('[data-tab-btn]').forEach(function(b){ b.classList.remove('is-active'); b.setAttribute('aria-selected','false'); });
+        btn.classList.add('is-active');
+        btn.setAttribute('aria-selected','true');
+        if (img) { img.src = btn.dataset.src; img.alt = btn.dataset.alt; }
+        if (cap) cap.textContent = btn.dataset.caption;
+        if (frame) frame.setAttribute('data-tint', btn.dataset.tint);
+      });
+    });
+    // One-click code block copy
+    document.querySelectorAll('[data-copy]').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        var pre = btn.closest('.code-block').querySelector('pre code');
+        if (!pre || !navigator.clipboard) return;
+        navigator.clipboard.writeText(pre.textContent || '').then(function(){
+          var old = btn.textContent;
+          btn.textContent = 'Copied';
+          setTimeout(function(){ btn.textContent = old; }, 1600);
+        });
+      });
+    });
+  })();
+  </script>
+</body>
+</html>

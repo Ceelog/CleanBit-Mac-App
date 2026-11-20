@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>CleanBit Mac 存储清理指南</title>
+    <link>https://ceelog.github.io/CleanBit-Mac-App/zh/</link>
+    <atom:link href="https://ceelog.github.io/CleanBit-Mac-App/zh/feed.xml" rel="self" type="application/rss+xml" />
+    <description>围绕 Mac 存储空间、Xcode、node_modules 与 AI 编程工具的实测清理指南。</description>
+    <language>zh-cn</language>
+    <item>
+      <title>Mac 上怎么找出并安全清理旧的 node_modules？（实测 304 个占 66.3 GB）</title>
+      <link>https://ceelog.github.io/CleanBit-Mac-App/zh/guides/mac-delete-node-modules/</link>
+      <guid isPermaLink="true">https://ceelog.github.io/CleanBit-Mac-App/zh/guides/mac-delete-node-modules/</guid>
+      <pubDate>Sat, 21 Nov 2026 00:00:00 GMT</pubDate>
+      <description>实测一台开发用 Mac 上 304 个 node_modules 占去 66.3 GB。手把手教你用终端安全排查、识别 pnpm 硬链接陷阱，以及何时不该直接删。</description>
+    </item>
+  </channel>
+</rss>

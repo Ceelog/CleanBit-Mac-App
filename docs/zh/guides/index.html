@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Mac 磁盘空间与开发者清理指南 — CleanBit</title>
+  <meta name="description" content="围绕 Xcode 缓存、node_modules、AI 编程工具与 macOS 存储占用的实测指南，提供完整手动命令。" />
+  <link rel="canonical" href="https://ceelog.github.io/CleanBit-Mac-App/zh/guides/" />
+  <link rel="alternate" hreflang="en" href="https://ceelog.github.io/CleanBit-Mac-App/guides/" />
+  <link rel="alternate" hreflang="zh-Hans" href="https://ceelog.github.io/CleanBit-Mac-App/zh/guides/" />
+  <link rel="alternate" hreflang="x-default" href="https://ceelog.github.io/CleanBit-Mac-App/guides/" />
+  <link rel="icon" type="image/png" href="/CleanBit-Mac-App/assets/favicon.png" />
+  <link rel="apple-touch-icon" href="/CleanBit-Mac-App/assets/icon.png" />
+  <link rel="alternate" type="application/rss+xml" title="CleanBit Guides (简体中文)" href="https://ceelog.github.io/CleanBit-Mac-App/zh/feed.xml" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="CleanBit" />
+  <meta property="og:title" content="Mac 磁盘空间与开发者清理指南 — CleanBit" />
+  <meta property="og:description" content="围绕 Xcode 缓存、node_modules、AI 编程工具与 macOS 存储占用的实测指南，提供完整手动命令。" />
+  <meta property="og:url" content="https://ceelog.github.io/CleanBit-Mac-App/zh/guides/" />
+  <meta property="og:image" content="https://ceelog.github.io/CleanBit-Mac-App/assets/og-cover.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Mac 磁盘空间与开发者清理指南 — CleanBit" />
+  <meta name="twitter:description" content="围绕 Xcode 缓存、node_modules、AI 编程工具与 macOS 存储占用的实测指南，提供完整手动命令。" />
+  <meta name="twitter:image" content="https://ceelog.github.io/CleanBit-Mac-App/assets/og-cover.png" />
+  <meta name="theme-color" content="#111419" />
+  <link rel="stylesheet" href="/CleanBit-Mac-App/styles.css" />
+  
+  
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="/CleanBit-Mac-App/zh/">
+        <img src="/CleanBit-Mac-App/assets/icon.png" alt="CleanBit icon" width="28" height="28" />
+        <span>CleanBit</span>
+      </a>
+      <nav class="nav" aria-label="Main navigation">
+        <a href="/CleanBit-Mac-App/zh/#features">功能</a>
+        <a href="/CleanBit-Mac-App/zh/#safety">安全设计</a>
+        <a href="/CleanBit-Mac-App/zh/guides/" class="active">指南</a>
+        <a href="/CleanBit-Mac-App/zh/#pricing">定价</a>
+        <a href="/CleanBit-Mac-App/support/" class="">支持</a>
+      </nav>
+      <div class="header-actions">
+        <a class="lang-switch" href="/CleanBit-Mac-App/guides/" hreflang="en">English</a>
+        <a class="pill pill-primary pill-sm" href="https://apps.apple.com/app/apple-store/id6829159531?pt=127116872&amp;ct=website-guides&amp;mt=8" target="_blank" rel="noopener noreferrer">Mac App Store</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+  <section class="article-shell">
+    <div class="container">
+      <div class="breadcrumbs">
+        <a href="/CleanBit-Mac-App/zh/">CleanBit</a>
+        <span>/</span>
+        <span>指南</span>
+      </div>
+      <div class="section-head" style="margin-bottom:32px">
+        <div class="section-eyebrow">Mac 存储清理指南</div>
+        <h1 style="margin:0 0 12px;font-size:clamp(28px,4vw,40px);letter-spacing:-0.025em">Mac 磁盘空间与开发者清理指南</h1>
+        <p>围绕 Xcode 缓存、node_modules、AI 编程工具与 macOS 存储占用的实测指南，提供完整手动命令。</p>
+      </div>
+      <div class="grid-2"><a class="card guide-card" href="/CleanBit-Mac-App/zh/guides/mac-delete-node-modules/">
+        <div>
+          <div class="guide-meta">
+            <span>开发者存储</span>
+            <span>·</span>
+            <span>更新于 2026-11-21</span>
+            <span>·</span>
+            <span>3 分钟阅读</span>
+          </div>
+          <h3 style="margin-top:8px">Mac 上怎么找出并安全清理旧的 node_modules？（实测 304 个占 66.3 GB）</h3>
+          <p style="margin-top:8px">实测一台开发用 Mac 上 304 个 node_modules 占去 66.3 GB。手把手教你用终端安全排查、识别 pnpm 硬链接陷阱，以及何时不该直接删。</p>
+        </div>
+        <span class="guide-more">阅读指南 →</span>
+      </a></div>
+    </div>
+  </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div>
+        <strong style="color:var(--text)">CleanBit</strong> · macOS 15+ · 仅在 Mac App Store 上架。
+        <div style="margin-top:6px">© 2026 Dongguan Aibeike AI Co., Ltd.</div>
+      </div>
+      <div class="footer-links">
+        <a href="/CleanBit-Mac-App/zh/guides/">指南</a>
+        <a href="/CleanBit-Mac-App/support/">支持</a>
+        <a href="/CleanBit-Mac-App/privacy/">Privacy</a>
+        <a href="/CleanBit-Mac-App/terms/">Terms</a>
+        <a href="/CleanBit-Mac-App/zh/feed.xml">RSS</a>
+        <a href="https://github.com/Ceelog/CleanBit-Mac-App" target="_blank" rel="noopener noreferrer">GitHub</a>
+        <a href="https://apps.apple.com/app/apple-store/id6829159531?pt=127116872&amp;ct=website-guides&amp;mt=8" target="_blank" rel="noopener noreferrer">Mac App Store</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+  (function(){
+    // Interactive module-tinted screenshot switcher
+    var frame = document.getElementById('showcase-frame');
+    var img = document.getElementById('showcase-img');
+    var cap = document.getElementById('showcase-caption');
+    document.querySelectorAll('[data-tab-btn]').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        document.querySelectorAll('[data-tab-btn]').forEach(function(b){ b.classList.remove('is-active'); b.setAttribute('aria-selected','false'); });
+        btn.classList.add('is-active');
+        btn.setAttribute('aria-selected','true');
+        if (img) { img.src = btn.dataset.src; img.alt = btn.dataset.alt; }
+        if (cap) cap.textContent = btn.dataset.caption;
+        if (frame) frame.setAttribute('data-tint', btn.dataset.tint);
+      });
+    });
+    // One-click code block copy
+    document.querySelectorAll('[data-copy]').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        var pre = btn.closest('.code-block').querySelector('pre code');
+        if (!pre || !navigator.clipboard) return;
+        navigator.clipboard.writeText(pre.textContent || '').then(function(){
+          var old = btn.textContent;
+          btn.textContent = 'Copied';
+          setTimeout(function(){ btn.textContent = old; }, 1600);
+        });
+      });
+    });
+  })();
+  </script>
+</body>
+</html>
