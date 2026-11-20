@@ -321,7 +321,7 @@ export function renderLayout({ lang = 'en', title, description, canonicalPath, a
   <meta name="twitter:description" content="${escapeHtml(description)}" />
   <meta name="twitter:image" content="${escapeHtml(ogImgAbs)}" />
   <meta name="theme-color" content="#111419" />
-  <link rel="stylesheet" href="${escapeHtml(ctx.relUrl('/styles.css'))}" />
+  <link rel="stylesheet" href="${escapeHtml(ctx.relUrl('/styles.css'))}?v=${escapeHtml(ctx.cssVersion || '1')}" />
   ${ldScripts}
   ${gaSnippet}
 </head>
@@ -395,23 +395,6 @@ export function renderLayout({ lang = 'en', title, description, canonicalPath, a
           btn.textContent = 'Copied';
           setTimeout(function(){ btn.textContent = old; }, 1600);
         });
-      });
-    });
-    // Click-to-load privacy-enhanced YouTube embed
-    document.querySelectorAll('[data-yt-play]').forEach(function(btn){
-      btn.addEventListener('click', function(){
-        var id = btn.getAttribute('data-yt-play');
-        var title = btn.getAttribute('data-yt-title') || 'CleanBit Demo';
-        var wrap = btn.closest('.video-frame');
-        if (!id || !wrap) return;
-        var iframe = document.createElement('iframe');
-        iframe.src = 'https://www.youtube-nocookie.com/embed/' + encodeURIComponent(id) + '?autoplay=1&rel=0';
-        iframe.title = title;
-        iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
-        iframe.allowFullscreen = true;
-        iframe.referrerPolicy = 'strict-origin-when-cross-origin';
-        wrap.innerHTML = '';
-        wrap.appendChild(iframe);
       });
     });
   })();
@@ -526,19 +509,17 @@ export function renderHome(lang, guides, ctx) {
         <p>${escapeHtml(t.demoSub)}</p>
       </div>
       <div class="video-shell">
-        <div class="video-frame">
-          <button type="button" class="video-poster" data-yt-play="${escapeHtml(ctx.config.youtubeVideoId)}" data-yt-title="${escapeHtml(t.demoTitle)}" aria-label="${escapeHtml(t.demoPlay)}">
-            <img src="${escapeHtml(ctx.relUrl(`/assets/screens/${screenPrefix}-smart-scan.webp`))}" alt="${escapeHtml(t.demoTitle)}" loading="lazy" decoding="async" />
-            <span class="video-overlay">
-              <span class="video-play" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.14v13.72a1 1 0 0 0 1.53.85l11.02-6.86a1 1 0 0 0 0-1.7L9.53 4.29A1 1 0 0 0 8 5.14z"/></svg>
-              </span>
-              <span class="video-play-label">${escapeHtml(t.demoPlay)}</span>
-            </span>
-          </button>
+        <div class="video-frame" style="position:relative;width:100%;aspect-ratio:16/9;">
+          <iframe
+            src="https://www.youtube.com/embed/${escapeHtml(ctx.config.youtubeVideoId)}?rel=0"
+            title="${escapeHtml(t.demoTitle)}"
+            loading="lazy"
+            style="position:absolute;inset:0;width:100%;height:100%;border:0;"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerpolicy="strict-origin-when-cross-origin"
+            allowfullscreen></iframe>
         </div>
         <div class="video-foot">
-          <span>${escapeHtml(t.demoPrivacy)}</span>
           <a href="https://www.youtube.com/watch?v=${escapeHtml(ctx.config.youtubeVideoId)}" target="_blank" rel="noopener noreferrer">${escapeHtml(t.demoOpenYt)}</a>
         </div>
       </div>
@@ -649,7 +630,7 @@ export function renderHome(lang, guides, ctx) {
         ],
         uploadDate: '2026-11-21',
         contentUrl: `https://www.youtube.com/watch?v=${ctx.config.youtubeVideoId}`,
-        embedUrl: `https://www.youtube-nocookie.com/embed/${ctx.config.youtubeVideoId}`
+        embedUrl: `https://www.youtube.com/embed/${ctx.config.youtubeVideoId}`
       }
     : null;
 

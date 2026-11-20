@@ -4,6 +4,7 @@
 
 import fs from 'node:fs';
 import path from 'node:path';
+import crypto from 'node:crypto';
 import { fileURLToPath } from 'node:url';
 import { parseFrontmatter, renderMarkdown, estimateReadingTime, extractFaqFromMarkdown, escapeHtml } from './src/markdown.mjs';
 import { renderHome, renderGuidesIndex, renderGuideDetail, renderDocPage, render404 } from './src/templates.mjs';
@@ -14,9 +15,15 @@ const config = JSON.parse(fs.readFileSync(path.join(ROOT, 'site.config.json'), '
 
 const basePath = (config.basePath || '').replace(/\/+$/, '');
 const origin = (config.origin || '').replace(/\/+$/, '');
+const cssHash = crypto
+  .createHash('sha256')
+  .update(fs.readFileSync(path.join(ROOT, 'src/styles.css')))
+  .digest('hex')
+  .slice(0, 8);
 
 const ctx = {
   config,
+  cssVersion: cssHash,
   relUrl(p) {
     if (!p) return basePath + '/';
     if (/^https?:\/\//.test(p) || p.startsWith('mailto:') || p.startsWith('#')) return p;

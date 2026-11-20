@@ -316,7 +316,7 @@ code, pre { font-family: "SF Mono", ui-monospace, SFMono-Regular, Menlo, Monaco,
   font-size: 13.5px;
 }
 
-/* Product Demo Video (lightweight click-to-load YouTube facade) */
+/* Official YouTube Embed */
 .video-shell {
   max-width: 920px;
 }
@@ -336,72 +336,14 @@ code, pre { font-family: "SF Mono", ui-monospace, SFMono-Regular, Menlo, Monaco,
   width: 100%;
   height: 100%;
   border: 0;
-}
-.video-poster {
-  position: relative;
   display: block;
-  width: 100%;
-  height: 100%;
-  padding: 0;
-  border: 0;
-  background: #0b0d11;
-  cursor: pointer;
-  color: var(--text);
-}
-.video-poster img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  opacity: 0.86;
-  transition: transform 0.35s ease, opacity 0.25s ease;
-}
-.video-poster:hover img {
-  transform: scale(1.015);
-  opacity: 0.94;
-}
-.video-overlay {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 14px;
-  background: radial-gradient(circle at center, rgba(17, 20, 25, 0.35), rgba(17, 20, 25, 0.72));
-}
-.video-play {
-  width: 72px;
-  height: 72px;
-  border-radius: 999px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  background: linear-gradient(135deg, var(--brand-base), var(--brand-deep));
-  color: #061318;
-  box-shadow: 0 12px 36px rgba(62, 230, 168, 0.38);
-  transition: transform 0.16s ease, box-shadow 0.16s ease;
-}
-.video-poster:hover .video-play {
-  transform: scale(1.06);
-  box-shadow: 0 16px 44px rgba(62, 230, 168, 0.48);
-}
-.video-play svg { width: 28px; height: 28px; margin-left: 3px; }
-.video-play-label {
-  padding: 6px 14px;
-  border-radius: 999px;
-  background: rgba(17, 20, 25, 0.78);
-  border: 1px solid var(--stroke-strong);
-  font-size: 13.5px;
-  font-weight: 600;
-  color: var(--text);
-  backdrop-filter: blur(8px);
 }
 .video-foot {
   margin-top: 12px;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-end;
   gap: 12px;
   color: var(--text-tertiary);
   font-size: 13px;

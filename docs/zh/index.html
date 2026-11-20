@@ -23,10 +23,10 @@
   <meta name="twitter:description" content="CleanBit 在你授权的个人文件夹里找出缓存、日志、项目构建产物和卸载残留。每一项都写明是什么、删了有什么影响，你确认之前什么都不删。" />
   <meta name="twitter:image" content="https://ceelog.github.io/CleanBit-Mac-App/assets/og-cover.png" />
   <meta name="theme-color" content="#111419" />
-  <link rel="stylesheet" href="/CleanBit-Mac-App/styles.css" />
+  <link rel="stylesheet" href="/CleanBit-Mac-App/styles.css?v=0d2d9a46" />
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"CleanBit: Disk Space Cleaner","operatingSystem":"macOS 15+","applicationCategory":"UtilitiesApplication","downloadUrl":"https://apps.apple.com/app/apple-store/id6829159531?pt=127116872&ct=website&mt=8","url":"https://ceelog.github.io/CleanBit-Mac-App/zh/","image":"https://ceelog.github.io/CleanBit-Mac-App/assets/icon.png","screenshot":"https://ceelog.github.io/CleanBit-Mac-App/assets/screens/zh-smart-scan.webp","description":"CleanBit 在你授权的个人文件夹里找出缓存、日志、项目构建产物和卸载残留。每一项都写明是什么、删了有什么影响，你确认之前什么都不删。","offers":[{"@type":"Offer","price":"0","priceCurrency":"USD","description":"Free scan and first 2 cleans free"},{"@type":"Offer","price":"4.99","priceCurrency":"USD","description":"Monthly subscription"},{"@type":"Offer","price":"19.99","priceCurrency":"USD","description":"Yearly subscription"},{"@type":"Offer","price":"29.99","priceCurrency":"USD","description":"One-time lifetime purchase"}]}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"为什么 CleanBit 只上架 Mac App Store 且坚持使用沙盒？","acceptedAnswer":{"@type":"Answer","text":"App Sandbox 保证了 CleanBit 不需要 root 权限、不安装常驻后台的 helper，只能访问你在系统打开面板中明确授权的文件夹。完全磁盘访问权限是可选的，仅在需要清理废纸篓、Safari 和其他应用容器时才需要打开。"}},{"@type":"Question","name":"删掉的文件还能恢复吗？","acceptedAnswer":{"@type":"Answer","text":"按风险分级处理，确认前会写清楚。「建议清理」中会自动重建的缓存默认直接删除以立即腾出空间（你也可以在设置里改为移到废纸篓）；「需要确认」项、项目产物、手动选择的文件和卸载的应用一律移到废纸篓，可以放回原处。"}},{"@type":"Question","name":"为什么 CleanBit 不清理 APFS 本地快照或系统缓存？","acceptedAnswer":{"@type":"Answer","text":"这些位置受 macOS 系统保护，沙盒应用无法触碰。我们不要求 root 权限，也不假装能清理系统自己管理的空间，只专注处理个人文件夹内明确可安全检查的缓存、开发产物和残留。"}},{"@type":"Question","name":"CleanBit 会上传我的文件名或路径吗？","acceptedAnswer":{"@type":"Answer","text":"不会。扫描、重复文件校验和清理全部在你的 Mac 本地完成，文件名、路径、内容和已安装应用列表从不离开电脑。CleanBit 仅通过 Firebase Analytics 收集匿名使用统计（规则 ID、数量与体积）。"}},{"@type":"Question","name":"支持哪些 macOS 版本？","acceptedAnswer":{"@type":"Answer","text":"CleanBit 使用 SwiftUI 原生开发，支持 macOS 15 及以上版本。"}}]}</script>
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"VideoObject","name":"实机录屏：看清 CleanBit 怎么扫描与确认清理","description":"完整演示智能扫描、项目产物、空间分析以及清理前的「废纸篓 / 永久删除」分栏确认流程。","thumbnailUrl":["https://i.ytimg.com/vi/SQDQhvJGRfY/hqdefault.jpg","https://ceelog.github.io/CleanBit-Mac-App/assets/og-cover.png"],"uploadDate":"2026-11-21","contentUrl":"https://www.youtube.com/watch?v=SQDQhvJGRfY","embedUrl":"https://www.youtube-nocookie.com/embed/SQDQhvJGRfY"}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"VideoObject","name":"实机录屏：看清 CleanBit 怎么扫描与确认清理","description":"完整演示智能扫描、项目产物、空间分析以及清理前的「废纸篓 / 永久删除」分栏确认流程。","thumbnailUrl":["https://i.ytimg.com/vi/SQDQhvJGRfY/hqdefault.jpg","https://ceelog.github.io/CleanBit-Mac-App/assets/og-cover.png"],"uploadDate":"2026-11-21","contentUrl":"https://www.youtube.com/watch?v=SQDQhvJGRfY","embedUrl":"https://www.youtube.com/embed/SQDQhvJGRfY"}</script>
   
 </head>
 <body>
@@ -83,19 +83,17 @@
         <p>完整演示智能扫描、项目产物、空间分析以及清理前的「废纸篓 / 永久删除」分栏确认流程。</p>
       </div>
       <div class="video-shell">
-        <div class="video-frame">
-          <button type="button" class="video-poster" data-yt-play="SQDQhvJGRfY" data-yt-title="实机录屏：看清 CleanBit 怎么扫描与确认清理" aria-label="播放产品演示视频">
-            <img src="/CleanBit-Mac-App/assets/screens/zh-smart-scan.webp" alt="实机录屏：看清 CleanBit 怎么扫描与确认清理" loading="lazy" decoding="async" />
-            <span class="video-overlay">
-              <span class="video-play" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.14v13.72a1 1 0 0 0 1.53.85l11.02-6.86a1 1 0 0 0 0-1.7L9.53 4.29A1 1 0 0 0 8 5.14z"/></svg>
-              </span>
-              <span class="video-play-label">播放产品演示视频</span>
-            </span>
-          </button>
+        <div class="video-frame" style="position:relative;width:100%;aspect-ratio:16/9;">
+          <iframe
+            src="https://www.youtube.com/embed/SQDQhvJGRfY?rel=0"
+            title="实机录屏：看清 CleanBit 怎么扫描与确认清理"
+            loading="lazy"
+            style="position:absolute;inset:0;width:100%;height:100%;border:0;"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerpolicy="strict-origin-when-cross-origin"
+            allowfullscreen></iframe>
         </div>
         <div class="video-foot">
-          <span>点击播放后才加载无跟踪嵌入式播放器（youtube-nocookie.com）。</span>
           <a href="https://www.youtube.com/watch?v=SQDQhvJGRfY" target="_blank" rel="noopener noreferrer">在 YouTube 打开 ↗</a>
         </div>
       </div>
@@ -284,23 +282,6 @@
           btn.textContent = 'Copied';
           setTimeout(function(){ btn.textContent = old; }, 1600);
         });
-      });
-    });
-    // Click-to-load privacy-enhanced YouTube embed
-    document.querySelectorAll('[data-yt-play]').forEach(function(btn){
-      btn.addEventListener('click', function(){
-        var id = btn.getAttribute('data-yt-play');
-        var title = btn.getAttribute('data-yt-title') || 'CleanBit Demo';
-        var wrap = btn.closest('.video-frame');
-        if (!id || !wrap) return;
-        var iframe = document.createElement('iframe');
-        iframe.src = 'https://www.youtube-nocookie.com/embed/' + encodeURIComponent(id) + '?autoplay=1&rel=0';
-        iframe.title = title;
-        iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
-        iframe.allowFullscreen = true;
-        iframe.referrerPolicy = 'strict-origin-when-cross-origin';
-        wrap.innerHTML = '';
-        wrap.appendChild(iframe);
       });
     });
   })();

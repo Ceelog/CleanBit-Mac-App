@@ -23,7 +23,7 @@
   <meta name="twitter:description" content="CleanBit license, cleaning responsibility, and Mac App Store purchase terms." />
   <meta name="twitter:image" content="https://ceelog.github.io/CleanBit-Mac-App/assets/og-cover.png" />
   <meta name="theme-color" content="#111419" />
-  <link rel="stylesheet" href="/CleanBit-Mac-App/styles.css" />
+  <link rel="stylesheet" href="/CleanBit-Mac-App/styles.css?v=0d2d9a46" />
   
   
 </head>
@@ -131,23 +131,6 @@
           btn.textContent = 'Copied';
           setTimeout(function(){ btn.textContent = old; }, 1600);
         });
-      });
-    });
-    // Click-to-load privacy-enhanced YouTube embed
-    document.querySelectorAll('[data-yt-play]').forEach(function(btn){
-      btn.addEventListener('click', function(){
-        var id = btn.getAttribute('data-yt-play');
-        var title = btn.getAttribute('data-yt-title') || 'CleanBit Demo';
-        var wrap = btn.closest('.video-frame');
-        if (!id || !wrap) return;
-        var iframe = document.createElement('iframe');
-        iframe.src = 'https://www.youtube-nocookie.com/embed/' + encodeURIComponent(id) + '?autoplay=1&rel=0';
-        iframe.title = title;
-        iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
-        iframe.allowFullscreen = true;
-        iframe.referrerPolicy = 'strict-origin-when-cross-origin';
-        wrap.innerHTML = '';
-        wrap.appendChild(iframe);
       });
     });
   })();
