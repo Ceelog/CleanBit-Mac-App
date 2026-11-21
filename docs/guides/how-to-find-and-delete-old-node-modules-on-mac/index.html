@@ -85,7 +85,7 @@
 
           <div class="prose">
             <p><strong>Yes—you can safely delete <code>node_modules</code> folders in inactive projects on macOS.</strong> Every package inside <code>node_modules</code> can be reinstalled later with <code>npm install</code>, <code>yarn</code>, <code>pnpm install</code>, or <code>bun install</code> as long as your <code>package.json</code> and lockfile are intact.</p>
-<p>If you build side projects or use AI coding tools like Claude Code, Cursor, or Codex, <code>node_modules</code> folders pile up quickly across dozens of folders you no longer open. On one developer Mac we measured (macOS home folder, excluding <code>~/Library</code>), there were <strong>304 <code>node_modules</code> folders occupying 66.3 GB</strong> in total—alongside 8 <code>.venv</code> folders (5.1 GB) and 7 <code>.build</code> folders (2.9 GB). Every machine varies widely, so start by measuring your own.</p>
+<p>If you build side projects or use AI coding tools like Claude Code, Cursor, or Codex, <code>node_modules</code> folders pile up quickly across dozens of folders and <code>git worktree</code> checkouts you no longer open (for the full breakdown of agent sessions, worktrees, and model caches, see our <a href="/guides/claude-code-cursor-codex-disk-space-mac/">Claude Code, Cursor, and Codex disk space guide</a>). On one developer Mac we measured (macOS home folder, excluding <code>~/Library</code>), there were <strong>304 <code>node_modules</code> folders occupying 66.3 GB</strong> in total—alongside 8 <code>.venv</code> folders (5.1 GB) and 7 <code>.build</code> folders (2.9 GB). Every machine varies widely, so start by measuring your own.</p>
 <h2 id="1-measure-how-much-space-nodemodules-takes-on-your-mac">1. Measure how much space <code>node_modules</code> takes on your Mac<a class="heading-anchor" href="#1-measure-how-much-space-nodemodules-takes-on-your-mac" aria-label="Link to section">#</a></h2>
 <p>Before deleting anything, run a read-only command to list the largest top-level <code>node_modules</code> directories inside your home folder. Using <code>-prune</code> is important because it stops <code>find</code> from descending into nested <code>node_modules</code> directories and double-counting them:</p>
 <div class="code-block"><div class="code-head"><span class="code-lang">bash</span><button type="button" class="code-copy" data-copy>Copy</button></div><pre><code>find ~ \( -path ~/Library -o -path ~/.Trash -o -name .git \) -prune -o \
@@ -138,6 +138,12 @@ pnpm store prune</code></pre></div>
                 <div>
                   <div class="guide-meta"><span>Developer Storage</span><span>·</span><span>3 min read</span></div>
                   <h3 style="margin-top:6px;font-size:16px">Is Xcode DerivedData Safe to Delete? What Happens and How to Clean It</h3>
+                </div>
+                <span class="guide-more">Read guide →</span>
+              </a><a class="card guide-card" href="/guides/claude-code-cursor-codex-disk-space-mac/">
+                <div>
+                  <div class="guide-meta"><span>AI &amp; Developer Storage</span><span>·</span><span>8 min read</span></div>
+                  <h3 style="margin-top:6px;font-size:16px">Claude Code, Cursor and Codex Eating Disk Space on Your Mac? Here&#39;s Where It Goes</h3>
                 </div>
                 <span class="guide-more">Read guide →</span>
               </a>

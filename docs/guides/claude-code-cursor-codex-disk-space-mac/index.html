@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Claude Code, Cursor and Codex Eating Disk Space on Your Mac? Here&#39;s Where It Goes — CleanBit</title>
+  <meta name="description" content="Find out why Claude Code, Cursor, and Codex consume gigabytes on macOS. Includes real developer Mac measurements, read-only audit commands, and safe cleanup steps." />
+  <link rel="canonical" href="https://getcleanbit.app/guides/claude-code-cursor-codex-disk-space-mac/" />
+  <link rel="alternate" hreflang="en" href="https://getcleanbit.app/guides/claude-code-cursor-codex-disk-space-mac/" />
+  <link rel="alternate" hreflang="zh-Hans" href="https://getcleanbit.app/zh/guides/" />
+  <link rel="alternate" hreflang="x-default" href="https://getcleanbit.app/guides/claude-code-cursor-codex-disk-space-mac/" />
+  <link rel="icon" type="image/png" href="/assets/favicon.png" />
+  <link rel="apple-touch-icon" href="/assets/icon.png" />
+  <link rel="alternate" type="application/rss+xml" title="CleanBit Guides (English)" href="https://getcleanbit.app/feed.xml" />
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="CleanBit" />
+  <meta property="og:title" content="Claude Code, Cursor and Codex Eating Disk Space on Your Mac? Here&#39;s Where It Goes — CleanBit" />
+  <meta property="og:description" content="Find out why Claude Code, Cursor, and Codex consume gigabytes on macOS. Includes real developer Mac measurements, read-only audit commands, and safe cleanup steps." />
+  <meta property="og:url" content="https://getcleanbit.app/guides/claude-code-cursor-codex-disk-space-mac/" />
+  <meta property="og:image" content="https://getcleanbit.app/assets/screens/en-smart-scan.webp" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Claude Code, Cursor and Codex Eating Disk Space on Your Mac? Here&#39;s Where It Goes — CleanBit" />
+  <meta name="twitter:description" content="Find out why Claude Code, Cursor, and Codex consume gigabytes on macOS. Includes real developer Mac measurements, read-only audit commands, and safe cleanup steps." />
+  <meta name="twitter:image" content="https://getcleanbit.app/assets/screens/en-smart-scan.webp" />
+  <meta name="theme-color" content="#111419" />
+  <link rel="stylesheet" href="/styles.css?v=cac88ab1" />
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Claude Code, Cursor and Codex Eating Disk Space on Your Mac? Here's Where It Goes","description":"Find out why Claude Code, Cursor, and Codex consume gigabytes on macOS. Includes real developer Mac measurements, read-only audit commands, and safe cleanup steps.","datePublished":"2026-11-21","dateModified":"2026-11-21","inLanguage":"en","author":{"@type":"Organization","name":"CleanBit Developer","url":"https://getcleanbit.app/"},"publisher":{"@type":"Organization","name":"CleanBit","logo":{"@type":"ImageObject","url":"https://getcleanbit.app/assets/icon.png"}},"mainEntityOfPage":"https://getcleanbit.app/guides/claude-code-cursor-codex-disk-space-mac/","image":"https://getcleanbit.app/assets/screens/en-smart-scan.webp"}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"CleanBit","item":"https://getcleanbit.app/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://getcleanbit.app/guides/"},{"@type":"ListItem","position":3,"name":"Claude Code, Cursor and Codex Eating Disk Space on Your Mac? Here's Where It Goes","item":"https://getcleanbit.app/guides/claude-code-cursor-codex-disk-space-mac/"}]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Will deleting ~/.claude/projects/*.jsonl erase my Claude Code CLAUDE.md or project memory?","acceptedAnswer":{"@type":"Answer","text":"No, as long as you only delete the .jsonl session transcript files at the top level of each project folder under ~/.claude/projects and do not delete the memory/ subdirectory or CLAUDE.md files inside your repositories. Removing a .jsonl transcript only prevents resuming that specific past conversation."}},{"@type":"Question","name":"Why did my Mac fill up so fast while using Claude Code or Codex?","acceptedAnswer":{"@type":"Answer","text":"Three factors compound quickly: screenshots pasted into agent chats get stored as base64 data inside .jsonl transcripts; each git worktree created for parallel tasks often installs its own full copy of node_modules, Rust target, or Swift .build; and background tool runs can accumulate package caches (npm, uv, Cargo) or temporary Xcode builds."}},{"@type":"Question","name":"Does CleanBit clean Cursor caches or /private/tmp?","acceptedAnswer":{"@type":"Answer","text":"No. CleanBit currently does not have a dedicated Cursor cleaner rule, and because CleanBit runs inside Apple's Mac App Store App Sandbox without root access, it cannot read or delete files in /private/tmp outside your home folder. Use the manual commands in Section 3 for both."}},{"@type":"Question","name":"Can CleanBit delete my local Ollama or Hugging Face models by mistake?","acceptedAnswer":{"@type":"Answer","text":"No. Local model directories (~/.ollama/models, ~/.lmstudio/models, ~/.cache/huggingface/hub, and ~/.cache/torch) are marked Info Only in CleanBit—they are listed so you can see their size, and cannot be selected for deletion."}}]}</script>
+  <script async src="https://www.googletagmanager.com/gtm.js?id=GTM-TFR7TV8Z"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+  </script>
+  
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="/">
+        <img src="/assets/icon.png" alt="CleanBit icon" width="28" height="28" />
+        <span>CleanBit</span>
+      </a>
+      <nav class="nav" aria-label="Main navigation">
+        <a href="/#demo">Demo</a>
+        <a href="/#features">Features</a>
+        <a href="/#safety">Safety</a>
+        <a href="/guides/" class="active">Guides</a>
+        <a href="/#pricing">Pricing</a>
+        <a href="/support/" class="">Support</a>
+      </nav>
+      <div class="header-actions">
+        <a class="lang-switch" href="/zh/guides/" hreflang="zh-Hans">中文</a>
+        <a class="pill pill-primary pill-sm" href="https://apps.apple.com/app/apple-store/id6829159531?pt=127116872&amp;ct=website-guides&amp;mt=8" target="_blank" rel="noopener noreferrer">Mac App Store</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+  <article class="article-shell">
+    <div class="container">
+      <div class="breadcrumbs">
+        <a href="/">CleanBit</a>
+        <span>/</span>
+        <a href="/guides/">Guides</a>
+        <span>/</span>
+        <span>AI &amp; Developer Storage</span>
+      </div>
+      <div class="article-grid">
+        <div>
+          <header class="article-header">
+            <div class="badge">AI &amp; Developer Storage</div>
+            <h1>Claude Code, Cursor and Codex Eating Disk Space on Your Mac? Here&#39;s Where It Goes</h1>
+            <p class="article-lead">Find out why Claude Code, Cursor, and Codex consume gigabytes on macOS. Includes real developer Mac measurements, read-only audit commands, and safe cleanup steps.</p>
+            <div class="article-meta">
+              <span>CleanBit Developer</span>
+              <span>·</span>
+              <span>Updated 2026-11-21</span>
+              <span>·</span>
+              <span>8 min read</span>
+            </div>
+          </header>
+
+          <div class="prose">
+            <p><strong>AI coding agents eat disk space on macOS in four places: conversation transcripts (often bloated with base64 screenshots), leftover binary versions and Electron caches, duplicated build folders inside <code>git worktree</code> sandboxes, and local model weights.</strong> If you run Claude Code, Codex, or Cursor daily, it is common to lose tens of gigabytes within a few weeks—even if your own source code is tiny.</p>
+<p>On one developer Mac we measured (read-only <code>du</code> across the home folder), AI tooling directories alone held <strong><code>~/.claude</code> at 1.9 GB</strong>, <strong><code>~/.local/share/claude</code> at 902 MB</strong>, <strong><code>~/.codex</code> at 5.2 GB</strong>, and <strong><code>~/.cache/huggingface</code> at 17.0 GB</strong>—on top of <strong>304 <code>node_modules</code> folders occupying 66.3 GB</strong>, 8 <code>.venv</code> folders (5.1 GB), and 7 <code>.build</code> folders (2.9 GB). Heavy agent users report even steeper spikes: in one <a href="https://www.reddit.com/r/ClaudeCode/comments/1xzgmo3/" target="_blank" rel="noopener noreferrer">r/ClaudeCode discussion</a> on a 256 GB Mac, <code>~/.claude/projects</code> reached <strong>11 GB</strong> (with a single 262 MB <code>.jsonl</code> session full of embedded screenshots), <code>~/.codex</code> grew by roughly <strong>650 MB per day</strong>, <code>/private/tmp</code> accumulated 26 DerivedData copies (<strong>6.5 GB</strong>), and another developer&#39;s agent worktrees grew a workspace to <strong>95 GB</strong>.</p>
+<h2 id="1-run-a-read-only-audit-first">1. Run a read-only audit first<a class="heading-anchor" href="#1-run-a-read-only-audit-first" aria-label="Link to section">#</a></h2>
+<p>Before deleting anything, measure where the gigabytes actually sit on your Mac. The command below is read-only and prints sizes for Claude Code, Codex, Cursor, local model caches, and <code>/private/tmp</code>:</p>
+<div class="code-block"><div class="code-head"><span class="code-lang">bash</span><button type="button" class="code-copy" data-copy>Copy</button></div><pre><code>du -sh \
+  ~/.claude \
+  ~/.claude/projects \
+  ~/.local/share/claude/versions \
+  ~/Library/Application\ Support/Claude \
+  ~/.codex \
+  ~/.codex/sessions \
+  ~/.codex/worktrees \
+  ~/.claude/worktrees \
+  ~/Library/Application\ Support/Cursor \
+  ~/.cursor \
+  ~/.cache/huggingface \
+  ~/.ollama/models \
+  ~/.lmstudio/models \
+  /private/tmp 2&gt;/dev/null</code></pre></div>
+<p>To see your largest individual Claude Code or Codex session logs (<code>.jsonl</code>):</p>
+<div class="code-block"><div class="code-head"><span class="code-lang">bash</span><button type="button" class="code-copy" data-copy>Copy</button></div><pre><code>find ~/.claude/projects ~/.codex/sessions ~/.codex/archived_sessions \
+  -name &#39;*.jsonl&#39; -exec du -h {} + 2&gt;/dev/null | sort -h | tail -20</code></pre></div>
+<aside class="callout callout-note"><div class="callout-title">NOTE</div><p><code>du</code> reports total disk usage for a directory, not how much is safe to delete. Never delete an entire <code>~/.claude</code>, <code>~/.codex</code>, or <code>~/Library/Application Support/Cursor</code> folder blindly—settings, auth tokens, project memory, and extensions live beside disposable caches.</p></aside>
+<h2 id="2-where-claude-code-codex-and-cursor-store-data">2. Where Claude Code, Codex, and Cursor store data<a class="heading-anchor" href="#2-where-claude-code-codex-and-cursor-store-data" aria-label="Link to section">#</a></h2>
+<div class="table-wrap"><table><thead><tr><th style="text-align:left">Location</th><th style="text-align:left">What lives inside</th><th style="text-align:left">Safe to clean?</th><th style="text-align:left">Manual cleanup</th><th style="text-align:left">CleanBit coverage</th></tr></thead><tbody><tr><td style="text-align:left"><code>~/.local/share/claude/versions</code></td><td style="text-align:left">Previous Claude Code binaries kept after updates</td><td style="text-align:left">Yes (keep active version)</td><td style="text-align:left">Keep the target of <code>~/.local/bin/claude</code>, remove older versions</td><td style="text-align:left"><strong>Recommended</strong> (<code>Old Claude Code Versions</code>; keeps active symlink + newest version)</td></tr><tr><td style="text-align:left"><code>~/.claude/projects/*/*.jsonl</code></td><td style="text-align:left">Claude Code conversation transcripts &amp; tool outputs</td><td style="text-align:left"><strong>Review</strong> (deletes chat history)</td><td style="text-align:left">Delete old <code>.jsonl</code> files by age; avoid touching <code>memory/</code> subdirectories</td><td style="text-align:left"><strong>AI Sessions</strong> (scans top-level <code>.jsonl</code> only, skips <code>memory/</code>, moves to Trash)</td></tr><tr><td style="text-align:left"><code>~/Library/Application Support/Claude</code> caches &amp; <code>~/Library/Caches/com.anthropic.claudefordesktop</code></td><td style="text-align:left">Claude Desktop Electron web/GPU caches &amp; update downloads</td><td style="text-align:left">Yes (quit Claude first)</td><td style="text-align:left">Quit Claude Desktop, clear <code>Cache</code>, <code>Code Cache</code>, <code>GPUCache</code>, and <code>~/Library/Caches/com.anthropic.claudefordesktop</code></td><td style="text-align:left"><strong>Recommended</strong> (blocked while Claude Desktop is running)</td></tr><tr><td style="text-align:left"><code>~/.codex/sessions</code> &amp; <code>~/.codex/archived_sessions</code></td><td style="text-align:left">Codex CLI/App JSONL session logs</td><td style="text-align:left"><strong>Review</strong> (deletes chat history)</td><td style="text-align:left">Delete old <code>.jsonl</code> files by modified date</td><td style="text-align:left"><strong>AI Sessions</strong> (filters by age, moves to Trash)</td></tr><tr><td style="text-align:left"><code>~/.claude/worktrees</code> &amp; <code>~/.codex/worktrees</code> (and repo worktrees)</td><td style="text-align:left">Isolated <code>git worktree</code> checkouts, each with its own <code>node_modules</code>, <code>target</code>, or <code>.build</code></td><td style="text-align:left"><strong>Review</strong> (check unmerged work first)</td><td style="text-align:left">Run <code>git worktree list</code> / <code>git worktree remove</code> or delete build folders inside idle worktrees</td><td style="text-align:left"><strong>Build Artifacts</strong> scans <code>~/.claude/worktrees</code>, <code>~/.codex/worktrees</code>, and visible home folders (skips Git-tracked files; moves build folders to Trash, never deletes source)</td></tr><tr><td style="text-align:left"><code>~/Library/Application Support/Cursor</code></td><td style="text-align:left">Cursor Electron caches, <code>workspaceStorage</code>, and <code>globalStorage/state.vscdb</code></td><td style="text-align:left"><strong>Caches only</strong> (keep settings/extensions)</td><td style="text-align:left">Quit Cursor; clear <code>Cache</code>, <code>CachedData</code>, <code>Code Cache</code>, <code>GPUCache</code>, <code>DawnGraphiteCache</code>; audit old <code>workspaceStorage</code> folders carefully</td><td style="text-align:left"><strong>Manual only</strong> (CleanBit does not include a dedicated Cursor cleaner rule)</td></tr><tr><td style="text-align:left"><code>~/.cache/huggingface</code>, <code>~/.ollama/models</code>, <code>~/.lmstudio/models</code>, <code>~/.cache/torch</code></td><td style="text-align:left">Local LLM &amp; ML model weights</td><td style="text-align:left"><strong>Manual / intentional</strong></td><td style="text-align:left">Use <code>ollama rm &lt;model&gt;</code>, LM Studio UI, or <code>huggingface-cli delete-cache</code></td><td style="text-align:left"><strong>Info Only</strong> (shows size; never deleted by CleanBit)</td></tr><tr><td style="text-align:left"><code>/private/tmp</code></td><td style="text-align:left">Temporary build copies (e.g., agent-created Xcode DerivedData)</td><td style="text-align:left">Usually yes after reboot/quitting tools</td><td style="text-align:left">Reboot macOS or inspect before removing specific temporary build folders</td><td style="text-align:left"><strong>Outside sandbox</strong> (CleanBit cannot read or clean <code>/private/tmp</code>)</td></tr></tbody></table></div>
+<h2 id="3-manual-cleanup-commands-step-by-step">3. Manual cleanup commands (step by step)<a class="heading-anchor" href="#3-manual-cleanup-commands-step-by-step" aria-label="Link to section">#</a></h2>
+<h3 id="clean-old-claude-code-versions-keeping-the-active-binary">Clean old Claude Code versions (keeping the active binary)<a class="heading-anchor" href="#clean-old-claude-code-versions-keeping-the-active-binary" aria-label="Link to section">#</a></h3>
+<p>Check which binary <code>~/.local/bin/claude</code> currently points to before removing older folders in <code>~/.local/share/claude/versions</code>:</p>
+<div class="code-block"><div class="code-head"><span class="code-lang">bash</span><button type="button" class="code-copy" data-copy>Copy</button></div><pre><code>ls -la ~/.local/bin/claude
+ls -lh ~/.local/share/claude/versions</code></pre></div>
+<p>Remove only older version entries that are <strong>not</strong> the symlink target or the latest version.</p>
+<h3 id="review-old-claude-code-and-codex-session-transcripts">Review old Claude Code and Codex session transcripts<a class="heading-anchor" href="#review-old-claude-code-and-codex-session-transcripts" aria-label="Link to section">#</a></h3>
+<p>List <code>.jsonl</code> transcripts older than 30 days without deleting anything:</p>
+<div class="code-block"><div class="code-head"><span class="code-lang">bash</span><button type="button" class="code-copy" data-copy>Copy</button></div><pre><code>find ~/.claude/projects -maxdepth 2 -name &#39;*.jsonl&#39; -mtime +30 -exec du -h {} + 2&gt;/dev/null | sort -h
+find ~/.codex/sessions ~/.codex/archived_sessions -name &#39;*.jsonl&#39; -mtime +30 -exec du -h {} + 2&gt;/dev/null | sort -h</code></pre></div>
+<p>Note the <code>-maxdepth 2</code> on <code>~/.claude/projects</code>: this targets session <code>.jsonl</code> files directly inside each project folder and leaves <code>memory/</code> files untouched. Once you have checked the list, move unwanted transcripts to the Trash or remove the specific files you no longer need to resume.</p>
+<h3 id="audit-cursor-storage-manually">Audit Cursor storage manually<a class="heading-anchor" href="#audit-cursor-storage-manually" aria-label="Link to section">#</a></h3>
+<p>CleanBit does not have a dedicated Cursor rule, so handle Cursor manually after <strong>quitting Cursor completely</strong>:</p>
+<div class="code-block"><div class="code-head"><span class="code-lang">bash</span><button type="button" class="code-copy" data-copy>Copy</button></div><pre><code># Check Cursor&#39;s largest subfolders first (read-only)
+du -sh ~/Library/Application\ Support/Cursor/* 2&gt;/dev/null | sort -h | tail -15</code></pre></div>
+<p>Subfolders like <code>Cache</code>, <code>CachedData</code>, <code>Code Cache</code>, <code>GPUCache</code>, <code>DawnGraphiteCache</code>, and <code>DawnWebGPUCache</code> inside <code>~/Library/Application Support/Cursor/</code> are Chromium/Electron caches that Cursor rebuilds on next launch. Be careful with <code>User/</code> (your settings and keybindings), <code>globalStorage/</code> (chat history and extension state), and <code>workspaceStorage/</code> (per-workspace chat and index state).</p>
+<h3 id="find-forgotten-git-worktree-checkouts-and-their-build-folders">Find forgotten <code>git worktree</code> checkouts and their build folders<a class="heading-anchor" href="#find-forgotten-git-worktree-checkouts-and-their-build-folders" aria-label="Link to section">#</a></h3>
+<p>When an AI coding agent spawns a separate <code>git worktree</code> per task, each checkout can install its own <code>node_modules</code>, Rust <code>target</code>, or Swift <code>.build</code> directory. Check active worktrees inside any repository:</p>
+<div class="code-block"><div class="code-head"><span class="code-lang">bash</span><button type="button" class="code-copy" data-copy>Copy</button></div><pre><code>cd ~/Repos/your-project
+git worktree list</code></pre></div>
+<p>If a worktree branch is already merged and has no uncommitted changes, remove it cleanly through Git rather than <code>rm -rf</code>:</p>
+<div class="code-block"><div class="code-head"><span class="code-lang">bash</span><button type="button" class="code-copy" data-copy>Copy</button></div><pre><code>git worktree remove /path/to/old-worktree
+git worktree prune</code></pre></div>
+<p>To see all <code>node_modules</code> or Rust <code>target</code> folders piling up across your workspace (including worktrees), see our dedicated guide on <a href="/guides/how-to-find-and-delete-old-node-modules-on-mac/">finding and deleting old <code>node_modules</code> folders on a Mac</a> and <a href="/guides/is-xcode-deriveddata-safe-to-delete/">cleaning Xcode <code>DerivedData</code> safely</a>.</p>
+<aside class="callout callout-warning"><div class="callout-title">WARNING</div><p><strong>Be cautious about asking an AI coding agent to free disk space for you.</strong> In the same <code>r/ClaudeCode</code> thread mentioned above, a user reported that the agent misidentified a folder containing source code as build artifacts and deleted it. Always inspect paths yourself and prefer moving project directories to the Trash over running blind <code>rm -rf</code> commands.</p></aside>
+<h3 id="check-privatetmp-and-local-ai-models">Check <code>/private/tmp</code> and local AI models<a class="heading-anchor" href="#check-privatetmp-and-local-ai-models" aria-label="Link to section">#</a></h3>
+<ul><li><strong><code>/private/tmp</code></strong>: Some agent runs redirect temporary build outputs (like Xcode <code>DerivedData</code> or test sandboxes) into <code>/private/tmp</code>. Because <code>/private/tmp</code> sits outside your home folder, sandboxed Mac App Store apps cannot inspect or clean it. A normal macOS restart clears stale <code>/private/tmp</code> items, or you can inspect <code>/private/tmp</code> in Terminal when no builds are running.</li><li><strong>Local models</strong>: Reclaim Ollama models with <code>ollama list</code> followed by <code>ollama rm &lt;model&gt;</code>. For Hugging Face caches (<code>~/.cache/huggingface/hub</code>), use <code>hf cache scan</code> / <code>huggingface-cli delete-cache</code> so you don&#39;t accidentally re-download a 15 GB model you still use.</li></ul>
+<h2 id="4-what-cleanbit-covers-and-what-it-deliberately-leaves-alone">4. What CleanBit covers (and what it deliberately leaves alone)<a class="heading-anchor" href="#4-what-cleanbit-covers-and-what-it-deliberately-leaves-alone" aria-label="Link to section">#</a></h2>
+<p>I&#39;m the developer of <strong>CleanBit</strong>, a sandboxed Mac App Store disk space cleaner for macOS 15+. Because AI coding directories mix disposable caches with irreplaceable chat history and source code, CleanBit splits them by risk rather than offering a single blind button:</p>
+<ul><li><strong>Smart Scan (Recommended)</strong>: Finds <strong>Old Claude Code Versions</strong> (<code>~/.local/share/claude/versions</code>, automatically preserving the active symlink target and newest version) and <strong>Claude Desktop Caches</strong> (blocked while Claude Desktop is running). On the developer Mac we measured, the engine found 945.9 MB of Claude Code versions (598.5 MB safely cleanable) and 57.5 MB of Claude Desktop cache.</li><li><strong>AI Sessions (Review, moved to Trash)</strong>: Lets you pick an age threshold (such as older than 30 days) and inspect <code>.jsonl</code> transcripts in <code>~/.claude/projects</code> (without entering <code>memory/</code>), <code>~/.codex/sessions</code>, and <code>~/.codex/archived_sessions</code>. Nothing is pre-selected, and removed transcripts move to the Trash.</li><li><strong>Build Artifacts (Review, moved to Trash)</strong>: Scans your visible home folders plus <code>~/.claude/worktrees</code> and <code>~/.codex/worktrees</code> for <code>node_modules</code>, <code>target</code>, <code>.build</code>, <code>.venv</code>, <code>Pods</code>, and more. CleanBit parses <code>.git</code> files (including <code>gitdir:</code> pointers used by git worktrees) to skip Git-tracked directories, and moves selected build folders to the Trash without touching your source code or the worktree itself. (Worktrees placed inside hidden subfolders such as <code>&lt;repo&gt;/.claude/worktrees</code> are skipped during recursive traversal—use <code>git worktree list</code> for those.)</li><li><strong>Info Only (never deleted)</strong>: Local model caches for Hugging Face, Ollama, LM Studio, and PyTorch are shown for visibility only so you know where those gigabytes went.</li><li><strong>Outside the App Sandbox</strong>: CleanBit does not require root privileges or a background daemon, so it cannot touch <code>/private/tmp</code>, APFS local snapshots, or system caches, and it currently does not include a dedicated Cursor rule.</li></ul>
+<figure class="prose-figure"><img src="/assets/screens/en-smart-scan.webp" alt="CleanBit Smart Scan showing developer and AI caches with impact explanations before confirmation" loading="lazy" decoding="async" /><figcaption>CleanBit separates Recommended caches, Review items, and Info Only model directories with clear impact notes.</figcaption></figure>
+<h2 id="frequently-asked-questions">Frequently Asked Questions<a class="heading-anchor" href="#frequently-asked-questions" aria-label="Link to section">#</a></h2>
+<h3 id="will-deleting-claudeprojectsjsonl-erase-my-claude-code-claudemd-or-project-memory">Will deleting <code>~/.claude/projects/*.jsonl</code> erase my Claude Code <code>CLAUDE.md</code> or project memory?<a class="heading-anchor" href="#will-deleting-claudeprojectsjsonl-erase-my-claude-code-claudemd-or-project-memory" aria-label="Link to section">#</a></h3>
+<p>No, as long as you only delete the <code>.jsonl</code> session transcript files at the top level of each project folder under <code>~/.claude/projects</code> and do not delete the <code>memory/</code> subdirectory or <code>CLAUDE.md</code> files inside your repositories. Removing a <code>.jsonl</code> transcript only prevents resuming that specific past conversation.</p>
+<h3 id="why-did-my-mac-fill-up-so-fast-while-using-claude-code-or-codex">Why did my Mac fill up so fast while using Claude Code or Codex?<a class="heading-anchor" href="#why-did-my-mac-fill-up-so-fast-while-using-claude-code-or-codex" aria-label="Link to section">#</a></h3>
+<p>Three factors compound quickly: screenshots pasted into agent chats get stored as base64 data inside <code>.jsonl</code> transcripts; each <code>git worktree</code> created for parallel tasks often installs its own full copy of <code>node_modules</code>, Rust <code>target</code>, or Swift <code>.build</code>; and background tool runs can accumulate package caches (<code>npm</code>, <code>uv</code>, <code>Cargo</code>) or temporary Xcode builds.</p>
+<h3 id="does-cleanbit-clean-cursor-caches-or-privatetmp">Does CleanBit clean Cursor caches or <code>/private/tmp</code>?<a class="heading-anchor" href="#does-cleanbit-clean-cursor-caches-or-privatetmp" aria-label="Link to section">#</a></h3>
+<p>No. CleanBit currently does not have a dedicated Cursor cleaner rule, and because CleanBit runs inside Apple&#39;s Mac App Store App Sandbox without root access, it cannot read or delete files in <code>/private/tmp</code> outside your home folder. Use the manual commands in Section 3 for both.</p>
+<h3 id="can-cleanbit-delete-my-local-ollama-or-hugging-face-models-by-mistake">Can CleanBit delete my local Ollama or Hugging Face models by mistake?<a class="heading-anchor" href="#can-cleanbit-delete-my-local-ollama-or-hugging-face-models-by-mistake" aria-label="Link to section">#</a></h3>
+<p>No. Local model directories (<code>~/.ollama/models</code>, <code>~/.lmstudio/models</code>, <code>~/.cache/huggingface/hub</code>, and <code>~/.cache/torch</code>) are marked <strong>Info Only</strong> in CleanBit—they are listed so you can see their size, and cannot be selected for deletion.</p>
+          </div>
+
+          <aside class="article-cta">
+            <div>
+              <h3>Prefer to inspect and clean visually?</h3>
+              <p>CleanBit is a sandboxed Mac App Store utility. Every item shows what it is and what happens if you remove it—scanning and your first 2 cleans are free.</p>
+            </div>
+            <a class="pill pill-primary" href="https://apps.apple.com/app/apple-store/id6829159531?pt=127116872&amp;ct=website-guides&amp;mt=8" target="_blank" rel="noopener noreferrer">Download on the Mac App Store</a>
+          </aside>
+
+          <p class="disclosure-note">Written by the CleanBit developer with AI assistance. All measurements were taken on a real developer Mac.</p>
+          <section style="margin-top:44px">
+        <h2 style="font-size:20px;margin:0 0 16px">Related guides</h2>
+        <div class="grid-2">
+          <a class="card guide-card" href="/guides/is-xcode-deriveddata-safe-to-delete/">
+                <div>
+                  <div class="guide-meta"><span>Developer Storage</span><span>·</span><span>3 min read</span></div>
+                  <h3 style="margin-top:6px;font-size:16px">Is Xcode DerivedData Safe to Delete? What Happens and How to Clean It</h3>
+                </div>
+                <span class="guide-more">Read guide →</span>
+              </a><a class="card guide-card" href="/guides/how-to-find-and-delete-old-node-modules-on-mac/">
+                <div>
+                  <div class="guide-meta"><span>Developer Storage</span><span>·</span><span>3 min read</span></div>
+                  <h3 style="margin-top:6px;font-size:16px">How to Find and Delete Old node_modules Folders on a Mac</h3>
+                </div>
+                <span class="guide-more">Read guide →</span>
+              </a>
+        </div>
+      </section>
+        </div>
+        <aside class="toc-aside" aria-label="Table of contents">
+        <div class="toc-title">On this page</div>
+        <ul class="toc-list">
+          <li class="toc-h2"><a href="#1-run-a-read-only-audit-first">1. Run a read-only audit first</a></li><li class="toc-h2"><a href="#2-where-claude-code-codex-and-cursor-store-data">2. Where Claude Code, Codex, and Cursor store data</a></li><li class="toc-h2"><a href="#3-manual-cleanup-commands-step-by-step">3. Manual cleanup commands (step by step)</a></li><li class="toc-h3"><a href="#clean-old-claude-code-versions-keeping-the-active-binary">Clean old Claude Code versions (keeping the active binary)</a></li><li class="toc-h3"><a href="#review-old-claude-code-and-codex-session-transcripts">Review old Claude Code and Codex session transcripts</a></li><li class="toc-h3"><a href="#audit-cursor-storage-manually">Audit Cursor storage manually</a></li><li class="toc-h3"><a href="#find-forgotten-git-worktree-checkouts-and-their-build-folders">Find forgotten git worktree checkouts and their build folders</a></li><li class="toc-h3"><a href="#check-privatetmp-and-local-ai-models">Check /private/tmp and local AI models</a></li><li class="toc-h2"><a href="#4-what-cleanbit-covers-and-what-it-deliberately-leaves-alone">4. What CleanBit covers (and what it deliberately leaves alone)</a></li><li class="toc-h2"><a href="#frequently-asked-questions">Frequently Asked Questions</a></li><li class="toc-h3"><a href="#will-deleting-claudeprojectsjsonl-erase-my-claude-code-claudemd-or-project-memory">Will deleting ~/.claude/projects/.jsonl erase my Claude Code CLAUDE.md or project memory?</a></li><li class="toc-h3"><a href="#why-did-my-mac-fill-up-so-fast-while-using-claude-code-or-codex">Why did my Mac fill up so fast while using Claude Code or Codex?</a></li><li class="toc-h3"><a href="#does-cleanbit-clean-cursor-caches-or-privatetmp">Does CleanBit clean Cursor caches or /private/tmp?</a></li><li class="toc-h3"><a href="#can-cleanbit-delete-my-local-ollama-or-hugging-face-models-by-mistake">Can CleanBit delete my local Ollama or Hugging Face models by mistake?</a></li>
+        </ul>
+      </aside>
+      </div>
+    </div>
+  </article>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div>
+        <strong style="color:var(--text)">CleanBit</strong> · macOS 15+ · Available exclusively on the Mac App Store.
+        <div style="margin-top:6px">© 2026 Dongguan Aibeike AI Co., Ltd.</div>
+      </div>
+      <div class="footer-links">
+        <a href="/guides/">Guides</a>
+        <a href="/support/">Support</a>
+        <a href="/privacy/">Privacy</a>
+        <a href="/terms/">Terms</a>
+        <a href="/feed.xml">RSS</a>
+        <a href="https://github.com/Ceelog/CleanBit-Mac-App" target="_blank" rel="noopener noreferrer">GitHub</a>
+        <a href="https://apps.apple.com/app/apple-store/id6829159531?pt=127116872&amp;ct=website-guides&amp;mt=8" target="_blank" rel="noopener noreferrer">Mac App Store</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+  (function(){
+    // Interactive module-tinted screenshot switcher
+    var frame = document.getElementById('showcase-frame');
+    var img = document.getElementById('showcase-img');
+    var cap = document.getElementById('showcase-caption');
+    document.querySelectorAll('[data-tab-btn]').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        document.querySelectorAll('[data-tab-btn]').forEach(function(b){ b.classList.remove('is-active'); b.setAttribute('aria-selected','false'); });
+        btn.classList.add('is-active');
+        btn.setAttribute('aria-selected','true');
+        if (img) { img.src = btn.dataset.src; img.alt = btn.dataset.alt; }
+        if (cap) cap.textContent = btn.dataset.caption;
+        if (frame) frame.setAttribute('data-tint', btn.dataset.tint);
+      });
+    });
+    // One-click code block copy
+    document.querySelectorAll('[data-copy]').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        var pre = btn.closest('.code-block').querySelector('pre code');
+        if (!pre || !navigator.clipboard) return;
+        navigator.clipboard.writeText(pre.textContent || '').then(function(){
+          var old = btn.textContent;
+          btn.textContent = 'Copied';
+          setTimeout(function(){ btn.textContent = old; }, 1600);
+        });
+      });
+    });
+  })();
+  </script>
+</body>
+</html>

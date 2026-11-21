@@ -66,7 +66,7 @@ rm -rf ~/Library/Developer/Xcode/DerivedData/*
 | `Xcode/Archives` | **Review carefully** | Contains `.xcarchive` builds & dSYMs used to symbolicate App Store crash logs—do not delete blindly |
 
 > [!NOTE]
-> `DerivedData` is only one piece of developer storage. Before deleting `Archives`, make sure you no longer need the dSYM files for shipped app versions.
+> `DerivedData` is only one piece of developer storage. Before deleting `Archives`, make sure you no longer need the dSYM files for shipped app versions. If you also use AI coding agents that spin up isolated worktrees or duplicate builds, see our guide on [where Claude Code, Cursor, and Codex store disk space on macOS](/guides/claude-code-cursor-codex-disk-space-mac/) and [cleaning old `node_modules` folders](/guides/how-to-find-and-delete-old-node-modules-on-mac/).
 
 ## How CleanBit handles Xcode storage
 

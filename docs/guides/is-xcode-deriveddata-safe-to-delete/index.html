@@ -107,7 +107,7 @@
 rm -rf ~/Library/Developer/Xcode/DerivedData/*</code></pre></div>
 <h3 id="option-3-check-other-xcode-folders-carefully">Option 3: Check other Xcode folders carefully<a class="heading-anchor" href="#option-3-check-other-xcode-folders-carefully" aria-label="Link to section">#</a></h3>
 <div class="table-wrap"><table><thead><tr><th style="text-align:left">Folder</th><th style="text-align:left">Safe to delete?</th><th style="text-align:left">What happens</th></tr></thead><tbody><tr><td style="text-align:left"><code>DerivedData</code></td><td style="text-align:left">Yes (rebuilt automatically)</td><td style="text-align:left">Next build &amp; index takes longer</td></tr><tr><td style="text-align:left"><code>iOS DeviceSupport</code> (older versions)</td><td style="text-align:left">Usually yes</td><td style="text-align:left">Xcode re-copies symbols if you reconnect an older iOS device</td></tr><tr><td style="text-align:left"><code>CoreSimulator/Caches</code></td><td style="text-align:left">Yes (when simulators are shut down)</td><td style="text-align:left">Simulator regenerates caches as needed</td></tr><tr><td style="text-align:left"><code>Xcode/Archives</code></td><td style="text-align:left"><strong>Review carefully</strong></td><td style="text-align:left">Contains <code>.xcarchive</code> builds &amp; dSYMs used to symbolicate App Store crash logs—do not delete blindly</td></tr></tbody></table></div>
-<aside class="callout callout-note"><div class="callout-title">NOTE</div><p><code>DerivedData</code> is only one piece of developer storage. Before deleting <code>Archives</code>, make sure you no longer need the dSYM files for shipped app versions.</p></aside>
+<aside class="callout callout-note"><div class="callout-title">NOTE</div><p><code>DerivedData</code> is only one piece of developer storage. Before deleting <code>Archives</code>, make sure you no longer need the dSYM files for shipped app versions. If you also use AI coding agents that spin up isolated worktrees or duplicate builds, see our guide on <a href="/guides/claude-code-cursor-codex-disk-space-mac/">where Claude Code, Cursor, and Codex store disk space on macOS</a> and <a href="/guides/how-to-find-and-delete-old-node-modules-on-mac/">cleaning old <code>node_modules</code> folders</a>.</p></aside>
 <h2 id="how-cleanbit-handles-xcode-storage">How CleanBit handles Xcode storage<a class="heading-anchor" href="#how-cleanbit-handles-xcode-storage" aria-label="Link to section">#</a></h2>
 <p>I&#39;m the developer of <strong>CleanBit</strong>, a sandboxed Mac App Store disk space cleaner for macOS 15+. CleanBit separates Xcode folders by risk instead of lumping them together:</p>
 <ul><li><strong>Recommended</strong> (rebuilds automatically): <code>Xcode DerivedData</code>, old <code>iOS DeviceSupport</code> versions (keeping the 2 most recent), SwiftUI Preview Data, and caches inside shut-down Simulator devices. Caches of apps that are currently running are blocked automatically.</li><li><strong>Review</strong> (not pre-selected, always moved to Trash): <code>Xcode Archives</code>, so you don&#39;t accidentally wipe shipped build archives.</li><li>Before confirming, CleanBit splits how much will be permanently deleted vs. moved to the Trash—and you can switch Recommended caches to Trash in Settings if you prefer.</li></ul>
@@ -137,6 +137,12 @@ rm -rf ~/Library/Developer/Xcode/DerivedData/*</code></pre></div>
                 <div>
                   <div class="guide-meta"><span>Developer Storage</span><span>·</span><span>3 min read</span></div>
                   <h3 style="margin-top:6px;font-size:16px">How to Find and Delete Old node_modules Folders on a Mac</h3>
+                </div>
+                <span class="guide-more">Read guide →</span>
+              </a><a class="card guide-card" href="/guides/claude-code-cursor-codex-disk-space-mac/">
+                <div>
+                  <div class="guide-meta"><span>AI &amp; Developer Storage</span><span>·</span><span>8 min read</span></div>
+                  <h3 style="margin-top:6px;font-size:16px">Claude Code, Cursor and Codex Eating Disk Space on Your Mac? Here&#39;s Where It Goes</h3>
                 </div>
                 <span class="guide-more">Read guide →</span>
               </a>
