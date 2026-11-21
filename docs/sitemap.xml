@@ -1,43 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://ceelog.github.io/CleanBit-Mac-App/</loc>
-    <lastmod>2026-11-20</lastmod>
-  </url>
-  <url>
-    <loc>https://ceelog.github.io/CleanBit-Mac-App/zh/</loc>
-    <lastmod>2026-11-20</lastmod>
-  </url>
-  <url>
-    <loc>https://ceelog.github.io/CleanBit-Mac-App/guides/</loc>
+    <loc>https://getcleanbit.app/</loc>
     <lastmod>2026-11-21</lastmod>
   </url>
   <url>
-    <loc>https://ceelog.github.io/CleanBit-Mac-App/guides/is-xcode-deriveddata-safe-to-delete/</loc>
+    <loc>https://getcleanbit.app/zh/</loc>
     <lastmod>2026-11-21</lastmod>
   </url>
   <url>
-    <loc>https://ceelog.github.io/CleanBit-Mac-App/guides/how-to-find-and-delete-old-node-modules-on-mac/</loc>
+    <loc>https://getcleanbit.app/guides/</loc>
     <lastmod>2026-11-21</lastmod>
   </url>
   <url>
-    <loc>https://ceelog.github.io/CleanBit-Mac-App/zh/guides/</loc>
+    <loc>https://getcleanbit.app/guides/is-xcode-deriveddata-safe-to-delete/</loc>
     <lastmod>2026-11-21</lastmod>
   </url>
   <url>
-    <loc>https://ceelog.github.io/CleanBit-Mac-App/zh/guides/mac-delete-node-modules/</loc>
+    <loc>https://getcleanbit.app/guides/how-to-find-and-delete-old-node-modules-on-mac/</loc>
     <lastmod>2026-11-21</lastmod>
   </url>
   <url>
-    <loc>https://ceelog.github.io/CleanBit-Mac-App/support/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <loc>https://getcleanbit.app/zh/guides/</loc>
+    <lastmod>2026-11-21</lastmod>
   </url>
   <url>
-    <loc>https://ceelog.github.io/CleanBit-Mac-App/privacy/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <loc>https://getcleanbit.app/zh/guides/mac-delete-node-modules/</loc>
+    <lastmod>2026-11-21</lastmod>
   </url>
   <url>
-    <loc>https://ceelog.github.io/CleanBit-Mac-App/terms/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <loc>https://getcleanbit.app/support/</loc>
+    <lastmod>2026-11-21</lastmod>
+  </url>
+  <url>
+    <loc>https://getcleanbit.app/privacy/</loc>
+    <lastmod>2026-11-21</lastmod>
+  </url>
+  <url>
+    <loc>https://getcleanbit.app/terms/</loc>
+    <lastmod>2026-11-21</lastmod>
   </url>
 </urlset>

@@ -5,45 +5,45 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Mac 磁盘空间与开发者清理指南 — CleanBit</title>
   <meta name="description" content="围绕 Xcode 缓存、node_modules、AI 编程工具与 macOS 存储占用的实测指南，提供完整手动命令。" />
-  <link rel="canonical" href="https://ceelog.github.io/CleanBit-Mac-App/zh/guides/" />
-  <link rel="alternate" hreflang="en" href="https://ceelog.github.io/CleanBit-Mac-App/guides/" />
-  <link rel="alternate" hreflang="zh-Hans" href="https://ceelog.github.io/CleanBit-Mac-App/zh/guides/" />
-  <link rel="alternate" hreflang="x-default" href="https://ceelog.github.io/CleanBit-Mac-App/guides/" />
-  <link rel="icon" type="image/png" href="/CleanBit-Mac-App/assets/favicon.png" />
-  <link rel="apple-touch-icon" href="/CleanBit-Mac-App/assets/icon.png" />
-  <link rel="alternate" type="application/rss+xml" title="CleanBit Guides (简体中文)" href="https://ceelog.github.io/CleanBit-Mac-App/zh/feed.xml" />
+  <link rel="canonical" href="https://getcleanbit.app/zh/guides/" />
+  <link rel="alternate" hreflang="en" href="https://getcleanbit.app/guides/" />
+  <link rel="alternate" hreflang="zh-Hans" href="https://getcleanbit.app/zh/guides/" />
+  <link rel="alternate" hreflang="x-default" href="https://getcleanbit.app/guides/" />
+  <link rel="icon" type="image/png" href="/assets/favicon.png" />
+  <link rel="apple-touch-icon" href="/assets/icon.png" />
+  <link rel="alternate" type="application/rss+xml" title="CleanBit Guides (简体中文)" href="https://getcleanbit.app/zh/feed.xml" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="CleanBit" />
   <meta property="og:title" content="Mac 磁盘空间与开发者清理指南 — CleanBit" />
   <meta property="og:description" content="围绕 Xcode 缓存、node_modules、AI 编程工具与 macOS 存储占用的实测指南，提供完整手动命令。" />
-  <meta property="og:url" content="https://ceelog.github.io/CleanBit-Mac-App/zh/guides/" />
-  <meta property="og:image" content="https://ceelog.github.io/CleanBit-Mac-App/assets/og-cover.png" />
+  <meta property="og:url" content="https://getcleanbit.app/zh/guides/" />
+  <meta property="og:image" content="https://getcleanbit.app/assets/og-cover.png" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Mac 磁盘空间与开发者清理指南 — CleanBit" />
   <meta name="twitter:description" content="围绕 Xcode 缓存、node_modules、AI 编程工具与 macOS 存储占用的实测指南，提供完整手动命令。" />
-  <meta name="twitter:image" content="https://ceelog.github.io/CleanBit-Mac-App/assets/og-cover.png" />
+  <meta name="twitter:image" content="https://getcleanbit.app/assets/og-cover.png" />
   <meta name="theme-color" content="#111419" />
-  <link rel="stylesheet" href="/CleanBit-Mac-App/styles.css?v=cac88ab1" />
+  <link rel="stylesheet" href="/styles.css?v=cac88ab1" />
   
   
 </head>
 <body>
   <header class="site-header">
     <div class="container header-inner">
-      <a class="brand" href="/CleanBit-Mac-App/zh/">
-        <img src="/CleanBit-Mac-App/assets/icon.png" alt="CleanBit icon" width="28" height="28" />
+      <a class="brand" href="/zh/">
+        <img src="/assets/icon.png" alt="CleanBit icon" width="28" height="28" />
         <span>CleanBit</span>
       </a>
       <nav class="nav" aria-label="Main navigation">
-        <a href="/CleanBit-Mac-App/zh/#demo">视频演示</a>
-        <a href="/CleanBit-Mac-App/zh/#features">功能</a>
-        <a href="/CleanBit-Mac-App/zh/#safety">安全设计</a>
-        <a href="/CleanBit-Mac-App/zh/guides/" class="active">指南</a>
-        <a href="/CleanBit-Mac-App/zh/#pricing">定价</a>
-        <a href="/CleanBit-Mac-App/support/" class="">支持</a>
+        <a href="/zh/#demo">视频演示</a>
+        <a href="/zh/#features">功能</a>
+        <a href="/zh/#safety">安全设计</a>
+        <a href="/zh/guides/" class="active">指南</a>
+        <a href="/zh/#pricing">定价</a>
+        <a href="/support/" class="">支持</a>
       </nav>
       <div class="header-actions">
-        <a class="lang-switch" href="/CleanBit-Mac-App/guides/" hreflang="en">English</a>
+        <a class="lang-switch" href="/guides/" hreflang="en">English</a>
         <a class="pill pill-primary pill-sm" href="https://apps.apple.com/app/apple-store/id6829159531?pt=127116872&amp;ct=website-guides&amp;mt=8" target="_blank" rel="noopener noreferrer">Mac App Store</a>
       </div>
     </div>
@@ -54,7 +54,7 @@
   <section class="article-shell">
     <div class="container">
       <div class="breadcrumbs">
-        <a href="/CleanBit-Mac-App/zh/">CleanBit</a>
+        <a href="/zh/">CleanBit</a>
         <span>/</span>
         <span>指南</span>
       </div>
@@ -63,7 +63,7 @@
         <h1 style="margin:0 0 12px;font-size:clamp(28px,4vw,40px);letter-spacing:-0.025em">Mac 磁盘空间与开发者清理指南</h1>
         <p>围绕 Xcode 缓存、node_modules、AI 编程工具与 macOS 存储占用的实测指南，提供完整手动命令。</p>
       </div>
-      <div class="grid-2"><a class="card guide-card" href="/CleanBit-Mac-App/zh/guides/mac-delete-node-modules/">
+      <div class="grid-2"><a class="card guide-card" href="/zh/guides/mac-delete-node-modules/">
         <div>
           <div class="guide-meta">
             <span>开发者存储</span>
@@ -88,11 +88,11 @@
         <div style="margin-top:6px">© 2026 Dongguan Aibeike AI Co., Ltd.</div>
       </div>
       <div class="footer-links">
-        <a href="/CleanBit-Mac-App/zh/guides/">指南</a>
-        <a href="/CleanBit-Mac-App/support/">支持</a>
-        <a href="/CleanBit-Mac-App/privacy/">Privacy</a>
-        <a href="/CleanBit-Mac-App/terms/">Terms</a>
-        <a href="/CleanBit-Mac-App/zh/feed.xml">RSS</a>
+        <a href="/zh/guides/">指南</a>
+        <a href="/support/">支持</a>
+        <a href="/privacy/">Privacy</a>
+        <a href="/terms/">Terms</a>
+        <a href="/zh/feed.xml">RSS</a>
         <a href="https://github.com/Ceelog/CleanBit-Mac-App" target="_blank" rel="noopener noreferrer">GitHub</a>
         <a href="https://apps.apple.com/app/apple-store/id6829159531?pt=127116872&amp;ct=website-guides&amp;mt=8" target="_blank" rel="noopener noreferrer">Mac App Store</a>
       </div>

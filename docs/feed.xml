@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>CleanBit Mac Storage Guides</title>
-    <link>https://ceelog.github.io/CleanBit-Mac-App/</link>
-    <atom:link href="https://ceelog.github.io/CleanBit-Mac-App/feed.xml" rel="self" type="application/rss+xml" />
+    <link>https://getcleanbit.app/</link>
+    <atom:link href="https://getcleanbit.app/feed.xml" rel="self" type="application/rss+xml" />
     <description>Practical guides on freeing Mac disk space safely for developers and everyday users.</description>
     <language>en-us</language>
     <item>
       <title>Is Xcode DerivedData Safe to Delete? What Happens and How to Clean It</title>
-      <link>https://ceelog.github.io/CleanBit-Mac-App/guides/is-xcode-deriveddata-safe-to-delete/</link>
-      <guid isPermaLink="true">https://ceelog.github.io/CleanBit-Mac-App/guides/is-xcode-deriveddata-safe-to-delete/</guid>
+      <link>https://getcleanbit.app/guides/is-xcode-deriveddata-safe-to-delete/</link>
+      <guid isPermaLink="true">https://getcleanbit.app/guides/is-xcode-deriveddata-safe-to-delete/</guid>
       <pubDate>Sat, 21 Nov 2026 00:00:00 GMT</pubDate>
       <description>Yes, Xcode DerivedData is safe to delete. Learn what lives inside DerivedData, what actually happens after removing it, and how to clean Xcode caches safely.</description>
     </item>
     <item>
       <title>How to Find and Delete Old node_modules Folders on a Mac</title>
-      <link>https://ceelog.github.io/CleanBit-Mac-App/guides/how-to-find-and-delete-old-node-modules-on-mac/</link>
-      <guid isPermaLink="true">https://ceelog.github.io/CleanBit-Mac-App/guides/how-to-find-and-delete-old-node-modules-on-mac/</guid>
+      <link>https://getcleanbit.app/guides/how-to-find-and-delete-old-node-modules-on-mac/</link>
+      <guid isPermaLink="true">https://getcleanbit.app/guides/how-to-find-and-delete-old-node-modules-on-mac/</guid>
       <pubDate>Sat, 21 Nov 2026 00:00:00 GMT</pubDate>
       <description>Measure how much space old node_modules folders take on macOS, remove them safely from Terminal, and avoid breaking active or pnpm projects.</description>
     </item>

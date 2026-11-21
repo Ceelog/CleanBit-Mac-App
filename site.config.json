@@ -1,7 +1,7 @@
 {
   "name": "CleanBit",
-  "origin": "https://ceelog.github.io",
-  "basePath": "/CleanBit-Mac-App",
+  "origin": "https://getcleanbit.app",
+  "basePath": "",
   "repoUrl": "https://github.com/Ceelog/CleanBit-Mac-App",
   "appStoreId": "6829159531",
   "providerToken": "127116872",

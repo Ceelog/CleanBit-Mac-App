@@ -4,11 +4,11 @@
 
 CleanBit is a native SwiftUI disk space cleaner built for macOS 15+ and distributed exclusively on the Mac App Store inside Apple's App Sandbox. Every item explains what it is and what happens if you remove it—and nothing is deleted until you confirm.
 
-- **Website:** https://ceelog.github.io/CleanBit-Mac-App/
-- **简体中文:** https://ceelog.github.io/CleanBit-Mac-App/zh/
+- **Website:** https://getcleanbit.app/
+- **简体中文:** https://getcleanbit.app/zh/
 - **Mac App Store:** https://apps.apple.com/app/apple-store/id6829159531?pt=127116872&ct=github-readme&mt=8
 - **Video Demo (YouTube):** https://www.youtube.com/watch?v=SQDQhvJGRfY
-- **Storage Guides:** https://ceelog.github.io/CleanBit-Mac-App/guides/
+- **Storage Guides:** https://getcleanbit.app/guides/
 
 ![CleanBit Smart Scan](assets/screens/en-smart-scan.webp)
 
@@ -28,21 +28,21 @@ CleanBit is a native SwiftUI disk space cleaner built for macOS 15+ and distribu
 
 Practical Mac storage guides with manual Terminal and Finder steps:
 
-- [How to Find and Delete Old `node_modules` Folders on a Mac](https://ceelog.github.io/CleanBit-Mac-App/guides/how-to-find-and-delete-old-node-modules-on-mac/)
-- [Is Xcode DerivedData Safe to Delete? What Happens and How to Clean It](https://ceelog.github.io/CleanBit-Mac-App/guides/is-xcode-deriveddata-safe-to-delete/)
-- [Mac 上怎么找出并安全清理旧的 `node_modules`？](https://ceelog.github.io/CleanBit-Mac-App/zh/guides/mac-delete-node-modules/)
+- [How to Find and Delete Old `node_modules` Folders on a Mac](https://getcleanbit.app/guides/how-to-find-and-delete-old-node-modules-on-mac/)
+- [Is Xcode DerivedData Safe to Delete? What Happens and How to Clean It](https://getcleanbit.app/guides/is-xcode-deriveddata-safe-to-delete/)
+- [Mac 上怎么找出并安全清理旧的 `node_modules`？](https://getcleanbit.app/zh/guides/mac-delete-node-modules/)
 
 ## Support & Legal
 
-- [Support & Troubleshooting](https://ceelog.github.io/CleanBit-Mac-App/support/)
-- [Privacy Policy](https://ceelog.github.io/CleanBit-Mac-App/privacy/)
-- [Terms of Use](https://ceelog.github.io/CleanBit-Mac-App/terms/)
+- [Support & Troubleshooting](https://getcleanbit.app/support/)
+- [Privacy Policy](https://getcleanbit.app/privacy/)
+- [Terms of Use](https://getcleanbit.app/terms/)
 
 ## Local Preview (Website Source)
 
 This repository hosts the static source for CleanBit's official website and guides (zero external dependencies, Node.js 20+):
 
 ```bash
-node build.mjs
-python3 -m http.server -d docs 4173
+npm run build
+npm run preview
 ```

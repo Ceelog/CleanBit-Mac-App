@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://ceelog.github.io/CleanBit-Mac-App/sitemap.xml
+Sitemap: https://getcleanbit.app/sitemap.xml

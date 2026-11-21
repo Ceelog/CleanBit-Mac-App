@@ -1,0 +1,12 @@
+{
+  "name": "cleanbit-website",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "node build.mjs",
+    "preview": "python3 -m http.server -d docs 4173"
+  }
+}

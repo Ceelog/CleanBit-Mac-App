@@ -5,47 +5,47 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Mac 上怎么找出并安全清理旧的 node_modules？（实测 304 个占 66.3 GB） — CleanBit</title>
   <meta name="description" content="实测一台开发用 Mac 上 304 个 node_modules 占去 66.3 GB。手把手教你用终端安全排查、识别 pnpm 硬链接陷阱，以及何时不该直接删。" />
-  <link rel="canonical" href="https://ceelog.github.io/CleanBit-Mac-App/zh/guides/mac-delete-node-modules/" />
-  <link rel="alternate" hreflang="en" href="https://ceelog.github.io/CleanBit-Mac-App/guides/how-to-find-and-delete-old-node-modules-on-mac/" />
-  <link rel="alternate" hreflang="zh-Hans" href="https://ceelog.github.io/CleanBit-Mac-App/zh/guides/mac-delete-node-modules/" />
-  <link rel="alternate" hreflang="x-default" href="https://ceelog.github.io/CleanBit-Mac-App/guides/how-to-find-and-delete-old-node-modules-on-mac/" />
-  <link rel="icon" type="image/png" href="/CleanBit-Mac-App/assets/favicon.png" />
-  <link rel="apple-touch-icon" href="/CleanBit-Mac-App/assets/icon.png" />
-  <link rel="alternate" type="application/rss+xml" title="CleanBit Guides (简体中文)" href="https://ceelog.github.io/CleanBit-Mac-App/zh/feed.xml" />
+  <link rel="canonical" href="https://getcleanbit.app/zh/guides/mac-delete-node-modules/" />
+  <link rel="alternate" hreflang="en" href="https://getcleanbit.app/guides/how-to-find-and-delete-old-node-modules-on-mac/" />
+  <link rel="alternate" hreflang="zh-Hans" href="https://getcleanbit.app/zh/guides/mac-delete-node-modules/" />
+  <link rel="alternate" hreflang="x-default" href="https://getcleanbit.app/guides/how-to-find-and-delete-old-node-modules-on-mac/" />
+  <link rel="icon" type="image/png" href="/assets/favicon.png" />
+  <link rel="apple-touch-icon" href="/assets/icon.png" />
+  <link rel="alternate" type="application/rss+xml" title="CleanBit Guides (简体中文)" href="https://getcleanbit.app/zh/feed.xml" />
   <meta property="og:type" content="article" />
   <meta property="og:site_name" content="CleanBit" />
   <meta property="og:title" content="Mac 上怎么找出并安全清理旧的 node_modules？（实测 304 个占 66.3 GB） — CleanBit" />
   <meta property="og:description" content="实测一台开发用 Mac 上 304 个 node_modules 占去 66.3 GB。手把手教你用终端安全排查、识别 pnpm 硬链接陷阱，以及何时不该直接删。" />
-  <meta property="og:url" content="https://ceelog.github.io/CleanBit-Mac-App/zh/guides/mac-delete-node-modules/" />
-  <meta property="og:image" content="https://ceelog.github.io/CleanBit-Mac-App/assets/screens/zh-artifacts.webp" />
+  <meta property="og:url" content="https://getcleanbit.app/zh/guides/mac-delete-node-modules/" />
+  <meta property="og:image" content="https://getcleanbit.app/assets/screens/zh-artifacts.webp" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Mac 上怎么找出并安全清理旧的 node_modules？（实测 304 个占 66.3 GB） — CleanBit" />
   <meta name="twitter:description" content="实测一台开发用 Mac 上 304 个 node_modules 占去 66.3 GB。手把手教你用终端安全排查、识别 pnpm 硬链接陷阱，以及何时不该直接删。" />
-  <meta name="twitter:image" content="https://ceelog.github.io/CleanBit-Mac-App/assets/screens/zh-artifacts.webp" />
+  <meta name="twitter:image" content="https://getcleanbit.app/assets/screens/zh-artifacts.webp" />
   <meta name="theme-color" content="#111419" />
-  <link rel="stylesheet" href="/CleanBit-Mac-App/styles.css?v=cac88ab1" />
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Mac 上怎么找出并安全清理旧的 node_modules？（实测 304 个占 66.3 GB）","description":"实测一台开发用 Mac 上 304 个 node_modules 占去 66.3 GB。手把手教你用终端安全排查、识别 pnpm 硬链接陷阱，以及何时不该直接删。","datePublished":"2026-11-21","dateModified":"2026-11-21","inLanguage":"zh-Hans","author":{"@type":"Organization","name":"CleanBit 开发者","url":"https://ceelog.github.io/CleanBit-Mac-App/"},"publisher":{"@type":"Organization","name":"CleanBit","logo":{"@type":"ImageObject","url":"https://ceelog.github.io/CleanBit-Mac-App/assets/icon.png"}},"mainEntityOfPage":"https://ceelog.github.io/CleanBit-Mac-App/zh/guides/mac-delete-node-modules/","image":"https://ceelog.github.io/CleanBit-Mac-App/assets/screens/zh-artifacts.webp"}</script>
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"CleanBit","item":"https://ceelog.github.io/CleanBit-Mac-App/zh/"},{"@type":"ListItem","position":2,"name":"指南","item":"https://ceelog.github.io/CleanBit-Mac-App/zh/guides/"},{"@type":"ListItem","position":3,"name":"Mac 上怎么找出并安全清理旧的 node_modules？（实测 304 个占 66.3 GB）","item":"https://ceelog.github.io/CleanBit-Mac-App/zh/guides/mac-delete-node-modules/"}]}</script>
+  <link rel="stylesheet" href="/styles.css?v=cac88ab1" />
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Mac 上怎么找出并安全清理旧的 node_modules？（实测 304 个占 66.3 GB）","description":"实测一台开发用 Mac 上 304 个 node_modules 占去 66.3 GB。手把手教你用终端安全排查、识别 pnpm 硬链接陷阱，以及何时不该直接删。","datePublished":"2026-11-21","dateModified":"2026-11-21","inLanguage":"zh-Hans","author":{"@type":"Organization","name":"CleanBit 开发者","url":"https://getcleanbit.app/"},"publisher":{"@type":"Organization","name":"CleanBit","logo":{"@type":"ImageObject","url":"https://getcleanbit.app/assets/icon.png"}},"mainEntityOfPage":"https://getcleanbit.app/zh/guides/mac-delete-node-modules/","image":"https://getcleanbit.app/assets/screens/zh-artifacts.webp"}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"CleanBit","item":"https://getcleanbit.app/zh/"},{"@type":"ListItem","position":2,"name":"指南","item":"https://getcleanbit.app/zh/guides/"},{"@type":"ListItem","position":3,"name":"Mac 上怎么找出并安全清理旧的 node_modules？（实测 304 个占 66.3 GB）","item":"https://getcleanbit.app/zh/guides/mac-delete-node-modules/"}]}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"删掉 node_modules 会影响全局 npm 包或 Node.js 环境吗？","acceptedAnswer":{"@type":"Answer","text":"不会。项目目录下的 node_modules 只属于当前项目，不影响全局安装的 CLI 工具或源代码。"}},{"@type":"Question","name":"为什么删完之后，访达里看到的可用空间没有立刻变多？","acceptedAnswer":{"@type":"Answer","text":"常见原因有两个：如果是移到废纸篓，需要清空废纸篓才会释放；如果是 pnpm 项目，因为存在硬链接，需要再执行 pnpm store prune。此外 macOS 的本地时间机器快照（APFS 快照）也可能导致系统延迟更新可用空间。"}}]}</script>
   
 </head>
 <body>
   <header class="site-header">
     <div class="container header-inner">
-      <a class="brand" href="/CleanBit-Mac-App/zh/">
-        <img src="/CleanBit-Mac-App/assets/icon.png" alt="CleanBit icon" width="28" height="28" />
+      <a class="brand" href="/zh/">
+        <img src="/assets/icon.png" alt="CleanBit icon" width="28" height="28" />
         <span>CleanBit</span>
       </a>
       <nav class="nav" aria-label="Main navigation">
-        <a href="/CleanBit-Mac-App/zh/#demo">视频演示</a>
-        <a href="/CleanBit-Mac-App/zh/#features">功能</a>
-        <a href="/CleanBit-Mac-App/zh/#safety">安全设计</a>
-        <a href="/CleanBit-Mac-App/zh/guides/" class="active">指南</a>
-        <a href="/CleanBit-Mac-App/zh/#pricing">定价</a>
-        <a href="/CleanBit-Mac-App/support/" class="">支持</a>
+        <a href="/zh/#demo">视频演示</a>
+        <a href="/zh/#features">功能</a>
+        <a href="/zh/#safety">安全设计</a>
+        <a href="/zh/guides/" class="active">指南</a>
+        <a href="/zh/#pricing">定价</a>
+        <a href="/support/" class="">支持</a>
       </nav>
       <div class="header-actions">
-        <a class="lang-switch" href="/CleanBit-Mac-App/guides/how-to-find-and-delete-old-node-modules-on-mac/" hreflang="en">English</a>
+        <a class="lang-switch" href="/guides/how-to-find-and-delete-old-node-modules-on-mac/" hreflang="en">English</a>
         <a class="pill pill-primary pill-sm" href="https://apps.apple.com/app/apple-store/id6829159531?pt=127116872&amp;ct=website-guides&amp;mt=8" target="_blank" rel="noopener noreferrer">Mac App Store</a>
       </div>
     </div>
@@ -56,9 +56,9 @@
   <article class="article-shell">
     <div class="container">
       <div class="breadcrumbs">
-        <a href="/CleanBit-Mac-App/zh/">CleanBit</a>
+        <a href="/zh/">CleanBit</a>
         <span>/</span>
-        <a href="/CleanBit-Mac-App/zh/guides/">指南</a>
+        <a href="/zh/guides/">指南</a>
         <span>/</span>
         <span>开发者存储</span>
       </div>
@@ -101,7 +101,7 @@ pnpm store prune</code></pre></div>
 <h2 id="4-如果不想敲命令也可以用-cleanbit-可视化筛选">4. 如果不想敲命令，也可以用 CleanBit 可视化筛选<a class="heading-anchor" href="#4-如果不想敲命令也可以用-cleanbit-可视化筛选" aria-label="Link to section">#</a></h2>
 <p>我是 <strong>CleanBit</strong> 的开发者，这是一款上架在 Mac App Store、运行在 macOS 沙盒里的磁盘清理工具（支持 macOS 15+）：</p>
 <ul><li><strong>项目产物</strong>模块会找出 <code>node_modules</code>、<code>target</code>、<code>.build</code>、<code>.venv</code>、<code>Pods</code> 等目录，直接显示<strong>每个项目最后一次改动的时间</strong>。</li><li><strong>被 Git 跟踪的内容一律跳过</strong>，近期有写入的活跃项目会自动标出并禁止误选。</li><li>所有项目产物属于「需要确认」（默认不勾选），删除时<strong>一律移到废纸篓</strong>，万一删错随时可以放回原处。</li><li><code>pnpm store</code> 在 CleanBit 里仅展示大小、不直接删除，并提示你使用 <code>pnpm store prune</code>。</li></ul>
-<figure class="prose-figure"><img src="/CleanBit-Mac-App/assets/screens/zh-artifacts.webp" alt="CleanBit 项目产物页面截图，展示构建目录、最后修改时间与安全防护提示" loading="lazy" decoding="async" /><figcaption>CleanBit「项目产物」列出各项目最后改动时间，跳过 Git 跟踪内容，删除时移到废纸篓。</figcaption></figure>
+<figure class="prose-figure"><img src="/assets/screens/zh-artifacts.webp" alt="CleanBit 项目产物页面截图，展示构建目录、最后修改时间与安全防护提示" loading="lazy" decoding="async" /><figcaption>CleanBit「项目产物」列出各项目最后改动时间，跳过 Git 跟踪内容，删除时移到废纸篓。</figcaption></figure>
 <h2 id="常见问题">常见问题<a class="heading-anchor" href="#常见问题" aria-label="Link to section">#</a></h2>
 <h3 id="删掉-nodemodules-会影响全局-npm-包或-nodejs-环境吗">删掉 <code>node_modules</code> 会影响全局 npm 包或 Node.js 环境吗？<a class="heading-anchor" href="#删掉-nodemodules-会影响全局-npm-包或-nodejs-环境吗" aria-label="Link to section">#</a></h3>
 <p>不会。项目目录下的 <code>node_modules</code> 只属于当前项目，不影响全局安装的 CLI 工具或源代码。</p>
@@ -138,11 +138,11 @@ pnpm store prune</code></pre></div>
         <div style="margin-top:6px">© 2026 Dongguan Aibeike AI Co., Ltd.</div>
       </div>
       <div class="footer-links">
-        <a href="/CleanBit-Mac-App/zh/guides/">指南</a>
-        <a href="/CleanBit-Mac-App/support/">支持</a>
-        <a href="/CleanBit-Mac-App/privacy/">Privacy</a>
-        <a href="/CleanBit-Mac-App/terms/">Terms</a>
-        <a href="/CleanBit-Mac-App/zh/feed.xml">RSS</a>
+        <a href="/zh/guides/">指南</a>
+        <a href="/support/">支持</a>
+        <a href="/privacy/">Privacy</a>
+        <a href="/terms/">Terms</a>
+        <a href="/zh/feed.xml">RSS</a>
         <a href="https://github.com/Ceelog/CleanBit-Mac-App" target="_blank" rel="noopener noreferrer">GitHub</a>
         <a href="https://apps.apple.com/app/apple-store/id6829159531?pt=127116872&amp;ct=website-guides&amp;mt=8" target="_blank" rel="noopener noreferrer">Mac App Store</a>
       </div>
