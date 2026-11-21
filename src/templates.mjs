@@ -291,6 +291,15 @@ export function renderLayout({ lang = 'en', title, description, canonicalPath, a
     .map((obj) => `<script type="application/ld+json">${JSON.stringify(obj)}</script>`)
     .join('\n  ');
 
+  const gtmSnippet = ctx.config.gtmId
+    ? `<script async src="https://www.googletagmanager.com/gtm.js?id=${escapeHtml(ctx.config.gtmId)}"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+  </script>`
+    : '';
+
   const gaSnippet = ctx.config.gaMeasurementId
     ? `<script async src="https://www.googletagmanager.com/gtag/js?id=${escapeHtml(ctx.config.gaMeasurementId)}"></script>
   <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${escapeHtml(ctx.config.gaMeasurementId)}');</script>`
@@ -323,6 +332,7 @@ export function renderLayout({ lang = 'en', title, description, canonicalPath, a
   <meta name="theme-color" content="#111419" />
   <link rel="stylesheet" href="${escapeHtml(ctx.relUrl('/styles.css'))}?v=${escapeHtml(ctx.cssVersion || '1')}" />
   ${ldScripts}
+  ${gtmSnippet}
   ${gaSnippet}
 </head>
 <body>

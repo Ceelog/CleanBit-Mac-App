@@ -27,6 +27,12 @@
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Mac 上怎么找出并安全清理旧的 node_modules？（实测 304 个占 66.3 GB）","description":"实测一台开发用 Mac 上 304 个 node_modules 占去 66.3 GB。手把手教你用终端安全排查、识别 pnpm 硬链接陷阱，以及何时不该直接删。","datePublished":"2026-11-21","dateModified":"2026-11-21","inLanguage":"zh-Hans","author":{"@type":"Organization","name":"CleanBit 开发者","url":"https://getcleanbit.app/"},"publisher":{"@type":"Organization","name":"CleanBit","logo":{"@type":"ImageObject","url":"https://getcleanbit.app/assets/icon.png"}},"mainEntityOfPage":"https://getcleanbit.app/zh/guides/mac-delete-node-modules/","image":"https://getcleanbit.app/assets/screens/zh-artifacts.webp"}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"CleanBit","item":"https://getcleanbit.app/zh/"},{"@type":"ListItem","position":2,"name":"指南","item":"https://getcleanbit.app/zh/guides/"},{"@type":"ListItem","position":3,"name":"Mac 上怎么找出并安全清理旧的 node_modules？（实测 304 个占 66.3 GB）","item":"https://getcleanbit.app/zh/guides/mac-delete-node-modules/"}]}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"删掉 node_modules 会影响全局 npm 包或 Node.js 环境吗？","acceptedAnswer":{"@type":"Answer","text":"不会。项目目录下的 node_modules 只属于当前项目，不影响全局安装的 CLI 工具或源代码。"}},{"@type":"Question","name":"为什么删完之后，访达里看到的可用空间没有立刻变多？","acceptedAnswer":{"@type":"Answer","text":"常见原因有两个：如果是移到废纸篓，需要清空废纸篓才会释放；如果是 pnpm 项目，因为存在硬链接，需要再执行 pnpm store prune。此外 macOS 的本地时间机器快照（APFS 快照）也可能导致系统延迟更新可用空间。"}}]}</script>
+  <script async src="https://www.googletagmanager.com/gtm.js?id=GTM-TFR7TV8Z"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+  </script>
   
 </head>
 <body>
