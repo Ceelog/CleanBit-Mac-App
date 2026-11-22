@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>iOS DeviceSupport and Simulators Taking 40 GB? What You Can Safely Remove — CleanBit</title>
+  <meta name="description" content="Reclaim tens of gigabytes from Xcode iOS DeviceSupport and CoreSimulator on macOS. Includes real Mac measurements, safe xcrun simctl commands, and cleanup limits." />
+  <link rel="canonical" href="https://getcleanbit.app/guides/ios-devicesupport-and-simulators-disk-space-mac/" />
+  <link rel="alternate" hreflang="en" href="https://getcleanbit.app/guides/ios-devicesupport-and-simulators-disk-space-mac/" />
+  <link rel="alternate" hreflang="zh-Hans" href="https://getcleanbit.app/zh/guides/" />
+  <link rel="alternate" hreflang="x-default" href="https://getcleanbit.app/guides/ios-devicesupport-and-simulators-disk-space-mac/" />
+  <link rel="icon" type="image/png" href="/assets/favicon.png" />
+  <link rel="apple-touch-icon" href="/assets/icon.png" />
+  <link rel="alternate" type="application/rss+xml" title="CleanBit Guides (English)" href="https://getcleanbit.app/feed.xml" />
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="CleanBit" />
+  <meta property="og:title" content="iOS DeviceSupport and Simulators Taking 40 GB? What You Can Safely Remove — CleanBit" />
+  <meta property="og:description" content="Reclaim tens of gigabytes from Xcode iOS DeviceSupport and CoreSimulator on macOS. Includes real Mac measurements, safe xcrun simctl commands, and cleanup limits." />
+  <meta property="og:url" content="https://getcleanbit.app/guides/ios-devicesupport-and-simulators-disk-space-mac/" />
+  <meta property="og:image" content="https://getcleanbit.app/assets/screens/en-smart-scan.webp" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="iOS DeviceSupport and Simulators Taking 40 GB? What You Can Safely Remove — CleanBit" />
+  <meta name="twitter:description" content="Reclaim tens of gigabytes from Xcode iOS DeviceSupport and CoreSimulator on macOS. Includes real Mac measurements, safe xcrun simctl commands, and cleanup limits." />
+  <meta name="twitter:image" content="https://getcleanbit.app/assets/screens/en-smart-scan.webp" />
+  <meta name="theme-color" content="#111419" />
+  <link rel="stylesheet" href="/styles.css?v=cac88ab1" />
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"iOS DeviceSupport and Simulators Taking 40 GB? What You Can Safely Remove","description":"Reclaim tens of gigabytes from Xcode iOS DeviceSupport and CoreSimulator on macOS. Includes real Mac measurements, safe xcrun simctl commands, and cleanup limits.","datePublished":"2026-11-22","dateModified":"2026-11-22","inLanguage":"en","author":{"@type":"Organization","name":"CleanBit Developer","url":"https://getcleanbit.app/"},"publisher":{"@type":"Organization","name":"CleanBit","logo":{"@type":"ImageObject","url":"https://getcleanbit.app/assets/icon.png"}},"mainEntityOfPage":"https://getcleanbit.app/guides/ios-devicesupport-and-simulators-disk-space-mac/","image":"https://getcleanbit.app/assets/screens/en-smart-scan.webp"}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"CleanBit","item":"https://getcleanbit.app/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://getcleanbit.app/guides/"},{"@type":"ListItem","position":3,"name":"iOS DeviceSupport and Simulators Taking 40 GB? What You Can Safely Remove","item":"https://getcleanbit.app/guides/ios-devicesupport-and-simulators-disk-space-mac/"}]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is it safe to delete ~/Library/Developer/Xcode/iOS DeviceSupport?","acceptedAnswer":{"@type":"Answer","text":"Yes, especially older iOS versions you no longer debug on physical devices. Deleting a version only removes cached debug symbols for that OS build; if you plug in a device running that version later, Xcode copies the symbols again. Keeping the 1–2 most recent versions avoids waiting on your daily test device."}},{"@type":"Question","name":"Does deleting Simulator caches remove my installed test apps or Core Data / UserDefaults?","acceptedAnswer":{"@type":"Answer","text":"Not if you only clear cache paths (Library/Caches, diagnostic logs, and CoreSimulator/Caches) on shut-down simulators. Running xcrun simctl erase or xcrun simctl delete, however, wipes the entire simulated device including installed apps and local app data."}},{"@type":"Question","name":"Why did deleting CoreSimulator/Devices not free the 15 GB of iOS runtimes I saw in Storage Settings?","acceptedAnswer":{"@type":"Answer","text":"Simulator devices (in ~/Library/Developer/CoreSimulator/Devices) store per-device data and caches, whereas Simulator runtimes (the OS images themselves) are managed separately in /Library/Developer/CoreSimulator and Xcode Components. Run xcrun simctl runtime list and xcrun simctl runtime delete <UUID> (or open Xcode → Settings → Components) to reclaim runtime disk images."}},{"@type":"Question","name":"Can a sandboxed Mac App Store cleaner delete Xcode Simulator runtimes?","acceptedAnswer":{"@type":"Answer","text":"No. Simulator runtime disk images live in system-managed locations outside your user home folder, which Apple's App Sandbox cannot modify. A sandboxed cleaner like CleanBit can safely clean DerivedData, old DeviceSupport folders, SwiftUI Preview data, and caches inside shut-down simulator devices in your home folder, while runtime images should be removed with xcrun simctl runtime delete or Xcode Settings."}}]}</script>
+  <script async src="https://www.googletagmanager.com/gtm.js?id=GTM-TFR7TV8Z"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+  </script>
+  
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="/">
+        <img src="/assets/icon.png" alt="CleanBit icon" width="28" height="28" />
+        <span>CleanBit</span>
+      </a>
+      <nav class="nav" aria-label="Main navigation">
+        <a href="/#demo">Demo</a>
+        <a href="/#features">Features</a>
+        <a href="/#safety">Safety</a>
+        <a href="/guides/" class="active">Guides</a>
+        <a href="/#pricing">Pricing</a>
+        <a href="/support/" class="">Support</a>
+      </nav>
+      <div class="header-actions">
+        <a class="lang-switch" href="/zh/guides/" hreflang="zh-Hans">中文</a>
+        <a class="pill pill-primary pill-sm" href="https://apps.apple.com/app/apple-store/id6829159531?pt=127116872&amp;ct=website-guides&amp;mt=8" target="_blank" rel="noopener noreferrer">Mac App Store</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+  <article class="article-shell">
+    <div class="container">
+      <div class="breadcrumbs">
+        <a href="/">CleanBit</a>
+        <span>/</span>
+        <a href="/guides/">Guides</a>
+        <span>/</span>
+        <span>Developer Storage</span>
+      </div>
+      <div class="article-grid">
+        <div>
+          <header class="article-header">
+            <div class="badge">Developer Storage</div>
+            <h1>iOS DeviceSupport and Simulators Taking 40 GB? What You Can Safely Remove</h1>
+            <p class="article-lead">Reclaim tens of gigabytes from Xcode iOS DeviceSupport and CoreSimulator on macOS. Includes real Mac measurements, safe xcrun simctl commands, and cleanup limits.</p>
+            <div class="article-meta">
+              <span>CleanBit Developer</span>
+              <span>·</span>
+              <span>Updated 2026-11-22</span>
+              <span>·</span>
+              <span>6 min read</span>
+            </div>
+          </header>
+
+          <div class="prose">
+            <p><strong>Yes—older <code>iOS DeviceSupport</code> folders and unused Simulator runtimes, devices, and caches are usually safe to remove, and they often reclaim far more space than <code>DerivedData</code>.</strong> Every physical iPhone or iPad OS version you debug adds several gigabytes of symbol files, while each Xcode upgrade leaves behind old Simulator devices and system caches that never clean themselves up.</p>
+<p>On one developer Mac we measured (read-only <code>du</code>), <strong><code>~/Library/Developer/Xcode/iOS DeviceSupport</code> occupied 24.1 GB</strong> and <strong><code>~/Library/Developer/CoreSimulator/Devices</code> occupied 43.0 GB</strong>—more than four times the 15.3 GB sitting in <code>DerivedData</code> on the same machine. Keep in mind that <code>du</code> reports total folder size, not how much is safe to delete blindly: active simulators hold your test app data, and deleting the DeviceSupport version matching your current test phone forces Xcode to re-copy symbols next time you plug it in.</p>
+<h2 id="1-measure-xcode-device-and-simulator-storage-first-read-only">1. Measure Xcode device and simulator storage first (read-only)<a class="heading-anchor" href="#1-measure-xcode-device-and-simulator-storage-first-read-only" aria-label="Link to section">#</a></h2>
+<p>Before removing anything, inspect how much space each folder actually takes on your Mac:</p>
+<div class="code-block"><div class="code-head"><span class="code-lang">bash</span><button type="button" class="code-copy" data-copy>Copy</button></div><pre><code>du -sh \
+  ~/Library/Developer/Xcode/iOS\ DeviceSupport \
+  ~/Library/Developer/Xcode/watchOS\ DeviceSupport \
+  ~/Library/Developer/Xcode/tvOS\ DeviceSupport \
+  ~/Library/Developer/Xcode/visionOS\ DeviceSupport \
+  ~/Library/Developer/CoreSimulator/Devices \
+  ~/Library/Developer/CoreSimulator/Caches \
+  ~/Library/Developer/Xcode/UserData/Previews 2&gt;/dev/null</code></pre></div>
+<p>To see which installed Simulator runtimes (the multi-gigabyte OS disk images managed by Xcode) are eating space outside your home folder:</p>
+<div class="code-block"><div class="code-head"><span class="code-lang">bash</span><button type="button" class="code-copy" data-copy>Copy</button></div><pre><code>xcrun simctl runtime list</code></pre></div>
+<p>And to list your individual Simulator devices, including unavailable ones left over from older Xcode versions:</p>
+<div class="code-block"><div class="code-head"><span class="code-lang">bash</span><button type="button" class="code-copy" data-copy>Copy</button></div><pre><code>xcrun simctl list devices</code></pre></div>
+<h2 id="2-what-lives-in-each-folderand-what-is-safe-to-remove">2. What lives in each folder—and what is safe to remove<a class="heading-anchor" href="#2-what-lives-in-each-folderand-what-is-safe-to-remove" aria-label="Link to section">#</a></h2>
+<div class="table-wrap"><table><thead><tr><th style="text-align:left">Location</th><th style="text-align:left">What lives inside</th><th style="text-align:left">Safe to delete?</th><th style="text-align:left">What happens after removal</th></tr></thead><tbody><tr><td style="text-align:left"><code>~/Library/Developer/Xcode/iOS DeviceSupport</code> (and <code>watchOS</code>, <code>tvOS</code>, <code>visionOS</code>)</td><td style="text-align:left">Debug symbols copied from physical devices you connected to Xcode</td><td style="text-align:left"><strong>Older versions: yes</strong> (keep your 1–2 newest OS versions)</td><td style="text-align:left">Xcode re-copies symbols if you reconnect an older physical device</td></tr><tr><td style="text-align:left"><code>~/Library/Developer/CoreSimulator/Caches</code></td><td style="text-align:left">Shared Simulator runtime and dyld caches</td><td style="text-align:left"><strong>Yes</strong> (quit Simulator and Xcode first)</td><td style="text-align:left">Simulator rebuilds caches on next launch</td></tr><tr><td style="text-align:left"><code>~/Library/Developer/CoreSimulator/Devices/&lt;UUID&gt;/data/Library/Caches</code> (and diagnostic/asset caches)</td><td style="text-align:left">Per-simulator system caches, MobileAsset downloads, and diagnostic logs</td><td style="text-align:left"><strong>Yes, when that simulator is shut down</strong></td><td style="text-align:left">Installed test apps and app data stay intact; system assets re-download if needed</td></tr><tr><td style="text-align:left">Entire <code>CoreSimulator/Devices/&lt;UUID&gt;</code> folders</td><td style="text-align:left">Full virtual devices, including installed test apps, Keychain, and app data</td><td style="text-align:left"><strong>Review</strong> (use <code>xcrun simctl</code>, not <code>rm -rf</code>)</td><td style="text-align:left">Erases that simulator&#39;s apps and local test state permanently</td></tr><tr><td style="text-align:left">Simulator Runtime Images (<code>/Library/Developer/CoreSimulator/Volumes</code> &amp; Xcode Components)</td><td style="text-align:left">Multi-GB iOS/watchOS/visionOS OS images (often 7–10 GB each)</td><td style="text-align:left"><strong>Older runtimes: yes</strong> (via <code>xcrun simctl runtime delete</code> or Xcode Settings)</td><td style="text-align:left">You must re-download that OS runtime if you need to test on it again</td></tr><tr><td style="text-align:left"><code>~/Library/Developer/Xcode/UserData/Previews</code></td><td style="text-align:left">SwiftUI Canvas preview simulators and caches</td><td style="text-align:left"><strong>Yes</strong> (quit Xcode first)</td><td style="text-align:left">Xcode regenerates preview data next time you open a SwiftUI Canvas</td></tr></tbody></table></div>
+<aside class="callout callout-note"><div class="callout-title">NOTE</div><p>On Xcode 15 and newer, iOS 17+ devices use CoreDevice shared symbols rather than creating new folders inside <code>iOS DeviceSupport</code>. If your <code>~/Library/Developer/Xcode/iOS DeviceSupport</code> folder is still 20 GB+, those folders are almost always leftover symbols from iOS 16 and earlier test devices.</p></aside>
+<h2 id="3-safe-manual-cleanup-commands">3. Safe manual cleanup commands<a class="heading-anchor" href="#3-safe-manual-cleanup-commands" aria-label="Link to section">#</a></h2>
+<p><strong>Always quit Xcode and the Simulator app first</strong> before deleting any Xcode or CoreSimulator files.</p>
+<h3 id="clean-old-ios-devicesupport-versions">Clean old <code>iOS DeviceSupport</code> versions<a class="heading-anchor" href="#clean-old-ios-devicesupport-versions" aria-label="Link to section">#</a></h3>
+<p>List folders sorted by modification date so you can see which OS versions you haven&#39;t touched in months:</p>
+<div class="code-block"><div class="code-head"><span class="code-lang">bash</span><button type="button" class="code-copy" data-copy>Copy</button></div><pre><code>ls -lt ~/Library/Developer/Xcode/iOS\ DeviceSupport</code></pre></div>
+<p>Keep the 1–2 newest versions you actively test on, and move older version folders to the Trash in Finder (<code>Shift + Command + G</code> → <code>~/Library/Developer/Xcode/iOS DeviceSupport</code>) or remove a specific old folder in Terminal:</p>
+<div class="code-block"><div class="code-head"><span class="code-lang">bash</span><button type="button" class="code-copy" data-copy>Copy</button></div><pre><code># Example: remove one specific old iOS version folder after verifying its name
+rm -rf ~/Library/Developer/Xcode/iOS\ DeviceSupport/16.4\ *</code></pre></div>
+<h3 id="clean-unavailable-simulator-devices-safest-first-step">Clean unavailable Simulator devices (safest first step)<a class="heading-anchor" href="#clean-unavailable-simulator-devices-safest-first-step" aria-label="Link to section">#</a></h3>
+<p>When you update Xcode, simulators tied to removed runtimes become <code>unavailable</code> but stay on disk. Remove only unavailable devices with Apple&#39;s official CLI:</p>
+<div class="code-block"><div class="code-head"><span class="code-lang">bash</span><button type="button" class="code-copy" data-copy>Copy</button></div><pre><code>xcrun simctl delete unavailable</code></pre></div>
+<h3 id="remove-old-simulator-runtimes-often-the-biggest-win">Remove old Simulator runtimes (often the biggest win)<a class="heading-anchor" href="#remove-old-simulator-runtimes-often-the-biggest-win" aria-label="Link to section">#</a></h3>
+<p>A single outdated iOS Simulator runtime can take <strong>7–10 GB</strong>. List installed runtimes with their identifiers:</p>
+<div class="code-block"><div class="code-head"><span class="code-lang">bash</span><button type="button" class="code-copy" data-copy>Copy</button></div><pre><code>xcrun simctl runtime list</code></pre></div>
+<p>Delete a specific unused runtime by its UUID (or remove them via <strong>Xcode → Settings → Components</strong>):</p>
+<div class="code-block"><div class="code-head"><span class="code-lang">bash</span><button type="button" class="code-copy" data-copy>Copy</button></div><pre><code># Replace &lt;RUNTIME_UUID&gt; with the identifier from `xcrun simctl runtime list`
+xcrun simctl runtime delete &lt;RUNTIME_UUID&gt;</code></pre></div>
+<p>You can also ask Xcode to prune unused runtimes that haven&#39;t been used in over a set number of days:</p>
+<div class="code-block"><div class="code-head"><span class="code-lang">bash</span><button type="button" class="code-copy" data-copy>Copy</button></div><pre><code># Preview/remove runtimes unused for more than 30 days
+xcrun simctl runtime delete --notUsedSinceDays 30</code></pre></div>
+<h3 id="clear-swiftui-preview-caches-and-shared-simulator-caches">Clear SwiftUI Preview caches and shared Simulator caches<a class="heading-anchor" href="#clear-swiftui-preview-caches-and-shared-simulator-caches" aria-label="Link to section">#</a></h3>
+<p>On the developer Mac we measured, <code>~/Library/Developer/Xcode/UserData/Previews</code> held <strong>3.44 GB</strong> on its own. After quitting Xcode and Simulator:</p>
+<div class="code-block"><div class="code-head"><span class="code-lang">bash</span><button type="button" class="code-copy" data-copy>Copy</button></div><pre><code>xcrun simctl --set previews delete all
+rm -rf ~/Library/Developer/CoreSimulator/Caches/*</code></pre></div>
+<aside class="callout callout-warning"><div class="callout-title">WARNING</div><p>Avoid running <code>rm -rf ~/Library/Developer/CoreSimulator/Devices/*</code> directly while <code>CoreSimulatorService</code> is running. Deleting device UUID folders behind <code>simctl</code>&#39;s back can leave Xcode unable to boot simulators until you reboot or run <code>killall -9 com.apple.CoreSimulator.CoreSimulatorService</code>. Always use <code>xcrun simctl delete</code> to remove whole simulators.</p></aside>
+<p>For the rest of your Xcode and developer footprint, check our guides on <a href="/guides/is-xcode-deriveddata-safe-to-delete/">whether Xcode <code>DerivedData</code> is safe to delete</a>, <a href="/guides/how-to-find-and-delete-old-node-modules-on-mac/">finding and deleting old <code>node_modules</code> folders</a>, and <a href="/guides/claude-code-cursor-codex-disk-space-mac/">cleaning Claude Code, Cursor, and Codex disk space on macOS</a>.</p>
+<h2 id="4-what-cleanbit-cleansand-what-stays-manual">4. What CleanBit cleans—and what stays manual<a class="heading-anchor" href="#4-what-cleanbit-cleansand-what-stays-manual" aria-label="Link to section">#</a></h2>
+<p>I&#39;m the developer of <strong>CleanBit</strong>, a sandboxed Mac App Store disk space cleaner for macOS 15+. CleanBit handles the repetitive home-folder Xcode caches automatically with strict guards, while staying transparent about what requires <code>xcrun simctl</code> or Xcode Settings:</p>
+<ul><li><strong>Old DeviceSupport Versions (Recommended)</strong>: Scans <code>iOS</code>, <code>macOS</code>, <code>watchOS</code>, <code>tvOS</code>, <code>visionOS</code>, and <code>xrOS</code> DeviceSupport folders, blocks cleanup while Xcode is running, and <strong>automatically keeps the 2 most recently modified versions</strong> per platform. On the developer Mac we measured, CleanBit found 4 <code>iOS DeviceSupport</code> folders, locked the 2 newest, and marked <strong>12.76 GB</strong> as safely cleanable.</li><li><strong>Caches Inside Simulator Devices (Recommended)</strong>: Reads each simulator&#39;s <code>device.plist</code> and <strong>only cleans simulators verified as shut down (<code>state == 1</code>)</strong>, targeting only five regenerable cache/diagnostic paths (<code>Library/Caches</code>, <code>MobileAsset/AssetsV2</code>, <code>var/db/diagnostics</code>, <code>var/db/uuidtext</code>, and <code>PRBPosterExtensionDataStore</code>) so your installed simulator apps and test data remain untouched. On the same developer Mac, CleanBit found 30 cache entries (25.6 GB), blocked 15 from non-shutdown simulators, and marked <strong>9.29 GB</strong> as safely cleanable.</li><li><strong>Simulator Caches &amp; SwiftUI Preview Data (Recommended)</strong>: Cleans <code>CoreSimulator/Caches</code> and <code>Xcode/UserData/Previews</code> (3.44 GB on our measured Mac) when Xcode and Simulator are closed.</li><li><strong>What CleanBit deliberately leaves to <code>xcrun simctl</code> / Xcode</strong>: Because CleanBit runs inside Apple&#39;s App Sandbox without root access, it cannot delete system-level Simulator runtime disk images under <code>/Library/Developer/CoreSimulator</code>, and it does not delete entire Simulator devices (so it won&#39;t wipe your test app state). Use <code>xcrun simctl runtime delete</code> and <code>xcrun simctl delete unavailable</code> above for those.</li></ul>
+<figure class="prose-figure"><img src="/assets/screens/en-smart-scan.webp" alt="CleanBit Smart Scan showing Xcode DerivedData, Old iOS DeviceSupport, and Simulator caches with impact notes" loading="lazy" decoding="async" /><figcaption>CleanBit locks the 2 newest DeviceSupport versions and active simulators automatically, explaining the impact before you confirm.</figcaption></figure>
+<h2 id="frequently-asked-questions">Frequently Asked Questions<a class="heading-anchor" href="#frequently-asked-questions" aria-label="Link to section">#</a></h2>
+<h3 id="is-it-safe-to-delete-librarydeveloperxcodeios-devicesupport">Is it safe to delete <code>~/Library/Developer/Xcode/iOS DeviceSupport</code>?<a class="heading-anchor" href="#is-it-safe-to-delete-librarydeveloperxcodeios-devicesupport" aria-label="Link to section">#</a></h3>
+<p>Yes, especially older iOS versions you no longer debug on physical devices. Deleting a version only removes cached debug symbols for that OS build; if you plug in a device running that version later, Xcode copies the symbols again. Keeping the 1–2 most recent versions avoids waiting on your daily test device.</p>
+<h3 id="does-deleting-simulator-caches-remove-my-installed-test-apps-or-core-data-userdefaults">Does deleting Simulator caches remove my installed test apps or Core Data / UserDefaults?<a class="heading-anchor" href="#does-deleting-simulator-caches-remove-my-installed-test-apps-or-core-data-userdefaults" aria-label="Link to section">#</a></h3>
+<p>Not if you only clear cache paths (<code>Library/Caches</code>, diagnostic logs, and <code>CoreSimulator/Caches</code>) on shut-down simulators. Running <code>xcrun simctl erase</code> or <code>xcrun simctl delete</code>, however, wipes the entire simulated device including installed apps and local app data.</p>
+<h3 id="why-did-deleting-coresimulatordevices-not-free-the-15-gb-of-ios-runtimes-i-saw-in-storage-settings">Why did deleting <code>CoreSimulator/Devices</code> not free the 15 GB of iOS runtimes I saw in Storage Settings?<a class="heading-anchor" href="#why-did-deleting-coresimulatordevices-not-free-the-15-gb-of-ios-runtimes-i-saw-in-storage-settings" aria-label="Link to section">#</a></h3>
+<p>Simulator <strong>devices</strong> (in <code>~/Library/Developer/CoreSimulator/Devices</code>) store per-device data and caches, whereas Simulator <strong>runtimes</strong> (the OS images themselves) are managed separately in <code>/Library/Developer/CoreSimulator</code> and Xcode Components. Run <code>xcrun simctl runtime list</code> and <code>xcrun simctl runtime delete &lt;UUID&gt;</code> (or open <strong>Xcode → Settings → Components</strong>) to reclaim runtime disk images.</p>
+<h3 id="can-a-sandboxed-mac-app-store-cleaner-delete-xcode-simulator-runtimes">Can a sandboxed Mac App Store cleaner delete Xcode Simulator runtimes?<a class="heading-anchor" href="#can-a-sandboxed-mac-app-store-cleaner-delete-xcode-simulator-runtimes" aria-label="Link to section">#</a></h3>
+<p>No. Simulator runtime disk images live in system-managed locations outside your user home folder, which Apple&#39;s App Sandbox cannot modify. A sandboxed cleaner like CleanBit can safely clean <code>DerivedData</code>, old <code>DeviceSupport</code> folders, SwiftUI Preview data, and caches inside shut-down simulator devices in your home folder, while runtime images should be removed with <code>xcrun simctl runtime delete</code> or Xcode Settings.</p>
+          </div>
+
+          <aside class="article-cta">
+            <div>
+              <h3>Prefer to inspect and clean visually?</h3>
+              <p>CleanBit is a sandboxed Mac App Store utility. Every item shows what it is and what happens if you remove it—scanning and your first 2 cleans are free.</p>
+            </div>
+            <a class="pill pill-primary" href="https://apps.apple.com/app/apple-store/id6829159531?pt=127116872&amp;ct=website-guides&amp;mt=8" target="_blank" rel="noopener noreferrer">Download on the Mac App Store</a>
+          </aside>
+
+          <p class="disclosure-note">Written by the CleanBit developer with AI assistance. All measurements were taken on a real developer Mac.</p>
+          <section style="margin-top:44px">
+        <h2 style="font-size:20px;margin:0 0 16px">Related guides</h2>
+        <div class="grid-2">
+          <a class="card guide-card" href="/guides/is-xcode-deriveddata-safe-to-delete/">
+                <div>
+                  <div class="guide-meta"><span>Developer Storage</span><span>·</span><span>3 min read</span></div>
+                  <h3 style="margin-top:6px;font-size:16px">Is Xcode DerivedData Safe to Delete? What Happens and How to Clean It</h3>
+                </div>
+                <span class="guide-more">Read guide →</span>
+              </a><a class="card guide-card" href="/guides/claude-code-cursor-codex-disk-space-mac/">
+                <div>
+                  <div class="guide-meta"><span>AI &amp; Developer Storage</span><span>·</span><span>8 min read</span></div>
+                  <h3 style="margin-top:6px;font-size:16px">Claude Code, Cursor and Codex Eating Disk Space on Your Mac? Here&#39;s Where It Goes</h3>
+                </div>
+                <span class="guide-more">Read guide →</span>
+              </a><a class="card guide-card" href="/guides/how-to-find-and-delete-old-node-modules-on-mac/">
+                <div>
+                  <div class="guide-meta"><span>Developer Storage</span><span>·</span><span>3 min read</span></div>
+                  <h3 style="margin-top:6px;font-size:16px">How to Find and Delete Old node_modules Folders on a Mac</h3>
+                </div>
+                <span class="guide-more">Read guide →</span>
+              </a>
+        </div>
+      </section>
+        </div>
+        <aside class="toc-aside" aria-label="Table of contents">
+        <div class="toc-title">On this page</div>
+        <ul class="toc-list">
+          <li class="toc-h2"><a href="#1-measure-xcode-device-and-simulator-storage-first-read-only">1. Measure Xcode device and simulator storage first (read-only)</a></li><li class="toc-h2"><a href="#2-what-lives-in-each-folderand-what-is-safe-to-remove">2. What lives in each folder—and what is safe to remove</a></li><li class="toc-h2"><a href="#3-safe-manual-cleanup-commands">3. Safe manual cleanup commands</a></li><li class="toc-h3"><a href="#clean-old-ios-devicesupport-versions">Clean old iOS DeviceSupport versions</a></li><li class="toc-h3"><a href="#clean-unavailable-simulator-devices-safest-first-step">Clean unavailable Simulator devices (safest first step)</a></li><li class="toc-h3"><a href="#remove-old-simulator-runtimes-often-the-biggest-win">Remove old Simulator runtimes (often the biggest win)</a></li><li class="toc-h3"><a href="#clear-swiftui-preview-caches-and-shared-simulator-caches">Clear SwiftUI Preview caches and shared Simulator caches</a></li><li class="toc-h2"><a href="#4-what-cleanbit-cleansand-what-stays-manual">4. What CleanBit cleans—and what stays manual</a></li><li class="toc-h2"><a href="#frequently-asked-questions">Frequently Asked Questions</a></li><li class="toc-h3"><a href="#is-it-safe-to-delete-librarydeveloperxcodeios-devicesupport">Is it safe to delete ~/Library/Developer/Xcode/iOS DeviceSupport?</a></li><li class="toc-h3"><a href="#does-deleting-simulator-caches-remove-my-installed-test-apps-or-core-data-userdefaults">Does deleting Simulator caches remove my installed test apps or Core Data / UserDefaults?</a></li><li class="toc-h3"><a href="#why-did-deleting-coresimulatordevices-not-free-the-15-gb-of-ios-runtimes-i-saw-in-storage-settings">Why did deleting CoreSimulator/Devices not free the 15 GB of iOS runtimes I saw in Storage Settings?</a></li><li class="toc-h3"><a href="#can-a-sandboxed-mac-app-store-cleaner-delete-xcode-simulator-runtimes">Can a sandboxed Mac App Store cleaner delete Xcode Simulator runtimes?</a></li>
+        </ul>
+      </aside>
+      </div>
+    </div>
+  </article>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div>
+        <strong style="color:var(--text)">CleanBit</strong> · macOS 15+ · Available exclusively on the Mac App Store.
+        <div style="margin-top:6px">© 2026 Dongguan Aibeike AI Co., Ltd.</div>
+      </div>
+      <div class="footer-links">
+        <a href="/guides/">Guides</a>
+        <a href="/support/">Support</a>
+        <a href="/privacy/">Privacy</a>
+        <a href="/terms/">Terms</a>
+        <a href="/feed.xml">RSS</a>
+        <a href="https://github.com/Ceelog/CleanBit-Mac-App" target="_blank" rel="noopener noreferrer">GitHub</a>
+        <a href="https://apps.apple.com/app/apple-store/id6829159531?pt=127116872&amp;ct=website-guides&amp;mt=8" target="_blank" rel="noopener noreferrer">Mac App Store</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+  (function(){
+    // Interactive module-tinted screenshot switcher
+    var frame = document.getElementById('showcase-frame');
+    var img = document.getElementById('showcase-img');
+    var cap = document.getElementById('showcase-caption');
+    document.querySelectorAll('[data-tab-btn]').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        document.querySelectorAll('[data-tab-btn]').forEach(function(b){ b.classList.remove('is-active'); b.setAttribute('aria-selected','false'); });
+        btn.classList.add('is-active');
+        btn.setAttribute('aria-selected','true');
+        if (img) { img.src = btn.dataset.src; img.alt = btn.dataset.alt; }
+        if (cap) cap.textContent = btn.dataset.caption;
+        if (frame) frame.setAttribute('data-tint', btn.dataset.tint);
+      });
+    });
+    // One-click code block copy
+    document.querySelectorAll('[data-copy]').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        var pre = btn.closest('.code-block').querySelector('pre code');
+        if (!pre || !navigator.clipboard) return;
+        navigator.clipboard.writeText(pre.textContent || '').then(function(){
+          var old = btn.textContent;
+          btn.textContent = 'Copied';
+          setTimeout(function(){ btn.textContent = old; }, 1600);
+        });
+      });
+    });
+  })();
+  </script>
+</body>
+</html>

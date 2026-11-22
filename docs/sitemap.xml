@@ -2,26 +2,30 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://getcleanbit.app/</loc>
-    <lastmod>2026-11-21</lastmod>
+    <lastmod>2026-11-22</lastmod>
   </url>
   <url>
     <loc>https://getcleanbit.app/zh/</loc>
-    <lastmod>2026-11-21</lastmod>
+    <lastmod>2026-11-22</lastmod>
   </url>
   <url>
     <loc>https://getcleanbit.app/guides/</loc>
-    <lastmod>2026-11-21</lastmod>
+    <lastmod>2026-11-22</lastmod>
   </url>
   <url>
     <loc>https://getcleanbit.app/guides/is-xcode-deriveddata-safe-to-delete/</loc>
-    <lastmod>2026-11-21</lastmod>
+    <lastmod>2026-11-22</lastmod>
   </url>
   <url>
-    <loc>https://getcleanbit.app/guides/how-to-find-and-delete-old-node-modules-on-mac/</loc>
-    <lastmod>2026-11-21</lastmod>
+    <loc>https://getcleanbit.app/guides/ios-devicesupport-and-simulators-disk-space-mac/</loc>
+    <lastmod>2026-11-22</lastmod>
   </url>
   <url>
     <loc>https://getcleanbit.app/guides/claude-code-cursor-codex-disk-space-mac/</loc>
+    <lastmod>2026-11-22</lastmod>
+  </url>
+  <url>
+    <loc>https://getcleanbit.app/guides/how-to-find-and-delete-old-node-modules-on-mac/</loc>
     <lastmod>2026-11-21</lastmod>
   </url>
   <url>
@@ -34,14 +38,14 @@
   </url>
   <url>
     <loc>https://getcleanbit.app/support/</loc>
-    <lastmod>2026-11-21</lastmod>
+    <lastmod>2026-11-22</lastmod>
   </url>
   <url>
     <loc>https://getcleanbit.app/privacy/</loc>
-    <lastmod>2026-11-21</lastmod>
+    <lastmod>2026-11-22</lastmod>
   </url>
   <url>
     <loc>https://getcleanbit.app/terms/</loc>
-    <lastmod>2026-11-21</lastmod>
+    <lastmod>2026-11-22</lastmod>
   </url>
 </urlset>
