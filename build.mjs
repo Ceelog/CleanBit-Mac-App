@@ -241,6 +241,9 @@ writePage('zh/feed.xml', buildRss('zh', zhGuides));
 writePage('sitemap.xml', buildSitemap(sitemapEntries));
 writePage('robots.txt', `User-agent: *\nAllow: /\n\nSitemap: ${ctx.absUrl('/sitemap.xml')}\n`);
 writePage('llms.txt', buildLlmsTxt(enGuides, zhGuides));
+if (config.indexNowKey) {
+  writePage(`${config.indexNowKey}.txt`, `${config.indexNowKey}\n`);
+}
 
 // Validation summary
 const warnings = [];
