@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Is It Safe to Delete ~/Library/Caches on a Mac? How to Clear Cache Safely — CleanBit</title>
+  <meta name="description" content="Yes—most files inside ~/Library/Caches are safe to clear on macOS, if you skip running apps and leave /Library/Caches alone. Includes commands and real Mac numbers." />
+  <link rel="canonical" href="https://getcleanbit.app/guides/is-it-safe-to-delete-library-caches-mac/" />
+  <link rel="alternate" hreflang="en" href="https://getcleanbit.app/guides/is-it-safe-to-delete-library-caches-mac/" />
+  <link rel="alternate" hreflang="zh-Hans" href="https://getcleanbit.app/zh/guides/" />
+  <link rel="alternate" hreflang="x-default" href="https://getcleanbit.app/guides/is-it-safe-to-delete-library-caches-mac/" />
+  <link rel="icon" type="image/png" href="/assets/favicon.png" />
+  <link rel="apple-touch-icon" href="/assets/icon.png" />
+  <link rel="alternate" type="application/rss+xml" title="CleanBit Guides (English)" href="https://getcleanbit.app/feed.xml" />
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="CleanBit" />
+  <meta property="og:title" content="Is It Safe to Delete ~/Library/Caches on a Mac? How to Clear Cache Safely — CleanBit" />
+  <meta property="og:description" content="Yes—most files inside ~/Library/Caches are safe to clear on macOS, if you skip running apps and leave /Library/Caches alone. Includes commands and real Mac numbers." />
+  <meta property="og:url" content="https://getcleanbit.app/guides/is-it-safe-to-delete-library-caches-mac/" />
+  <meta property="og:image" content="https://getcleanbit.app/assets/screens/en-smart-scan.webp" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Is It Safe to Delete ~/Library/Caches on a Mac? How to Clear Cache Safely — CleanBit" />
+  <meta name="twitter:description" content="Yes—most files inside ~/Library/Caches are safe to clear on macOS, if you skip running apps and leave /Library/Caches alone. Includes commands and real Mac numbers." />
+  <meta name="twitter:image" content="https://getcleanbit.app/assets/screens/en-smart-scan.webp" />
+  <meta name="theme-color" content="#111419" />
+  <link rel="stylesheet" href="/styles.css?v=cac88ab1" />
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Is It Safe to Delete ~/Library/Caches on a Mac? How to Clear Cache Safely","description":"Yes—most files inside ~/Library/Caches are safe to clear on macOS, if you skip running apps and leave /Library/Caches alone. Includes commands and real Mac numbers.","datePublished":"2026-11-23","dateModified":"2026-11-23","inLanguage":"en","author":{"@type":"Organization","name":"CleanBit Developer","url":"https://getcleanbit.app/"},"publisher":{"@type":"Organization","name":"CleanBit","logo":{"@type":"ImageObject","url":"https://getcleanbit.app/assets/icon.png"}},"mainEntityOfPage":"https://getcleanbit.app/guides/is-it-safe-to-delete-library-caches-mac/","image":"https://getcleanbit.app/assets/screens/en-smart-scan.webp"}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"CleanBit","item":"https://getcleanbit.app/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://getcleanbit.app/guides/"},{"@type":"ListItem","position":3,"name":"Is It Safe to Delete ~/Library/Caches on a Mac? How to Clear Cache Safely","item":"https://getcleanbit.app/guides/is-it-safe-to-delete-library-caches-mac/"}]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is it safe to delete everything in ~/Library/Caches on a Mac?","acceptedAnswer":{"@type":"Answer","text":"No—you should not delete the ~/Library/Caches folder itself or wipe everything inside it blindly with rm -rf ~/Library/Caches/*. Most third-party app cache folders inside ~/Library/Caches are safe to remove after quitting those apps, but Apple system caches (com.apple.FontRegistry, CloudKit, com.apple.finder), caches of currently running apps, and tool environments stored there (such as Poetry virtualenvs or Playwright browsers) should be skipped."}},{"@type":"Question","name":"What happens if I delete ~/Library/Caches while apps are running?","acceptedAnswer":{"@type":"Answer","text":"Deleting cache files while an app is open can cause the app to crash, display missing thumbnails or UI glitches, or leave corrupted cache databases until you quit and relaunch it. In addition, macOS does not free disk blocks for open file handles until the app closes. Always quit apps first—or use a tool that locks running apps' caches automatically."}},{"@type":"Question","name":"Does clearing cache on a Mac delete passwords, bookmarks, or personal files?","acceptedAnswer":{"@type":"Answer","text":"Not if you only clear genuine cache directories (~/Library/Caches and browser web caches). Passwords live in macOS Keychain or your browser's profile login store, bookmarks and history live in browser profile folders (~/Library/Application Support or ~/Library/Safari), and documents live in your home folders. Avoid clearing cookies or Application Support folders if you want to stay signed in."}},{"@type":"Question","name":"Does clearing Mac cache make my Mac faster?","acceptedAnswer":{"@type":"Answer","text":"Usually no. Caches exist to make apps and web pages load faster by avoiding repeated downloads or computations. Clearing ~/Library/Caches reclaims disk space—which helps if your startup disk is nearly full—but apps may launch slightly slower the first time afterward while they rebuild their caches."}},{"@type":"Question","name":"What is the difference between ~/Library/Caches and /Library/Caches?","acceptedAnswer":{"@type":"Answer","text":"~/Library/Caches (with the tilde ~) belongs only to your user account and stores user-level app and browser caches that you can inspect and selectively clean. /Library/Caches (at the root of Macintosh HD) holds system-wide caches shared across all accounts and macOS background services; leave /Library/Caches and /System/Library/Caches to macOS."}}]}</script>
+  <script async src="https://www.googletagmanager.com/gtm.js?id=GTM-TFR7TV8Z"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+  </script>
+  
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="/">
+        <img src="/assets/icon.png" alt="CleanBit icon" width="28" height="28" />
+        <span>CleanBit</span>
+      </a>
+      <nav class="nav" aria-label="Main navigation">
+        <a href="/#demo">Demo</a>
+        <a href="/#features">Features</a>
+        <a href="/#safety">Safety</a>
+        <a href="/guides/" class="active">Guides</a>
+        <a href="/#pricing">Pricing</a>
+        <a href="/support/" class="">Support</a>
+      </nav>
+      <div class="header-actions">
+        <a class="lang-switch" href="/zh/guides/" hreflang="zh-Hans">中文</a>
+        <a class="pill pill-primary pill-sm" href="https://apps.apple.com/app/apple-store/id6829159531?pt=127116872&amp;ct=website-guides&amp;mt=8" target="_blank" rel="noopener noreferrer">Mac App Store</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+  <article class="article-shell">
+    <div class="container">
+      <div class="breadcrumbs">
+        <a href="/">CleanBit</a>
+        <span>/</span>
+        <a href="/guides/">Guides</a>
+        <span>/</span>
+        <span>Mac Storage</span>
+      </div>
+      <div class="article-grid">
+        <div>
+          <header class="article-header">
+            <div class="badge">Mac Storage</div>
+            <h1>Is It Safe to Delete ~/Library/Caches on a Mac? How to Clear Cache Safely</h1>
+            <p class="article-lead">Yes—most files inside ~/Library/Caches are safe to clear on macOS, if you skip running apps and leave /Library/Caches alone. Includes commands and real Mac numbers.</p>
+            <div class="article-meta">
+              <span>CleanBit Developer</span>
+              <span>·</span>
+              <span>Updated 2026-11-23</span>
+              <span>·</span>
+              <span>8 min read</span>
+            </div>
+          </header>
+
+          <div class="prose">
+            <p><strong>Yes—most subfolders inside <code>~/Library/Caches</code> are safe to delete on a Mac, as long as you quit running apps first, remove only the contents inside (never the <code>Caches</code> folder itself), and skip Apple system caches and sensitive tool data.</strong> Apps automatically recreate their cache files the next time you open them, so the only normal side effect is a slightly slower first launch or re-downloading cached assets.</p>
+<p>What you should <strong>not</strong> touch are macOS&#39;s system-wide <code>/Library/Caches</code> and <code>/System/Library/Caches</code> folders—macOS manages those itself. Also keep expectations realistic: clearing cache reclaims disk space, <strong>not</strong> RAM or CPU performance; in fact, rebuilding caches can briefly use a little extra disk and network activity right after cleanup.</p>
+<p>On one developer Mac we measured using CleanBit&#39;s scan engine, general <strong>App Caches</strong> inside <code>~/Library/Caches</code> held <strong>5.42 GB across 65 items</strong>, <strong>Chrome Disk Cache</strong> (<code>~/Library/Caches/Google/Chrome</code>) held <strong>4.37 GB</strong>, and dedicated developer caches living under <code>~/Library/Caches</code> added over <strong>1.2 GB</strong> more (including 575 MB for Swift Package Manager, 379.7 MB of Homebrew downloads, 261.7 MB of <code>pip</code> cache, and 24.1 MB of <code>pnpm</code> metadata). Even so, <code>~/Library/Caches</code> was only a slice of the <strong>124.29 GB</strong> scanned on that machine—far smaller than <code>iOS DeviceSupport</code> (24.1 GB <code>du</code>), <code>CoreSimulator/Devices</code> (43.0 GB <code>du</code>), Xcode <code>DerivedData</code> (15.3 GB <code>du</code>), and old <code>node_modules</code> folders (66.3 GB <code>du</code>). Always measure first so you know whether caches are actually where your storage went.</p>
+<h2 id="1-check-how-much-space-librarycaches-uses-read-only">1. Check how much space <code>~/Library/Caches</code> uses (read-only)<a class="heading-anchor" href="#1-check-how-much-space-librarycaches-uses-read-only" aria-label="Link to section">#</a></h2>
+<p>Before deleting anything, check the total size of your user cache folder and see which individual apps are taking the most space:</p>
+<div class="code-block"><div class="code-head"><span class="code-lang">bash</span><button type="button" class="code-copy" data-copy>Copy</button></div><pre><code># Total size of your user cache folder (read-only)
+du -sh ~/Library/Caches
+
+# Top 20 largest folders inside ~/Library/Caches
+du -sh ~/Library/Caches/* 2&gt;/dev/null | sort -h | tail -20</code></pre></div>
+<p>If you also use web browsers with profile-level caches or developer tools that store caches outside <code>~/Library/Caches</code>, you can inspect them read-only too:</p>
+<div class="code-block"><div class="code-head"><span class="code-lang">bash</span><button type="button" class="code-copy" data-copy>Copy</button></div><pre><code>du -sh \
+  ~/Library/Caches/Google/Chrome \
+  ~/Library/Caches/Firefox \
+  ~/Library/Caches/Homebrew/downloads \
+  ~/Library/Caches/pip \
+  ~/Library/Caches/org.swift.swiftpm \
+  ~/Library/Caches/Yarn 2&gt;/dev/null</code></pre></div>
+<aside class="callout callout-note"><div class="callout-title">NOTE</div><p><code>du</code> reports total disk usage for a directory, not how much is safe to remove blindly. Some tools place virtual environments, downloaded browser binaries, or Apple system databases inside <code>~/Library/Caches</code>, so always inspect folder names before deleting.</p></aside>
+<h2 id="2-librarycaches-vs-librarycaches-what-is-safe-and-what-to-leave-alone">2. <code>~/Library/Caches</code> vs. <code>/Library/Caches</code>: what is safe and what to leave alone<a class="heading-anchor" href="#2-librarycaches-vs-librarycaches-what-is-safe-and-what-to-leave-alone" aria-label="Link to section">#</a></h2>
+<p>macOS keeps caches in several locations that look similar but carry very different risk levels:</p>
+<div class="table-wrap"><table><thead><tr><th style="text-align:left">Location</th><th style="text-align:left">What lives inside</th><th style="text-align:left">Safe to clear?</th><th style="text-align:left">What happens after removal</th></tr></thead><tbody><tr><td style="text-align:left"><code>~/Library/Caches/&lt;third-party app&gt;</code></td><td style="text-align:left">App thumbnails, HTTP/image caches, updater downloads</td><td style="text-align:left"><strong>Usually yes</strong> (quit the app first)</td><td style="text-align:left">App rebuilds the cache on next launch; first launch may feel slightly slower</td></tr><tr><td style="text-align:left">Browser caches (<code>~/Library/Caches/Google/Chrome</code>, <code>Firefox</code>, <code>com.apple.Safari</code>, plus browser profile <code>Cache</code>/<code>Code Cache</code>)</td><td style="text-align:left">Cached web pages, scripts, images, and shader caches</td><td style="text-align:left"><strong>Yes</strong> (quit the browser first)</td><td style="text-align:left">Websites re-download assets on next visit; cookies, history, bookmarks, and passwords stay intact</td></tr><tr><td style="text-align:left">Developer caches in <code>~/Library/Caches</code> (<code>Homebrew/downloads</code>, <code>pip</code>, <code>Yarn</code>, <code>org.swift.swiftpm</code>, <code>CocoaPods</code>, <code>go-build</code>)</td><td style="text-align:left">Downloaded package archives and build intermediates</td><td style="text-align:left"><strong>Yes</strong> (when no build or install is running)</td><td style="text-align:left">Package managers re-download archives next time you install or rebuild</td></tr><tr><td style="text-align:left">Risky subfolders inside <code>~/Library/Caches</code> (<code>com.apple.FontRegistry*</code>, <code>com.apple.spotlight*</code>, <code>CloudKit*</code>, <code>com.apple.finder</code>, <code>pypoetry/virtualenvs*</code>, <code>ms-playwright*</code>, <code>pnpm/dlx*</code>, <code>JetBrains*</code>)</td><td style="text-align:left">macOS system indexes/databases, Python virtualenvs, Playwright browser runtimes, IDE indexes</td><td style="text-align:left"><strong>No—skip these</strong></td><td style="text-align:left">Deleting them can break font rendering, Finder/CloudKit sync, local Python virtualenvs, or test runners until rebuilt/reinstalled</td></tr><tr><td style="text-align:left"><code>~/Library/Containers/&lt;bundle-id&gt;/Data/Library/Caches</code></td><td style="text-align:left">Caches of sandboxed Mac App Store apps</td><td style="text-align:left"><strong>Usually yes</strong> (quit the app first)</td><td style="text-align:left">Sandboxed app regenerates its cache on next launch</td></tr><tr><td style="text-align:left"><code>/Library/Caches</code> (root Library)</td><td style="text-align:left">System-wide caches shared across all user accounts and daemons</td><td style="text-align:left"><strong>Leave alone</strong></td><td style="text-align:left">Requires admin privileges and can cause glitches in shared services; macOS prunes these itself</td></tr><tr><td style="text-align:left"><code>/System/Library/Caches</code></td><td style="text-align:left">Core macOS operating system caches (SIP-protected)</td><td style="text-align:left"><strong>Never touch</strong></td><td style="text-align:left">Protected by System Integrity Protection; attempting to modify it risks system instability</td></tr></tbody></table></div>
+<h2 id="3-how-to-clear-cache-on-a-mac-manually-finder-terminal">3. How to clear cache on a Mac manually (Finder &amp; Terminal)<a class="heading-anchor" href="#3-how-to-clear-cache-on-a-mac-manually-finder-terminal" aria-label="Link to section">#</a></h2>
+<p>You do not need any third-party app to clear <code>~/Library/Caches</code> safely. Follow this conservative sequence instead of wiping the whole folder at once.</p>
+<h3 id="step-1-quit-all-running-apps-first">Step 1: Quit all running apps first<a class="heading-anchor" href="#step-1-quit-all-running-apps-first" aria-label="Link to section">#</a></h3>
+<p>Deleting cache files while an app holds open file handles or writes to a SQLite cache database can cause the app to crash, lose transient state, or keep disk space occupied until the process exits. Quit your browsers, editors, chat apps, and Xcode (<code>Command + Q</code>) before cleaning.</p>
+<h3 id="step-2-inspect-and-clear-specific-folders-in-finder">Step 2: Inspect and clear specific folders in Finder<a class="heading-anchor" href="#step-2-inspect-and-clear-specific-folders-in-finder" aria-label="Link to section">#</a></h3>
+<ol><li>Open <strong>Finder</strong> and press <code>Shift + Command + G</code> (Go to Folder).</li><li>Type <code>~/Library/Caches</code> and press <strong>Return</strong>.</li><li>Switch to List view (<code>Command + 2</code>) and sort by <strong>Size</strong> (enable <em>Calculate all sizes</em> via <code>Command + J</code> if sizes are blank).</li><li>Select specific large third-party app cache folders whose apps are <strong>not running</strong>—skipping <code>com.apple.*</code> folders, password managers, cloud sync apps, IDEs, and anything you do not recognize.</li><li>Press <code>Command + Delete</code> to move those folders to the <strong>Trash</strong> (never delete the parent <code>~/Library/Caches</code> folder itself).</li><li>Relaunch your apps to verify everything opens normally, then empty the Trash to reclaim the disk space.</li></ol>
+<h3 id="step-3-clear-browser-caches-safely-without-losing-logins">Step 3: Clear browser caches safely (without losing logins)<a class="heading-anchor" href="#step-3-clear-browser-caches-safely-without-losing-logins" aria-label="Link to section">#</a></h3>
+<ul><li><strong>Safari</strong>: Open <strong>Safari → Settings → Advanced</strong>, check <strong>Show features for web developers</strong>, then press <code>Option + Command + E</code> (or click <strong>Develop → Empty Caches</strong>). This clears web cache without removing cookies, history, or passwords.</li><li><strong>Chrome / Brave / Edge / Arc</strong>: Open <strong>Delete Browsing Data</strong>, check <strong>only</strong> <em>Cached images and files</em> (leave <em>Cookies</em> and <em>Passwords</em> unchecked), and confirm.</li><li><strong>Firefox</strong>: Go to <strong>Settings → Privacy &amp; Security → Cookies and Site Data → Clear Data</strong>, and check <strong>only</strong> <em>Temporary cached files and pages</em>.</li></ul>
+<h3 id="step-4-clean-developer-caches-with-their-official-commands">Step 4: Clean developer caches with their official commands<a class="heading-anchor" href="#step-4-clean-developer-caches-with-their-official-commands" aria-label="Link to section">#</a></h3>
+<p>When large folders inside <code>~/Library/Caches</code> belong to developer tools, their built-in cleanup commands are safer than <code>rm -rf</code>:</p>
+<div class="code-block"><div class="code-head"><span class="code-lang">bash</span><button type="button" class="code-copy" data-copy>Copy</button></div><pre><code># Clean old Homebrew download caches
+brew cleanup --prune=all
+
+# Purge pip&#39;s HTTP and wheel cache
+pip cache purge
+
+# Remove unused pnpm store packages (do not delete ~/Library/pnpm/store manually)
+pnpm store prune</code></pre></div>
+<aside class="callout callout-warning"><div class="callout-title">WARNING</div><p><strong>Avoid running <code>rm -rf ~/Library/Caches/*</code> blindly.</strong> Wildcard deletion hits caches of currently running apps and background services, wipes Apple subsystem caches like <code>com.apple.FontRegistry</code>, <code>CloudKit</code>, and <code>com.apple.finder</code>, and can accidentally destroy Poetry virtual environments (<code>pypoetry/virtualenvs</code>), Playwright browsers (<code>ms-playwright</code>), or JetBrains caches stored inside <code>~/Library/Caches</code>. Always target specific verified folders—or move them to the Trash first.</p></aside>
+<h3 id="what-if-librarycaches-is-only-a-few-gigabytes">What if <code>~/Library/Caches</code> is only a few gigabytes?<a class="heading-anchor" href="#what-if-librarycaches-is-only-a-few-gigabytes" aria-label="Link to section">#</a></h3>
+<p>On many Macs—especially developer or AI-coding machines—<code>~/Library/Caches</code> is not the main reason storage is full. If your disk is still tight after checking caches, check our dedicated guides on <a href="/guides/is-xcode-deriveddata-safe-to-delete/">whether Xcode <code>DerivedData</code> is safe to delete</a>, <a href="/guides/ios-devicesupport-and-simulators-disk-space-mac/">cleaning <code>iOS DeviceSupport</code> and Xcode Simulators</a>, <a href="/guides/how-to-find-and-delete-old-node-modules-on-mac/">finding and deleting old <code>node_modules</code> folders</a>, and <a href="/guides/claude-code-cursor-codex-disk-space-mac/">tracking down Claude Code, Cursor, and Codex disk space</a>.</p>
+<h2 id="4-how-cleanbit-handles-librarycaches-and-its-sandbox-boundaries">4. How CleanBit handles <code>~/Library/Caches</code> (and its sandbox boundaries)<a class="heading-anchor" href="#4-how-cleanbit-handles-librarycaches-and-its-sandbox-boundaries" aria-label="Link to section">#</a></h2>
+<p>I&#39;m the developer of <strong>CleanBit</strong>, a sandboxed Mac App Store disk space cleaner for macOS 15+. Because blind wildcard cleaning inside <code>~/Library/Caches</code> causes unnecessary breakage, CleanBit applies multiple guardrails before anything can be removed:</p>
+<ul><li><strong>Running-app blocking (checked twice)</strong>: CleanBit checks currently running apps during scanning and locks their caches so they cannot be selected—then re-checks running apps again immediately before deleting each individual item, along with verifying the file path, symlink target, and file identity.</li><li><strong>Protected Apple &amp; third-party bundle lists</strong>: CleanBit refuses to delete the <code>~/Library/Caches</code> folder itself, automatically skips <code>com.apple.*</code> and macOS subsystem prefixes (<code>FontRegistry</code>, <code>Spotlight</code>, <code>CloudKit</code>, <code>Finder</code>, <code>Keychain</code>, and more), excludes sensitive tool paths (<code>pypoetry/virtualenvs</code>, <code>ms-playwright</code>, <code>pnpm/dlx</code>, <code>JetBrains</code>), and skips over 300 protected third-party app bundle patterns (such as password managers, IDEs, cloud sync clients, VPN apps, database clients, creative suites, and messaging apps) during broad cache sweeps.</li><li><strong>Dedicated rules with no double-counting</strong>: Browser caches (Safari, Chrome, Edge, Brave, Arc, Vivaldi, Firefox—without touching cookies, history, or passwords) and developer caches (Xcode, Homebrew, <code>pip</code>, Yarn, SwiftPM, CocoaPods, Go) are handled by their own specific rules with dedicated freshness and running-app checks, so the broad <code>App Caches</code> sweep yields those paths instead of counting them twice.</li><li><strong>Sandboxed App Caches (<code>~/Library/Containers</code>)</strong>: If you optionally grant Full Disk Access, CleanBit can also inspect <code>Data/Library/Caches</code> and <code>Data/tmp</code> inside sandboxed app containers—only after verifying each container&#39;s <code>containermanagerd</code> metadata matches its bundle ID.</li><li><strong>Clear deletion control &amp; honest sandbox limits</strong>: Recommended caches are deleted permanently by default so disk space returns right away (or you can switch Recommended items to move to Trash in Settings), while Review items always move to the Trash. Because CleanBit runs inside Apple&#39;s App Sandbox with no root privileges and no background helper daemon, it <strong>never touches <code>/Library/Caches</code>, <code>/System/Library/Caches</code>, <code>/private/tmp</code>, APFS local snapshots, or iCloud Drive synced files</strong>.</li></ul>
+<figure class="prose-figure"><img src="/assets/screens/en-smart-scan.webp" alt="CleanBit Smart Scan showing App Caches, Browser Caches, and impact notes before confirmation" loading="lazy" decoding="async" /><figcaption>CleanBit labels every cache group with plain-language impact notes and automatically locks caches belonging to running apps.</figcaption></figure>
+<h2 id="frequently-asked-questions">Frequently Asked Questions<a class="heading-anchor" href="#frequently-asked-questions" aria-label="Link to section">#</a></h2>
+<h3 id="is-it-safe-to-delete-everything-in-librarycaches-on-a-mac">Is it safe to delete everything in <code>~/Library/Caches</code> on a Mac?<a class="heading-anchor" href="#is-it-safe-to-delete-everything-in-librarycaches-on-a-mac" aria-label="Link to section">#</a></h3>
+<p>No—you should not delete the <code>~/Library/Caches</code> folder itself or wipe everything inside it blindly with <code>rm -rf ~/Library/Caches/*</code>. Most third-party app cache folders inside <code>~/Library/Caches</code> are safe to remove after quitting those apps, but Apple system caches (<code>com.apple.FontRegistry</code>, <code>CloudKit</code>, <code>com.apple.finder</code>), caches of currently running apps, and tool environments stored there (such as Poetry virtualenvs or Playwright browsers) should be skipped.</p>
+<h3 id="what-happens-if-i-delete-librarycaches-while-apps-are-running">What happens if I delete <code>~/Library/Caches</code> while apps are running?<a class="heading-anchor" href="#what-happens-if-i-delete-librarycaches-while-apps-are-running" aria-label="Link to section">#</a></h3>
+<p>Deleting cache files while an app is open can cause the app to crash, display missing thumbnails or UI glitches, or leave corrupted cache databases until you quit and relaunch it. In addition, macOS does not free disk blocks for open file handles until the app closes. Always quit apps first—or use a tool that locks running apps&#39; caches automatically.</p>
+<h3 id="does-clearing-cache-on-a-mac-delete-passwords-bookmarks-or-personal-files">Does clearing cache on a Mac delete passwords, bookmarks, or personal files?<a class="heading-anchor" href="#does-clearing-cache-on-a-mac-delete-passwords-bookmarks-or-personal-files" aria-label="Link to section">#</a></h3>
+<p>Not if you only clear genuine cache directories (<code>~/Library/Caches</code> and browser web caches). Passwords live in macOS Keychain or your browser&#39;s profile login store, bookmarks and history live in browser profile folders (<code>~/Library/Application Support</code> or <code>~/Library/Safari</code>), and documents live in your home folders. Avoid clearing cookies or Application Support folders if you want to stay signed in.</p>
+<h3 id="does-clearing-mac-cache-make-my-mac-faster">Does clearing Mac cache make my Mac faster?<a class="heading-anchor" href="#does-clearing-mac-cache-make-my-mac-faster" aria-label="Link to section">#</a></h3>
+<p>Usually no. Caches exist to make apps and web pages load faster by avoiding repeated downloads or computations. Clearing <code>~/Library/Caches</code> reclaims disk space—which helps if your startup disk is nearly full—but apps may launch slightly slower the first time afterward while they rebuild their caches.</p>
+<h3 id="what-is-the-difference-between-librarycaches-and-librarycaches">What is the difference between <code>~/Library/Caches</code> and <code>/Library/Caches</code>?<a class="heading-anchor" href="#what-is-the-difference-between-librarycaches-and-librarycaches" aria-label="Link to section">#</a></h3>
+<p><code>~/Library/Caches</code> (with the tilde <code>~</code>) belongs only to your user account and stores user-level app and browser caches that you can inspect and selectively clean. <code>/Library/Caches</code> (at the root of Macintosh HD) holds system-wide caches shared across all accounts and macOS background services; leave <code>/Library/Caches</code> and <code>/System/Library/Caches</code> to macOS.</p>
+          </div>
+
+          <aside class="article-cta">
+            <div>
+              <h3>Prefer to inspect and clean visually?</h3>
+              <p>CleanBit is a sandboxed Mac App Store utility. Every item shows what it is and what happens if you remove it—scanning and your first 2 cleans are free.</p>
+            </div>
+            <a class="pill pill-primary" href="https://apps.apple.com/app/apple-store/id6829159531?pt=127116872&amp;ct=website-guides&amp;mt=8" target="_blank" rel="noopener noreferrer">Download on the Mac App Store</a>
+          </aside>
+
+          <p class="disclosure-note">Written by the CleanBit developer with AI assistance. All measurements were taken on a real developer Mac.</p>
+          <section style="margin-top:44px">
+        <h2 style="font-size:20px;margin:0 0 16px">Related guides</h2>
+        <div class="grid-2">
+          <a class="card guide-card" href="/guides/is-xcode-deriveddata-safe-to-delete/">
+                <div>
+                  <div class="guide-meta"><span>Developer Storage</span><span>·</span><span>4 min read</span></div>
+                  <h3 style="margin-top:6px;font-size:16px">Is Xcode DerivedData Safe to Delete? What Happens and How to Clean It</h3>
+                </div>
+                <span class="guide-more">Read guide →</span>
+              </a><a class="card guide-card" href="/guides/ios-devicesupport-and-simulators-disk-space-mac/">
+                <div>
+                  <div class="guide-meta"><span>Developer Storage</span><span>·</span><span>6 min read</span></div>
+                  <h3 style="margin-top:6px;font-size:16px">iOS DeviceSupport and Simulators Taking 40 GB? What You Can Safely Remove</h3>
+                </div>
+                <span class="guide-more">Read guide →</span>
+              </a><a class="card guide-card" href="/guides/how-to-find-and-delete-old-node-modules-on-mac/">
+                <div>
+                  <div class="guide-meta"><span>Developer Storage</span><span>·</span><span>4 min read</span></div>
+                  <h3 style="margin-top:6px;font-size:16px">How to Find and Delete Old node_modules Folders on a Mac</h3>
+                </div>
+                <span class="guide-more">Read guide →</span>
+              </a>
+        </div>
+      </section>
+        </div>
+        <aside class="toc-aside" aria-label="Table of contents">
+        <div class="toc-title">On this page</div>
+        <ul class="toc-list">
+          <li class="toc-h2"><a href="#1-check-how-much-space-librarycaches-uses-read-only">1. Check how much space ~/Library/Caches uses (read-only)</a></li><li class="toc-h2"><a href="#2-librarycaches-vs-librarycaches-what-is-safe-and-what-to-leave-alone">2. ~/Library/Caches vs. /Library/Caches: what is safe and what to leave alone</a></li><li class="toc-h2"><a href="#3-how-to-clear-cache-on-a-mac-manually-finder-terminal">3. How to clear cache on a Mac manually (Finder &amp; Terminal)</a></li><li class="toc-h3"><a href="#step-1-quit-all-running-apps-first">Step 1: Quit all running apps first</a></li><li class="toc-h3"><a href="#step-2-inspect-and-clear-specific-folders-in-finder">Step 2: Inspect and clear specific folders in Finder</a></li><li class="toc-h3"><a href="#step-3-clear-browser-caches-safely-without-losing-logins">Step 3: Clear browser caches safely (without losing logins)</a></li><li class="toc-h3"><a href="#step-4-clean-developer-caches-with-their-official-commands">Step 4: Clean developer caches with their official commands</a></li><li class="toc-h3"><a href="#what-if-librarycaches-is-only-a-few-gigabytes">What if ~/Library/Caches is only a few gigabytes?</a></li><li class="toc-h2"><a href="#4-how-cleanbit-handles-librarycaches-and-its-sandbox-boundaries">4. How CleanBit handles ~/Library/Caches (and its sandbox boundaries)</a></li><li class="toc-h2"><a href="#frequently-asked-questions">Frequently Asked Questions</a></li><li class="toc-h3"><a href="#is-it-safe-to-delete-everything-in-librarycaches-on-a-mac">Is it safe to delete everything in ~/Library/Caches on a Mac?</a></li><li class="toc-h3"><a href="#what-happens-if-i-delete-librarycaches-while-apps-are-running">What happens if I delete ~/Library/Caches while apps are running?</a></li><li class="toc-h3"><a href="#does-clearing-cache-on-a-mac-delete-passwords-bookmarks-or-personal-files">Does clearing cache on a Mac delete passwords, bookmarks, or personal files?</a></li><li class="toc-h3"><a href="#does-clearing-mac-cache-make-my-mac-faster">Does clearing Mac cache make my Mac faster?</a></li><li class="toc-h3"><a href="#what-is-the-difference-between-librarycaches-and-librarycaches">What is the difference between ~/Library/Caches and /Library/Caches?</a></li>
+        </ul>
+      </aside>
+      </div>
+    </div>
+  </article>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div>
+        <strong style="color:var(--text)">CleanBit</strong> · macOS 15+ · Available exclusively on the Mac App Store.
+        <div style="margin-top:6px">© 2026 Dongguan Aibeike AI Co., Ltd.</div>
+      </div>
+      <div class="footer-links">
+        <a href="/guides/">Guides</a>
+        <a href="/support/">Support</a>
+        <a href="/privacy/">Privacy</a>
+        <a href="/terms/">Terms</a>
+        <a href="/feed.xml">RSS</a>
+        <a href="https://github.com/Ceelog/CleanBit-Mac-App" target="_blank" rel="noopener noreferrer">GitHub</a>
+        <a href="https://apps.apple.com/app/apple-store/id6829159531?pt=127116872&amp;ct=website-guides&amp;mt=8" target="_blank" rel="noopener noreferrer">Mac App Store</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+  (function(){
+    // Interactive module-tinted screenshot switcher
+    var frame = document.getElementById('showcase-frame');
+    var img = document.getElementById('showcase-img');
+    var cap = document.getElementById('showcase-caption');
+    document.querySelectorAll('[data-tab-btn]').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        document.querySelectorAll('[data-tab-btn]').forEach(function(b){ b.classList.remove('is-active'); b.setAttribute('aria-selected','false'); });
+        btn.classList.add('is-active');
+        btn.setAttribute('aria-selected','true');
+        if (img) { img.src = btn.dataset.src; img.alt = btn.dataset.alt; }
+        if (cap) cap.textContent = btn.dataset.caption;
+        if (frame) frame.setAttribute('data-tint', btn.dataset.tint);
+      });
+    });
+    // One-click code block copy
+    document.querySelectorAll('[data-copy]').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        var pre = btn.closest('.code-block').querySelector('pre code');
+        if (!pre || !navigator.clipboard) return;
+        navigator.clipboard.writeText(pre.textContent || '').then(function(){
+          var old = btn.textContent;
+          btn.textContent = 'Copied';
+          setTimeout(function(){ btn.textContent = old; }, 1600);
+        });
+      });
+    });
+  })();
+  </script>
+</body>
+</html>

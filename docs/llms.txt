@@ -11,9 +11,10 @@
 
 ## English Guides
 - [Is Xcode DerivedData Safe to Delete? What Happens and How to Clean It](https://getcleanbit.app/guides/is-xcode-deriveddata-safe-to-delete/): Yes, Xcode DerivedData is safe to delete. Learn what lives inside DerivedData, what actually happens after removing it, and how to clean Xcode caches safely.
+- [Is It Safe to Delete ~/Library/Caches on a Mac? How to Clear Cache Safely](https://getcleanbit.app/guides/is-it-safe-to-delete-library-caches-mac/): Yes—most files inside ~/Library/Caches are safe to clear on macOS, if you skip running apps and leave /Library/Caches alone. Includes commands and real Mac numbers.
 - [iOS DeviceSupport and Simulators Taking 40 GB? What You Can Safely Remove](https://getcleanbit.app/guides/ios-devicesupport-and-simulators-disk-space-mac/): Reclaim tens of gigabytes from Xcode iOS DeviceSupport and CoreSimulator on macOS. Includes real Mac measurements, safe xcrun simctl commands, and cleanup limits.
-- [Claude Code, Cursor and Codex Eating Disk Space on Your Mac? Here's Where It Goes](https://getcleanbit.app/guides/claude-code-cursor-codex-disk-space-mac/): Find out why Claude Code, Cursor, and Codex consume gigabytes on macOS. Includes real developer Mac measurements, read-only audit commands, and safe cleanup steps.
 - [How to Find and Delete Old node_modules Folders on a Mac](https://getcleanbit.app/guides/how-to-find-and-delete-old-node-modules-on-mac/): Measure how much space old node_modules folders take on macOS, remove them safely from Terminal, and avoid breaking active or pnpm projects.
+- [Claude Code, Cursor and Codex Eating Disk Space on Your Mac? Here's Where It Goes](https://getcleanbit.app/guides/claude-code-cursor-codex-disk-space-mac/): Find out why Claude Code, Cursor, and Codex consume gigabytes on macOS. Includes real developer Mac measurements, read-only audit commands, and safe cleanup steps.
 
 ## Chinese Guides
 - [Mac 上怎么找出并安全清理旧的 node_modules？（实测 304 个占 66.3 GB）](https://getcleanbit.app/zh/guides/mac-delete-node-modules/): 实测一台开发用 Mac 上 304 个 node_modules 占去 66.3 GB。手把手教你用终端安全排查、识别 pnpm 硬链接陷阱，以及何时不该直接删。

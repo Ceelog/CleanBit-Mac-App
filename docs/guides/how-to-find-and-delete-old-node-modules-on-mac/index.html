@@ -24,7 +24,7 @@
   <meta name="twitter:image" content="https://getcleanbit.app/assets/screens/en-artifacts.webp" />
   <meta name="theme-color" content="#111419" />
   <link rel="stylesheet" href="/styles.css?v=cac88ab1" />
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"How to Find and Delete Old node_modules Folders on a Mac","description":"Measure how much space old node_modules folders take on macOS, remove them safely from Terminal, and avoid breaking active or pnpm projects.","datePublished":"2026-11-21","dateModified":"2026-11-21","inLanguage":"en","author":{"@type":"Organization","name":"CleanBit Developer","url":"https://getcleanbit.app/"},"publisher":{"@type":"Organization","name":"CleanBit","logo":{"@type":"ImageObject","url":"https://getcleanbit.app/assets/icon.png"}},"mainEntityOfPage":"https://getcleanbit.app/guides/how-to-find-and-delete-old-node-modules-on-mac/","image":"https://getcleanbit.app/assets/screens/en-artifacts.webp"}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"How to Find and Delete Old node_modules Folders on a Mac","description":"Measure how much space old node_modules folders take on macOS, remove them safely from Terminal, and avoid breaking active or pnpm projects.","datePublished":"2026-11-21","dateModified":"2026-11-23","inLanguage":"en","author":{"@type":"Organization","name":"CleanBit Developer","url":"https://getcleanbit.app/"},"publisher":{"@type":"Organization","name":"CleanBit","logo":{"@type":"ImageObject","url":"https://getcleanbit.app/assets/icon.png"}},"mainEntityOfPage":"https://getcleanbit.app/guides/how-to-find-and-delete-old-node-modules-on-mac/","image":"https://getcleanbit.app/assets/screens/en-artifacts.webp"}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"CleanBit","item":"https://getcleanbit.app/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://getcleanbit.app/guides/"},{"@type":"ListItem","position":3,"name":"How to Find and Delete Old node_modules Folders on a Mac","item":"https://getcleanbit.app/guides/how-to-find-and-delete-old-node-modules-on-mac/"}]}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is it safe to delete node_modules on a Mac?","acceptedAnswer":{"@type":"Answer","text":"Yes, as long as the project is not currently running and its package.json (and lockfile) is intact. You will simply need to run npm install (or your package manager's install command) the next time you work on that project."}},{"@type":"Question","name":"Why didn't my free disk space increase immediately after deleting node_modules?","acceptedAnswer":{"@type":"Answer","text":"Two common reasons: if you moved folders to the Trash, space isn't reclaimed until you empty the Trash; and if the project used pnpm, packages are hard-linked to the shared store—run pnpm store prune to free unreferenced packages. macOS may also hold purgeable space or APFS local snapshots temporarily."}},{"@type":"Question","name":"Does deleting node_modules affect global npm packages or Node.js itself?","acceptedAnswer":{"@type":"Answer","text":"No. Project-level node_modules folders only contain dependencies for that specific project. Your Node.js installation, global CLI tools, and source code remain untouched."}}]}</script>
   <script async src="https://www.googletagmanager.com/gtm.js?id=GTM-TFR7TV8Z"></script>
@@ -77,9 +77,9 @@
             <div class="article-meta">
               <span>CleanBit Developer</span>
               <span>·</span>
-              <span>Updated 2026-11-21</span>
+              <span>Updated 2026-11-23</span>
               <span>·</span>
-              <span>3 min read</span>
+              <span>4 min read</span>
             </div>
           </header>
 
@@ -112,6 +112,7 @@ pnpm store prune</code></pre></div>
 <h2 id="5-inspect-and-clean-visually-with-cleanbit">5. Inspect and clean visually with CleanBit<a class="heading-anchor" href="#5-inspect-and-clean-visually-with-cleanbit" aria-label="Link to section">#</a></h2>
 <p>I&#39;m the developer of <strong>CleanBit</strong>, a sandboxed Mac App Store disk space cleaner for macOS 15+. If you don&#39;t want to write <code>find</code> commands or worry about wiping something Git tracks:</p>
 <ul><li><strong>Build Artifacts</strong> scans <code>node_modules</code>, <code>target</code>, <code>.build</code>, <code>.venv</code>, and <code>Pods</code> across the folders you grant and shows <strong>when each project was last modified</strong>.</li><li>Anything tracked by Git is automatically skipped, and recently modified folders are flagged as in use.</li><li>Project build folders are categorized as <strong>Review</strong> (never pre-selected) and are always <strong>moved to the Trash</strong>, so you can put them back if you need to.</li><li>CleanBit also shows your <code>pnpm</code> store as <strong>Info Only</strong> (never deleted directly) and reminds you to use <code>pnpm store prune</code>.</li></ul>
+<p>For other common macOS storage folders outside your project directories, see our guides on <a href="/guides/is-it-safe-to-delete-library-caches-mac/">whether <code>~/Library/Caches</code> is safe to delete</a>, <a href="/guides/is-xcode-deriveddata-safe-to-delete/">cleaning Xcode <code>DerivedData</code></a>, and <a href="/guides/ios-devicesupport-and-simulators-disk-space-mac/">reclaiming space from <code>iOS DeviceSupport</code> and Xcode Simulators</a>.</p>
 <figure class="prose-figure"><img src="/assets/screens/en-artifacts.webp" alt="CleanBit Build Artifacts view showing project folders, last modified dates, and Git-safe selection" loading="lazy" decoding="async" /><figcaption>CleanBit Build Artifacts lists project build folders with last-modified times and moves removed folders to the Trash.</figcaption></figure>
 <h2 id="frequently-asked-questions">Frequently Asked Questions<a class="heading-anchor" href="#frequently-asked-questions" aria-label="Link to section">#</a></h2>
 <h3 id="is-it-safe-to-delete-nodemodules-on-a-mac">Is it safe to delete <code>node_modules</code> on a Mac?<a class="heading-anchor" href="#is-it-safe-to-delete-nodemodules-on-a-mac" aria-label="Link to section">#</a></h3>
@@ -136,20 +137,20 @@ pnpm store prune</code></pre></div>
         <div class="grid-2">
           <a class="card guide-card" href="/guides/is-xcode-deriveddata-safe-to-delete/">
                 <div>
-                  <div class="guide-meta"><span>Developer Storage</span><span>·</span><span>3 min read</span></div>
+                  <div class="guide-meta"><span>Developer Storage</span><span>·</span><span>4 min read</span></div>
                   <h3 style="margin-top:6px;font-size:16px">Is Xcode DerivedData Safe to Delete? What Happens and How to Clean It</h3>
+                </div>
+                <span class="guide-more">Read guide →</span>
+              </a><a class="card guide-card" href="/guides/is-it-safe-to-delete-library-caches-mac/">
+                <div>
+                  <div class="guide-meta"><span>Mac Storage</span><span>·</span><span>8 min read</span></div>
+                  <h3 style="margin-top:6px;font-size:16px">Is It Safe to Delete ~/Library/Caches on a Mac? How to Clear Cache Safely</h3>
                 </div>
                 <span class="guide-more">Read guide →</span>
               </a><a class="card guide-card" href="/guides/ios-devicesupport-and-simulators-disk-space-mac/">
                 <div>
                   <div class="guide-meta"><span>Developer Storage</span><span>·</span><span>6 min read</span></div>
                   <h3 style="margin-top:6px;font-size:16px">iOS DeviceSupport and Simulators Taking 40 GB? What You Can Safely Remove</h3>
-                </div>
-                <span class="guide-more">Read guide →</span>
-              </a><a class="card guide-card" href="/guides/claude-code-cursor-codex-disk-space-mac/">
-                <div>
-                  <div class="guide-meta"><span>AI &amp; Developer Storage</span><span>·</span><span>8 min read</span></div>
-                  <h3 style="margin-top:6px;font-size:16px">Claude Code, Cursor and Codex Eating Disk Space on Your Mac? Here&#39;s Where It Goes</h3>
                 </div>
                 <span class="guide-more">Read guide →</span>
               </a>

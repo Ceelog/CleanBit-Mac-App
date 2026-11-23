@@ -4,7 +4,7 @@ description: Reclaim tens of gigabytes from Xcode iOS DeviceSupport and CoreSimu
 target_query: ios devicesupport delete
 category: Developer Storage
 date: 2026-11-22
-updated: 2026-11-22
+updated: 2026-11-23
 image: /assets/screens/en-smart-scan.webp
 ai_disclosure: Written by the CleanBit developer with AI assistance. All measurements were taken on a real developer Mac.
 ---
@@ -115,7 +115,7 @@ rm -rf ~/Library/Developer/CoreSimulator/Caches/*
 > [!WARNING]
 > Avoid running `rm -rf ~/Library/Developer/CoreSimulator/Devices/*` directly while `CoreSimulatorService` is running. Deleting device UUID folders behind `simctl`'s back can leave Xcode unable to boot simulators until you reboot or run `killall -9 com.apple.CoreSimulator.CoreSimulatorService`. Always use `xcrun simctl delete` to remove whole simulators.
 
-For the rest of your Xcode and developer footprint, check our guides on [whether Xcode `DerivedData` is safe to delete](/guides/is-xcode-deriveddata-safe-to-delete/), [finding and deleting old `node_modules` folders](/guides/how-to-find-and-delete-old-node-modules-on-mac/), and [cleaning Claude Code, Cursor, and Codex disk space on macOS](/guides/claude-code-cursor-codex-disk-space-mac/).
+For the rest of your Xcode and developer footprint, check our guides on [whether Xcode `DerivedData` is safe to delete](/guides/is-xcode-deriveddata-safe-to-delete/), [whether `~/Library/Caches` is safe to delete on a Mac](/guides/is-it-safe-to-delete-library-caches-mac/), [finding and deleting old `node_modules` folders](/guides/how-to-find-and-delete-old-node-modules-on-mac/), and [cleaning Claude Code, Cursor, and Codex disk space on macOS](/guides/claude-code-cursor-codex-disk-space-mac/).
 
 ## 4. What CleanBit cleans—and what stays manual
 
