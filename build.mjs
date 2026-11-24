@@ -155,6 +155,7 @@ function buildLlmsTxt(enGuides, zhGuides) {
     `- Mac App Store: ${ctx.appStoreUrl('website')}`,
     ...(config.youtubeVideoId ? [`- Product Demo Video (YouTube): https://www.youtube.com/watch?v=${config.youtubeVideoId}`] : []),
     '- Requirements: macOS 15+, App Sandbox (no root, no background helper daemon)',
+    '- Version & Languages: v1.0.1 supports 9 languages (English, Simplified Chinese, Traditional Chinese, Japanese, Korean, French, German, Spanish, Russian) following macOS system language, plus per-group cleaning in Smart Scan.',
     '- Pricing: Free scanning & 2 free cleans; $4.99/mo, $19.99/yr, or $29.99 lifetime one-time purchase',
     '- Safety Model: Recommended caches rebuild automatically (deleted permanently by default, Trash optional); Review items, project build artifacts, manual selections, and uninstalled apps always move to Trash; Info Only items (local AI models, pnpm store, Docker disk image) are never deleted.',
     '',

@@ -16,13 +16,13 @@ const COPY = {
     demoPlay: 'Play Product Demo',
     demoOpenYt: 'Watch on YouTube ↗',
     demoPrivacy: 'Privacy-enhanced embed (youtube-nocookie.com) loads only when you click play.',
-    heroBadge: 'macOS 15+ · Mac App Store · App Sandbox',
+    heroBadge: 'macOS 15+ · Mac App Store · App Sandbox · 9 Languages',
     heroTitleA: 'Free up Mac disk space.',
     heroTitleB: 'Know what you’re removing.',
     heroSub: 'CleanBit finds caches, logs, build artifacts, and app leftovers in your home folder. Every item explains what it is and what happens if you remove it—nothing is deleted until you confirm.',
     heroTrust: 'No root · No background helper · Free scan & 2 free cleans · One-time purchase option',
     tabs: [
-      { id: 'smart-scan', label: 'Smart Scan', tint: 'brand', caption: 'Every group is labeled Recommended, Review, or Info Only, with plain-language impact notes and active apps blocked automatically.' },
+      { id: 'smart-scan', label: 'Smart Scan', tint: 'brand', caption: 'Every group is labeled Recommended, Review, or Info Only, with plain-language impact notes, per-group cleaning, and active apps blocked automatically.' },
       { id: 'confirm', label: 'Confirmation', tint: 'coral', caption: 'Before anything is deleted, CleanBit splits what goes to the Trash from what is deleted permanently—and re-checks every item.' },
       { id: 'artifacts', label: 'Build Artifacts', tint: 'amber', caption: 'Find node_modules, target, .build, and .venv across projects with last-modified dates. Anything tracked by Git is skipped.' },
       { id: 'space', label: 'Space Analysis', tint: 'ocean', caption: 'Drill down into your home folder or any folder you grant to see where your gigabytes actually went.' },
@@ -123,19 +123,24 @@ const COPY = {
         a: 'Never. Scanning, duplicate hashing, and cleaning happen entirely locally on your Mac. File names, paths, contents, and installed app lists never leave your device. CleanBit uses Firebase Analytics only for anonymous product telemetry (built-in rule IDs, counts, and sizes rounded to MB).'
       },
       {
-        q: 'What macOS version is required?',
-        a: 'CleanBit is built natively with SwiftUI for macOS 15 (Sequoia) and later.'
+        q: 'What macOS version and languages are supported?',
+        a: 'CleanBit is built natively with SwiftUI for macOS 15 (Sequoia) and later. Version 1.0.1 supports 9 languages following your macOS system language: English, Simplified Chinese, Traditional Chinese, Japanese, Korean, French, German, Spanish, and Russian.'
       }
     ],
     guidesIndexTitle: 'Mac Storage & Developer Cleanup Guides',
     guidesIndexSub: 'Honest, practical guides on Xcode caches, node_modules, AI coding tools, and macOS storage—with real measurements and manual commands.',
     articleCtaTitle: 'Prefer to inspect and clean visually?',
     articleCtaSub: 'CleanBit is a sandboxed Mac App Store utility. Every item shows what it is and what happens if you remove it—scanning and your first 2 cleans are free.',
+    tocCtaEyebrow: 'Mac App Store · Sandboxed',
+    tocCtaTitle: 'CleanBit for macOS',
+    tocCtaBody: 'Know what you’re removing before you confirm. Free scan & first 2 cleans free.',
+    tocCtaButton: 'Download on App Store',
+    tocCtaMeta: 'macOS 15+ · 9 languages · One-time option',
     tocTitle: 'On this page',
     relatedTitle: 'Related guides',
     updatedLabel: 'Updated',
     minRead: 'min read',
-    footerNote: 'macOS 15+ · Available exclusively on the Mac App Store.'
+    footerNote: 'macOS 15+ · 9 languages · Available exclusively on the Mac App Store.'
   },
   zh: {
     langAttr: 'zh-Hans',
@@ -152,13 +157,13 @@ const COPY = {
     demoPlay: '播放产品演示视频',
     demoOpenYt: '在 YouTube 打开 ↗',
     demoPrivacy: '点击播放后才加载无跟踪嵌入式播放器（youtube-nocookie.com）。',
-    heroBadge: 'macOS 15+ · Mac App Store · App 沙盒',
+    heroBadge: 'macOS 15+ · Mac App Store · App 沙盒 · 支持 9 种语言',
     heroTitleA: '释放 Mac 磁盘空间，',
     heroTitleB: '删之前清楚知道删的是什么。',
     heroSub: 'CleanBit 在你授权的个人文件夹里找出缓存、日志、项目构建产物和卸载残留。每一项都写明是什么、删了有什么影响，你确认之前什么都不删。',
     heroTrust: '不要 root · 不装后台 helper · 扫描免费、前 2 次清理免费 · 支持一次买断',
     tabs: [
-      { id: 'smart-scan', label: '智能扫描', tint: 'brand', caption: '结果分为「建议清理」「需要确认」「仅展示」三类，每一项写明删除影响，正在运行的应用缓存自动锁定。' },
+      { id: 'smart-scan', label: '智能扫描', tint: 'brand', caption: '结果分为「建议清理」「需要确认」「仅展示」三类，支持按分组单独清理，每一项写明删除影响，正在运行的应用缓存自动锁定。' },
       { id: 'confirm', label: '删除前确认', tint: 'coral', caption: '确认框明确分开显示多少移到废纸篓、多少永久删除；真正删除前每一项都会再次校验。' },
       { id: 'artifacts', label: '项目产物', tint: 'amber', caption: '找出项目里的 node_modules、target、.build、.venv，显示每个项目最后改动时间；被 Git 跟踪的内容一律跳过。' },
       { id: 'space', label: '空间分析', tint: 'ocean', caption: '一张图看清个人文件夹或任意文件夹的占用分布，点进去逐层查看空间去向。' },
@@ -259,19 +264,24 @@ const COPY = {
         a: '不会。扫描、重复文件校验和清理全部在你的 Mac 本地完成，文件名、路径、内容和已安装应用列表从不离开电脑。CleanBit 仅通过 Firebase Analytics 收集匿名使用统计（规则 ID、数量与体积）。'
       },
       {
-        q: '支持哪些 macOS 版本？',
-        a: 'CleanBit 使用 SwiftUI 原生开发，支持 macOS 15 及以上版本。'
+        q: '支持哪些 macOS 版本和语言？',
+        a: 'CleanBit 使用 SwiftUI 原生开发，支持 macOS 15 及以上版本。1.0.1 起支持 9 种语言（跟随系统语言）：英语、简体中文、繁体中文、日语、韩语、法语、德语、西班牙语和俄语。'
       }
     ],
     guidesIndexTitle: 'Mac 磁盘空间与开发者清理指南',
     guidesIndexSub: '围绕 Xcode 缓存、node_modules、AI 编程工具与 macOS 存储占用的实测指南，提供完整手动命令。',
     articleCtaTitle: '想可视化查看每一项、确认后再安全清理？',
     articleCtaSub: 'CleanBit 是 Mac App Store 里的沙盒磁盘清理工具：每一项都写明是什么和删除影响，扫描和前 2 次清理免费。',
+    tocCtaEyebrow: 'Mac App Store · App 沙盒',
+    tocCtaTitle: 'CleanBit 磁盘清理',
+    tocCtaBody: '每项写明用途与删除影响，确认前不动文件。扫描免费，前 2 次清理免费。',
+    tocCtaButton: '前往 Mac App Store',
+    tocCtaMeta: 'macOS 15+ · 9 语言 · 支持一次买断',
     tocTitle: '本文目录',
     relatedTitle: '相关指南',
     updatedLabel: '更新于',
     minRead: '分钟阅读',
-    footerNote: 'macOS 15+ · 仅在 Mac App Store 上架。'
+    footerNote: 'macOS 15+ · 支持 9 种语言 · 仅在 Mac App Store 上架。'
   }
 };
 
@@ -603,8 +613,10 @@ export function renderHome(lang, guides, ctx) {
     '@context': 'https://schema.org',
     '@type': 'SoftwareApplication',
     name: 'CleanBit: Disk Space Cleaner',
+    softwareVersion: '1.0.1',
     operatingSystem: 'macOS 15+',
     applicationCategory: 'UtilitiesApplication',
+    inLanguage: ['en', 'zh-Hans', 'zh-Hant', 'ja', 'ko', 'fr', 'de', 'es', 'ru'],
     downloadUrl: ctx.appStoreUrl('website'),
     url: ctx.absUrl(lang === 'en' ? '/' : '/zh/'),
     image: ctx.absUrl('/assets/icon.png'),
@@ -717,14 +729,30 @@ export function renderGuideDetail(guide, allGuides, ctx) {
   const guidesHref = ctx.relUrl(lang === 'en' ? '/guides/' : '/zh/guides/');
   const appStoreHref = ctx.appStoreUrl('website-guides');
 
-  const tocHtml = guide.toc.length
-    ? `<aside class="toc-aside" aria-label="Table of contents">
+  const tocCardHtml = guide.toc.length
+    ? `<nav class="toc-card" aria-label="Table of contents">
         <div class="toc-title">${escapeHtml(t.tocTitle)}</div>
         <ul class="toc-list">
           ${guide.toc.map((item) => `<li class="toc-h${item.level}"><a href="#${escapeHtml(item.id)}">${escapeHtml(item.text)}</a></li>`).join('')}
         </ul>
-      </aside>`
+      </nav>`
     : '';
+
+  const tocHtml = `<aside class="toc-aside" aria-label="Guide sidebar">
+      ${tocCardHtml}
+      <div class="toc-cta">
+        <div class="toc-cta-head">
+          <img src="${escapeHtml(ctx.relUrl('/assets/icon.png'))}" alt="CleanBit icon" width="28" height="28" />
+          <div>
+            <div class="toc-cta-eyebrow">${escapeHtml(t.tocCtaEyebrow)}</div>
+            <div class="toc-cta-title">${escapeHtml(t.tocCtaTitle)}</div>
+          </div>
+        </div>
+        <p class="toc-cta-body">${escapeHtml(t.tocCtaBody)}</p>
+        <a class="pill pill-primary pill-sm toc-cta-btn" href="${escapeHtml(appStoreHref)}" target="_blank" rel="noopener noreferrer">${escapeHtml(t.tocCtaButton)}</a>
+        <div class="toc-cta-meta">${escapeHtml(t.tocCtaMeta)}</div>
+      </div>
+    </aside>`;
 
   const related = allGuides.filter((g) => g.slug !== guide.slug).slice(0, 3);
   const relatedHtml = related.length

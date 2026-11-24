@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Claude Code Worktrees Filling Your Disk? How to Find and Remove Leftover Git Worktrees — CleanBit</title>
+  <meta name="description" content="Parallel Claude Code and Codex git worktrees duplicate node_modules, Rust target, and Swift .build folders. Audit them read-only and clean up safely on macOS." />
+  <link rel="canonical" href="https://getcleanbit.app/guides/claude-code-worktrees-disk-space-mac/" />
+  <link rel="alternate" hreflang="en" href="https://getcleanbit.app/guides/claude-code-worktrees-disk-space-mac/" />
+  <link rel="alternate" hreflang="zh-Hans" href="https://getcleanbit.app/zh/guides/" />
+  <link rel="alternate" hreflang="x-default" href="https://getcleanbit.app/guides/claude-code-worktrees-disk-space-mac/" />
+  <link rel="icon" type="image/png" href="/assets/favicon.png" />
+  <link rel="apple-touch-icon" href="/assets/icon.png" />
+  <link rel="alternate" type="application/rss+xml" title="CleanBit Guides (English)" href="https://getcleanbit.app/feed.xml" />
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="CleanBit" />
+  <meta property="og:title" content="Claude Code Worktrees Filling Your Disk? How to Find and Remove Leftover Git Worktrees — CleanBit" />
+  <meta property="og:description" content="Parallel Claude Code and Codex git worktrees duplicate node_modules, Rust target, and Swift .build folders. Audit them read-only and clean up safely on macOS." />
+  <meta property="og:url" content="https://getcleanbit.app/guides/claude-code-worktrees-disk-space-mac/" />
+  <meta property="og:image" content="https://getcleanbit.app/assets/screens/en-artifacts.webp" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Claude Code Worktrees Filling Your Disk? How to Find and Remove Leftover Git Worktrees — CleanBit" />
+  <meta name="twitter:description" content="Parallel Claude Code and Codex git worktrees duplicate node_modules, Rust target, and Swift .build folders. Audit them read-only and clean up safely on macOS." />
+  <meta name="twitter:image" content="https://getcleanbit.app/assets/screens/en-artifacts.webp" />
+  <meta name="theme-color" content="#111419" />
+  <link rel="stylesheet" href="/styles.css?v=bfa4b138" />
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Claude Code Worktrees Filling Your Disk? How to Find and Remove Leftover Git Worktrees","description":"Parallel Claude Code and Codex git worktrees duplicate node_modules, Rust target, and Swift .build folders. Audit them read-only and clean up safely on macOS.","datePublished":"2026-11-24","dateModified":"2026-11-24","inLanguage":"en","author":{"@type":"Organization","name":"CleanBit Developer","url":"https://getcleanbit.app/"},"publisher":{"@type":"Organization","name":"CleanBit","logo":{"@type":"ImageObject","url":"https://getcleanbit.app/assets/icon.png"}},"mainEntityOfPage":"https://getcleanbit.app/guides/claude-code-worktrees-disk-space-mac/","image":"https://getcleanbit.app/assets/screens/en-artifacts.webp"}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"CleanBit","item":"https://getcleanbit.app/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://getcleanbit.app/guides/"},{"@type":"ListItem","position":3,"name":"Claude Code Worktrees Filling Your Disk? How to Find and Remove Leftover Git Worktrees","item":"https://getcleanbit.app/guides/claude-code-worktrees-disk-space-mac/"}]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Why do Claude Code worktrees take up so much disk space?","acceptedAnswer":{"@type":"Answer","text":"Git worktrees share your repository's .git object database, so source code and commit history take almost no extra space. The bloat comes from untracked dependencies and build caches—each parallel worktree installs its own node_modules, Rust target/, Swift .build/, or Python .venv/, multiplying disk usage by the number of active or forgotten worktrees."}},{"@type":"Question","name":"Is git worktree remove safer than rm -rf?","acceptedAnswer":{"@type":"Answer","text":"Yes. git worktree remove <path> refuses to delete a worktree if it has uncommitted changes or untracked files, and it cleans up the matching registration inside .git/worktrees/. Running rm -rf bypasses Git's safety checks and leaves stale worktree metadata behind until you run git worktree prune."}},{"@type":"Question","name":"What does git worktree prune actually delete?","acceptedAnswer":{"@type":"Answer","text":"git worktree prune does not delete live working directories or source files. It only removes stale administrative metadata files inside .git/worktrees/ that point to worktree folders which were already deleted or moved manually. You can preview its actions safely with git worktree prune --dry-run --verbose."}},{"@type":"Question","name":"Can I delete node_modules or target/ inside a worktree without deleting the worktree?","acceptedAnswer":{"@type":"Answer","text":"Yes, as long as no dev server, watcher, or coding agent is currently running in that worktree. Removing only node_modules, target/, or .build/ keeps your branch, uncommitted source files, and Git worktree intact—you just re-run npm install or cargo build if you return to that worktree later."}},{"@type":"Question","name":"Does CleanBit scan Claude Code and Codex worktrees?","acceptedAnswer":{"@type":"Answer","text":"CleanBit's Build Artifacts module scans ~/.claude/worktrees, ~/.codex/worktrees, and visible home folders for disposable build directories (node_modules, target, .build, .venv, etc.), parses .git gitdir: pointers to skip Git-tracked files, and moves selected build folders to the Trash. It does not remove Git worktree checkouts or branches themselves, and currently does not auto-scan ~/.cursor/worktrees or hidden repo subfolders like <repo>/.claude/worktrees."}}]}</script>
+  <script async src="https://www.googletagmanager.com/gtm.js?id=GTM-TFR7TV8Z"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+  </script>
+  
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="/">
+        <img src="/assets/icon.png" alt="CleanBit icon" width="28" height="28" />
+        <span>CleanBit</span>
+      </a>
+      <nav class="nav" aria-label="Main navigation">
+        <a href="/#demo">Demo</a>
+        <a href="/#features">Features</a>
+        <a href="/#safety">Safety</a>
+        <a href="/guides/" class="active">Guides</a>
+        <a href="/#pricing">Pricing</a>
+        <a href="/support/" class="">Support</a>
+      </nav>
+      <div class="header-actions">
+        <a class="lang-switch" href="/zh/guides/" hreflang="zh-Hans">中文</a>
+        <a class="pill pill-primary pill-sm" href="https://apps.apple.com/app/apple-store/id6829159531?pt=127116872&amp;ct=website-guides&amp;mt=8" target="_blank" rel="noopener noreferrer">Mac App Store</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+  <article class="article-shell">
+    <div class="container">
+      <div class="breadcrumbs">
+        <a href="/">CleanBit</a>
+        <span>/</span>
+        <a href="/guides/">Guides</a>
+        <span>/</span>
+        <span>AI &amp; Developer Storage</span>
+      </div>
+      <div class="article-grid">
+        <div>
+          <header class="article-header">
+            <div class="badge">AI &amp; Developer Storage</div>
+            <h1>Claude Code Worktrees Filling Your Disk? How to Find and Remove Leftover Git Worktrees</h1>
+            <p class="article-lead">Parallel Claude Code and Codex git worktrees duplicate node_modules, Rust target, and Swift .build folders. Audit them read-only and clean up safely on macOS.</p>
+            <div class="article-meta">
+              <span>CleanBit Developer</span>
+              <span>·</span>
+              <span>Updated 2026-11-24</span>
+              <span>·</span>
+              <span>9 min read</span>
+            </div>
+          </header>
+
+          <div class="prose">
+            <p><strong>Claude Code and Codex worktrees fill up your Mac because Git shares commit history across worktrees, but never shares untracked build directories like <code>node_modules</code>, Rust <code>target/</code>, Swift <code>.build/</code>, or Python <code>.venv/</code>.</strong> Every parallel agent task that runs <code>npm install</code>, <code>cargo build</code>, or <code>swift build</code> inside its own <code>git worktree</code> creates a fresh multi-gigabyte copy of dependencies—and those folders stay on disk even after your PR is merged unless you remove the worktree with <code>git worktree remove</code> or clear its build directories.</p>
+<p>On one developer Mac we measured (read-only <code>du</code> across the home folder, excluding <code>~/Library</code>), project build artifacts alone reached <strong>66.3 GB across 304 <code>node_modules</code> folders</strong>, <strong>5.1 GB across 8 <code>.venv</code> folders</strong>, and <strong>2.9 GB across 7 <code>.build</code> folders</strong>—alongside <strong><code>~/.claude</code> (1.9 GB)</strong>, <strong><code>~/.local/share/claude</code> (902 MB)</strong>, and <strong><code>~/.codex</code> (5.2 GB)</strong>. Heavy parallel-agent users hit much steeper spikes: developers on <code>r/ClaudeCode</code> and <code>r/ClaudeAI</code> have reported leftover agent worktrees growing a single workspace to <strong>95 GB</strong>, and parallel Rust agent checkouts generating <strong>10–40 GB <code>target/</code> folders</strong> each until the startup disk hit 95%+ full.</p>
+<h2 id="1-run-a-read-only-audit-of-your-worktrees-first">1. Run a read-only audit of your worktrees first<a class="heading-anchor" href="#1-run-a-read-only-audit-of-your-worktrees-first" aria-label="Link to section">#</a></h2>
+<p>Before deleting anything, measure where agent worktrees and their build folders actually sit on your Mac. The commands below are strictly read-only.</p>
+<h3 id="check-worktree-storage-across-common-coding-agent-locations">Check worktree storage across common coding-agent locations<a class="heading-anchor" href="#check-worktree-storage-across-common-coding-agent-locations" aria-label="Link to section">#</a></h3>
+<div class="code-block"><div class="code-head"><span class="code-lang">bash</span><button type="button" class="code-copy" data-copy>Copy</button></div><pre><code># Total disk usage in common agent worktree directories (read-only)
+du -sh \
+  ~/.claude/worktrees \
+  ~/.codex/worktrees \
+  ~/.cursor/worktrees 2&gt;/dev/null
+
+# Largest individual worktree folders inside ~/.claude/worktrees and ~/.codex/worktrees
+du -sh ~/.claude/worktrees/* ~/.codex/worktrees/* 2&gt;/dev/null | sort -h | tail -20</code></pre></div>
+<h3 id="list-every-git-worktree-registered-by-a-repository">List every Git worktree registered by a repository<a class="heading-anchor" href="#list-every-git-worktree-registered-by-a-repository" aria-label="Link to section">#</a></h3>
+<p>Claude Code and other tools can also create worktrees inside a hidden folder inside the repo itself (such as <code>&lt;repo&gt;/.claude/worktrees</code>) or in a sibling folder next to your repo. Inside any repository, run:</p>
+<div class="code-block"><div class="code-head"><span class="code-lang">bash</span><button type="button" class="code-copy" data-copy>Copy</button></div><pre><code>cd ~/Repos/your-project
+git worktree list</code></pre></div>
+<p>To see whether any worktrees are locked, detached, or already missing from disk (<code>prunable</code>), add <code>--porcelain</code>:</p>
+<div class="code-block"><div class="code-head"><span class="code-lang">bash</span><button type="button" class="code-copy" data-copy>Copy</button></div><pre><code>git worktree list --porcelain</code></pre></div>
+<h3 id="find-the-biggest-nodemodules-target-and-build-folders-inside-worktrees">Find the biggest <code>node_modules</code>, <code>target</code>, and <code>.build</code> folders inside worktrees<a class="heading-anchor" href="#find-the-biggest-nodemodules-target-and-build-folders-inside-worktrees" aria-label="Link to section">#</a></h3>
+<div class="code-block"><div class="code-head"><span class="code-lang">bash</span><button type="button" class="code-copy" data-copy>Copy</button></div><pre><code>find ~/.claude/worktrees ~/.codex/worktrees ~/.cursor/worktrees \
+  \( -name node_modules -o -name target -o -name .build -o -name .venv \) \
+  -type d -prune -exec du -sh {} + 2&gt;/dev/null | sort -h | tail -25</code></pre></div>
+<aside class="callout callout-note"><div class="callout-title">NOTE</div><p><code>du</code> shows total directory size, not how much is safe to delete blindly. A worktree may still contain uncommitted edits or an unmerged branch—always verify Git status before removing the checkout itself.</p></aside>
+<h2 id="2-where-claude-code-codex-and-cursor-put-worktrees">2. Where Claude Code, Codex, and Cursor put worktrees<a class="heading-anchor" href="#2-where-claude-code-codex-and-cursor-put-worktrees" aria-label="Link to section">#</a></h2>
+<p>Different AI coding tools store isolated worktrees in different places, and each location behaves slightly differently when you audit or clean it:</p>
+<div class="table-wrap"><table><thead><tr><th style="text-align:left">Location</th><th style="text-align:left">Created by</th><th style="text-align:left">What eats the space</th><th style="text-align:left">Safe manual cleanup</th><th style="text-align:left">CleanBit coverage</th></tr></thead><tbody><tr><td style="text-align:left"><code>~/.claude/worktrees</code></td><td style="text-align:left">Claude Code</td><td style="text-align:left">Duplicated <code>node_modules</code>, <code>target/</code>, <code>.build/</code>, <code>.venv/</code> per worktree</td><td style="text-align:left"><code>git worktree remove &lt;path&gt;</code> (or delete build dirs inside idle checkouts)</td><td style="text-align:left"><strong>Build Artifacts</strong> scans this path by default, parses <code>.git</code> <code>gitdir:</code> to skip Git-tracked files, moves build folders to Trash</td></tr><tr><td style="text-align:left"><code>&lt;repo&gt;/.claude/worktrees</code></td><td style="text-align:left">Claude Code (repo-local worktree mode)</td><td style="text-align:left">Same per-task build folders inside a hidden repo subfolder</td><td style="text-align:left">Run <code>git worktree list</code> and <code>git worktree remove &lt;path&gt;</code> inside the repo</td><td style="text-align:left"><strong>Manual only</strong> (CleanBit skips hidden <code>.</code> subfolders during recursive traversal)</td></tr><tr><td style="text-align:left"><code>~/.codex/worktrees</code></td><td style="text-align:left">OpenAI Codex app / CLI</td><td style="text-align:left">Duplicated <code>node_modules</code>, Rust <code>target/</code>, Python <code>.venv/</code>, etc.</td><td style="text-align:left"><code>git worktree remove &lt;path&gt;</code> or remove build folders in finished tasks</td><td style="text-align:left"><strong>Build Artifacts</strong> scans this path by default, parses <code>.git</code> <code>gitdir:</code>, moves build folders to Trash</td></tr><tr><td style="text-align:left"><code>~/.cursor/worktrees</code> (or <code>&lt;repo&gt;/.cursor/worktrees</code>)</td><td style="text-align:left">Cursor parallel agents</td><td style="text-align:left">Isolated checkouts with separate dependency and build trees</td><td style="text-align:left">Run <code>git worktree list</code> / <code>git worktree remove &lt;path&gt;</code> or clear via Cursor</td><td style="text-align:left"><strong>Manual only</strong> (not currently in CleanBit&#39;s default search roots)</td></tr><tr><td style="text-align:left">Visible sibling worktrees (e.g., <code>~/Repos/app-feature-a</code>)</td><td style="text-align:left">Manual <code>git worktree add</code> or custom agent scripts</td><td style="text-align:left">Standard project build artifacts</td><td style="text-align:left"><code>git worktree remove &lt;path&gt;</code> and <code>git worktree prune</code></td><td style="text-align:left"><strong>Build Artifacts</strong> scans visible home folders (excluding <code>Library</code>, <code>Movies</code>, <code>Pictures</code>, etc.)</td></tr><tr><td style="text-align:left"><code>/private/tmp</code></td><td style="text-align:left">Agent-triggered temporary Xcode or test builds</td><td style="text-align:left">Temporary <code>DerivedData</code> or sandboxed test artifacts</td><td style="text-align:left">Reboot macOS or inspect <code>/private/tmp</code> when no builds are active</td><td style="text-align:left"><strong>Outside sandbox</strong> (CleanBit runs in App Sandbox without root and cannot access <code>/private/tmp</code>)</td></tr></tbody></table></div>
+<h2 id="3-how-to-safely-remove-leftover-git-worktrees-without-losing-work">3. How to safely remove leftover Git worktrees (without losing work)<a class="heading-anchor" href="#3-how-to-safely-remove-leftover-git-worktrees-without-losing-work" aria-label="Link to section">#</a></h2>
+<p>Never start with <code>rm -rf</code> on a worktree directory. Removing a worktree folder directly leaves stale metadata in <code>.git/worktrees/</code> and gives you zero warning if an agent left uncommitted edits behind.</p>
+<h3 id="step-1-check-for-uncommitted-changes-and-unmerged-commits">Step 1: Check for uncommitted changes and unmerged commits<a class="heading-anchor" href="#step-1-check-for-uncommitted-changes-and-unmerged-commits" aria-label="Link to section">#</a></h3>
+<p>For each worktree path printed by <code>git worktree list</code>, inspect its working tree before touching it:</p>
+<div class="code-block"><div class="code-head"><span class="code-lang">bash</span><button type="button" class="code-copy" data-copy>Copy</button></div><pre><code># Check uncommitted or untracked files inside a specific worktree
+git -C /path/to/worktree status --short
+
+# From your main repo, see which branches have NOT been merged into main
+git branch --no-merged main</code></pre></div>
+<p>If <code>git status --short</code> shows changes you want to keep, commit them or create a patch before removing the worktree.</p>
+<h3 id="step-2-remove-finished-worktrees-with-git-worktree-remove">Step 2: Remove finished worktrees with <code>git worktree remove</code><a class="heading-anchor" href="#step-2-remove-finished-worktrees-with-git-worktree-remove" aria-label="Link to section">#</a></h3>
+<p><code>git worktree remove</code> refuses to delete a worktree that has untracked or modified files unless you pass <code>--force</code>, making it much safer than <code>rm -rf</code>:</p>
+<div class="code-block"><div class="code-head"><span class="code-lang">bash</span><button type="button" class="code-copy" data-copy>Copy</button></div><pre><code># Run from your main repository directory
+git worktree remove /path/to/old-worktree</code></pre></div>
+<p>If Git refuses because the only leftover files are disposable build caches (such as <code>node_modules</code> or <code>target</code>) and you have already confirmed no source edits exist, remove the build folder first or pass <code>--force</code> only after verifying <code>git -C /path/to/old-worktree status</code>:</p>
+<div class="code-block"><div class="code-head"><span class="code-lang">bash</span><button type="button" class="code-copy" data-copy>Copy</button></div><pre><code># Only after confirming no wanted source changes remain
+git worktree remove --force /path/to/old-worktree</code></pre></div>
+<h3 id="step-3-clean-up-stale-git-metadata-with-git-worktree-prune">Step 3: Clean up stale Git metadata with <code>git worktree prune</code><a class="heading-anchor" href="#step-3-clean-up-stale-git-metadata-with-git-worktree-prune" aria-label="Link to section">#</a></h3>
+<p>If you (or a coding agent) already deleted a worktree folder manually in Finder or with <code>rm -rf</code>, Git keeps dead administrative entries under <code>.git/worktrees/</code>. Preview what Git would prune first with <code>--dry-run</code>:</p>
+<div class="code-block"><div class="code-head"><span class="code-lang">bash</span><button type="button" class="code-copy" data-copy>Copy</button></div><pre><code># Preview stale worktree references without changing anything
+git worktree prune --dry-run --verbose
+
+# Remove stale administrative entries
+git worktree prune</code></pre></div>
+<h3 id="step-4-delete-merged-temporary-branches-safely">Step 4: Delete merged temporary branches safely<a class="heading-anchor" href="#step-4-delete-merged-temporary-branches-safely" aria-label="Link to section">#</a></h3>
+<p>Use lowercase <code>-d</code> (never <code>-D</code> blindly)—Git will refuse to delete a branch if its commits are not yet merged:</p>
+<div class="code-block"><div class="code-head"><span class="code-lang">bash</span><button type="button" class="code-copy" data-copy>Copy</button></div><pre><code>git branch -d claude/old-feature-branch</code></pre></div>
+<h3 id="option-b-keep-the-worktree-delete-only-its-build-folder">Option B: Keep the worktree, delete only its build folder<a class="heading-anchor" href="#option-b-keep-the-worktree-delete-only-its-build-folder" aria-label="Link to section">#</a></h3>
+<p>If you want to keep a paused worktree branch around for reference but reclaim the gigabytes immediately, delete only the regenerable build directory inside it:</p>
+<div class="code-block"><div class="code-head"><span class="code-lang">bash</span><button type="button" class="code-copy" data-copy>Copy</button></div><pre><code># Example: clear Rust build output or Node dependencies inside a paused worktree
+rm -rf /path/to/paused-worktree/target
+# or
+rm -rf /path/to/paused-worktree/node_modules</code></pre></div>
+<p>If your JS/TS projects use <code>pnpm</code>, also run <code>pnpm store prune</code> afterward so unreferenced hard-linked packages are freed from <code>~/Library/pnpm</code>.</p>
+<aside class="callout callout-warning"><div class="callout-title">WARNING</div><p><strong>Avoid telling an AI coding agent to &quot;clean up my disk&quot; with shell access.</strong> Developers on <code>r/ClaudeCode</code> have reported agents misclassifying source directories as disposable build caches and wiping them with <code>rm -rf</code>. Keep disk cleanup read-only first, use <code>git worktree remove</code> for checkouts, and prefer moving build folders to the Trash so you can put them back if needed.</p></aside>
+<h2 id="4-how-to-prevent-worktree-disk-bloat-going-forward">4. How to prevent worktree disk bloat going forward<a class="heading-anchor" href="#4-how-to-prevent-worktree-disk-bloat-going-forward" aria-label="Link to section">#</a></h2>
+<ul><li><strong>Prune right after merging</strong>: Make <code>git worktree remove &lt;path&gt; &amp;&amp; git worktree prune</code> part of your PR-merge habit instead of letting 20 parallel checkouts accumulate for months.</li><li><strong>Share package stores where possible</strong>: <code>pnpm</code> hard-links packages from a single content-addressable store (<code>~/Library/pnpm</code>), dramatically reducing real disk consumption across multiple worktrees compared to standard <code>npm install</code> copies. (Note that <code>du</code> still counts each worktree&#39;s hard-linked <code>node_modules</code> unless deduplicated.)</li><li><strong>Share a Rust <code>CARGO_TARGET_DIR</code> (if appropriate)</strong>: For Rust repos using parallel worktrees, pointing non-overlapping builds at a shared target cache—or running <code>cargo clean</code> when finishing a task—avoids keeping ten separate 15 GB <code>target/</code> folders on disk.</li><li><strong>Watch the rest of your AI &amp; developer footprint</strong>: Worktrees are only one half of agent storage. See our related guides on <a href="/guides/claude-code-cursor-codex-disk-space-mac/">tracking down Claude Code, Cursor, and Codex sessions and model caches</a>, <a href="/guides/how-to-find-and-delete-old-node-modules-on-mac/">finding and deleting old <code>node_modules</code> folders on a Mac</a>, <a href="/guides/is-it-safe-to-delete-library-caches-mac/">whether <code>~/Library/Caches</code> is safe to delete</a>, and <a href="/guides/is-xcode-deriveddata-safe-to-delete/">cleaning Xcode <code>DerivedData</code></a>.</li></ul>
+<h2 id="5-inspect-worktree-build-artifacts-visually-with-cleanbit-and-honest-limits">5. Inspect worktree build artifacts visually with CleanBit (and honest limits)<a class="heading-anchor" href="#5-inspect-worktree-build-artifacts-visually-with-cleanbit-and-honest-limits" aria-label="Link to section">#</a></h2>
+<p>I&#39;m the developer of <strong>CleanBit</strong>, a sandboxed Mac App Store disk space cleaner for macOS 15+. If you want to reclaim gigabytes from duplicated <code>node_modules</code>, Rust <code>target/</code>, Swift <code>.build/</code>, and Python <code>.venv/</code> folders across your projects and worktrees without risking source code:</p>
+<ul><li><strong>Default worktree roots included</strong>: CleanBit&#39;s <strong>Build Artifacts</strong> module scans visible folders in your home directory plus <strong><code>~/.claude/worktrees</code></strong> and <strong><code>~/.codex/worktrees</code></strong> (up to 6 levels deep), matching 26 project artifact types only when their companion project marker file is present (<code>package.json</code>, <code>Cargo.toml</code>, <code>Package.swift</code>, <code>pyproject.toml</code>, <code>Podfile</code>, etc.).</li><li><strong>Native <code>.git</code> worktree parsing (<code>gitdir:</code>)</strong>: In a Git worktree, <code>.git</code> is a text file pointing to <code>gitdir: ...</code> rather than a folder. CleanBit reads that <code>gitdir:</code> pointer and parses Git index formats v2, v3, and v4 directly inside the App Sandbox—skipping any directory containing Git-tracked files, and blocking the item if an index cannot be parsed.</li><li><strong>Review-only and always moved to Trash</strong>: Build artifacts are sorted by size, show when each project was last modified, are never pre-selected, and are <strong>always moved to the Trash</strong>. CleanBit removes only the disposable build folders—never your source code or the worktree checkout itself.</li><li><strong>Honest boundaries</strong>:</li><li>CleanBit does <strong>not</strong> run <code>git worktree remove</code> or delete Git branches—use Section 3 above when you want to remove the worktree checkout itself.</li><li>Default search roots do <strong>not</strong> currently include <code>~/.cursor/worktrees</code>, and recursive scanning skips nested hidden folders starting with <code>.</code> (such as <code>&lt;repo&gt;/.claude/worktrees</code> or <code>&lt;repo&gt;/.cursor/worktrees</code>), so audit those with <code>git worktree list</code>.</li><li>Because CleanBit runs inside Apple&#39;s App Sandbox with no root access, temporary build copies inside <code>/private/tmp</code> remain outside its reach.</li></ul>
+<figure class="prose-figure"><img src="/assets/screens/en-artifacts.webp" alt="CleanBit Build Artifacts view showing project build folders, last modified dates, and Git-safe selection" loading="lazy" decoding="async" /><figcaption>CleanBit Build Artifacts inspects node_modules, target, and .build folders across projects and ~/.claude/worktrees, skipping Git-tracked directories and moving removed folders to the Trash.</figcaption></figure>
+<h2 id="frequently-asked-questions">Frequently Asked Questions<a class="heading-anchor" href="#frequently-asked-questions" aria-label="Link to section">#</a></h2>
+<h3 id="why-do-claude-code-worktrees-take-up-so-much-disk-space">Why do Claude Code worktrees take up so much disk space?<a class="heading-anchor" href="#why-do-claude-code-worktrees-take-up-so-much-disk-space" aria-label="Link to section">#</a></h3>
+<p>Git worktrees share your repository&#39;s <code>.git</code> object database, so source code and commit history take almost no extra space. The bloat comes from untracked dependencies and build caches—each parallel worktree installs its own <code>node_modules</code>, Rust <code>target/</code>, Swift <code>.build/</code>, or Python <code>.venv/</code>, multiplying disk usage by the number of active or forgotten worktrees.</p>
+<h3 id="is-git-worktree-remove-safer-than-rm-rf">Is <code>git worktree remove</code> safer than <code>rm -rf</code>?<a class="heading-anchor" href="#is-git-worktree-remove-safer-than-rm-rf" aria-label="Link to section">#</a></h3>
+<p>Yes. <code>git worktree remove &lt;path&gt;</code> refuses to delete a worktree if it has uncommitted changes or untracked files, and it cleans up the matching registration inside <code>.git/worktrees/</code>. Running <code>rm -rf</code> bypasses Git&#39;s safety checks and leaves stale worktree metadata behind until you run <code>git worktree prune</code>.</p>
+<h3 id="what-does-git-worktree-prune-actually-delete">What does <code>git worktree prune</code> actually delete?<a class="heading-anchor" href="#what-does-git-worktree-prune-actually-delete" aria-label="Link to section">#</a></h3>
+<p><code>git worktree prune</code> does <strong>not</strong> delete live working directories or source files. It only removes stale administrative metadata files inside <code>.git/worktrees/</code> that point to worktree folders which were already deleted or moved manually. You can preview its actions safely with <code>git worktree prune --dry-run --verbose</code>.</p>
+<h3 id="can-i-delete-nodemodules-or-target-inside-a-worktree-without-deleting-the-worktree">Can I delete <code>node_modules</code> or <code>target/</code> inside a worktree without deleting the worktree?<a class="heading-anchor" href="#can-i-delete-nodemodules-or-target-inside-a-worktree-without-deleting-the-worktree" aria-label="Link to section">#</a></h3>
+<p>Yes, as long as no dev server, watcher, or coding agent is currently running in that worktree. Removing only <code>node_modules</code>, <code>target/</code>, or <code>.build/</code> keeps your branch, uncommitted source files, and Git worktree intact—you just re-run <code>npm install</code> or <code>cargo build</code> if you return to that worktree later.</p>
+<h3 id="does-cleanbit-scan-claude-code-and-codex-worktrees">Does CleanBit scan Claude Code and Codex worktrees?<a class="heading-anchor" href="#does-cleanbit-scan-claude-code-and-codex-worktrees" aria-label="Link to section">#</a></h3>
+<p>CleanBit&#39;s <strong>Build Artifacts</strong> module scans <code>~/.claude/worktrees</code>, <code>~/.codex/worktrees</code>, and visible home folders for disposable build directories (<code>node_modules</code>, <code>target</code>, <code>.build</code>, <code>.venv</code>, etc.), parses <code>.git</code> <code>gitdir:</code> pointers to skip Git-tracked files, and moves selected build folders to the Trash. It does not remove Git worktree checkouts or branches themselves, and currently does not auto-scan <code>~/.cursor/worktrees</code> or hidden repo subfolders like <code>&lt;repo&gt;/.claude/worktrees</code>.</p>
+          </div>
+
+          <aside class="article-cta">
+            <div>
+              <h3>Prefer to inspect and clean visually?</h3>
+              <p>CleanBit is a sandboxed Mac App Store utility. Every item shows what it is and what happens if you remove it—scanning and your first 2 cleans are free.</p>
+            </div>
+            <a class="pill pill-primary" href="https://apps.apple.com/app/apple-store/id6829159531?pt=127116872&amp;ct=website-guides&amp;mt=8" target="_blank" rel="noopener noreferrer">Download on the Mac App Store</a>
+          </aside>
+
+          <p class="disclosure-note">Written by the CleanBit developer with AI assistance. All measurements were taken on a real developer Mac.</p>
+          <section style="margin-top:44px">
+        <h2 style="font-size:20px;margin:0 0 16px">Related guides</h2>
+        <div class="grid-2">
+          <a class="card guide-card" href="/guides/is-it-safe-to-delete-library-caches-mac/">
+                <div>
+                  <div class="guide-meta"><span>Mac Storage</span><span>·</span><span>9 min read</span></div>
+                  <h3 style="margin-top:6px;font-size:16px">Is It Safe to Delete ~/Library/Caches on a Mac? How to Clear Cache Safely</h3>
+                </div>
+                <span class="guide-more">Read guide →</span>
+              </a><a class="card guide-card" href="/guides/how-to-find-and-delete-old-node-modules-on-mac/">
+                <div>
+                  <div class="guide-meta"><span>Developer Storage</span><span>·</span><span>4 min read</span></div>
+                  <h3 style="margin-top:6px;font-size:16px">How to Find and Delete Old node_modules Folders on a Mac</h3>
+                </div>
+                <span class="guide-more">Read guide →</span>
+              </a><a class="card guide-card" href="/guides/claude-code-cursor-codex-disk-space-mac/">
+                <div>
+                  <div class="guide-meta"><span>AI &amp; Developer Storage</span><span>·</span><span>8 min read</span></div>
+                  <h3 style="margin-top:6px;font-size:16px">Claude Code, Cursor and Codex Eating Disk Space on Your Mac? Here&#39;s Where It Goes</h3>
+                </div>
+                <span class="guide-more">Read guide →</span>
+              </a>
+        </div>
+      </section>
+        </div>
+        <aside class="toc-aside" aria-label="Guide sidebar">
+      <nav class="toc-card" aria-label="Table of contents">
+        <div class="toc-title">On this page</div>
+        <ul class="toc-list">
+          <li class="toc-h2"><a href="#1-run-a-read-only-audit-of-your-worktrees-first">1. Run a read-only audit of your worktrees first</a></li><li class="toc-h3"><a href="#check-worktree-storage-across-common-coding-agent-locations">Check worktree storage across common coding-agent locations</a></li><li class="toc-h3"><a href="#list-every-git-worktree-registered-by-a-repository">List every Git worktree registered by a repository</a></li><li class="toc-h3"><a href="#find-the-biggest-nodemodules-target-and-build-folders-inside-worktrees">Find the biggest nodemodules, target, and .build folders inside worktrees</a></li><li class="toc-h2"><a href="#2-where-claude-code-codex-and-cursor-put-worktrees">2. Where Claude Code, Codex, and Cursor put worktrees</a></li><li class="toc-h2"><a href="#3-how-to-safely-remove-leftover-git-worktrees-without-losing-work">3. How to safely remove leftover Git worktrees (without losing work)</a></li><li class="toc-h3"><a href="#step-1-check-for-uncommitted-changes-and-unmerged-commits">Step 1: Check for uncommitted changes and unmerged commits</a></li><li class="toc-h3"><a href="#step-2-remove-finished-worktrees-with-git-worktree-remove">Step 2: Remove finished worktrees with git worktree remove</a></li><li class="toc-h3"><a href="#step-3-clean-up-stale-git-metadata-with-git-worktree-prune">Step 3: Clean up stale Git metadata with git worktree prune</a></li><li class="toc-h3"><a href="#step-4-delete-merged-temporary-branches-safely">Step 4: Delete merged temporary branches safely</a></li><li class="toc-h3"><a href="#option-b-keep-the-worktree-delete-only-its-build-folder">Option B: Keep the worktree, delete only its build folder</a></li><li class="toc-h2"><a href="#4-how-to-prevent-worktree-disk-bloat-going-forward">4. How to prevent worktree disk bloat going forward</a></li><li class="toc-h2"><a href="#5-inspect-worktree-build-artifacts-visually-with-cleanbit-and-honest-limits">5. Inspect worktree build artifacts visually with CleanBit (and honest limits)</a></li><li class="toc-h2"><a href="#frequently-asked-questions">Frequently Asked Questions</a></li><li class="toc-h3"><a href="#why-do-claude-code-worktrees-take-up-so-much-disk-space">Why do Claude Code worktrees take up so much disk space?</a></li><li class="toc-h3"><a href="#is-git-worktree-remove-safer-than-rm-rf">Is git worktree remove safer than rm -rf?</a></li><li class="toc-h3"><a href="#what-does-git-worktree-prune-actually-delete">What does git worktree prune actually delete?</a></li><li class="toc-h3"><a href="#can-i-delete-nodemodules-or-target-inside-a-worktree-without-deleting-the-worktree">Can I delete nodemodules or target/ inside a worktree without deleting the worktree?</a></li><li class="toc-h3"><a href="#does-cleanbit-scan-claude-code-and-codex-worktrees">Does CleanBit scan Claude Code and Codex worktrees?</a></li>
+        </ul>
+      </nav>
+      <div class="toc-cta">
+        <div class="toc-cta-head">
+          <img src="/assets/icon.png" alt="CleanBit icon" width="28" height="28" />
+          <div>
+            <div class="toc-cta-eyebrow">Mac App Store · Sandboxed</div>
+            <div class="toc-cta-title">CleanBit for macOS</div>
+          </div>
+        </div>
+        <p class="toc-cta-body">Know what you’re removing before you confirm. Free scan &amp; first 2 cleans free.</p>
+        <a class="pill pill-primary pill-sm toc-cta-btn" href="https://apps.apple.com/app/apple-store/id6829159531?pt=127116872&amp;ct=website-guides&amp;mt=8" target="_blank" rel="noopener noreferrer">Download on App Store</a>
+        <div class="toc-cta-meta">macOS 15+ · 9 languages · One-time option</div>
+      </div>
+    </aside>
+      </div>
+    </div>
+  </article>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div>
+        <strong style="color:var(--text)">CleanBit</strong> · macOS 15+ · 9 languages · Available exclusively on the Mac App Store.
+        <div style="margin-top:6px">© 2026 Dongguan Aibeike AI Co., Ltd.</div>
+      </div>
+      <div class="footer-links">
+        <a href="/guides/">Guides</a>
+        <a href="/support/">Support</a>
+        <a href="/privacy/">Privacy</a>
+        <a href="/terms/">Terms</a>
+        <a href="/feed.xml">RSS</a>
+        <a href="https://github.com/Ceelog/CleanBit-Mac-App" target="_blank" rel="noopener noreferrer">GitHub</a>
+        <a href="https://apps.apple.com/app/apple-store/id6829159531?pt=127116872&amp;ct=website-guides&amp;mt=8" target="_blank" rel="noopener noreferrer">Mac App Store</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+  (function(){
+    // Interactive module-tinted screenshot switcher
+    var frame = document.getElementById('showcase-frame');
+    var img = document.getElementById('showcase-img');
+    var cap = document.getElementById('showcase-caption');
+    document.querySelectorAll('[data-tab-btn]').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        document.querySelectorAll('[data-tab-btn]').forEach(function(b){ b.classList.remove('is-active'); b.setAttribute('aria-selected','false'); });
+        btn.classList.add('is-active');
+        btn.setAttribute('aria-selected','true');
+        if (img) { img.src = btn.dataset.src; img.alt = btn.dataset.alt; }
+        if (cap) cap.textContent = btn.dataset.caption;
+        if (frame) frame.setAttribute('data-tint', btn.dataset.tint);
+      });
+    });
+    // One-click code block copy
+    document.querySelectorAll('[data-copy]').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        var pre = btn.closest('.code-block').querySelector('pre code');
+        if (!pre || !navigator.clipboard) return;
+        navigator.clipboard.writeText(pre.textContent || '').then(function(){
+          var old = btn.textContent;
+          btn.textContent = 'Copied';
+          setTimeout(function(){ btn.textContent = old; }, 1600);
+        });
+      });
+    });
+  })();
+  </script>
+</body>
+</html>

@@ -7,25 +7,11 @@
     <description>Practical guides on freeing Mac disk space safely for developers and everyday users.</description>
     <language>en-us</language>
     <item>
-      <title>Is Xcode DerivedData Safe to Delete? What Happens and How to Clean It</title>
-      <link>https://getcleanbit.app/guides/is-xcode-deriveddata-safe-to-delete/</link>
-      <guid isPermaLink="true">https://getcleanbit.app/guides/is-xcode-deriveddata-safe-to-delete/</guid>
-      <pubDate>Sat, 21 Nov 2026 00:00:00 GMT</pubDate>
-      <description>Yes, Xcode DerivedData is safe to delete. Learn what lives inside DerivedData, what actually happens after removing it, and how to clean Xcode caches safely.</description>
-    </item>
-    <item>
       <title>Is It Safe to Delete ~/Library/Caches on a Mac? How to Clear Cache Safely</title>
       <link>https://getcleanbit.app/guides/is-it-safe-to-delete-library-caches-mac/</link>
       <guid isPermaLink="true">https://getcleanbit.app/guides/is-it-safe-to-delete-library-caches-mac/</guid>
       <pubDate>Mon, 23 Nov 2026 00:00:00 GMT</pubDate>
       <description>Yes—most files inside ~/Library/Caches are safe to clear on macOS, if you skip running apps and leave /Library/Caches alone. Includes commands and real Mac numbers.</description>
-    </item>
-    <item>
-      <title>iOS DeviceSupport and Simulators Taking 40 GB? What You Can Safely Remove</title>
-      <link>https://getcleanbit.app/guides/ios-devicesupport-and-simulators-disk-space-mac/</link>
-      <guid isPermaLink="true">https://getcleanbit.app/guides/ios-devicesupport-and-simulators-disk-space-mac/</guid>
-      <pubDate>Sun, 22 Nov 2026 00:00:00 GMT</pubDate>
-      <description>Reclaim tens of gigabytes from Xcode iOS DeviceSupport and CoreSimulator on macOS. Includes real Mac measurements, safe xcrun simctl commands, and cleanup limits.</description>
     </item>
     <item>
       <title>How to Find and Delete Old node_modules Folders on a Mac</title>
@@ -35,11 +21,32 @@
       <description>Measure how much space old node_modules folders take on macOS, remove them safely from Terminal, and avoid breaking active or pnpm projects.</description>
     </item>
     <item>
+      <title>Claude Code Worktrees Filling Your Disk? How to Find and Remove Leftover Git Worktrees</title>
+      <link>https://getcleanbit.app/guides/claude-code-worktrees-disk-space-mac/</link>
+      <guid isPermaLink="true">https://getcleanbit.app/guides/claude-code-worktrees-disk-space-mac/</guid>
+      <pubDate>Tue, 24 Nov 2026 00:00:00 GMT</pubDate>
+      <description>Parallel Claude Code and Codex git worktrees duplicate node_modules, Rust target, and Swift .build folders. Audit them read-only and clean up safely on macOS.</description>
+    </item>
+    <item>
       <title>Claude Code, Cursor and Codex Eating Disk Space on Your Mac? Here&#39;s Where It Goes</title>
       <link>https://getcleanbit.app/guides/claude-code-cursor-codex-disk-space-mac/</link>
       <guid isPermaLink="true">https://getcleanbit.app/guides/claude-code-cursor-codex-disk-space-mac/</guid>
       <pubDate>Sat, 21 Nov 2026 00:00:00 GMT</pubDate>
       <description>Find out why Claude Code, Cursor, and Codex consume gigabytes on macOS. Includes real developer Mac measurements, read-only audit commands, and safe cleanup steps.</description>
+    </item>
+    <item>
+      <title>Is Xcode DerivedData Safe to Delete? What Happens and How to Clean It</title>
+      <link>https://getcleanbit.app/guides/is-xcode-deriveddata-safe-to-delete/</link>
+      <guid isPermaLink="true">https://getcleanbit.app/guides/is-xcode-deriveddata-safe-to-delete/</guid>
+      <pubDate>Sat, 21 Nov 2026 00:00:00 GMT</pubDate>
+      <description>Yes, Xcode DerivedData is safe to delete. Learn what lives inside DerivedData, what actually happens after removing it, and how to clean Xcode caches safely.</description>
+    </item>
+    <item>
+      <title>iOS DeviceSupport and Simulators Taking 40 GB? What You Can Safely Remove</title>
+      <link>https://getcleanbit.app/guides/ios-devicesupport-and-simulators-disk-space-mac/</link>
+      <guid isPermaLink="true">https://getcleanbit.app/guides/ios-devicesupport-and-simulators-disk-space-mac/</guid>
+      <pubDate>Sun, 22 Nov 2026 00:00:00 GMT</pubDate>
+      <description>Reclaim tens of gigabytes from Xcode iOS DeviceSupport and CoreSimulator on macOS. Includes real Mac measurements, safe xcrun simctl commands, and cleanup limits.</description>
     </item>
   </channel>
 </rss>

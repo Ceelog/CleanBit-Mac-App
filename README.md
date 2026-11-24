@@ -23,11 +23,16 @@ CleanBit is a native SwiftUI disk space cleaner built for macOS 15+ and distribu
   - **AI Tools & Sessions:** Old Claude Code versions, Claude desktop caches, and date-filtered Claude Code / Codex sessions; local models (Hugging Face, Ollama, LM Studio) are listed as info-only
 - **Space Analysis, Large Files, Duplicates & App Uninstaller:** Visual folder map, Spotlight-assisted large file search, byte-identical duplicate finder (always keeping at least one copy), and clean app removal.
 - **Sandboxed & Honest:** Runs in macOS App Sandbox with no root privileges and no background helper daemon. File names, paths, and file contents never leave your Mac.
+- **9 Languages & Per-Group Cleaning (v1.0.1):** Supports English, Simplified Chinese, Traditional Chinese, Japanese, Korean, French, German, Spanish, and Russian (following macOS system language), plus per-group cleaning inside Smart Scan.
 
 ## Guides
 
 Practical Mac storage guides with manual Terminal and Finder steps:
 
+- [Claude Code Worktrees Filling Your Disk? How to Find and Remove Leftover Git Worktrees](https://getcleanbit.app/guides/claude-code-worktrees-disk-space-mac/)
+- [Is It Safe to Delete `~/Library/Caches` on a Mac? How to Clear Cache Safely](https://getcleanbit.app/guides/is-it-safe-to-delete-library-caches-mac/)
+- [iOS DeviceSupport and Simulators Taking 40 GB? What You Can Safely Remove](https://getcleanbit.app/guides/ios-devicesupport-and-simulators-disk-space-mac/)
+- [Claude Code, Cursor and Codex Eating Disk Space on Your Mac? Here's Where It Goes](https://getcleanbit.app/guides/claude-code-cursor-codex-disk-space-mac/)
 - [How to Find and Delete Old `node_modules` Folders on a Mac](https://getcleanbit.app/guides/how-to-find-and-delete-old-node-modules-on-mac/)
 - [Is Xcode DerivedData Safe to Delete? What Happens and How to Clean It](https://getcleanbit.app/guides/is-xcode-deriveddata-safe-to-delete/)
 - [Mac 上怎么找出并安全清理旧的 `node_modules`？](https://getcleanbit.app/zh/guides/mac-delete-node-modules/)

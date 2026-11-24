@@ -23,7 +23,7 @@
   <meta name="twitter:description" content="Honest, practical guides on Xcode caches, node_modules, AI coding tools, and macOS storage—with real measurements and manual commands." />
   <meta name="twitter:image" content="https://getcleanbit.app/assets/og-cover.png" />
   <meta name="theme-color" content="#111419" />
-  <link rel="stylesheet" href="/styles.css?v=cac88ab1" />
+  <link rel="stylesheet" href="/styles.css?v=bfa4b138" />
   
   <script async src="https://www.googletagmanager.com/gtm.js?id=GTM-TFR7TV8Z"></script>
   <script>
@@ -69,7 +69,59 @@
         <h1 style="margin:0 0 12px;font-size:clamp(28px,4vw,40px);letter-spacing:-0.025em">Mac Storage &amp; Developer Cleanup Guides</h1>
         <p>Honest, practical guides on Xcode caches, node_modules, AI coding tools, and macOS storage—with real measurements and manual commands.</p>
       </div>
-      <div class="grid-2"><a class="card guide-card" href="/guides/is-xcode-deriveddata-safe-to-delete/">
+      <div class="grid-2"><a class="card guide-card" href="/guides/is-it-safe-to-delete-library-caches-mac/">
+        <div>
+          <div class="guide-meta">
+            <span>Mac Storage</span>
+            <span>·</span>
+            <span>Updated 2026-11-24</span>
+            <span>·</span>
+            <span>9 min read</span>
+          </div>
+          <h3 style="margin-top:8px">Is It Safe to Delete ~/Library/Caches on a Mac? How to Clear Cache Safely</h3>
+          <p style="margin-top:8px">Yes—most files inside ~/Library/Caches are safe to clear on macOS, if you skip running apps and leave /Library/Caches alone. Includes commands and real Mac numbers.</p>
+        </div>
+        <span class="guide-more">Read guide →</span>
+      </a><a class="card guide-card" href="/guides/how-to-find-and-delete-old-node-modules-on-mac/">
+        <div>
+          <div class="guide-meta">
+            <span>Developer Storage</span>
+            <span>·</span>
+            <span>Updated 2026-11-24</span>
+            <span>·</span>
+            <span>4 min read</span>
+          </div>
+          <h3 style="margin-top:8px">How to Find and Delete Old node_modules Folders on a Mac</h3>
+          <p style="margin-top:8px">Measure how much space old node_modules folders take on macOS, remove them safely from Terminal, and avoid breaking active or pnpm projects.</p>
+        </div>
+        <span class="guide-more">Read guide →</span>
+      </a><a class="card guide-card" href="/guides/claude-code-worktrees-disk-space-mac/">
+        <div>
+          <div class="guide-meta">
+            <span>AI &amp; Developer Storage</span>
+            <span>·</span>
+            <span>Updated 2026-11-24</span>
+            <span>·</span>
+            <span>9 min read</span>
+          </div>
+          <h3 style="margin-top:8px">Claude Code Worktrees Filling Your Disk? How to Find and Remove Leftover Git Worktrees</h3>
+          <p style="margin-top:8px">Parallel Claude Code and Codex git worktrees duplicate node_modules, Rust target, and Swift .build folders. Audit them read-only and clean up safely on macOS.</p>
+        </div>
+        <span class="guide-more">Read guide →</span>
+      </a><a class="card guide-card" href="/guides/claude-code-cursor-codex-disk-space-mac/">
+        <div>
+          <div class="guide-meta">
+            <span>AI &amp; Developer Storage</span>
+            <span>·</span>
+            <span>Updated 2026-11-24</span>
+            <span>·</span>
+            <span>8 min read</span>
+          </div>
+          <h3 style="margin-top:8px">Claude Code, Cursor and Codex Eating Disk Space on Your Mac? Here&#39;s Where It Goes</h3>
+          <p style="margin-top:8px">Find out why Claude Code, Cursor, and Codex consume gigabytes on macOS. Includes real developer Mac measurements, read-only audit commands, and safe cleanup steps.</p>
+        </div>
+        <span class="guide-more">Read guide →</span>
+      </a><a class="card guide-card" href="/guides/is-xcode-deriveddata-safe-to-delete/">
         <div>
           <div class="guide-meta">
             <span>Developer Storage</span>
@@ -80,19 +132,6 @@
           </div>
           <h3 style="margin-top:8px">Is Xcode DerivedData Safe to Delete? What Happens and How to Clean It</h3>
           <p style="margin-top:8px">Yes, Xcode DerivedData is safe to delete. Learn what lives inside DerivedData, what actually happens after removing it, and how to clean Xcode caches safely.</p>
-        </div>
-        <span class="guide-more">Read guide →</span>
-      </a><a class="card guide-card" href="/guides/is-it-safe-to-delete-library-caches-mac/">
-        <div>
-          <div class="guide-meta">
-            <span>Mac Storage</span>
-            <span>·</span>
-            <span>Updated 2026-11-23</span>
-            <span>·</span>
-            <span>8 min read</span>
-          </div>
-          <h3 style="margin-top:8px">Is It Safe to Delete ~/Library/Caches on a Mac? How to Clear Cache Safely</h3>
-          <p style="margin-top:8px">Yes—most files inside ~/Library/Caches are safe to clear on macOS, if you skip running apps and leave /Library/Caches alone. Includes commands and real Mac numbers.</p>
         </div>
         <span class="guide-more">Read guide →</span>
       </a><a class="card guide-card" href="/guides/ios-devicesupport-and-simulators-disk-space-mac/">
@@ -108,32 +147,6 @@
           <p style="margin-top:8px">Reclaim tens of gigabytes from Xcode iOS DeviceSupport and CoreSimulator on macOS. Includes real Mac measurements, safe xcrun simctl commands, and cleanup limits.</p>
         </div>
         <span class="guide-more">Read guide →</span>
-      </a><a class="card guide-card" href="/guides/how-to-find-and-delete-old-node-modules-on-mac/">
-        <div>
-          <div class="guide-meta">
-            <span>Developer Storage</span>
-            <span>·</span>
-            <span>Updated 2026-11-23</span>
-            <span>·</span>
-            <span>4 min read</span>
-          </div>
-          <h3 style="margin-top:8px">How to Find and Delete Old node_modules Folders on a Mac</h3>
-          <p style="margin-top:8px">Measure how much space old node_modules folders take on macOS, remove them safely from Terminal, and avoid breaking active or pnpm projects.</p>
-        </div>
-        <span class="guide-more">Read guide →</span>
-      </a><a class="card guide-card" href="/guides/claude-code-cursor-codex-disk-space-mac/">
-        <div>
-          <div class="guide-meta">
-            <span>AI &amp; Developer Storage</span>
-            <span>·</span>
-            <span>Updated 2026-11-23</span>
-            <span>·</span>
-            <span>8 min read</span>
-          </div>
-          <h3 style="margin-top:8px">Claude Code, Cursor and Codex Eating Disk Space on Your Mac? Here&#39;s Where It Goes</h3>
-          <p style="margin-top:8px">Find out why Claude Code, Cursor, and Codex consume gigabytes on macOS. Includes real developer Mac measurements, read-only audit commands, and safe cleanup steps.</p>
-        </div>
-        <span class="guide-more">Read guide →</span>
       </a></div>
     </div>
   </section>
@@ -142,7 +155,7 @@
   <footer class="site-footer">
     <div class="container footer-inner">
       <div>
-        <strong style="color:var(--text)">CleanBit</strong> · macOS 15+ · Available exclusively on the Mac App Store.
+        <strong style="color:var(--text)">CleanBit</strong> · macOS 15+ · 9 languages · Available exclusively on the Mac App Store.
         <div style="margin-top:6px">© 2026 Dongguan Aibeike AI Co., Ltd.</div>
       </div>
       <div class="footer-links">

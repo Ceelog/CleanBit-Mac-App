@@ -4,7 +4,7 @@ description: Measure how much space old node_modules folders take on macOS, remo
 target_query: delete node_modules mac
 category: Developer Storage
 date: 2026-11-21
-updated: 2026-11-23
+updated: 2026-11-24
 alt_slug: mac-delete-node-modules
 image: /assets/screens/en-artifacts.webp
 ai_disclosure: Written by the CleanBit developer with AI assistance. All measurements were taken on a real developer Mac.
@@ -12,7 +12,7 @@ ai_disclosure: Written by the CleanBit developer with AI assistance. All measure
 
 **Yes—you can safely delete `node_modules` folders in inactive projects on macOS.** Every package inside `node_modules` can be reinstalled later with `npm install`, `yarn`, `pnpm install`, or `bun install` as long as your `package.json` and lockfile are intact.
 
-If you build side projects or use AI coding tools like Claude Code, Cursor, or Codex, `node_modules` folders pile up quickly across dozens of folders and `git worktree` checkouts you no longer open (for the full breakdown of agent sessions, worktrees, and model caches, see our [Claude Code, Cursor, and Codex disk space guide](/guides/claude-code-cursor-codex-disk-space-mac/)). On one developer Mac we measured (macOS home folder, excluding `~/Library`), there were **304 `node_modules` folders occupying 66.3 GB** in total—alongside 8 `.venv` folders (5.1 GB) and 7 `.build` folders (2.9 GB). Every machine varies widely, so start by measuring your own.
+If you build side projects or use AI coding tools like Claude Code, Cursor, or Codex, `node_modules` folders pile up quickly across dozens of folders and `git worktree` checkouts you no longer open (see our dedicated guides on [finding and removing leftover Claude Code git worktrees](/guides/claude-code-worktrees-disk-space-mac/) and [Claude Code, Cursor, and Codex disk space on macOS](/guides/claude-code-cursor-codex-disk-space-mac/)). On one developer Mac we measured (macOS home folder, excluding `~/Library`), there were **304 `node_modules` folders occupying 66.3 GB** in total—alongside 8 `.venv` folders (5.1 GB) and 7 `.build` folders (2.9 GB). Every machine varies widely, so start by measuring your own.
 
 ## 1. Measure how much space `node_modules` takes on your Mac
 
