@@ -8,6 +8,8 @@
   <link rel="canonical" href="https://getcleanbit.app/guides/how-to-find-and-delete-old-node-modules-on-mac/" />
   <link rel="alternate" hreflang="en" href="https://getcleanbit.app/guides/how-to-find-and-delete-old-node-modules-on-mac/" />
   <link rel="alternate" hreflang="zh-Hans" href="https://getcleanbit.app/zh/guides/mac-delete-node-modules/" />
+  <link rel="alternate" hreflang="ja" href="https://getcleanbit.app/ja/guides/" />
+  <link rel="alternate" hreflang="de" href="https://getcleanbit.app/de/guides/" />
   <link rel="alternate" hreflang="x-default" href="https://getcleanbit.app/guides/how-to-find-and-delete-old-node-modules-on-mac/" />
   <link rel="icon" type="image/png" href="/assets/favicon.png" />
   <link rel="apple-touch-icon" href="/assets/icon.png" />
@@ -23,17 +25,28 @@
   <meta name="twitter:description" content="Measure how much space old node_modules folders take on macOS, remove them safely from Terminal, and avoid breaking active or pnpm projects." />
   <meta name="twitter:image" content="https://getcleanbit.app/assets/screens/en-artifacts.webp" />
   <meta name="theme-color" content="#111419" />
-  <link rel="stylesheet" href="/styles.css?v=bfa4b138" />
+  <link rel="stylesheet" href="/styles.css?v=8ec2702e" />
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"How to Find and Delete Old node_modules Folders on a Mac","description":"Measure how much space old node_modules folders take on macOS, remove them safely from Terminal, and avoid breaking active or pnpm projects.","datePublished":"2026-11-21","dateModified":"2026-11-24","inLanguage":"en","author":{"@type":"Organization","name":"CleanBit Developer","url":"https://getcleanbit.app/"},"publisher":{"@type":"Organization","name":"CleanBit","logo":{"@type":"ImageObject","url":"https://getcleanbit.app/assets/icon.png"}},"mainEntityOfPage":"https://getcleanbit.app/guides/how-to-find-and-delete-old-node-modules-on-mac/","image":"https://getcleanbit.app/assets/screens/en-artifacts.webp"}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"CleanBit","item":"https://getcleanbit.app/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://getcleanbit.app/guides/"},{"@type":"ListItem","position":3,"name":"How to Find and Delete Old node_modules Folders on a Mac","item":"https://getcleanbit.app/guides/how-to-find-and-delete-old-node-modules-on-mac/"}]}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is it safe to delete node_modules on a Mac?","acceptedAnswer":{"@type":"Answer","text":"Yes, as long as the project is not currently running and its package.json (and lockfile) is intact. You will simply need to run npm install (or your package manager's install command) the next time you work on that project."}},{"@type":"Question","name":"Why didn't my free disk space increase immediately after deleting node_modules?","acceptedAnswer":{"@type":"Answer","text":"Two common reasons: if you moved folders to the Trash, space isn't reclaimed until you empty the Trash; and if the project used pnpm, packages are hard-linked to the shared store—run pnpm store prune to free unreferenced packages. macOS may also hold purgeable space or APFS local snapshots temporarily."}},{"@type":"Question","name":"Does deleting node_modules affect global npm packages or Node.js itself?","acceptedAnswer":{"@type":"Answer","text":"No. Project-level node_modules folders only contain dependencies for that specific project. Your Node.js installation, global CLI tools, and source code remain untouched."}}]}</script>
-  <script async src="https://www.googletagmanager.com/gtm.js?id=GTM-TFR7TV8Z"></script>
   <script>
+  (function(){
+    try {
+      var q = new URLSearchParams(location.search);
+      var f = q.get('analytics');
+      if (f === 'off') localStorage.setItem('cb_no_analytics', '1');
+      else if (f === 'on') localStorage.removeItem('cb_no_analytics');
+    } catch (e) {}
+    var off = navigator.doNotTrack === '1' || window.doNotTrack === '1';
+    try { if (localStorage.getItem('cb_no_analytics') === '1') off = true; } catch (e) {}
+    if (off) return;
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
+    window.gtag = gtag;
     gtag('js', new Date());
+    var s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtm.js?id=GTM-TFR7TV8Z';document.head.appendChild(s);
+  })();
   </script>
-  
 </head>
 <body>
   <header class="site-header">
@@ -43,15 +56,15 @@
         <span>CleanBit</span>
       </a>
       <nav class="nav" aria-label="Main navigation">
-        <a href="/#demo">Demo</a>
         <a href="/#features">Features</a>
         <a href="/#safety">Safety</a>
         <a href="/guides/" class="active">Guides</a>
+        <a href="/tools/disk-check/" class="">Disk Check</a>
         <a href="/#pricing">Pricing</a>
         <a href="/support/" class="">Support</a>
       </nav>
       <div class="header-actions">
-        <a class="lang-switch" href="/zh/guides/mac-delete-node-modules/" hreflang="zh-Hans">中文</a>
+        <div class="lang-strip" aria-label="Language switcher"><a href="/guides/how-to-find-and-delete-old-node-modules-on-mac/" hreflang="en" class="is-current" aria-current="page">EN</a><a href="/zh/guides/mac-delete-node-modules/" hreflang="zh-Hans">中文</a><a href="/ja/guides/" hreflang="ja">日本語</a><a href="/de/guides/" hreflang="de">DE</a></div>
         <a class="pill pill-primary pill-sm" href="https://apps.apple.com/app/apple-store/id6829159531?pt=127116872&amp;ct=website-guides&amp;mt=8" target="_blank" rel="noopener noreferrer">Mac App Store</a>
       </div>
     </div>
@@ -190,6 +203,7 @@ pnpm store prune</code></pre></div>
       </div>
       <div class="footer-links">
         <a href="/guides/">Guides</a>
+        <a href="/tools/disk-check/">Disk Check</a>
         <a href="/support/">Support</a>
         <a href="/privacy/">Privacy</a>
         <a href="/terms/">Terms</a>
@@ -202,7 +216,6 @@ pnpm store prune</code></pre></div>
 
   <script>
   (function(){
-    // Interactive module-tinted screenshot switcher
     var frame = document.getElementById('showcase-frame');
     var img = document.getElementById('showcase-img');
     var cap = document.getElementById('showcase-caption');
@@ -216,7 +229,6 @@ pnpm store prune</code></pre></div>
         if (frame) frame.setAttribute('data-tint', btn.dataset.tint);
       });
     });
-    // One-click code block copy
     document.querySelectorAll('[data-copy]').forEach(function(btn){
       btn.addEventListener('click', function(){
         var pre = btn.closest('.code-block').querySelector('pre code');
@@ -230,5 +242,6 @@ pnpm store prune</code></pre></div>
     });
   })();
   </script>
+  
 </body>
 </html>

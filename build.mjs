@@ -7,7 +7,7 @@ import path from 'node:path';
 import crypto from 'node:crypto';
 import { fileURLToPath } from 'node:url';
 import { parseFrontmatter, renderMarkdown, estimateReadingTime, extractFaqFromMarkdown, escapeHtml } from './src/markdown.mjs';
-import { renderHome, renderGuidesIndex, renderGuideDetail, renderDocPage, render404 } from './src/templates.mjs';
+import { LANG_META, renderHome, renderGuidesIndex, renderGuideDetail, renderDiskCheckTool, renderDocPage, render404 } from './src/templates.mjs';
 
 const ROOT = path.dirname(fileURLToPath(import.meta.url));
 const DIST = path.join(ROOT, 'docs');
@@ -57,8 +57,16 @@ function copyDir(src, dst) {
   }
 }
 
+const DEFAULT_CATEGORIES = {
+  en: 'Mac Storage',
+  zh: 'Mac 存储',
+  ja: 'Mac ストレージ',
+  de: 'Mac-Speicher'
+};
+
 function loadGuides(dir, lang) {
   if (!fs.existsSync(dir)) return [];
+  const metaCfg = LANG_META[lang] || LANG_META.en;
   const guides = [];
   for (const file of fs.readdirSync(dir).sort()) {
     if (!file.endsWith('.md') || file.toLowerCase() === 'readme.md') continue;
@@ -67,7 +75,7 @@ function loadGuides(dir, lang) {
     const { meta, body } = parseFrontmatter(raw);
     if (meta.draft === true) continue;
     const { html, toc } = renderMarkdown(body, (u) => ctx.relUrl(u));
-    const urlPath = lang === 'en' ? `/guides/${slug}/` : `/zh/guides/${slug}/`;
+    const urlPath = `${metaCfg.guides}${slug}/`;
     const altPath = meta.alt_slug
       ? (lang === 'en' ? `/zh/guides/${meta.alt_slug}/` : `/guides/${meta.alt_slug}/`)
       : (lang === 'en' ? '/zh/guides/' : '/guides/');
@@ -79,7 +87,7 @@ function loadGuides(dir, lang) {
       title: String(meta.title || slug),
       description: String(meta.description || ''),
       targetQuery: String(meta.target_query || ''),
-      category: String(meta.category || (lang === 'en' ? 'Mac Storage' : 'Mac 存储')),
+      category: String(meta.category || DEFAULT_CATEGORIES[lang] || 'Mac Storage'),
       date,
       updated,
       image: meta.image ? String(meta.image) : '',
@@ -95,13 +103,18 @@ function loadGuides(dir, lang) {
   return guides.sort((a, b) => (b.updated + b.slug).localeCompare(a.updated + a.slug));
 }
 
+const RSS_META = {
+  en: { title: 'CleanBit Mac Storage Guides', desc: 'Practical guides on freeing Mac disk space safely for developers and everyday users.' },
+  zh: { title: 'CleanBit Mac 存储清理指南', desc: '围绕 Mac 存储空间、Xcode、node_modules 与 AI 编程工具的实测清理指南。' },
+  ja: { title: 'CleanBit Mac ストレージガイド', desc: 'Xcode、node_modules、AI コーディングツールなど Mac のディスク容量整理ガイド。' },
+  de: { title: 'CleanBit Mac-Speicher-Guides', desc: 'Praxisnahe Anleitungen zum sicheren Freigeben von Mac-Speicherplatz für Entwickler.' }
+};
+
 function buildRss(lang, guides) {
-  const siteUrl = ctx.absUrl(lang === 'en' ? '/' : '/zh/');
-  const feedUrl = ctx.absUrl(lang === 'en' ? '/feed.xml' : '/zh/feed.xml');
-  const title = lang === 'en' ? 'CleanBit Mac Storage Guides' : 'CleanBit Mac 存储清理指南';
-  const desc = lang === 'en'
-    ? 'Practical guides on freeing Mac disk space safely for developers and everyday users.'
-    : '围绕 Mac 存储空间、Xcode、node_modules 与 AI 编程工具的实测清理指南。';
+  const m = LANG_META[lang] || LANG_META.en;
+  const r = RSS_META[lang] || RSS_META.en;
+  const siteUrl = ctx.absUrl(m.home);
+  const feedUrl = ctx.absUrl(m.feed);
 
   const items = guides
     .map(
@@ -118,11 +131,11 @@ function buildRss(lang, guides) {
   return `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>${escapeHtml(title)}</title>
+    <title>${escapeHtml(r.title)}</title>
     <link>${escapeHtml(siteUrl)}</link>
     <atom:link href="${escapeHtml(feedUrl)}" rel="self" type="application/rss+xml" />
-    <description>${escapeHtml(desc)}</description>
-    <language>${lang === 'en' ? 'en-us' : 'zh-cn'}</language>
+    <description>${escapeHtml(r.desc)}</description>
+    <language>${m.rssLang}</language>
 ${items}
   </channel>
 </rss>
@@ -145,13 +158,17 @@ ${urls}
 `;
 }
 
-function buildLlmsTxt(enGuides, zhGuides) {
+function buildLlmsTxt(guidesByLang) {
   const lines = [
     '# CleanBit: Disk Space Cleaner for macOS',
     '',
     '> Sandboxed Mac App Store disk cleaner for macOS 15+. Every item explains what it is and what happens if you remove it, and nothing is deleted until you confirm.',
     '',
-    `- Official Site: ${ctx.absUrl('/')}`,
+    `- Official Site (EN): ${ctx.absUrl('/')}`,
+    `- Official Site (ZH): ${ctx.absUrl('/zh/')}`,
+    `- Official Site (JA): ${ctx.absUrl('/ja/')}`,
+    `- Official Site (DE): ${ctx.absUrl('/de/')}`,
+    `- Interactive Read-Only Disk Audit Tool: ${ctx.absUrl('/tools/disk-check/')}`,
     `- Mac App Store: ${ctx.appStoreUrl('website')}`,
     ...(config.youtubeVideoId ? [`- Product Demo Video (YouTube): https://www.youtube.com/watch?v=${config.youtubeVideoId}`] : []),
     '- Requirements: macOS 15+, App Sandbox (no root, no background helper daemon)',
@@ -160,10 +177,12 @@ function buildLlmsTxt(enGuides, zhGuides) {
     '- Safety Model: Recommended caches rebuild automatically (deleted permanently by default, Trash optional); Review items, project build artifacts, manual selections, and uninstalled apps always move to Trash; Info Only items (local AI models, pnpm store, Docker disk image) are never deleted.',
     '',
     '## English Guides',
-    ...enGuides.map((g) => `- [${g.title}](${ctx.absUrl(g.urlPath)}): ${g.description}`),
+    ...guidesByLang.en.map((g) => `- [${g.title}](${ctx.absUrl(g.urlPath)}): ${g.description}`),
     '',
     '## Chinese Guides',
-    ...zhGuides.map((g) => `- [${g.title}](${ctx.absUrl(g.urlPath)}): ${g.description}`),
+    ...guidesByLang.zh.map((g) => `- [${g.title}](${ctx.absUrl(g.urlPath)}): ${g.description}`),
+    ...(guidesByLang.ja.length ? ['', '## Japanese Guides', ...guidesByLang.ja.map((g) => `- [${g.title}](${ctx.absUrl(g.urlPath)}): ${g.description}`)] : []),
+    ...(guidesByLang.de.length ? ['', '## German Guides', ...guidesByLang.de.map((g) => `- [${g.title}](${ctx.absUrl(g.urlPath)}): ${g.description}`)] : []),
     '',
     '## Documentation & Legal',
     `- [Support](${ctx.absUrl('/support/')})`,
@@ -189,33 +208,45 @@ for (const entry of fs.readdirSync(ROOT)) {
 }
 writePage('.nojekyll', '');
 
-// Load guides
-const enGuides = loadGuides(path.join(ROOT, 'content/guides'), 'en');
-const zhGuides = loadGuides(path.join(ROOT, 'content/zh/guides'), 'zh');
+// Load guides per language
+const guidesByLang = {
+  en: loadGuides(path.join(ROOT, 'content/guides'), 'en'),
+  zh: loadGuides(path.join(ROOT, 'content/zh/guides'), 'zh'),
+  ja: loadGuides(path.join(ROOT, 'content/ja/guides'), 'ja'),
+  de: loadGuides(path.join(ROOT, 'content/de/guides'), 'de')
+};
 
 const today = new Date().toISOString().slice(0, 10);
 const sitemapEntries = [];
 
-// Homepages
-writePage('index.html', renderHome('en', enGuides, ctx));
-sitemapEntries.push({ path: '/', lastmod: today });
-writePage('zh/index.html', renderHome('zh', zhGuides, ctx));
-sitemapEntries.push({ path: '/zh/', lastmod: today });
+// Homepages, guides & RSS for each language
+const langSpecs = [
+  { lang: 'en', homeFile: 'index.html', guidesDir: 'guides', feedFile: 'feed.xml' },
+  { lang: 'zh', homeFile: 'zh/index.html', guidesDir: 'zh/guides', feedFile: 'zh/feed.xml' },
+  { lang: 'ja', homeFile: 'ja/index.html', guidesDir: 'ja/guides', feedFile: 'ja/feed.xml' },
+  { lang: 'de', homeFile: 'de/index.html', guidesDir: 'de/guides', feedFile: 'de/feed.xml' }
+];
 
-// Guides index & details
-writePage('guides/index.html', renderGuidesIndex('en', enGuides, ctx));
-sitemapEntries.push({ path: '/guides/', lastmod: enGuides[0]?.updated || today });
-for (const g of enGuides) {
-  writePage(`guides/${g.slug}/index.html`, renderGuideDetail(g, enGuides, ctx));
-  sitemapEntries.push({ path: g.urlPath, lastmod: g.updated });
+for (const spec of langSpecs) {
+  const list = guidesByLang[spec.lang];
+  const m = LANG_META[spec.lang];
+  writePage(spec.homeFile, renderHome(spec.lang, list, ctx));
+  sitemapEntries.push({ path: m.home, lastmod: today });
+
+  writePage(`${spec.guidesDir}/index.html`, renderGuidesIndex(spec.lang, list, ctx));
+  if (list.length || spec.lang === 'en' || spec.lang === 'zh') {
+    sitemapEntries.push({ path: m.guides, lastmod: list[0]?.updated || today });
+  }
+  for (const g of list) {
+    writePage(`${spec.guidesDir}/${g.slug}/index.html`, renderGuideDetail(g, list, ctx));
+    sitemapEntries.push({ path: g.urlPath, lastmod: g.updated });
+  }
+  writePage(spec.feedFile, buildRss(spec.lang, list));
 }
 
-writePage('zh/guides/index.html', renderGuidesIndex('zh', zhGuides, ctx));
-sitemapEntries.push({ path: '/zh/guides/', lastmod: zhGuides[0]?.updated || today });
-for (const g of zhGuides) {
-  writePage(`zh/guides/${g.slug}/index.html`, renderGuideDetail(g, zhGuides, ctx));
-  sitemapEntries.push({ path: g.urlPath, lastmod: g.updated });
-}
+// Interactive Read-Only Disk Check Tool
+writePage('tools/disk-check/index.html', renderDiskCheckTool(ctx));
+sitemapEntries.push({ path: '/tools/disk-check/', lastmod: today });
 
 // Legal & Support pages
 const docPages = [
@@ -235,26 +266,24 @@ for (const dp of docPages) {
   sitemapEntries.push({ path: urlPath, lastmod: today });
 }
 
-// 404, RSS, sitemap, robots, llms.txt
+// 404, sitemap, robots, llms.txt
 writePage('404.html', render404(ctx));
-writePage('feed.xml', buildRss('en', enGuides));
-writePage('zh/feed.xml', buildRss('zh', zhGuides));
 writePage('sitemap.xml', buildSitemap(sitemapEntries));
 writePage('robots.txt', `User-agent: *\nAllow: /\n\nSitemap: ${ctx.absUrl('/sitemap.xml')}\n`);
-writePage('llms.txt', buildLlmsTxt(enGuides, zhGuides));
+writePage('llms.txt', buildLlmsTxt(guidesByLang));
 if (config.indexNowKey) {
   writePage(`${config.indexNowKey}.txt`, `${config.indexNowKey}\n`);
 }
 
 // Validation summary
 const warnings = [];
-for (const g of [...enGuides, ...zhGuides]) {
+for (const g of [...guidesByLang.en, ...guidesByLang.zh, ...guidesByLang.ja, ...guidesByLang.de]) {
   if (!g.description) warnings.push(`Missing description: ${g.slug}`);
   if (g.description.length > 170) warnings.push(`Long description (${g.description.length} chars): ${g.slug}`);
 }
 console.log(`Built CleanBit site -> ${DIST}`);
-console.log(`  Pages: ${sitemapEntries.length} (${enGuides.length} EN guides, ${zhGuides.length} ZH guides, ${docPages.length} docs)`);
-console.log(`  Feeds: sitemap.xml, robots.txt, feed.xml, zh/feed.xml, llms.txt`);
+console.log(`  Pages: ${sitemapEntries.length} (${guidesByLang.en.length} EN, ${guidesByLang.zh.length} ZH, ${guidesByLang.ja.length} JA, ${guidesByLang.de.length} DE guides; 1 interactive tool; ${docPages.length} docs)`);
+console.log(`  Feeds: sitemap.xml, robots.txt, feed.xml, zh/feed.xml, ja/feed.xml, de/feed.xml, llms.txt`);
 if (warnings.length) {
   console.log('  Warnings:');
   for (const w of warnings) console.log('   -', w);

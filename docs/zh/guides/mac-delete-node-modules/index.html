@@ -8,6 +8,8 @@
   <link rel="canonical" href="https://getcleanbit.app/zh/guides/mac-delete-node-modules/" />
   <link rel="alternate" hreflang="en" href="https://getcleanbit.app/guides/how-to-find-and-delete-old-node-modules-on-mac/" />
   <link rel="alternate" hreflang="zh-Hans" href="https://getcleanbit.app/zh/guides/mac-delete-node-modules/" />
+  <link rel="alternate" hreflang="ja" href="https://getcleanbit.app/ja/guides/" />
+  <link rel="alternate" hreflang="de" href="https://getcleanbit.app/de/guides/" />
   <link rel="alternate" hreflang="x-default" href="https://getcleanbit.app/guides/how-to-find-and-delete-old-node-modules-on-mac/" />
   <link rel="icon" type="image/png" href="/assets/favicon.png" />
   <link rel="apple-touch-icon" href="/assets/icon.png" />
@@ -23,17 +25,28 @@
   <meta name="twitter:description" content="实测一台开发用 Mac 上 304 个 node_modules 占去 66.3 GB。手把手教你用终端安全排查、识别 pnpm 硬链接陷阱，以及何时不该直接删。" />
   <meta name="twitter:image" content="https://getcleanbit.app/assets/screens/zh-artifacts.webp" />
   <meta name="theme-color" content="#111419" />
-  <link rel="stylesheet" href="/styles.css?v=bfa4b138" />
+  <link rel="stylesheet" href="/styles.css?v=8ec2702e" />
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Mac 上怎么找出并安全清理旧的 node_modules？（实测 304 个占 66.3 GB）","description":"实测一台开发用 Mac 上 304 个 node_modules 占去 66.3 GB。手把手教你用终端安全排查、识别 pnpm 硬链接陷阱，以及何时不该直接删。","datePublished":"2026-11-21","dateModified":"2026-11-21","inLanguage":"zh-Hans","author":{"@type":"Organization","name":"CleanBit 开发者","url":"https://getcleanbit.app/"},"publisher":{"@type":"Organization","name":"CleanBit","logo":{"@type":"ImageObject","url":"https://getcleanbit.app/assets/icon.png"}},"mainEntityOfPage":"https://getcleanbit.app/zh/guides/mac-delete-node-modules/","image":"https://getcleanbit.app/assets/screens/zh-artifacts.webp"}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"CleanBit","item":"https://getcleanbit.app/zh/"},{"@type":"ListItem","position":2,"name":"指南","item":"https://getcleanbit.app/zh/guides/"},{"@type":"ListItem","position":3,"name":"Mac 上怎么找出并安全清理旧的 node_modules？（实测 304 个占 66.3 GB）","item":"https://getcleanbit.app/zh/guides/mac-delete-node-modules/"}]}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"删掉 node_modules 会影响全局 npm 包或 Node.js 环境吗？","acceptedAnswer":{"@type":"Answer","text":"不会。项目目录下的 node_modules 只属于当前项目，不影响全局安装的 CLI 工具或源代码。"}},{"@type":"Question","name":"为什么删完之后，访达里看到的可用空间没有立刻变多？","acceptedAnswer":{"@type":"Answer","text":"常见原因有两个：如果是移到废纸篓，需要清空废纸篓才会释放；如果是 pnpm 项目，因为存在硬链接，需要再执行 pnpm store prune。此外 macOS 的本地时间机器快照（APFS 快照）也可能导致系统延迟更新可用空间。"}}]}</script>
-  <script async src="https://www.googletagmanager.com/gtm.js?id=GTM-TFR7TV8Z"></script>
   <script>
+  (function(){
+    try {
+      var q = new URLSearchParams(location.search);
+      var f = q.get('analytics');
+      if (f === 'off') localStorage.setItem('cb_no_analytics', '1');
+      else if (f === 'on') localStorage.removeItem('cb_no_analytics');
+    } catch (e) {}
+    var off = navigator.doNotTrack === '1' || window.doNotTrack === '1';
+    try { if (localStorage.getItem('cb_no_analytics') === '1') off = true; } catch (e) {}
+    if (off) return;
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
+    window.gtag = gtag;
     gtag('js', new Date());
+    var s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtm.js?id=GTM-TFR7TV8Z';document.head.appendChild(s);
+  })();
   </script>
-  
 </head>
 <body>
   <header class="site-header">
@@ -43,15 +56,15 @@
         <span>CleanBit</span>
       </a>
       <nav class="nav" aria-label="Main navigation">
-        <a href="/zh/#demo">视频演示</a>
         <a href="/zh/#features">功能</a>
         <a href="/zh/#safety">安全设计</a>
         <a href="/zh/guides/" class="active">指南</a>
+        <a href="/tools/disk-check/" class="">排查命令</a>
         <a href="/zh/#pricing">定价</a>
         <a href="/support/" class="">支持</a>
       </nav>
       <div class="header-actions">
-        <a class="lang-switch" href="/guides/how-to-find-and-delete-old-node-modules-on-mac/" hreflang="en">English</a>
+        <div class="lang-strip" aria-label="Language switcher"><a href="/guides/how-to-find-and-delete-old-node-modules-on-mac/" hreflang="en">EN</a><a href="/zh/guides/mac-delete-node-modules/" hreflang="zh-Hans" class="is-current" aria-current="page">中文</a><a href="/ja/guides/" hreflang="ja">日本語</a><a href="/de/guides/" hreflang="de">DE</a></div>
         <a class="pill pill-primary pill-sm" href="https://apps.apple.com/app/apple-store/id6829159531?pt=127116872&amp;ct=website-guides&amp;mt=8" target="_blank" rel="noopener noreferrer">Mac App Store</a>
       </div>
     </div>
@@ -159,6 +172,7 @@ pnpm store prune</code></pre></div>
       </div>
       <div class="footer-links">
         <a href="/zh/guides/">指南</a>
+        <a href="/tools/disk-check/">排查命令</a>
         <a href="/support/">支持</a>
         <a href="/privacy/">Privacy</a>
         <a href="/terms/">Terms</a>
@@ -171,7 +185,6 @@ pnpm store prune</code></pre></div>
 
   <script>
   (function(){
-    // Interactive module-tinted screenshot switcher
     var frame = document.getElementById('showcase-frame');
     var img = document.getElementById('showcase-img');
     var cap = document.getElementById('showcase-caption');
@@ -185,7 +198,6 @@ pnpm store prune</code></pre></div>
         if (frame) frame.setAttribute('data-tint', btn.dataset.tint);
       });
     });
-    // One-click code block copy
     document.querySelectorAll('[data-copy]').forEach(function(btn){
       btn.addEventListener('click', function(){
         var pre = btn.closest('.code-block').querySelector('pre code');
@@ -199,5 +211,6 @@ pnpm store prune</code></pre></div>
     });
   })();
   </script>
+  
 </body>
 </html>

@@ -1,11 +1,20 @@
 import { escapeHtml } from './markdown.mjs';
 
+export const LANG_META = {
+  en: { code: 'en', langAttr: 'en', hreflang: 'en', shortLabel: 'EN', home: '/', guides: '/guides/', feed: '/feed.xml', rssLang: 'en-us', screenPrefix: 'en' },
+  zh: { code: 'zh', langAttr: 'zh-Hans', hreflang: 'zh-Hans', shortLabel: '中文', home: '/zh/', guides: '/zh/guides/', feed: '/zh/feed.xml', rssLang: 'zh-cn', screenPrefix: 'zh' },
+  ja: { code: 'ja', langAttr: 'ja', hreflang: 'ja', shortLabel: '日本語', home: '/ja/', guides: '/ja/guides/', feed: '/ja/feed.xml', rssLang: 'ja', screenPrefix: 'en' },
+  de: { code: 'de', langAttr: 'de', hreflang: 'de', shortLabel: 'DE', home: '/de/', guides: '/de/guides/', feed: '/de/feed.xml', rssLang: 'de', screenPrefix: 'en' }
+};
+
+export const LANG_ORDER = ['en', 'zh', 'ja', 'de'];
+
 const COPY = {
   en: {
     langAttr: 'en',
     localeName: 'English',
-    switchLabel: '中文',
-    nav: { demo: 'Demo', features: 'Features', safety: 'Safety', guides: 'Guides', pricing: 'Pricing', support: 'Support' },
+    homeTitle: 'CleanBit — Sandboxed Mac App Store Disk Space Cleaner',
+    nav: { demo: 'Demo', features: 'Features', safety: 'Safety', guides: 'Guides', tool: 'Disk Check', pricing: 'Pricing', support: 'Support' },
     ctaShort: 'Mac App Store',
     ctaMain: 'Download on the Mac App Store',
     ctaGuides: 'Read Storage Guides',
@@ -13,9 +22,7 @@ const COPY = {
     demoEyebrow: 'Video Walkthrough',
     demoTitle: 'See CleanBit in action on macOS',
     demoSub: 'A quick real-screen walkthrough of Smart Scan, Build Artifacts, Space Analysis, and the Trash vs. permanent deletion confirmation dialog.',
-    demoPlay: 'Play Product Demo',
     demoOpenYt: 'Watch on YouTube ↗',
-    demoPrivacy: 'Privacy-enhanced embed (youtube-nocookie.com) loads only when you click play.',
     heroBadge: 'macOS 15+ · Mac App Store · App Sandbox · 9 Languages',
     heroTitleA: 'Free up Mac disk space.',
     heroTitleB: 'Know what you’re removing.',
@@ -129,6 +136,7 @@ const COPY = {
     ],
     guidesIndexTitle: 'Mac Storage & Developer Cleanup Guides',
     guidesIndexSub: 'Honest, practical guides on Xcode caches, node_modules, AI coding tools, and macOS storage—with real measurements and manual commands.',
+    guidesEmpty: 'More guides in this language are on the way. In the meantime, browse our English guides or try the read-only Disk Check command generator.',
     articleCtaTitle: 'Prefer to inspect and clean visually?',
     articleCtaSub: 'CleanBit is a sandboxed Mac App Store utility. Every item shows what it is and what happens if you remove it—scanning and your first 2 cleans are free.',
     tocCtaEyebrow: 'Mac App Store · Sandboxed',
@@ -140,13 +148,14 @@ const COPY = {
     relatedTitle: 'Related guides',
     updatedLabel: 'Updated',
     minRead: 'min read',
+    disclosureDefault: 'Written by the CleanBit developer with AI assistance. All measurements were taken on a real developer Mac.',
     footerNote: 'macOS 15+ · 9 languages · Available exclusively on the Mac App Store.'
   },
   zh: {
     langAttr: 'zh-Hans',
     localeName: '简体中文',
-    switchLabel: 'English',
-    nav: { demo: '视频演示', features: '功能', safety: '安全设计', guides: '指南', pricing: '定价', support: '支持' },
+    homeTitle: 'CleanBit — Mac App Store 沙盒磁盘清理工具，看得见删什么',
+    nav: { demo: '视频演示', features: '功能', safety: '安全设计', guides: '指南', tool: '排查命令', pricing: '定价', support: '支持' },
     ctaShort: 'Mac App Store',
     ctaMain: '前往 Mac App Store 下载',
     ctaGuides: '阅读 Mac 空间清理指南',
@@ -154,9 +163,7 @@ const COPY = {
     demoEyebrow: '产品演示',
     demoTitle: '实机录屏：看清 CleanBit 怎么扫描与确认清理',
     demoSub: '完整演示智能扫描、项目产物、空间分析以及清理前的「废纸篓 / 永久删除」分栏确认流程。',
-    demoPlay: '播放产品演示视频',
     demoOpenYt: '在 YouTube 打开 ↗',
-    demoPrivacy: '点击播放后才加载无跟踪嵌入式播放器（youtube-nocookie.com）。',
     heroBadge: 'macOS 15+ · Mac App Store · App 沙盒 · 支持 9 种语言',
     heroTitleA: '释放 Mac 磁盘空间，',
     heroTitleB: '删之前清楚知道删的是什么。',
@@ -270,6 +277,7 @@ const COPY = {
     ],
     guidesIndexTitle: 'Mac 磁盘空间与开发者清理指南',
     guidesIndexSub: '围绕 Xcode 缓存、node_modules、AI 编程工具与 macOS 存储占用的实测指南，提供完整手动命令。',
+    guidesEmpty: '更多中文指南正在整理中，也可以直接查看英文指南或使用只读终端排查命令生成器。',
     articleCtaTitle: '想可视化查看每一项、确认后再安全清理？',
     articleCtaSub: 'CleanBit 是 Mac App Store 里的沙盒磁盘清理工具：每一项都写明是什么和删除影响，扫描和前 2 次清理免费。',
     tocCtaEyebrow: 'Mac App Store · App 沙盒',
@@ -281,39 +289,373 @@ const COPY = {
     relatedTitle: '相关指南',
     updatedLabel: '更新于',
     minRead: '分钟阅读',
+    disclosureDefault: '本文由 CleanBit 开发者借助 AI 整理，数据为作者在一台开发用 Mac 上实测。',
     footerNote: 'macOS 15+ · 支持 9 种语言 · 仅在 Mac App Store 上架。'
+  },
+  ja: {
+    langAttr: 'ja',
+    localeName: '日本語',
+    homeTitle: 'CleanBit — App Sandbox 対応の Mac ディスク容量クリーナー（Mac App Store）',
+    nav: { demo: 'デモ', features: '機能', safety: '安全性', guides: 'ガイド', tool: '容量チェック', pricing: '料金', support: 'サポート' },
+    ctaShort: 'Mac App Store',
+    ctaMain: 'Mac App Store でダウンロード',
+    ctaGuides: 'Mac ストレージガイドを読む',
+    ctaWatch: 'デモを見る',
+    demoEyebrow: '動画デモ',
+    demoTitle: 'macOS 上でのスキャンと削除確認の流れ',
+    demoSub: 'スマートスキャン、ビルド成果物、容量分析、そして「ゴミ箱へ移動 / 完全に削除」の確認画面を実機画面で紹介しています。',
+    demoOpenYt: 'YouTube で見る ↗',
+    heroBadge: 'macOS 15+ · Mac App Store · App Sandbox · 9 言語対応',
+    heroTitleA: 'Mac の空き容量を、',
+    heroTitleB: '消す前に中身と影響を確認して整理。',
+    heroSub: 'CleanBit はホームフォルダ内のキャッシュ、ログ、開発ビルド成果物、アプリの残留ファイルを見つけます。各項目に「何か」「削除するとどうなるか」を明記し、確認するまで何も削除しません。',
+    heroTrust: 'root 権限不要 · 常駐バックグラウンドヘルパーなし · スキャン無料・初回 2 回無料 · 買い切り対応',
+    tabs: [
+      { id: 'smart-scan', label: 'スマートスキャン', tint: 'brand', caption: '「推奨」「要確認」「表示のみ」の 3 段階で分類。グループ単位のクリーンに対応し、起動中アプリのキャッシュは自動で保護します。' },
+      { id: 'confirm', label: '削除前の確認', tint: 'coral', caption: '実行前に「ゴミ箱へ移動」と「完全に削除」を明確に分けて表示し、削除直前に各項目を再検証します。' },
+      { id: 'artifacts', label: 'ビルド成果物', tint: 'amber', caption: 'node_modules・target・.build・.venv を最終更新日つきで一覧表示。Git 追跡中のファイルは自動でスキップします。' },
+      { id: 'space', label: '容量分析', tint: 'ocean', caption: 'ホームフォルダや許可したフォルダを階層ごとに掘り下げ、どこが容量を圧迫しているか可視化します。' },
+      { id: 'uninstall', label: 'アプリ削除', tint: 'sky', caption: 'アプリ本体とキャッシュ・設定・ログをまとめて整理。ユーザーデータを含む領域は別枠で表示し、初期選択しません。' }
+    ],
+    safetyEyebrow: '安全設計',
+    safetyTitle: '中身の見えない「ワンクリック一括削除」はしません。',
+    safetySub: '合計サイズとボタン 1 つだけを見せるクリーナーとは違い、CleanBit はリスク別に 3 段階へ整理して判断を委ねます。',
+    tiers: [
+      {
+        badge: '推奨',
+        badgeClass: 'level-safe',
+        title: '自動で再生成されるキャッシュ',
+        desc: 'アプリキャッシュ、ブラウザキャッシュ（Cookie・履歴・パスワードには触れません）、Xcode DerivedData、パッケージマネージャキャッシュ。初期設定では即時削除（設定でゴミ箱移動に変更可能）です。'
+      },
+      {
+        badge: '要確認',
+        badgeClass: 'level-review',
+        title: '初期状態では未選択。常にゴミ箱へ移動',
+        desc: 'プロジェクトのビルドフォルダ（node_modules、target、.venv）、古いインストーラ（.dmg / .pkg）、アンインストール済みアプリの残り、AI セッション履歴など。必ずゴミ箱へ移動するため戻せます。'
+      },
+      {
+        badge: '表示のみ',
+        badgeClass: 'level-info',
+        title: '容量の把握のみ。アプリからは削除不可',
+        desc: 'ローカル AI モデル（Hugging Face、Ollama、LM Studio）、ハードリンク構造の pnpm store、Docker Desktop 仮想ディスクなど。使用量を示し、公式コマンドを案内します。'
+      }
+    ],
+    boundaryTitle: 'App Sandbox の境界を正直に公開しています',
+    boundarySub: 'CleanBit は macOS App Sandbox 内で動作し、root 権限も常駐デーモンも要求しません。macOS が保護する領域には手を出さず、できる範囲を明確にしています。',
+    boundaryItems: [
+      'APFS ローカルスナップショットやシステムキャッシュは対象外',
+      'iCloud Drive 上のファイルは触りません（Finder 側で安全に管理）',
+      'メモリ解放・Mac 高速化・ウイルス対策といった誇張表現はしません',
+      'バックグラウンドでの自動サイレント削除は一切なし',
+      'ファイル名・パス・中身が Mac の外へ送信されることはありません'
+    ],
+    devEyebrow: '開発者・AI コーディング環境向け',
+    devTitle: 'Xcode、パッケージマネージャ、AI ツールが溜め込む数十 GB を可視化。',
+    devSub: 'Swift 開発でも Claude Code / Codex を使った試作でも、開発用キャッシュとビルド成果物は数週間で数十 GB に膨らみます。',
+    devCards: [
+      {
+        tile: 'tile-amber', icon: '{}', title: 'プロジェクトのビルド成果物',
+        desc: 'node_modules、target、.build、.venv、Pods などを横断検出し、各プロジェクトの最終更新日を表示。Git 追跡対象はスキップし、削除時はゴミ箱へ移動します。'
+      },
+      {
+        tile: 'tile-brand', icon: '⌘', title: 'Xcode と 12 種以上のパッケージキャッシュ',
+        desc: 'Xcode DerivedData、古い iOS DeviceSupport、SwiftUI プレビュー、停止済みシミュレータ、さらに npm・Yarn・pnpm・Bun・pip・uv・SwiftPM・CocoaPods・Homebrew・Go・Cargo・Gradle に対応。'
+      },
+      {
+        tile: 'tile-violet', icon: 'AI', title: 'AI ツールと古いセッション履歴',
+        desc: 'Claude Code の旧バージョンや Claude デスクトップキャッシュを整理し、Claude Code / Codex の古いセッションを期間別に見直せます。Ollama / LM Studio / Hugging Face モデルは表示のみです。'
+      },
+      {
+        tile: 'tile-ocean', icon: '◫', title: '容量マップ・大きなファイル・重複検出',
+        desc: '階層ドリルダウン型の容量分析、サイズと最終開封日で絞れる大きなファイル一覧、バイト完全一致の重複検出（各グループ最低 1 つを保持）、アプリ関連ファイル整理まで 1 つに集約。'
+      }
+    ],
+    pricingEyebrow: 'わかりやすい料金',
+    pricingTitle: 'スキャン無料。買い切りプランも用意。',
+    pricingSub: '購入と復元はすべて Mac App Store 経由で完結。アカウント登録は不要です（日本円など各国の実価格は App Store 表示に準拠）。',
+    plans: [
+      {
+        name: '無料でお試し', price: '$0', unit: 'スキャン無制限', featured: false,
+        items: ['スキャンと容量分析は無制限', '最初の 2 回のクリーンが無料', '購入前に全項目と影響を確認可能', '削除せず試せるドライランモード搭載']
+      },
+      {
+        name: '月額 / 年額', price: '$4.99', unit: '/ 月 · または $19.99 / 年', featured: false,
+        items: ['全モジュールで回数無制限のクリーン', 'Apple Account 設定からいつでも解約可能', '今後のルール更新をすべて含む', 'App Store のファミリー共有に対応']
+      },
+      {
+        name: '買い切り（Lifetime）', price: '$29.99', unit: '一度きり・更新なし', featured: true,
+        items: ['一度の購入で継続課金なし', '全モジュールで回数無制限のクリーン', '今後のルール更新をすべて含む', 'Mac App Store からいつでも復元可能']
+      }
+    ],
+    guidesEyebrow: 'Mac ストレージガイド',
+    guidesTitle: '実測データと手動コマンドを先に載せた実用ガイド',
+    guidesSub: 'CleanBit を入れなくても解決できるよう、Terminal と Finder の手動手順を先に整理しています。',
+    allGuides: 'ガイド一覧を見る →',
+    readGuide: 'ガイドを読む →',
+    faqEyebrow: 'よくある質問',
+    faqTitle: 'FAQ',
+    faqs: [
+      {
+        q: 'なぜ Mac App Store 専用で App Sandbox に限定しているのですか？',
+        a: 'App Sandbox 内で動作することで、root 権限や常駐バックグラウンドヘルパーを一切使わず、macOS 標準のパネルで許可したフォルダだけにアクセス範囲を限定できます。フルディスクアクセスは任意で、ゴミ箱・Safari キャッシュ・他アプリコンテナを扱う場合のみ必要です。'
+      },
+      {
+        q: '削除したファイルは元に戻せますか？',
+        a: 'リスク区分によって扱いが異なり、確認ダイアログで事前に明示します。自動再生成される「推奨」キャッシュは初期設定で即時削除（設定でゴミ箱移動へ変更可）、「要確認」項目・ビルド成果物・手動選択ファイル・アンインストール対象は必ずゴミ箱へ移動します。'
+      },
+      {
+        q: 'APFS ローカルスナップショットやシステムキャッシュはなぜ削除しないのですか？',
+        a: 'macOS がシステム保護している領域は App Sandbox の外にあります。root 権限を求めたり OS 管理領域を無理に触ったりせず、ホームフォルダ内で安全に確認できる領域だけに集中しています。'
+      },
+      {
+        q: 'ファイル名やパスが外部に送信されることはありますか？',
+        a: 'ありません。スキャン・ハッシュ照合・削除はすべて Mac ローカルで完結し、ファイル名・パス・内容・アプリ一覧は外部に送信しません。匿名の製品利用統計（内蔵ルール ID・件数・MB 単位のサイズ）のみ Firebase Analytics を使用します。'
+      },
+      {
+        q: '対応 macOS バージョンと対応言語は？',
+        a: 'SwiftUI でネイティブ開発されており、macOS 15（Sequoia）以降に対応します。v1.0.1 よりシステム言語に連動した 9 言語（英語、簡体字中国語、繁体字中国語、日本語、韓国語、フランス語、ドイツ語、スペイン語、ロシア語）に対応しています。'
+      }
+    ],
+    guidesIndexTitle: 'Mac ストレージ＆開発環境クリーンアップガイド',
+    guidesIndexSub: 'Xcode キャッシュ、node_modules、AI コーディングツール、macOS ストレージ整理を実測データと手動コマンドで解説します。',
+    guidesEmpty: '日本語ガイドを順次追加しています。現在は英語ガイドおよび読み取り専用の容量チェックコマンド生成ツールをご利用いただけます。',
+    articleCtaTitle: '視覚的に確認してから安全に整理したい方へ',
+    articleCtaSub: 'CleanBit は App Sandbox 対応の Mac App Store ツールです。削除前にすべての項目と影響を確認でき、スキャンと初回 2 回のクリーンは無料です。',
+    tocCtaEyebrow: 'Mac App Store · App Sandbox',
+    tocCtaTitle: 'CleanBit for macOS',
+    tocCtaBody: '確認するまで何も削除しません。スキャン無料・初回 2 回クリーン無料。',
+    tocCtaButton: 'Mac App Store で見る',
+    tocCtaMeta: 'macOS 15+ · 9 言語対応 · 買い切り対応',
+    tocTitle: '目次',
+    relatedTitle: '関連ガイド',
+    updatedLabel: '更新日',
+    minRead: '分で読めます',
+    disclosureDefault: 'CleanBit 開発者が AI 補助を用いて執筆し、実機の開発用 Mac での計測値に基づいています。',
+    footerNote: 'macOS 15+ · 9 言語対応 · Mac App Store 専売。'
+  },
+  de: {
+    langAttr: 'de',
+    localeName: 'Deutsch',
+    homeTitle: 'CleanBit — Sandbox-Speicherbereinigung für macOS im Mac App Store',
+    nav: { demo: 'Demo', features: 'Funktionen', safety: 'Sicherheit', guides: 'Guides', tool: 'Speicher-Check', pricing: 'Preise', support: 'Support' },
+    ctaShort: 'Mac App Store',
+    ctaMain: 'Im Mac App Store laden',
+    ctaGuides: 'Speicher-Guides lesen',
+    ctaWatch: 'Demo ansehen',
+    demoEyebrow: 'Video-Rundgang',
+    demoTitle: 'CleanBit live auf macOS erleben',
+    demoSub: 'Ein kurzer Einblick in Smart Scan, Build-Artefakte, Speicheranalyse und den Bestätigungsdialog mit Trennung zwischen Papierkorb und endgültigem Löschen.',
+    demoOpenYt: 'Auf YouTube ansehen ↗',
+    heroBadge: 'macOS 15+ · Mac App Store · App Sandbox · 9 Sprachen',
+    heroTitleA: 'Mac-Speicher freigeben.',
+    heroTitleB: 'Immer wissen, was gelöscht wird.',
+    heroSub: 'CleanBit findet Caches, Protokolle, Build-Artefakte und App-Reste in Ihrem Benutzerordner. Jeder Eintrag erklärt, was er ist und was beim Entfernen passiert – gelöscht wird erst nach Ihrer Bestätigung.',
+    heroTrust: 'Kein Root · Kein Hintergrund-Helper · Scan & 2 Bereinigungen kostenlos · Einmalkauf verfügbar',
+    tabs: [
+      { id: 'smart-scan', label: 'Smart Scan', tint: 'brand', caption: 'Jede Gruppe ist als Empfohlen, Prüfen oder Nur Info markiert – mit verständlichen Hinweisen, Gruppen-Bereinigung und automatischem Schutz für laufende Apps.' },
+      { id: 'confirm', label: 'Bestätigung', tint: 'coral', caption: 'Vor dem Löschen trennt CleanBit klar zwischen Papierkorb und endgültigem Entfernen und prüft jeden Eintrag erneut.' },
+      { id: 'artifacts', label: 'Build-Artefakte', tint: 'amber', caption: 'Findet node_modules, target, .build und .venv mit letztem Änderungsdatum. Von Git verfolgte Inhalte werden automatisch übersprungen.' },
+      { id: 'space', label: 'Speicheranalyse', tint: 'ocean', caption: 'Navigieren Sie Ebene für Ebene durch Ihren Benutzerordner, um zu sehen, wohin Ihre Gigabytes tatsächlich gehen.' },
+      { id: 'uninstall', label: 'Apps entfernen', tint: 'sky', caption: 'Entfernt Apps samt Caches, Einstellungen und Logs. Persönliche App-Daten werden separat aufgeführt und nie vorausgewählt.' }
+    ],
+    safetyEyebrow: 'Sicherheitskonzept',
+    safetyTitle: 'Kein blindes „Ein-Klick-Bereinigen“. Jede Löschung wird erklärt.',
+    safetySub: 'Viele Mac-Cleaner zeigen nur eine große Zahl und einen Knopf. CleanBit trennt transparent in drei Risikostufen.',
+    tiers: [
+      {
+        badge: 'Empfohlen',
+        badgeClass: 'level-safe',
+        title: 'Caches, die sich selbst neu aufbauen',
+        desc: 'App-Caches, Browser-Caches (ohne Cookies, Verlauf oder Passwörter anzutasten), Xcode DerivedData und Paketmanager-Caches. Standardmäßig direkt gelöscht – oder optional in den Papierkorb.'
+      },
+      {
+        badge: 'Prüfen',
+        badgeClass: 'level-review',
+        title: 'Nicht vorausgewählt. Immer in den Papierkorb.',
+        desc: 'Build-Ordner (node_modules, target, .venv), alte Installer (.dmg, .pkg), App-Reste, ältere AI-Sitzungen und deinstallierte Apps. Alles landet im Papierkorb und lässt sich zurückholen.'
+      },
+      {
+        badge: 'Nur Info',
+        badgeClass: 'level-info',
+        title: 'Nur zur Übersicht. Niemals löschbar.',
+        desc: 'Lokale KI-Modelle (Hugging Face, Ollama, LM Studio), Hardlink-basierter pnpm-Store und Docker-Disk-Images. CleanBit zeigt die Größe und nennt den passenden offiziellen Befehl.'
+      }
+    ],
+    boundaryTitle: 'Transparente Grenzen der App Sandbox',
+    boundarySub: 'CleanBit läuft strikt in der macOS App Sandbox ohne Root-Rechte und ohne Hintergrund-Daemon. Geschützte macOS-Bereiche werden bewusst nicht angetastet:',
+    boundaryItems: [
+      'Keine APFS-Snapshots oder System-Caches',
+      'Keine iCloud-Drive-Dateien (sicher im Finder verwalten)',
+      'Keine Versprechen zu RAM-Freigabe, Beschleunigung oder Virenschutz',
+      'Keine stillen Löschvorgänge im Hintergrund',
+      'Dateinamen und Pfade verlassen niemals Ihren Mac'
+    ],
+    devEyebrow: 'Für Entwickler & KI-Coding gebaut',
+    devTitle: 'Aufräumen, was Xcode, Paketmanager und KI-Tools hinterlassen.',
+    devSub: 'Ob Swift-Apps oder Nebenprojekte mit Claude Code und Codex – Entwickler-Caches wachsen unbemerkt auf dutzende Gigabytes an.',
+    devCards: [
+      {
+        tile: 'tile-amber', icon: '{}', title: 'Projekt-Build-Artefakte',
+        desc: 'Findet node_modules, target, .build, .venv, Pods und mehr samt letztem Änderungsdatum. Von Git verfolgte Dateien werden übersprungen; entfernte Ordner landen im Papierkorb.'
+      },
+      {
+        tile: 'tile-brand', icon: '⌘', title: 'Xcode & 12+ Paketmanager',
+        desc: 'Deckt Xcode DerivedData, ältere iOS DeviceSupport-Versionen, SwiftUI-Previews, gestoppte Simulatoren sowie npm, Yarn, pnpm, Bun, pip, uv, SwiftPM, CocoaPods, Homebrew, Go, Cargo und Gradle ab.'
+      },
+      {
+        tile: 'tile-violet', icon: 'AI', title: 'KI-Tools & alte Sitzungen',
+        desc: 'Bereinigt ältere Claude-Code-Versionen und Claude-Desktop-Caches und filtert alte Claude-Code- und Codex-Sitzungen nach Zeitraum. Modelle von Ollama, LM Studio und Hugging Face werden nur angezeigt.'
+      },
+      {
+        tile: 'tile-ocean', icon: '◫', title: 'Speicherkarte, große Dateien & Duplikate',
+        desc: 'Ordner-Drilldown, große Dateien nach Größe und letztem Zugriff, Byte-identische Duplikatsuche (mindestens eine Kopie bleibt immer erhalten) und sauberer App-Uninstaller.'
+      }
+    ],
+    pricingEyebrow: 'Transparente Preise',
+    pricingTitle: 'Kostenlos scannen. Auf Wunsch einmalig kaufen.',
+    pricingSub: 'Alle Käufe laufen sicher über den Mac App Store. Kein Konto nötig (lokale Euro-Preise laut Mac App Store).',
+    plans: [
+      {
+        name: 'Kostenlos testen', price: '$0', unit: 'dauerhaft', featured: false,
+        items: ['Unbegrenztes Scannen & Speicheranalyse', 'Erste 2 Bereinigungen kostenlos', 'Jeden Eintrag vor dem Kauf prüfen', 'Dry-Run-Modus jederzeit verfügbar']
+      },
+      {
+        name: 'Monatlich / Jährlich', price: '$4.99', unit: '/ Monat · oder $19.99 / Jahr', featured: false,
+        items: ['Unbegrenzte Bereinigung in allen Modulen', 'Jederzeit in den Apple-Account-Einstellungen kündbar', 'Alle künftigen Regel-Updates enthalten', 'Familienfreigabe über den App Store']
+      },
+      {
+        name: 'Lifetime (Einmalkauf)', price: '$29.99', unit: 'einmalig · kein Abo', featured: true,
+        items: ['Einmal zahlen, keine laufenden Kosten', 'Unbegrenzte Bereinigung in allen Modulen', 'Alle künftigen Regel-Updates enthalten', 'Jederzeit über den Mac App Store wiederherstellbar']
+      }
+    ],
+    guidesEyebrow: 'Mac-Speicher-Guides',
+    guidesTitle: 'Praxisnahe Guides mit echten Messwerten',
+    guidesSub: 'Zuerst manuelle Terminal- und Finder-Wege – damit jeder Guide auch ohne CleanBit weiterhilft.',
+    allGuides: 'Alle Guides ansehen →',
+    readGuide: 'Guide lesen →',
+    faqEyebrow: 'FAQ',
+    faqTitle: 'Häufige Fragen',
+    faqs: [
+      {
+        q: 'Warum gibt es CleanBit ausschließlich mit App Sandbox im Mac App Store?',
+        a: 'Durch Apples App Sandbox fordert CleanBit niemals Root-Rechte, installiert keinen dauerhaften Hintergrund-Helper und liest nur Ordner, die Sie explizit über den macOS-Öffnen-Dialog freigeben. Festplattenvollzugriff ist optional und nur für Papierkorb, Safari-Caches und fremde App-Container nötig.'
+      },
+      {
+        q: 'Lassen sich gelöschte Elemente wiederherstellen?',
+        a: 'Das hängt von der Risikostufe ab und wird vor jeder Bestätigung klar getrennt angezeigt. Empfohlene Caches, die Apps selbst neu anlegen, werden standardmäßig direkt gelöscht (in den Einstellungen auf Papierkorb umstellbar). Prüfen-Einträge, Build-Artefakte, manuell gewählte Dateien und entfernte Apps landen immer im Papierkorb.'
+      },
+      {
+        q: 'Warum bereinigt CleanBit keine APFS-Snapshots oder System-Caches?',
+        a: 'Diese Bereiche schützt macOS außerhalb der App Sandbox. Statt Root-Rechte zu verlangen, konzentriert sich CleanBit auf sicher prüfbare Caches, Entwicklerdaten und App-Reste im Benutzerordner.'
+      },
+      {
+        q: 'Werden meine Dateinamen oder Pfade hochgeladen?',
+        a: 'Niemals. Scannen, Hashing und Bereinigen laufen vollständig lokal auf Ihrem Mac. Dateinamen, Pfade, Inhalte und App-Listen verlassen Ihr Gerät nicht. Firebase Analytics erfasst ausschließlich anonyme Nutzungskennzahlen (eingebaute Regel-IDs, Anzahlen und auf MB gerundete Größen).'
+      },
+      {
+        q: 'Welche macOS-Version und Sprachen werden unterstützt?',
+        a: 'CleanBit ist nativ mit SwiftUI für macOS 15 (Sequoia) und neuer entwickelt. Ab Version 1.0.1 werden 9 Systemsprachen unterstützt: Englisch, Chinesisch (vereinfacht & traditionell), Japanisch, Koreanisch, Französisch, Deutsch, Spanisch und Russisch.'
+      }
+    ],
+    guidesIndexTitle: 'Mac-Speicher & Entwickler-Guides',
+    guidesIndexSub: 'Ehrliche Praxis-Guides zu Xcode-Caches, node_modules, KI-Coding-Tools und macOS-Speicher mit echten Messungen und manuellen Befehlen.',
+    guidesEmpty: 'Weitere deutschsprachige Guides folgen in Kürze. Bis dahin stehen unsere englischen Guides sowie der schreibgeschützte Speicher-Check-Befehlsgenerator bereit.',
+    articleCtaTitle: 'Lieber visuell prüfen und sicher bereinigen?',
+    articleCtaSub: 'CleanBit ist ein Sandbox-Tool aus dem Mac App Store: Jeder Eintrag zeigt Zweck und Auswirkung – Scannen und die ersten 2 Bereinigungen sind kostenlos.',
+    tocCtaEyebrow: 'Mac App Store · App Sandbox',
+    tocCtaTitle: 'CleanBit für macOS',
+    tocCtaBody: 'Vor jeder Bestätigung klar sehen, was entfernt wird. Scan & erste 2 Bereinigungen gratis.',
+    tocCtaButton: 'Im Mac App Store laden',
+    tocCtaMeta: 'macOS 15+ · 9 Sprachen · Einmalkauf möglich',
+    tocTitle: 'Auf dieser Seite',
+    relatedTitle: 'Ähnliche Guides',
+    updatedLabel: 'Aktualisiert',
+    minRead: 'Min. Lesezeit',
+    disclosureDefault: 'Verfasst vom CleanBit-Entwickler mit KI-Unterstützung. Alle Messwerte stammen von einem realen Entwickler-Mac.',
+    footerNote: 'macOS 15+ · 9 Sprachen · Exklusiv im Mac App Store.'
   }
 };
 
-export function renderLayout({ lang = 'en', title, description, canonicalPath, altPath, ogImage, ogType = 'website', jsonLd = [], activeNav = '', bodyHtml, ctx }) {
-  const t = COPY[lang];
+function buildAnalyticsSnippet(config) {
+  if (!config.gtmId && !config.gaMeasurementId) return '';
+  const gtmLoader = config.gtmId
+    ? `var s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtm.js?id=${escapeHtml(config.gtmId)}';document.head.appendChild(s);`
+    : '';
+  const gaLoader = config.gaMeasurementId
+    ? `var g=document.createElement('script');g.async=true;g.src='https://www.googletagmanager.com/gtag/js?id=${escapeHtml(config.gaMeasurementId)}';document.head.appendChild(g);gtag('config','${escapeHtml(config.gaMeasurementId)}');`
+    : '';
+  return `<script>
+  (function(){
+    try {
+      var q = new URLSearchParams(location.search);
+      var f = q.get('analytics');
+      if (f === 'off') localStorage.setItem('cb_no_analytics', '1');
+      else if (f === 'on') localStorage.removeItem('cb_no_analytics');
+    } catch (e) {}
+    var off = navigator.doNotTrack === '1' || window.doNotTrack === '1';
+    try { if (localStorage.getItem('cb_no_analytics') === '1') off = true; } catch (e) {}
+    if (off) return;
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    window.gtag = gtag;
+    gtag('js', new Date());
+    ${gtmLoader}${gaLoader}
+  })();
+  </script>`;
+}
+
+export function renderLayout({
+  lang = 'en',
+  title,
+  description,
+  canonicalPath,
+  altLinks = null,
+  ogImage,
+  ogType = 'website',
+  jsonLd = [],
+  activeNav = '',
+  bodyHtml,
+  extraScript = '',
+  ctx
+}) {
+  const meta = LANG_META[lang] || LANG_META.en;
+  const t = COPY[lang] || COPY.en;
   const fullCanonical = ctx.absUrl(canonicalPath);
-  const enUrl = lang === 'en' ? fullCanonical : (altPath ? ctx.absUrl(altPath) : ctx.absUrl('/'));
-  const zhUrl = lang === 'zh' ? fullCanonical : (altPath ? ctx.absUrl(altPath) : ctx.absUrl('/zh/'));
-  const switchHref = altPath ? ctx.relUrl(altPath) : ctx.relUrl(lang === 'en' ? '/zh/' : '/');
-  const homeHref = ctx.relUrl(lang === 'en' ? '/' : '/zh/');
-  const guidesHref = ctx.relUrl(lang === 'en' ? '/guides/' : '/zh/guides/');
-  const appStoreHref = ctx.appStoreUrl(activeNav === 'guides' ? 'website-guides' : 'website');
+  const homeHref = ctx.relUrl(meta.home);
+  const guidesHref = ctx.relUrl(meta.guides);
+  const toolHref = ctx.relUrl('/tools/disk-check/');
+  const ctMap = { guides: 'website-guides', tool: 'website-tools' };
+  const appStoreHref = ctx.appStoreUrl(ctMap[activeNav] || 'website');
   const ogImgAbs = ctx.absUrl(ogImage || '/assets/og-cover.png');
+
+  const resolvedAlts = altLinks || {
+    en: '/',
+    zh: '/zh/',
+    ja: '/ja/',
+    de: '/de/'
+  };
+
+  const hreflangTags = LANG_ORDER
+    .filter((code) => resolvedAlts[code])
+    .map((code) => `<link rel="alternate" hreflang="${LANG_META[code].hreflang}" href="${escapeHtml(ctx.absUrl(resolvedAlts[code]))}" />`)
+    .join('\n  ');
+  const xDefaultHref = ctx.absUrl(resolvedAlts.en || '/');
+
+  const langStripHtml = LANG_ORDER
+    .map((code) => {
+      const m = LANG_META[code];
+      const target = resolvedAlts[code] || m.home;
+      const cls = code === lang ? ' class="is-current" aria-current="page"' : '';
+      return `<a href="${escapeHtml(ctx.relUrl(target))}" hreflang="${m.hreflang}"${cls}>${escapeHtml(m.shortLabel)}</a>`;
+    })
+    .join('');
 
   const ldScripts = jsonLd
     .filter(Boolean)
     .map((obj) => `<script type="application/ld+json">${JSON.stringify(obj)}</script>`)
     .join('\n  ');
 
-  const gtmSnippet = ctx.config.gtmId
-    ? `<script async src="https://www.googletagmanager.com/gtm.js?id=${escapeHtml(ctx.config.gtmId)}"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-  </script>`
-    : '';
-
-  const gaSnippet = ctx.config.gaMeasurementId
-    ? `<script async src="https://www.googletagmanager.com/gtag/js?id=${escapeHtml(ctx.config.gaMeasurementId)}"></script>
-  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${escapeHtml(ctx.config.gaMeasurementId)}');</script>`
-    : '';
+  const analyticsSnippet = buildAnalyticsSnippet(ctx.config);
 
   return `<!DOCTYPE html>
 <html lang="${t.langAttr}">
@@ -323,12 +665,11 @@ export function renderLayout({ lang = 'en', title, description, canonicalPath, a
   <title>${escapeHtml(title)}</title>
   <meta name="description" content="${escapeHtml(description)}" />
   <link rel="canonical" href="${escapeHtml(fullCanonical)}" />
-  <link rel="alternate" hreflang="en" href="${escapeHtml(enUrl)}" />
-  <link rel="alternate" hreflang="zh-Hans" href="${escapeHtml(zhUrl)}" />
-  <link rel="alternate" hreflang="x-default" href="${escapeHtml(enUrl)}" />
+  ${hreflangTags}
+  <link rel="alternate" hreflang="x-default" href="${escapeHtml(xDefaultHref)}" />
   <link rel="icon" type="image/png" href="${escapeHtml(ctx.relUrl('/assets/favicon.png'))}" />
   <link rel="apple-touch-icon" href="${escapeHtml(ctx.relUrl('/assets/icon.png'))}" />
-  <link rel="alternate" type="application/rss+xml" title="CleanBit Guides (${t.localeName})" href="${escapeHtml(ctx.absUrl(lang === 'en' ? '/feed.xml' : '/zh/feed.xml'))}" />
+  <link rel="alternate" type="application/rss+xml" title="CleanBit Guides (${escapeHtml(t.localeName)})" href="${escapeHtml(ctx.absUrl(meta.feed))}" />
   <meta property="og:type" content="${escapeHtml(ogType)}" />
   <meta property="og:site_name" content="CleanBit" />
   <meta property="og:title" content="${escapeHtml(title)}" />
@@ -342,8 +683,7 @@ export function renderLayout({ lang = 'en', title, description, canonicalPath, a
   <meta name="theme-color" content="#111419" />
   <link rel="stylesheet" href="${escapeHtml(ctx.relUrl('/styles.css'))}?v=${escapeHtml(ctx.cssVersion || '1')}" />
   ${ldScripts}
-  ${gtmSnippet}
-  ${gaSnippet}
+  ${analyticsSnippet}
 </head>
 <body>
   <header class="site-header">
@@ -353,16 +693,16 @@ export function renderLayout({ lang = 'en', title, description, canonicalPath, a
         <span>CleanBit</span>
       </a>
       <nav class="nav" aria-label="Main navigation">
-        <a href="${escapeHtml(homeHref)}#demo">${t.nav.demo}</a>
-        <a href="${escapeHtml(homeHref)}#features">${t.nav.features}</a>
-        <a href="${escapeHtml(homeHref)}#safety">${t.nav.safety}</a>
-        <a href="${escapeHtml(guidesHref)}" class="${activeNav === 'guides' ? 'active' : ''}">${t.nav.guides}</a>
-        <a href="${escapeHtml(homeHref)}#pricing">${t.nav.pricing}</a>
-        <a href="${escapeHtml(ctx.relUrl('/support/'))}" class="${activeNav === 'support' ? 'active' : ''}">${t.nav.support}</a>
+        <a href="${escapeHtml(homeHref)}#features">${escapeHtml(t.nav.features)}</a>
+        <a href="${escapeHtml(homeHref)}#safety">${escapeHtml(t.nav.safety)}</a>
+        <a href="${escapeHtml(guidesHref)}" class="${activeNav === 'guides' ? 'active' : ''}">${escapeHtml(t.nav.guides)}</a>
+        <a href="${escapeHtml(toolHref)}" class="${activeNav === 'tool' ? 'active' : ''}">${escapeHtml(t.nav.tool)}</a>
+        <a href="${escapeHtml(homeHref)}#pricing">${escapeHtml(t.nav.pricing)}</a>
+        <a href="${escapeHtml(ctx.relUrl('/support/'))}" class="${activeNav === 'support' ? 'active' : ''}">${escapeHtml(t.nav.support)}</a>
       </nav>
       <div class="header-actions">
-        <a class="lang-switch" href="${escapeHtml(switchHref)}" hreflang="${lang === 'en' ? 'zh-Hans' : 'en'}">${t.switchLabel}</a>
-        <a class="pill pill-primary pill-sm" href="${escapeHtml(appStoreHref)}" target="_blank" rel="noopener noreferrer">${t.ctaShort}</a>
+        <div class="lang-strip" aria-label="Language switcher">${langStripHtml}</div>
+        <a class="pill pill-primary pill-sm" href="${escapeHtml(appStoreHref)}" target="_blank" rel="noopener noreferrer">${escapeHtml(t.ctaShort)}</a>
       </div>
     </div>
   </header>
@@ -378,11 +718,12 @@ export function renderLayout({ lang = 'en', title, description, canonicalPath, a
         <div style="margin-top:6px">© ${new Date().getFullYear()} ${escapeHtml(ctx.config.company)}</div>
       </div>
       <div class="footer-links">
-        <a href="${escapeHtml(guidesHref)}">${t.nav.guides}</a>
-        <a href="${escapeHtml(ctx.relUrl('/support/'))}">${t.nav.support}</a>
+        <a href="${escapeHtml(guidesHref)}">${escapeHtml(t.nav.guides)}</a>
+        <a href="${escapeHtml(toolHref)}">${escapeHtml(t.nav.tool)}</a>
+        <a href="${escapeHtml(ctx.relUrl('/support/'))}">${escapeHtml(t.nav.support)}</a>
         <a href="${escapeHtml(ctx.relUrl('/privacy/'))}">Privacy</a>
         <a href="${escapeHtml(ctx.relUrl('/terms/'))}">Terms</a>
-        <a href="${escapeHtml(ctx.relUrl(lang === 'en' ? '/feed.xml' : '/zh/feed.xml'))}">RSS</a>
+        <a href="${escapeHtml(ctx.relUrl(meta.feed))}">RSS</a>
         <a href="${escapeHtml(ctx.config.repoUrl)}" target="_blank" rel="noopener noreferrer">GitHub</a>
         <a href="${escapeHtml(appStoreHref)}" target="_blank" rel="noopener noreferrer">Mac App Store</a>
       </div>
@@ -391,7 +732,6 @@ export function renderLayout({ lang = 'en', title, description, canonicalPath, a
 
   <script>
   (function(){
-    // Interactive module-tinted screenshot switcher
     var frame = document.getElementById('showcase-frame');
     var img = document.getElementById('showcase-img');
     var cap = document.getElementById('showcase-caption');
@@ -405,7 +745,6 @@ export function renderLayout({ lang = 'en', title, description, canonicalPath, a
         if (frame) frame.setAttribute('data-tint', btn.dataset.tint);
       });
     });
-    // One-click code block copy
     document.querySelectorAll('[data-copy]').forEach(function(btn){
       btn.addEventListener('click', function(){
         var pre = btn.closest('.code-block').querySelector('pre code');
@@ -419,15 +758,17 @@ export function renderLayout({ lang = 'en', title, description, canonicalPath, a
     });
   })();
   </script>
+  ${extraScript}
 </body>
 </html>`;
 }
 
 export function renderHome(lang, guides, ctx) {
-  const t = COPY[lang];
+  const meta = LANG_META[lang] || LANG_META.en;
+  const t = COPY[lang] || COPY.en;
   const appStoreHref = ctx.appStoreUrl('website');
-  const guidesHref = ctx.relUrl(lang === 'en' ? '/guides/' : '/zh/guides/');
-  const screenPrefix = lang === 'en' ? 'en' : 'zh';
+  const guidesHref = ctx.relUrl(guides.length ? meta.guides : '/guides/');
+  const screenPrefix = meta.screenPrefix;
   const firstTab = t.tabs[0];
 
   const tabsHtml = t.tabs
@@ -507,7 +848,7 @@ export function renderHome(lang, guides, ctx) {
       <div class="hero-cta">
         <a class="pill pill-primary" href="${escapeHtml(appStoreHref)}" target="_blank" rel="noopener noreferrer">${escapeHtml(t.ctaMain)}</a>
         ${ctx.config.youtubeVideoId ? `<a class="pill pill-secondary" href="#demo">▶ ${escapeHtml(t.ctaWatch)}</a>` : ''}
-        <a class="pill pill-secondary" href="${escapeHtml(guidesHref)}">${escapeHtml(t.ctaGuides)}</a>
+        <a class="pill pill-secondary" href="${escapeHtml(ctx.relUrl('/tools/disk-check/'))}">${escapeHtml(t.nav.tool)}</a>
       </div>
       <div class="hero-trust">${escapeHtml(t.heroTrust)}</div>
 
@@ -618,7 +959,7 @@ export function renderHome(lang, guides, ctx) {
     applicationCategory: 'UtilitiesApplication',
     inLanguage: ['en', 'zh-Hans', 'zh-Hant', 'ja', 'ko', 'fr', 'de', 'es', 'ru'],
     downloadUrl: ctx.appStoreUrl('website'),
-    url: ctx.absUrl(lang === 'en' ? '/' : '/zh/'),
+    url: ctx.absUrl(meta.home),
     image: ctx.absUrl('/assets/icon.png'),
     screenshot: ctx.absUrl(`/assets/screens/${screenPrefix}-smart-scan.webp`),
     description: t.heroSub,
@@ -658,12 +999,10 @@ export function renderHome(lang, guides, ctx) {
 
   return renderLayout({
     lang,
-    title: lang === 'en'
-      ? 'CleanBit — Sandboxed Mac App Store Disk Space Cleaner'
-      : 'CleanBit — Mac App Store 沙盒磁盘清理工具，看得见删什么',
+    title: t.homeTitle,
     description: t.heroSub,
-    canonicalPath: lang === 'en' ? '/' : '/zh/',
-    altPath: lang === 'en' ? '/zh/' : '/',
+    canonicalPath: meta.home,
+    altLinks: { en: '/', zh: '/zh/', ja: '/ja/', de: '/de/' },
     jsonLd: [softwareLd, faqLd, videoLd],
     bodyHtml,
     ctx
@@ -671,27 +1010,36 @@ export function renderHome(lang, guides, ctx) {
 }
 
 export function renderGuidesIndex(lang, guides, ctx) {
-  const t = COPY[lang];
-  const homeHref = ctx.relUrl(lang === 'en' ? '/' : '/zh/');
+  const meta = LANG_META[lang] || LANG_META.en;
+  const t = COPY[lang] || COPY.en;
+  const homeHref = ctx.relUrl(meta.home);
 
-  const cardsHtml = guides
-    .map(
-      (g) => `<a class="card guide-card" href="${escapeHtml(ctx.relUrl(g.urlPath))}">
-        <div>
-          <div class="guide-meta">
-            <span>${escapeHtml(g.category)}</span>
-            <span>·</span>
-            <span>${escapeHtml(t.updatedLabel)} ${escapeHtml(g.updated)}</span>
-            <span>·</span>
-            <span>${g.readingTime} ${escapeHtml(t.minRead)}</span>
-          </div>
-          <h3 style="margin-top:8px">${escapeHtml(g.title)}</h3>
-          <p style="margin-top:8px">${escapeHtml(g.description)}</p>
+  const cardsHtml = guides.length
+    ? `<div class="grid-2">${guides
+        .map(
+          (g) => `<a class="card guide-card" href="${escapeHtml(ctx.relUrl(g.urlPath))}">
+            <div>
+              <div class="guide-meta">
+                <span>${escapeHtml(g.category)}</span>
+                <span>·</span>
+                <span>${escapeHtml(t.updatedLabel)} ${escapeHtml(g.updated)}</span>
+                <span>·</span>
+                <span>${g.readingTime} ${escapeHtml(t.minRead)}</span>
+              </div>
+              <h3 style="margin-top:8px">${escapeHtml(g.title)}</h3>
+              <p style="margin-top:8px">${escapeHtml(g.description)}</p>
+            </div>
+            <span class="guide-more">${escapeHtml(t.readGuide)}</span>
+          </a>`
+        )
+        .join('')}</div>`
+    : `<div class="card">
+        <p>${escapeHtml(t.guidesEmpty)}</p>
+        <div style="margin-top:16px;display:flex;gap:10px;flex-wrap:wrap">
+          <a class="pill pill-secondary pill-sm" href="${escapeHtml(ctx.relUrl('/guides/'))}">English Guides →</a>
+          <a class="pill pill-primary pill-sm" href="${escapeHtml(ctx.relUrl('/tools/disk-check/'))}">${escapeHtml(t.nav.tool)} →</a>
         </div>
-        <span class="guide-more">${escapeHtml(t.readGuide)}</span>
-      </a>`
-    )
-    .join('');
+      </div>`;
 
   const bodyHtml = `
   <section class="article-shell">
@@ -706,7 +1054,7 @@ export function renderGuidesIndex(lang, guides, ctx) {
         <h1 style="margin:0 0 12px;font-size:clamp(28px,4vw,40px);letter-spacing:-0.025em">${escapeHtml(t.guidesIndexTitle)}</h1>
         <p>${escapeHtml(t.guidesIndexSub)}</p>
       </div>
-      <div class="grid-2">${cardsHtml}</div>
+      ${cardsHtml}
     </div>
   </section>`;
 
@@ -714,8 +1062,8 @@ export function renderGuidesIndex(lang, guides, ctx) {
     lang,
     title: `${t.guidesIndexTitle} — CleanBit`,
     description: t.guidesIndexSub,
-    canonicalPath: lang === 'en' ? '/guides/' : '/zh/guides/',
-    altPath: lang === 'en' ? '/zh/guides/' : '/guides/',
+    canonicalPath: meta.guides,
+    altLinks: { en: '/guides/', zh: '/zh/guides/', ja: '/ja/guides/', de: '/de/guides/' },
     activeNav: 'guides',
     bodyHtml,
     ctx
@@ -724,10 +1072,12 @@ export function renderGuidesIndex(lang, guides, ctx) {
 
 export function renderGuideDetail(guide, allGuides, ctx) {
   const lang = guide.lang;
-  const t = COPY[lang];
-  const homeHref = ctx.relUrl(lang === 'en' ? '/' : '/zh/');
-  const guidesHref = ctx.relUrl(lang === 'en' ? '/guides/' : '/zh/guides/');
+  const meta = LANG_META[lang] || LANG_META.en;
+  const t = COPY[lang] || COPY.en;
+  const homeHref = ctx.relUrl(meta.home);
+  const guidesHref = ctx.relUrl(meta.guides);
   const appStoreHref = ctx.appStoreUrl('website-guides');
+  const authorName = (ctx.config.author && ctx.config.author[lang]) || ctx.config.author.en;
 
   const tocCardHtml = guide.toc.length
     ? `<nav class="toc-card" aria-label="Table of contents">
@@ -774,11 +1124,7 @@ export function renderGuideDetail(guide, allGuides, ctx) {
       </section>`
     : '';
 
-  const disclosureText =
-    guide.aiDisclosure ||
-    (lang === 'en'
-      ? 'Written by the CleanBit developer with AI assistance. All measurements were taken on a real developer Mac.'
-      : '本文由 CleanBit 开发者借助 AI 整理，数据为作者在一台开发用 Mac 上实测。');
+  const disclosureText = guide.aiDisclosure || t.disclosureDefault;
 
   const bodyHtml = `
   <article class="article-shell">
@@ -797,7 +1143,7 @@ export function renderGuideDetail(guide, allGuides, ctx) {
             <h1>${escapeHtml(guide.title)}</h1>
             <p class="article-lead">${escapeHtml(guide.description)}</p>
             <div class="article-meta">
-              <span>${escapeHtml(ctx.config.author[lang])}</span>
+              <span>${escapeHtml(authorName)}</span>
               <span>·</span>
               <span>${escapeHtml(t.updatedLabel)} ${escapeHtml(guide.updated)}</span>
               <span>·</span>
@@ -833,7 +1179,7 @@ export function renderGuideDetail(guide, allGuides, ctx) {
     datePublished: guide.date,
     dateModified: guide.updated,
     inLanguage: t.langAttr,
-    author: { '@type': 'Organization', name: ctx.config.author[lang], url: ctx.absUrl('/') },
+    author: { '@type': 'Organization', name: authorName, url: ctx.absUrl('/') },
     publisher: {
       '@type': 'Organization',
       name: 'CleanBit',
@@ -847,8 +1193,8 @@ export function renderGuideDetail(guide, allGuides, ctx) {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
     itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'CleanBit', item: ctx.absUrl(lang === 'en' ? '/' : '/zh/') },
-      { '@type': 'ListItem', position: 2, name: t.nav.guides, item: ctx.absUrl(lang === 'en' ? '/guides/' : '/zh/guides/') },
+      { '@type': 'ListItem', position: 1, name: 'CleanBit', item: ctx.absUrl(meta.home) },
+      { '@type': 'ListItem', position: 2, name: t.nav.guides, item: ctx.absUrl(meta.guides) },
       { '@type': 'ListItem', position: 3, name: guide.title, item: ctx.absUrl(guide.urlPath) }
     ]
   };
@@ -866,17 +1212,269 @@ export function renderGuideDetail(guide, allGuides, ctx) {
     });
   }
 
+  const altLinks = {
+    en: lang === 'en' ? guide.urlPath : '/guides/',
+    zh: lang === 'zh' ? guide.urlPath : '/zh/guides/',
+    ja: lang === 'ja' ? guide.urlPath : '/ja/guides/',
+    de: lang === 'de' ? guide.urlPath : '/de/guides/'
+  };
+  if (guide.altPath && lang === 'en') altLinks.zh = guide.altPath;
+  if (guide.altPath && lang === 'zh') altLinks.en = guide.altPath;
+
   return renderLayout({
     lang,
     title: `${guide.title} — CleanBit`,
     description: guide.description,
     canonicalPath: guide.urlPath,
-    altPath: guide.altPath,
+    altLinks,
     ogImage: guide.image || '/assets/og-cover.png',
     ogType: 'article',
     activeNav: 'guides',
     jsonLd,
     bodyHtml,
+    ctx
+  });
+}
+
+export function renderDiskCheckTool(ctx) {
+  const appStoreHref = ctx.appStoreUrl('website-tools');
+  const stacks = [
+    {
+      id: 'xcode',
+      checked: true,
+      title: 'Xcode & iOS Simulators',
+      desc: 'DerivedData, iOS DeviceSupport, CoreSimulator devices, SwiftUI Previews'
+    },
+    {
+      id: 'js',
+      checked: true,
+      title: 'Node.js & JS Package Caches',
+      desc: 'Old node_modules in your home folder plus npm, Yarn, pnpm, and Bun caches'
+    },
+    {
+      id: 'ai',
+      checked: true,
+      title: 'AI Coding Tools & Local Models',
+      desc: 'Claude Code, Codex, Claude desktop cache, Ollama, LM Studio, Hugging Face'
+    },
+    {
+      id: 'caches',
+      checked: true,
+      title: 'User Caches, Logs & Old Installers',
+      desc: 'Top folders in ~/Library/Caches, ~/Library/Logs, and .dmg / .pkg files in ~/Downloads'
+    },
+    {
+      id: 'python',
+      checked: false,
+      title: 'Python, Rust, Go & SwiftPM',
+      desc: '.venv folders, pip / uv caches, Cargo, Go module cache, and SwiftPM cache'
+    },
+    {
+      id: 'docker',
+      checked: false,
+      title: 'Docker Desktop & Homebrew',
+      desc: 'Docker virtual disk image (Docker.raw) and Homebrew download cache'
+    }
+  ];
+
+  const checksHtml = stacks
+    .map(
+      (s) => `<label class="stack-option${s.checked ? ' is-checked' : ''}" data-stack-label>
+        <input type="checkbox" value="${s.id}"${s.checked ? ' checked' : ''} data-stack-input />
+        <div>
+          <strong>${escapeHtml(s.title)}</strong>
+          <span>${escapeHtml(s.desc)}</span>
+        </div>
+      </label>`
+    )
+    .join('');
+
+  const bodyHtml = `
+  <section class="article-shell">
+    <div class="container" style="max-width:920px">
+      <div class="breadcrumbs">
+        <a href="${escapeHtml(ctx.relUrl('/'))}">CleanBit</a>
+        <span>/</span>
+        <span>Disk Check</span>
+      </div>
+      <div class="section-head" style="max-width:none;margin-bottom:24px">
+        <div class="section-eyebrow">Read-Only macOS Terminal Audit</div>
+        <h1 style="margin:0 0 12px;font-size:clamp(28px,4vw,42px);letter-spacing:-0.025em">Mac Developer Disk Space Audit Generator</h1>
+        <p>Pick the stacks you use on your Mac and copy a 100% read-only Terminal command. It inspects folder sizes with <code>du</code> and <code>find</code> and never deletes, moves, or modifies any file.</p>
+      </div>
+
+      <div class="tool-panel">
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap">
+          <strong style="font-size:15px">1. Select what to inspect in your home folder</strong>
+          <div class="tool-actions">
+            <button type="button" class="pill pill-secondary pill-sm" id="tool-select-all">Select All</button>
+            <button type="button" class="pill pill-secondary pill-sm" id="tool-reset">Default</button>
+          </div>
+        </div>
+        <div class="tool-checks">${checksHtml}</div>
+
+        <div class="tool-controls">
+          <strong style="font-size:15px">2. Copy &amp; run in macOS Terminal (read-only)</strong>
+          <button type="button" class="pill pill-primary pill-sm" id="tool-copy-btn">Copy Audit Script</button>
+        </div>
+        <div class="tool-code">
+          <div class="tool-code-head">
+            <span>zsh · read-only (zero delete commands)</span>
+            <span id="tool-count">4 stacks selected</span>
+          </div>
+          <pre><code id="tool-output"></code></pre>
+        </div>
+
+        <div class="tool-notes">
+          <div class="tool-note">
+            <strong>Recommended to rebuild</strong>
+            Xcode DerivedData, package manager caches, and app caches rebuild automatically when reopened.
+          </div>
+          <div class="tool-note">
+            <strong>Review before removing</strong>
+            Old <code>node_modules</code>, <code>.venv</code>, installers, and AI session logs should be checked by date and moved to Trash.
+          </div>
+          <div class="tool-note">
+            <strong>Manage with native tools</strong>
+            Local AI models (Ollama, Hugging Face), hard-linked pnpm store, and Docker disk images are best cleaned with their own CLI.
+          </div>
+        </div>
+      </div>
+
+      <aside class="article-cta">
+        <div>
+          <h3>Want to inspect and clean visually instead of Terminal?</h3>
+          <p>CleanBit runs inside the macOS App Sandbox with no root privileges. Every item explains what it is and what happens if you remove it—scanning and your first 2 cleans are free.</p>
+        </div>
+        <a class="pill pill-primary" href="${escapeHtml(appStoreHref)}" target="_blank" rel="noopener noreferrer">Download on the Mac App Store</a>
+      </aside>
+
+      <section style="margin-top:44px">
+        <h2 style="font-size:20px;margin:0 0 16px">Deep-dive cleanup guides</h2>
+        <div class="grid-2">
+          <a class="card guide-card" href="${escapeHtml(ctx.relUrl('/guides/is-xcode-deriveddata-safe-to-delete/'))}">
+            <div><h3>Is Xcode DerivedData Safe to Delete?</h3><p style="margin-top:6px">Real measurements across DerivedData, DeviceSupport, and Simulators with safe manual steps.</p></div>
+            <span class="guide-more">Read guide →</span>
+          </a>
+          <a class="card guide-card" href="${escapeHtml(ctx.relUrl('/guides/how-to-find-and-delete-old-node-modules-on-mac/'))}">
+            <div><h3>How to Find and Delete Old node_modules on a Mac</h3><p style="margin-top:6px">Audit hundreds of inactive project build folders without touching Git-tracked files.</p></div>
+            <span class="guide-more">Read guide →</span>
+          </a>
+          <a class="card guide-card" href="${escapeHtml(ctx.relUrl('/guides/claude-code-cursor-codex-disk-space-mac/'))}">
+            <div><h3>Claude Code, Cursor &amp; Codex Disk Space on Mac</h3><p style="margin-top:6px">Where AI coding agents store sessions, caches, and worktrees—and what is safe to prune.</p></div>
+            <span class="guide-more">Read guide →</span>
+          </a>
+          <a class="card guide-card" href="${escapeHtml(ctx.relUrl('/guides/claude-code-worktrees-disk-space-mac/'))}">
+            <div><h3>Claude Code Worktrees Filling Your Disk?</h3><p style="margin-top:6px">Inspect leftover Git worktrees and duplicate dependency trees cleanly.</p></div>
+            <span class="guide-more">Read guide →</span>
+          </a>
+        </div>
+      </section>
+    </div>
+  </section>`;
+
+  const extraScript = `<script>
+  (function(){
+    var BLOCKS = {
+      xcode: [
+        'echo "\\n=== Xcode & iOS Simulators ==="',
+        'du -sh ~/Library/Developer/Xcode/DerivedData ~/Library/Developer/Xcode/iOS\\\\ DeviceSupport ~/Library/Developer/CoreSimulator/Devices ~/Library/Developer/Xcode/UserData/Previews 2>/dev/null || true'
+      ],
+      js: [
+        'echo "\\n=== Node.js / JS Package Caches & node_modules ==="',
+        'du -sh ~/.npm ~/Library/Caches/Yarn ~/Library/pnpm/store ~/.bun/install/cache 2>/dev/null || true',
+        'echo "Top node_modules folders (depth <= 5, skipping Library):"',
+        'find ~ -maxdepth 5 \\\\( -path ~/Library -o -path ~/.Trash -o -path ~/Pictures -o -path ~/Movies -o -path ~/Music \\\\) -prune -o -type d -name node_modules -prune -print0 2>/dev/null | xargs -0 du -sh 2>/dev/null | sort -hr | head -n 15'
+      ],
+      ai: [
+        'echo "\\n=== AI Coding Tools & Local Models ==="',
+        'du -sh ~/.claude ~/.codex ~/Library/Application\\\\ Support/Claude/Cache ~/.ollama/models ~/.cache/lm-studio ~/.cache/huggingface 2>/dev/null || true'
+      ],
+      caches: [
+        'echo "\\n=== Top User Caches, Logs & Installers ==="',
+        'du -sh ~/Library/Caches/* 2>/dev/null | sort -hr | head -n 12',
+        'du -sh ~/Library/Logs 2>/dev/null || true',
+        'find ~/Downloads -maxdepth 2 -type f \\\\( -name "*.dmg" -o -name "*.pkg" \\\\) -exec du -sh {} + 2>/dev/null | sort -hr | head -n 10'
+      ],
+      python: [
+        'echo "\\n=== Python, Rust, Go & SwiftPM Caches ==="',
+        'du -sh ~/Library/Caches/pip ~/Library/Caches/uv ~/.cargo/registry ~/.cargo/git ~/go/pkg/mod ~/Library/Caches/org.swift.swiftpm 2>/dev/null || true',
+        'find ~ -maxdepth 5 \\\\( -path ~/Library -o -path ~/.Trash \\\\) -prune -o -type d \\\\( -name .venv -o -name target -o -name .build \\\\) -prune -print0 2>/dev/null | xargs -0 du -sh 2>/dev/null | sort -hr | head -n 15'
+      ],
+      docker: [
+        'echo "\\n=== Docker Desktop & Homebrew ==="',
+        'du -sh ~/Library/Containers/com.docker.docker/Data/vms ~/Library/Caches/Homebrew 2>/dev/null || true'
+      ]
+    };
+    var inputs = Array.from(document.querySelectorAll('[data-stack-input]'));
+    var out = document.getElementById('tool-output');
+    var countEl = document.getElementById('tool-count');
+    var copyBtn = document.getElementById('tool-copy-btn');
+    var selectAllBtn = document.getElementById('tool-select-all');
+    var resetBtn = document.getElementById('tool-reset');
+
+    function render() {
+      var selected = [];
+      inputs.forEach(function(inp){
+        var label = inp.closest('[data-stack-label]');
+        if (label) label.classList.toggle('is-checked', inp.checked);
+        if (inp.checked) selected.push(inp.value);
+      });
+      if (countEl) countEl.textContent = selected.length + (selected.length === 1 ? ' stack selected' : ' stacks selected');
+      if (!selected.length) {
+        out.textContent = '# Select at least one stack above to generate a read-only audit command.';
+        return;
+      }
+      var lines = [
+        '# CleanBit Read-Only Mac Disk Space Audit (inspects sizes only — deletes nothing)',
+        'df -h /'
+      ];
+      selected.forEach(function(id){
+        if (BLOCKS[id]) lines = lines.concat([''].concat(BLOCKS[id]));
+      });
+      out.textContent = lines.join('\\n');
+    }
+
+    inputs.forEach(function(inp){ inp.addEventListener('change', render); });
+    if (selectAllBtn) selectAllBtn.addEventListener('click', function(){ inputs.forEach(function(i){ i.checked = true; }); render(); });
+    if (resetBtn) resetBtn.addEventListener('click', function(){
+      var defaults = { xcode: true, js: true, ai: true, caches: true };
+      inputs.forEach(function(i){ i.checked = !!defaults[i.value]; });
+      render();
+    });
+    if (copyBtn) copyBtn.addEventListener('click', function(){
+      if (!navigator.clipboard || !out) return;
+      navigator.clipboard.writeText(out.textContent || '').then(function(){
+        var old = copyBtn.textContent;
+        copyBtn.textContent = 'Copied!';
+        setTimeout(function(){ copyBtn.textContent = old; }, 1600);
+      });
+    });
+    render();
+  })();
+  </script>`;
+
+  const webAppLd = {
+    '@context': 'https://schema.org',
+    '@type': 'WebApplication',
+    name: 'CleanBit Mac Developer Disk Space Audit Generator',
+    applicationCategory: 'DeveloperApplication',
+    operatingSystem: 'macOS',
+    url: ctx.absUrl('/tools/disk-check/'),
+    description: 'Generate safe, 100% read-only macOS Terminal commands to measure Xcode, node_modules, AI coding tools, and cache sizes without deleting any files.',
+    offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' }
+  };
+
+  return renderLayout({
+    lang: 'en',
+    title: 'Mac Developer Disk Space Audit Generator (Read-Only) — CleanBit',
+    description: 'Generate safe, 100% read-only macOS Terminal commands to inspect Xcode, node_modules, Claude Code, Codex, and cache sizes without deleting anything.',
+    canonicalPath: '/tools/disk-check/',
+    altLinks: { en: '/tools/disk-check/' },
+    activeNav: 'tool',
+    jsonLd: [webAppLd],
+    bodyHtml,
+    extraScript,
     ctx
   });
 }
@@ -903,7 +1501,7 @@ export function renderDocPage(page, ctx) {
     title: `${page.title} — CleanBit`,
     description: page.description,
     canonicalPath: page.urlPath,
-    altPath: '/zh/',
+    altLinks: { en: page.urlPath },
     activeNav: page.slug === 'support' ? 'support' : '',
     bodyHtml,
     ctx

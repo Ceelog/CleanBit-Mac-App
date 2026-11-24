@@ -10,7 +10,9 @@
   "company": "Dongguan Aibeike AI Co., Ltd.",
   "author": {
     "en": "CleanBit Developer",
-    "zh": "CleanBit 开发者"
+    "zh": "CleanBit 开发者",
+    "ja": "CleanBit 開発者",
+    "de": "CleanBit-Entwickler"
   },
   "pricing": {
     "freeCleans": 2,

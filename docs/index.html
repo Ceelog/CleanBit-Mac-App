@@ -8,6 +8,8 @@
   <link rel="canonical" href="https://getcleanbit.app/" />
   <link rel="alternate" hreflang="en" href="https://getcleanbit.app/" />
   <link rel="alternate" hreflang="zh-Hans" href="https://getcleanbit.app/zh/" />
+  <link rel="alternate" hreflang="ja" href="https://getcleanbit.app/ja/" />
+  <link rel="alternate" hreflang="de" href="https://getcleanbit.app/de/" />
   <link rel="alternate" hreflang="x-default" href="https://getcleanbit.app/" />
   <link rel="icon" type="image/png" href="/assets/favicon.png" />
   <link rel="apple-touch-icon" href="/assets/icon.png" />
@@ -23,17 +25,28 @@
   <meta name="twitter:description" content="CleanBit finds caches, logs, build artifacts, and app leftovers in your home folder. Every item explains what it is and what happens if you remove it—nothing is deleted until you confirm." />
   <meta name="twitter:image" content="https://getcleanbit.app/assets/og-cover.png" />
   <meta name="theme-color" content="#111419" />
-  <link rel="stylesheet" href="/styles.css?v=bfa4b138" />
+  <link rel="stylesheet" href="/styles.css?v=8ec2702e" />
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"CleanBit: Disk Space Cleaner","softwareVersion":"1.0.1","operatingSystem":"macOS 15+","applicationCategory":"UtilitiesApplication","inLanguage":["en","zh-Hans","zh-Hant","ja","ko","fr","de","es","ru"],"downloadUrl":"https://apps.apple.com/app/apple-store/id6829159531?pt=127116872&ct=website&mt=8","url":"https://getcleanbit.app/","image":"https://getcleanbit.app/assets/icon.png","screenshot":"https://getcleanbit.app/assets/screens/en-smart-scan.webp","description":"CleanBit finds caches, logs, build artifacts, and app leftovers in your home folder. Every item explains what it is and what happens if you remove it—nothing is deleted until you confirm.","offers":[{"@type":"Offer","price":"0","priceCurrency":"USD","description":"Free scan and first 2 cleans free"},{"@type":"Offer","price":"4.99","priceCurrency":"USD","description":"Monthly subscription"},{"@type":"Offer","price":"19.99","priceCurrency":"USD","description":"Yearly subscription"},{"@type":"Offer","price":"29.99","priceCurrency":"USD","description":"One-time lifetime purchase"}]}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Why is CleanBit only on the Mac App Store and sandboxed?","acceptedAnswer":{"@type":"Answer","text":"Running inside Apple’s App Sandbox means CleanBit never asks for root access, never installs a persistent background helper daemon, and can only read folders you explicitly grant in a standard macOS open panel. Full Disk Access is optional and only needed for the Trash, Safari caches, and other apps’ containers."}},{"@type":"Question","name":"Can deleted items be recovered?","acceptedAnswer":{"@type":"Answer","text":"It depends on the risk tier, and CleanBit tells you before you confirm. Recommended caches that apps rebuild automatically are deleted permanently by default (you can switch them to Trash in Settings). Review items, build artifacts, manually picked files, and uninstalled apps always move to the Trash so you can put them back."}},{"@type":"Question","name":"Why doesn’t CleanBit clean APFS local snapshots or system caches?","acceptedAnswer":{"@type":"Answer","text":"macOS protects system locations and APFS snapshots outside the App Sandbox. Rather than asking for root privileges or claiming to clean things macOS manages itself, CleanBit focuses strictly on the user-space caches, developer files, and leftovers inside your home folder."}},{"@type":"Question","name":"Does CleanBit collect or upload my file names?","acceptedAnswer":{"@type":"Answer","text":"Never. Scanning, duplicate hashing, and cleaning happen entirely locally on your Mac. File names, paths, contents, and installed app lists never leave your device. CleanBit uses Firebase Analytics only for anonymous product telemetry (built-in rule IDs, counts, and sizes rounded to MB)."}},{"@type":"Question","name":"What macOS version and languages are supported?","acceptedAnswer":{"@type":"Answer","text":"CleanBit is built natively with SwiftUI for macOS 15 (Sequoia) and later. Version 1.0.1 supports 9 languages following your macOS system language: English, Simplified Chinese, Traditional Chinese, Japanese, Korean, French, German, Spanish, and Russian."}}]}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"VideoObject","name":"See CleanBit in action on macOS","description":"A quick real-screen walkthrough of Smart Scan, Build Artifacts, Space Analysis, and the Trash vs. permanent deletion confirmation dialog.","thumbnailUrl":["https://i.ytimg.com/vi/SQDQhvJGRfY/hqdefault.jpg","https://getcleanbit.app/assets/og-cover.png"],"uploadDate":"2026-11-21","contentUrl":"https://www.youtube.com/watch?v=SQDQhvJGRfY","embedUrl":"https://www.youtube.com/embed/SQDQhvJGRfY"}</script>
-  <script async src="https://www.googletagmanager.com/gtm.js?id=GTM-TFR7TV8Z"></script>
   <script>
+  (function(){
+    try {
+      var q = new URLSearchParams(location.search);
+      var f = q.get('analytics');
+      if (f === 'off') localStorage.setItem('cb_no_analytics', '1');
+      else if (f === 'on') localStorage.removeItem('cb_no_analytics');
+    } catch (e) {}
+    var off = navigator.doNotTrack === '1' || window.doNotTrack === '1';
+    try { if (localStorage.getItem('cb_no_analytics') === '1') off = true; } catch (e) {}
+    if (off) return;
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
+    window.gtag = gtag;
     gtag('js', new Date());
+    var s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtm.js?id=GTM-TFR7TV8Z';document.head.appendChild(s);
+  })();
   </script>
-  
 </head>
 <body>
   <header class="site-header">
@@ -43,15 +56,15 @@
         <span>CleanBit</span>
       </a>
       <nav class="nav" aria-label="Main navigation">
-        <a href="/#demo">Demo</a>
         <a href="/#features">Features</a>
         <a href="/#safety">Safety</a>
         <a href="/guides/" class="">Guides</a>
+        <a href="/tools/disk-check/" class="">Disk Check</a>
         <a href="/#pricing">Pricing</a>
         <a href="/support/" class="">Support</a>
       </nav>
       <div class="header-actions">
-        <a class="lang-switch" href="/zh/" hreflang="zh-Hans">中文</a>
+        <div class="lang-strip" aria-label="Language switcher"><a href="/" hreflang="en" class="is-current" aria-current="page">EN</a><a href="/zh/" hreflang="zh-Hans">中文</a><a href="/ja/" hreflang="ja">日本語</a><a href="/de/" hreflang="de">DE</a></div>
         <a class="pill pill-primary pill-sm" href="https://apps.apple.com/app/apple-store/id6829159531?pt=127116872&amp;ct=website&amp;mt=8" target="_blank" rel="noopener noreferrer">Mac App Store</a>
       </div>
     </div>
@@ -67,7 +80,7 @@
       <div class="hero-cta">
         <a class="pill pill-primary" href="https://apps.apple.com/app/apple-store/id6829159531?pt=127116872&amp;ct=website&amp;mt=8" target="_blank" rel="noopener noreferrer">Download on the Mac App Store</a>
         <a class="pill pill-secondary" href="#demo">▶ Watch Demo</a>
-        <a class="pill pill-secondary" href="/guides/">Read Storage Guides</a>
+        <a class="pill pill-secondary" href="/tools/disk-check/">Disk Check</a>
       </div>
       <div class="hero-trust">No root · No background helper · Free scan &amp; 2 free cleans · One-time purchase option</div>
 
@@ -317,6 +330,7 @@
       </div>
       <div class="footer-links">
         <a href="/guides/">Guides</a>
+        <a href="/tools/disk-check/">Disk Check</a>
         <a href="/support/">Support</a>
         <a href="/privacy/">Privacy</a>
         <a href="/terms/">Terms</a>
@@ -329,7 +343,6 @@
 
   <script>
   (function(){
-    // Interactive module-tinted screenshot switcher
     var frame = document.getElementById('showcase-frame');
     var img = document.getElementById('showcase-img');
     var cap = document.getElementById('showcase-caption');
@@ -343,7 +356,6 @@
         if (frame) frame.setAttribute('data-tint', btn.dataset.tint);
       });
     });
-    // One-click code block copy
     document.querySelectorAll('[data-copy]').forEach(function(btn){
       btn.addEventListener('click', function(){
         var pre = btn.closest('.code-block').querySelector('pre code');
@@ -357,5 +369,6 @@
     });
   })();
   </script>
+  
 </body>
 </html>

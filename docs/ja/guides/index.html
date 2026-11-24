@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Mac ストレージ＆開発環境クリーンアップガイド — CleanBit</title>
+  <meta name="description" content="Xcode キャッシュ、node_modules、AI コーディングツール、macOS ストレージ整理を実測データと手動コマンドで解説します。" />
+  <link rel="canonical" href="https://getcleanbit.app/ja/guides/" />
+  <link rel="alternate" hreflang="en" href="https://getcleanbit.app/guides/" />
+  <link rel="alternate" hreflang="zh-Hans" href="https://getcleanbit.app/zh/guides/" />
+  <link rel="alternate" hreflang="ja" href="https://getcleanbit.app/ja/guides/" />
+  <link rel="alternate" hreflang="de" href="https://getcleanbit.app/de/guides/" />
+  <link rel="alternate" hreflang="x-default" href="https://getcleanbit.app/guides/" />
+  <link rel="icon" type="image/png" href="/assets/favicon.png" />
+  <link rel="apple-touch-icon" href="/assets/icon.png" />
+  <link rel="alternate" type="application/rss+xml" title="CleanBit Guides (日本語)" href="https://getcleanbit.app/ja/feed.xml" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="CleanBit" />
+  <meta property="og:title" content="Mac ストレージ＆開発環境クリーンアップガイド — CleanBit" />
+  <meta property="og:description" content="Xcode キャッシュ、node_modules、AI コーディングツール、macOS ストレージ整理を実測データと手動コマンドで解説します。" />
+  <meta property="og:url" content="https://getcleanbit.app/ja/guides/" />
+  <meta property="og:image" content="https://getcleanbit.app/assets/og-cover.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Mac ストレージ＆開発環境クリーンアップガイド — CleanBit" />
+  <meta name="twitter:description" content="Xcode キャッシュ、node_modules、AI コーディングツール、macOS ストレージ整理を実測データと手動コマンドで解説します。" />
+  <meta name="twitter:image" content="https://getcleanbit.app/assets/og-cover.png" />
+  <meta name="theme-color" content="#111419" />
+  <link rel="stylesheet" href="/styles.css?v=8ec2702e" />
+  
+  <script>
+  (function(){
+    try {
+      var q = new URLSearchParams(location.search);
+      var f = q.get('analytics');
+      if (f === 'off') localStorage.setItem('cb_no_analytics', '1');
+      else if (f === 'on') localStorage.removeItem('cb_no_analytics');
+    } catch (e) {}
+    var off = navigator.doNotTrack === '1' || window.doNotTrack === '1';
+    try { if (localStorage.getItem('cb_no_analytics') === '1') off = true; } catch (e) {}
+    if (off) return;
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    window.gtag = gtag;
+    gtag('js', new Date());
+    var s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtm.js?id=GTM-TFR7TV8Z';document.head.appendChild(s);
+  })();
+  </script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="/ja/">
+        <img src="/assets/icon.png" alt="CleanBit icon" width="28" height="28" />
+        <span>CleanBit</span>
+      </a>
+      <nav class="nav" aria-label="Main navigation">
+        <a href="/ja/#features">機能</a>
+        <a href="/ja/#safety">安全性</a>
+        <a href="/ja/guides/" class="active">ガイド</a>
+        <a href="/tools/disk-check/" class="">容量チェック</a>
+        <a href="/ja/#pricing">料金</a>
+        <a href="/support/" class="">サポート</a>
+      </nav>
+      <div class="header-actions">
+        <div class="lang-strip" aria-label="Language switcher"><a href="/guides/" hreflang="en">EN</a><a href="/zh/guides/" hreflang="zh-Hans">中文</a><a href="/ja/guides/" hreflang="ja" class="is-current" aria-current="page">日本語</a><a href="/de/guides/" hreflang="de">DE</a></div>
+        <a class="pill pill-primary pill-sm" href="https://apps.apple.com/app/apple-store/id6829159531?pt=127116872&amp;ct=website-guides&amp;mt=8" target="_blank" rel="noopener noreferrer">Mac App Store</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+  <section class="article-shell">
+    <div class="container">
+      <div class="breadcrumbs">
+        <a href="/ja/">CleanBit</a>
+        <span>/</span>
+        <span>ガイド</span>
+      </div>
+      <div class="section-head" style="margin-bottom:32px">
+        <div class="section-eyebrow">Mac ストレージガイド</div>
+        <h1 style="margin:0 0 12px;font-size:clamp(28px,4vw,40px);letter-spacing:-0.025em">Mac ストレージ＆開発環境クリーンアップガイド</h1>
+        <p>Xcode キャッシュ、node_modules、AI コーディングツール、macOS ストレージ整理を実測データと手動コマンドで解説します。</p>
+      </div>
+      <div class="card">
+        <p>日本語ガイドを順次追加しています。現在は英語ガイドおよび読み取り専用の容量チェックコマンド生成ツールをご利用いただけます。</p>
+        <div style="margin-top:16px;display:flex;gap:10px;flex-wrap:wrap">
+          <a class="pill pill-secondary pill-sm" href="/guides/">English Guides →</a>
+          <a class="pill pill-primary pill-sm" href="/tools/disk-check/">容量チェック →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div>
+        <strong style="color:var(--text)">CleanBit</strong> · macOS 15+ · 9 言語対応 · Mac App Store 専売。
+        <div style="margin-top:6px">© 2026 Dongguan Aibeike AI Co., Ltd.</div>
+      </div>
+      <div class="footer-links">
+        <a href="/ja/guides/">ガイド</a>
+        <a href="/tools/disk-check/">容量チェック</a>
+        <a href="/support/">サポート</a>
+        <a href="/privacy/">Privacy</a>
+        <a href="/terms/">Terms</a>
+        <a href="/ja/feed.xml">RSS</a>
+        <a href="https://github.com/Ceelog/CleanBit-Mac-App" target="_blank" rel="noopener noreferrer">GitHub</a>
+        <a href="https://apps.apple.com/app/apple-store/id6829159531?pt=127116872&amp;ct=website-guides&amp;mt=8" target="_blank" rel="noopener noreferrer">Mac App Store</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+  (function(){
+    var frame = document.getElementById('showcase-frame');
+    var img = document.getElementById('showcase-img');
+    var cap = document.getElementById('showcase-caption');
+    document.querySelectorAll('[data-tab-btn]').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        document.querySelectorAll('[data-tab-btn]').forEach(function(b){ b.classList.remove('is-active'); b.setAttribute('aria-selected','false'); });
+        btn.classList.add('is-active');
+        btn.setAttribute('aria-selected','true');
+        if (img) { img.src = btn.dataset.src; img.alt = btn.dataset.alt; }
+        if (cap) cap.textContent = btn.dataset.caption;
+        if (frame) frame.setAttribute('data-tint', btn.dataset.tint);
+      });
+    });
+    document.querySelectorAll('[data-copy]').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        var pre = btn.closest('.code-block').querySelector('pre code');
+        if (!pre || !navigator.clipboard) return;
+        navigator.clipboard.writeText(pre.textContent || '').then(function(){
+          var old = btn.textContent;
+          btn.textContent = 'Copied';
+          setTimeout(function(){ btn.textContent = old; }, 1600);
+        });
+      });
+    });
+  })();
+  </script>
+  
+</body>
+</html>

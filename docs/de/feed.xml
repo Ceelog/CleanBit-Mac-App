@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>CleanBit Mac-Speicher-Guides</title>
+    <link>https://getcleanbit.app/de/</link>
+    <atom:link href="https://getcleanbit.app/de/feed.xml" rel="self" type="application/rss+xml" />
+    <description>Praxisnahe Anleitungen zum sicheren Freigeben von Mac-Speicherplatz für Entwickler.</description>
+    <language>de</language>
+
+  </channel>
+</rss>

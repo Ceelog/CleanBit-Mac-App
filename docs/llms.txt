@@ -2,7 +2,11 @@
 
 > Sandboxed Mac App Store disk cleaner for macOS 15+. Every item explains what it is and what happens if you remove it, and nothing is deleted until you confirm.
 
-- Official Site: https://getcleanbit.app/
+- Official Site (EN): https://getcleanbit.app/
+- Official Site (ZH): https://getcleanbit.app/zh/
+- Official Site (JA): https://getcleanbit.app/ja/
+- Official Site (DE): https://getcleanbit.app/de/
+- Interactive Read-Only Disk Audit Tool: https://getcleanbit.app/tools/disk-check/
 - Mac App Store: https://apps.apple.com/app/apple-store/id6829159531?pt=127116872&ct=website&mt=8
 - Product Demo Video (YouTube): https://www.youtube.com/watch?v=SQDQhvJGRfY
 - Requirements: macOS 15+, App Sandbox (no root, no background helper daemon)

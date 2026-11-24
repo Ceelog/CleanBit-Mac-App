@@ -8,6 +8,8 @@
   <link rel="canonical" href="https://getcleanbit.app/guides/claude-code-worktrees-disk-space-mac/" />
   <link rel="alternate" hreflang="en" href="https://getcleanbit.app/guides/claude-code-worktrees-disk-space-mac/" />
   <link rel="alternate" hreflang="zh-Hans" href="https://getcleanbit.app/zh/guides/" />
+  <link rel="alternate" hreflang="ja" href="https://getcleanbit.app/ja/guides/" />
+  <link rel="alternate" hreflang="de" href="https://getcleanbit.app/de/guides/" />
   <link rel="alternate" hreflang="x-default" href="https://getcleanbit.app/guides/claude-code-worktrees-disk-space-mac/" />
   <link rel="icon" type="image/png" href="/assets/favicon.png" />
   <link rel="apple-touch-icon" href="/assets/icon.png" />
@@ -23,17 +25,28 @@
   <meta name="twitter:description" content="Parallel Claude Code and Codex git worktrees duplicate node_modules, Rust target, and Swift .build folders. Audit them read-only and clean up safely on macOS." />
   <meta name="twitter:image" content="https://getcleanbit.app/assets/screens/en-artifacts.webp" />
   <meta name="theme-color" content="#111419" />
-  <link rel="stylesheet" href="/styles.css?v=bfa4b138" />
+  <link rel="stylesheet" href="/styles.css?v=8ec2702e" />
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Claude Code Worktrees Filling Your Disk? How to Find and Remove Leftover Git Worktrees","description":"Parallel Claude Code and Codex git worktrees duplicate node_modules, Rust target, and Swift .build folders. Audit them read-only and clean up safely on macOS.","datePublished":"2026-11-24","dateModified":"2026-11-24","inLanguage":"en","author":{"@type":"Organization","name":"CleanBit Developer","url":"https://getcleanbit.app/"},"publisher":{"@type":"Organization","name":"CleanBit","logo":{"@type":"ImageObject","url":"https://getcleanbit.app/assets/icon.png"}},"mainEntityOfPage":"https://getcleanbit.app/guides/claude-code-worktrees-disk-space-mac/","image":"https://getcleanbit.app/assets/screens/en-artifacts.webp"}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"CleanBit","item":"https://getcleanbit.app/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://getcleanbit.app/guides/"},{"@type":"ListItem","position":3,"name":"Claude Code Worktrees Filling Your Disk? How to Find and Remove Leftover Git Worktrees","item":"https://getcleanbit.app/guides/claude-code-worktrees-disk-space-mac/"}]}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Why do Claude Code worktrees take up so much disk space?","acceptedAnswer":{"@type":"Answer","text":"Git worktrees share your repository's .git object database, so source code and commit history take almost no extra space. The bloat comes from untracked dependencies and build caches—each parallel worktree installs its own node_modules, Rust target/, Swift .build/, or Python .venv/, multiplying disk usage by the number of active or forgotten worktrees."}},{"@type":"Question","name":"Is git worktree remove safer than rm -rf?","acceptedAnswer":{"@type":"Answer","text":"Yes. git worktree remove <path> refuses to delete a worktree if it has uncommitted changes or untracked files, and it cleans up the matching registration inside .git/worktrees/. Running rm -rf bypasses Git's safety checks and leaves stale worktree metadata behind until you run git worktree prune."}},{"@type":"Question","name":"What does git worktree prune actually delete?","acceptedAnswer":{"@type":"Answer","text":"git worktree prune does not delete live working directories or source files. It only removes stale administrative metadata files inside .git/worktrees/ that point to worktree folders which were already deleted or moved manually. You can preview its actions safely with git worktree prune --dry-run --verbose."}},{"@type":"Question","name":"Can I delete node_modules or target/ inside a worktree without deleting the worktree?","acceptedAnswer":{"@type":"Answer","text":"Yes, as long as no dev server, watcher, or coding agent is currently running in that worktree. Removing only node_modules, target/, or .build/ keeps your branch, uncommitted source files, and Git worktree intact—you just re-run npm install or cargo build if you return to that worktree later."}},{"@type":"Question","name":"Does CleanBit scan Claude Code and Codex worktrees?","acceptedAnswer":{"@type":"Answer","text":"CleanBit's Build Artifacts module scans ~/.claude/worktrees, ~/.codex/worktrees, and visible home folders for disposable build directories (node_modules, target, .build, .venv, etc.), parses .git gitdir: pointers to skip Git-tracked files, and moves selected build folders to the Trash. It does not remove Git worktree checkouts or branches themselves, and currently does not auto-scan ~/.cursor/worktrees or hidden repo subfolders like <repo>/.claude/worktrees."}}]}</script>
-  <script async src="https://www.googletagmanager.com/gtm.js?id=GTM-TFR7TV8Z"></script>
   <script>
+  (function(){
+    try {
+      var q = new URLSearchParams(location.search);
+      var f = q.get('analytics');
+      if (f === 'off') localStorage.setItem('cb_no_analytics', '1');
+      else if (f === 'on') localStorage.removeItem('cb_no_analytics');
+    } catch (e) {}
+    var off = navigator.doNotTrack === '1' || window.doNotTrack === '1';
+    try { if (localStorage.getItem('cb_no_analytics') === '1') off = true; } catch (e) {}
+    if (off) return;
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
+    window.gtag = gtag;
     gtag('js', new Date());
+    var s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtm.js?id=GTM-TFR7TV8Z';document.head.appendChild(s);
+  })();
   </script>
-  
 </head>
 <body>
   <header class="site-header">
@@ -43,15 +56,15 @@
         <span>CleanBit</span>
       </a>
       <nav class="nav" aria-label="Main navigation">
-        <a href="/#demo">Demo</a>
         <a href="/#features">Features</a>
         <a href="/#safety">Safety</a>
         <a href="/guides/" class="active">Guides</a>
+        <a href="/tools/disk-check/" class="">Disk Check</a>
         <a href="/#pricing">Pricing</a>
         <a href="/support/" class="">Support</a>
       </nav>
       <div class="header-actions">
-        <a class="lang-switch" href="/zh/guides/" hreflang="zh-Hans">中文</a>
+        <div class="lang-strip" aria-label="Language switcher"><a href="/guides/claude-code-worktrees-disk-space-mac/" hreflang="en" class="is-current" aria-current="page">EN</a><a href="/zh/guides/" hreflang="zh-Hans">中文</a><a href="/ja/guides/" hreflang="ja">日本語</a><a href="/de/guides/" hreflang="de">DE</a></div>
         <a class="pill pill-primary pill-sm" href="https://apps.apple.com/app/apple-store/id6829159531?pt=127116872&amp;ct=website-guides&amp;mt=8" target="_blank" rel="noopener noreferrer">Mac App Store</a>
       </div>
     </div>
@@ -232,6 +245,7 @@ rm -rf /path/to/paused-worktree/node_modules</code></pre></div>
       </div>
       <div class="footer-links">
         <a href="/guides/">Guides</a>
+        <a href="/tools/disk-check/">Disk Check</a>
         <a href="/support/">Support</a>
         <a href="/privacy/">Privacy</a>
         <a href="/terms/">Terms</a>
@@ -244,7 +258,6 @@ rm -rf /path/to/paused-worktree/node_modules</code></pre></div>
 
   <script>
   (function(){
-    // Interactive module-tinted screenshot switcher
     var frame = document.getElementById('showcase-frame');
     var img = document.getElementById('showcase-img');
     var cap = document.getElementById('showcase-caption');
@@ -258,7 +271,6 @@ rm -rf /path/to/paused-worktree/node_modules</code></pre></div>
         if (frame) frame.setAttribute('data-tint', btn.dataset.tint);
       });
     });
-    // One-click code block copy
     document.querySelectorAll('[data-copy]').forEach(function(btn){
       btn.addEventListener('click', function(){
         var pre = btn.closest('.code-block').querySelector('pre code');
@@ -272,5 +284,6 @@ rm -rf /path/to/paused-worktree/node_modules</code></pre></div>
     });
   })();
   </script>
+  
 </body>
 </html>

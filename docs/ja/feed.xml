@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>CleanBit Mac ストレージガイド</title>
+    <link>https://getcleanbit.app/ja/</link>
+    <atom:link href="https://getcleanbit.app/ja/feed.xml" rel="self" type="application/rss+xml" />
+    <description>Xcode、node_modules、AI コーディングツールなど Mac のディスク容量整理ガイド。</description>
+    <language>ja</language>
+
+  </channel>
+</rss>

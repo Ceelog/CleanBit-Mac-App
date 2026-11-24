@@ -8,6 +8,8 @@
   <link rel="canonical" href="https://getcleanbit.app/zh/" />
   <link rel="alternate" hreflang="en" href="https://getcleanbit.app/" />
   <link rel="alternate" hreflang="zh-Hans" href="https://getcleanbit.app/zh/" />
+  <link rel="alternate" hreflang="ja" href="https://getcleanbit.app/ja/" />
+  <link rel="alternate" hreflang="de" href="https://getcleanbit.app/de/" />
   <link rel="alternate" hreflang="x-default" href="https://getcleanbit.app/" />
   <link rel="icon" type="image/png" href="/assets/favicon.png" />
   <link rel="apple-touch-icon" href="/assets/icon.png" />
@@ -23,17 +25,28 @@
   <meta name="twitter:description" content="CleanBit 在你授权的个人文件夹里找出缓存、日志、项目构建产物和卸载残留。每一项都写明是什么、删了有什么影响，你确认之前什么都不删。" />
   <meta name="twitter:image" content="https://getcleanbit.app/assets/og-cover.png" />
   <meta name="theme-color" content="#111419" />
-  <link rel="stylesheet" href="/styles.css?v=bfa4b138" />
+  <link rel="stylesheet" href="/styles.css?v=8ec2702e" />
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"CleanBit: Disk Space Cleaner","softwareVersion":"1.0.1","operatingSystem":"macOS 15+","applicationCategory":"UtilitiesApplication","inLanguage":["en","zh-Hans","zh-Hant","ja","ko","fr","de","es","ru"],"downloadUrl":"https://apps.apple.com/app/apple-store/id6829159531?pt=127116872&ct=website&mt=8","url":"https://getcleanbit.app/zh/","image":"https://getcleanbit.app/assets/icon.png","screenshot":"https://getcleanbit.app/assets/screens/zh-smart-scan.webp","description":"CleanBit 在你授权的个人文件夹里找出缓存、日志、项目构建产物和卸载残留。每一项都写明是什么、删了有什么影响，你确认之前什么都不删。","offers":[{"@type":"Offer","price":"0","priceCurrency":"USD","description":"Free scan and first 2 cleans free"},{"@type":"Offer","price":"4.99","priceCurrency":"USD","description":"Monthly subscription"},{"@type":"Offer","price":"19.99","priceCurrency":"USD","description":"Yearly subscription"},{"@type":"Offer","price":"29.99","priceCurrency":"USD","description":"One-time lifetime purchase"}]}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"为什么 CleanBit 只上架 Mac App Store 且坚持使用沙盒？","acceptedAnswer":{"@type":"Answer","text":"App Sandbox 保证了 CleanBit 不需要 root 权限、不安装常驻后台的 helper，只能访问你在系统打开面板中明确授权的文件夹。完全磁盘访问权限是可选的，仅在需要清理废纸篓、Safari 和其他应用容器时才需要打开。"}},{"@type":"Question","name":"删掉的文件还能恢复吗？","acceptedAnswer":{"@type":"Answer","text":"按风险分级处理，确认前会写清楚。「建议清理」中会自动重建的缓存默认直接删除以立即腾出空间（你也可以在设置里改为移到废纸篓）；「需要确认」项、项目产物、手动选择的文件和卸载的应用一律移到废纸篓，可以放回原处。"}},{"@type":"Question","name":"为什么 CleanBit 不清理 APFS 本地快照或系统缓存？","acceptedAnswer":{"@type":"Answer","text":"这些位置受 macOS 系统保护，沙盒应用无法触碰。我们不要求 root 权限，也不假装能清理系统自己管理的空间，只专注处理个人文件夹内明确可安全检查的缓存、开发产物和残留。"}},{"@type":"Question","name":"CleanBit 会上传我的文件名或路径吗？","acceptedAnswer":{"@type":"Answer","text":"不会。扫描、重复文件校验和清理全部在你的 Mac 本地完成，文件名、路径、内容和已安装应用列表从不离开电脑。CleanBit 仅通过 Firebase Analytics 收集匿名使用统计（规则 ID、数量与体积）。"}},{"@type":"Question","name":"支持哪些 macOS 版本和语言？","acceptedAnswer":{"@type":"Answer","text":"CleanBit 使用 SwiftUI 原生开发，支持 macOS 15 及以上版本。1.0.1 起支持 9 种语言（跟随系统语言）：英语、简体中文、繁体中文、日语、韩语、法语、德语、西班牙语和俄语。"}}]}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"VideoObject","name":"实机录屏：看清 CleanBit 怎么扫描与确认清理","description":"完整演示智能扫描、项目产物、空间分析以及清理前的「废纸篓 / 永久删除」分栏确认流程。","thumbnailUrl":["https://i.ytimg.com/vi/SQDQhvJGRfY/hqdefault.jpg","https://getcleanbit.app/assets/og-cover.png"],"uploadDate":"2026-11-21","contentUrl":"https://www.youtube.com/watch?v=SQDQhvJGRfY","embedUrl":"https://www.youtube.com/embed/SQDQhvJGRfY"}</script>
-  <script async src="https://www.googletagmanager.com/gtm.js?id=GTM-TFR7TV8Z"></script>
   <script>
+  (function(){
+    try {
+      var q = new URLSearchParams(location.search);
+      var f = q.get('analytics');
+      if (f === 'off') localStorage.setItem('cb_no_analytics', '1');
+      else if (f === 'on') localStorage.removeItem('cb_no_analytics');
+    } catch (e) {}
+    var off = navigator.doNotTrack === '1' || window.doNotTrack === '1';
+    try { if (localStorage.getItem('cb_no_analytics') === '1') off = true; } catch (e) {}
+    if (off) return;
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
+    window.gtag = gtag;
     gtag('js', new Date());
+    var s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtm.js?id=GTM-TFR7TV8Z';document.head.appendChild(s);
+  })();
   </script>
-  
 </head>
 <body>
   <header class="site-header">
@@ -43,15 +56,15 @@
         <span>CleanBit</span>
       </a>
       <nav class="nav" aria-label="Main navigation">
-        <a href="/zh/#demo">视频演示</a>
         <a href="/zh/#features">功能</a>
         <a href="/zh/#safety">安全设计</a>
         <a href="/zh/guides/" class="">指南</a>
+        <a href="/tools/disk-check/" class="">排查命令</a>
         <a href="/zh/#pricing">定价</a>
         <a href="/support/" class="">支持</a>
       </nav>
       <div class="header-actions">
-        <a class="lang-switch" href="/" hreflang="en">English</a>
+        <div class="lang-strip" aria-label="Language switcher"><a href="/" hreflang="en">EN</a><a href="/zh/" hreflang="zh-Hans" class="is-current" aria-current="page">中文</a><a href="/ja/" hreflang="ja">日本語</a><a href="/de/" hreflang="de">DE</a></div>
         <a class="pill pill-primary pill-sm" href="https://apps.apple.com/app/apple-store/id6829159531?pt=127116872&amp;ct=website&amp;mt=8" target="_blank" rel="noopener noreferrer">Mac App Store</a>
       </div>
     </div>
@@ -67,7 +80,7 @@
       <div class="hero-cta">
         <a class="pill pill-primary" href="https://apps.apple.com/app/apple-store/id6829159531?pt=127116872&amp;ct=website&amp;mt=8" target="_blank" rel="noopener noreferrer">前往 Mac App Store 下载</a>
         <a class="pill pill-secondary" href="#demo">▶ 观看演示视频</a>
-        <a class="pill pill-secondary" href="/zh/guides/">阅读 Mac 空间清理指南</a>
+        <a class="pill pill-secondary" href="/tools/disk-check/">排查命令</a>
       </div>
       <div class="hero-trust">不要 root · 不装后台 helper · 扫描免费、前 2 次清理免费 · 支持一次买断</div>
 
@@ -252,6 +265,7 @@
       </div>
       <div class="footer-links">
         <a href="/zh/guides/">指南</a>
+        <a href="/tools/disk-check/">排查命令</a>
         <a href="/support/">支持</a>
         <a href="/privacy/">Privacy</a>
         <a href="/terms/">Terms</a>
@@ -264,7 +278,6 @@
 
   <script>
   (function(){
-    // Interactive module-tinted screenshot switcher
     var frame = document.getElementById('showcase-frame');
     var img = document.getElementById('showcase-img');
     var cap = document.getElementById('showcase-caption');
@@ -278,7 +291,6 @@
         if (frame) frame.setAttribute('data-tint', btn.dataset.tint);
       });
     });
-    // One-click code block copy
     document.querySelectorAll('[data-copy]').forEach(function(btn){
       btn.addEventListener('click', function(){
         var pre = btn.closest('.code-block').querySelector('pre code');
@@ -292,5 +304,6 @@
     });
   })();
   </script>
+  
 </body>
 </html>
