@@ -4,7 +4,7 @@ description: Yes, Xcode DerivedData is safe to delete. Learn what lives inside D
 target_query: is deriveddata safe to delete
 category: Developer Storage
 date: 2026-11-21
-updated: 2026-11-23
+updated: 2026-11-25
 image: /assets/screens/en-smart-scan.webp
 ai_disclosure: Written by the CleanBit developer with AI assistance. All measurements were taken on a real developer Mac.
 ---
@@ -66,7 +66,7 @@ rm -rf ~/Library/Developer/Xcode/DerivedData/*
 | `Xcode/Archives` | **Review carefully** | Contains `.xcarchive` builds & dSYMs used to symbolicate App Store crash logs—do not delete blindly |
 
 > [!NOTE]
-> `DerivedData` is only one piece of developer storage. Before deleting `Archives`, make sure you no longer need the dSYM files for shipped app versions. For the even larger folders right next to `DerivedData`, see our guide on [safely cleaning `iOS DeviceSupport` and Xcode Simulators](/guides/ios-devicesupport-and-simulators-disk-space-mac/). You can also check [whether it is safe to delete `~/Library/Caches` on a Mac](/guides/is-it-safe-to-delete-library-caches-mac/), [where Claude Code, Cursor, and Codex store disk space on macOS](/guides/claude-code-cursor-codex-disk-space-mac/), and [cleaning old `node_modules` folders](/guides/how-to-find-and-delete-old-node-modules-on-mac/).
+> `DerivedData` is only one piece of developer storage. Before deleting `Archives`, make sure you no longer need the dSYM files for shipped app versions. For the even larger folders right next to `DerivedData`, see our guide on [safely cleaning `iOS DeviceSupport` and Xcode Simulators](/guides/ios-devicesupport-and-simulators-disk-space-mac/). You can also check [whether it is safe to delete `~/Library/Caches` on a Mac](/guides/is-it-safe-to-delete-library-caches-mac/), [where Claude Code, Cursor, and Codex store disk space on macOS](/guides/claude-code-cursor-codex-disk-space-mac/), [cleaning old `node_modules` folders](/guides/how-to-find-and-delete-old-node-modules-on-mac/), or our side-by-side comparison of the [best sandboxed disk cleaners on the Mac App Store](/guides/best-disk-cleaners-mac-app-store/).
 
 ## How CleanBit handles Xcode storage
 

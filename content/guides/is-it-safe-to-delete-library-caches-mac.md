@@ -4,7 +4,7 @@ description: Yes—most files inside ~/Library/Caches are safe to clear on macOS
 target_query: clear cache mac
 category: Mac Storage
 date: 2026-11-23
-updated: 2026-11-24
+updated: 2026-11-25
 image: /assets/screens/en-smart-scan.webp
 ai_disclosure: Written by the CleanBit developer with AI assistance. All measurements were taken on a real developer Mac.
 ---
@@ -99,7 +99,7 @@ pnpm store prune
 
 ### What if `~/Library/Caches` is only a few gigabytes?
 
-On many Macs—especially developer or AI-coding machines—`~/Library/Caches` is not the main reason storage is full. If your disk is still tight after checking caches, check our dedicated guides on [whether Xcode `DerivedData` is safe to delete](/guides/is-xcode-deriveddata-safe-to-delete/), [cleaning `iOS DeviceSupport` and Xcode Simulators](/guides/ios-devicesupport-and-simulators-disk-space-mac/), [finding and deleting old `node_modules` folders](/guides/how-to-find-and-delete-old-node-modules-on-mac/), [removing leftover Claude Code git worktrees](/guides/claude-code-worktrees-disk-space-mac/), and [tracking down Claude Code, Cursor, and Codex disk space](/guides/claude-code-cursor-codex-disk-space-mac/).
+On many Macs—especially developer or AI-coding machines—`~/Library/Caches` is not the main reason storage is full. If your disk is still tight after checking caches, check our dedicated guides on [whether Xcode `DerivedData` is safe to delete](/guides/is-xcode-deriveddata-safe-to-delete/), [cleaning `iOS DeviceSupport` and Xcode Simulators](/guides/ios-devicesupport-and-simulators-disk-space-mac/), [finding and deleting old `node_modules` folders](/guides/how-to-find-and-delete-old-node-modules-on-mac/), [removing leftover Claude Code git worktrees](/guides/claude-code-worktrees-disk-space-mac/), [tracking down Claude Code, Cursor, and Codex disk space](/guides/claude-code-cursor-codex-disk-space-mac/), or compare options in our [best Mac App Store disk cleaners guide](/guides/best-disk-cleaners-mac-app-store/).
 
 ## 4. How CleanBit handles `~/Library/Caches` (and its sandbox boundaries)
 

@@ -29,6 +29,7 @@ CleanBit is a native SwiftUI disk space cleaner built for macOS 15+ and distribu
 
 Practical Mac storage guides with manual Terminal and Finder steps:
 
+- [Best Disk Cleaners on the Mac App Store (2026): Sandboxed, No Root & One-Time Purchase Options](https://getcleanbit.app/guides/best-disk-cleaners-mac-app-store/)
 - [Claude Code Worktrees Filling Your Disk? How to Find and Remove Leftover Git Worktrees](https://getcleanbit.app/guides/claude-code-worktrees-disk-space-mac/)
 - [Is It Safe to Delete `~/Library/Caches` on a Mac? How to Clear Cache Safely](https://getcleanbit.app/guides/is-it-safe-to-delete-library-caches-mac/)
 - [iOS DeviceSupport and Simulators Taking 40 GB? What You Can Safely Remove](https://getcleanbit.app/guides/ios-devicesupport-and-simulators-disk-space-mac/)

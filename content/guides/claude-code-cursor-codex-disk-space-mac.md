@@ -4,7 +4,7 @@ description: Find out why Claude Code, Cursor, and Codex consume gigabytes on ma
 target_query: claude code disk space mac
 category: AI & Developer Storage
 date: 2026-11-21
-updated: 2026-11-24
+updated: 2026-11-25
 image: /assets/screens/en-smart-scan.webp
 ai_disclosure: Written by the CleanBit developer with AI assistance. All measurements were taken on a real developer Mac.
 ---
@@ -109,7 +109,7 @@ git worktree remove /path/to/old-worktree
 git worktree prune
 ```
 
-For a complete walkthrough of checking unmerged branches, using `git worktree remove` and `git worktree prune`, and cleaning duplicated build trees inside parallel agent checkouts, see our dedicated guide on [finding and removing leftover Claude Code git worktrees](/guides/claude-code-worktrees-disk-space-mac/). To audit other large storage folders on macOS, see our guides on [finding and deleting old `node_modules` folders on a Mac](/guides/how-to-find-and-delete-old-node-modules-on-mac/), [cleaning Xcode `DerivedData` safely](/guides/is-xcode-deriveddata-safe-to-delete/), [reclaiming space from `iOS DeviceSupport` and Xcode Simulators](/guides/ios-devicesupport-and-simulators-disk-space-mac/), and [whether `~/Library/Caches` is safe to delete on a Mac](/guides/is-it-safe-to-delete-library-caches-mac/).
+For a complete walkthrough of checking unmerged branches, using `git worktree remove` and `git worktree prune`, and cleaning duplicated build trees inside parallel agent checkouts, see our dedicated guide on [finding and removing leftover Claude Code git worktrees](/guides/claude-code-worktrees-disk-space-mac/). To audit other large storage folders on macOS, see our guides on [finding and deleting old `node_modules` folders on a Mac](/guides/how-to-find-and-delete-old-node-modules-on-mac/), [cleaning Xcode `DerivedData` safely](/guides/is-xcode-deriveddata-safe-to-delete/), [reclaiming space from `iOS DeviceSupport` and Xcode Simulators](/guides/ios-devicesupport-and-simulators-disk-space-mac/), [whether `~/Library/Caches` is safe to delete on a Mac](/guides/is-it-safe-to-delete-library-caches-mac/), or our comparison of the [best sandboxed disk cleaners on the Mac App Store](/guides/best-disk-cleaners-mac-app-store/).
 
 > [!WARNING]
 > **Be cautious about asking an AI coding agent to free disk space for you.** In the same `r/ClaudeCode` thread mentioned above, a user reported that the agent misidentified a folder containing source code as build artifacts and deleted it. Always inspect paths yourself and prefer moving project directories to the Trash over running blind `rm -rf` commands.

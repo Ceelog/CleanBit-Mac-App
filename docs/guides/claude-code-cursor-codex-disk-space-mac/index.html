@@ -26,7 +26,7 @@
   <meta name="twitter:image" content="https://getcleanbit.app/assets/screens/en-smart-scan.webp" />
   <meta name="theme-color" content="#111419" />
   <link rel="stylesheet" href="/styles.css?v=8ec2702e" />
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Claude Code, Cursor and Codex Eating Disk Space on Your Mac? Here's Where It Goes","description":"Find out why Claude Code, Cursor, and Codex consume gigabytes on macOS. Includes real developer Mac measurements, read-only audit commands, and safe cleanup steps.","datePublished":"2026-11-21","dateModified":"2026-11-24","inLanguage":"en","author":{"@type":"Organization","name":"CleanBit Developer","url":"https://getcleanbit.app/"},"publisher":{"@type":"Organization","name":"CleanBit","logo":{"@type":"ImageObject","url":"https://getcleanbit.app/assets/icon.png"}},"mainEntityOfPage":"https://getcleanbit.app/guides/claude-code-cursor-codex-disk-space-mac/","image":"https://getcleanbit.app/assets/screens/en-smart-scan.webp"}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Claude Code, Cursor and Codex Eating Disk Space on Your Mac? Here's Where It Goes","description":"Find out why Claude Code, Cursor, and Codex consume gigabytes on macOS. Includes real developer Mac measurements, read-only audit commands, and safe cleanup steps.","datePublished":"2026-11-21","dateModified":"2026-11-25","inLanguage":"en","author":{"@type":"Organization","name":"CleanBit Developer","url":"https://getcleanbit.app/"},"publisher":{"@type":"Organization","name":"CleanBit","logo":{"@type":"ImageObject","url":"https://getcleanbit.app/assets/icon.png"}},"mainEntityOfPage":"https://getcleanbit.app/guides/claude-code-cursor-codex-disk-space-mac/","image":"https://getcleanbit.app/assets/screens/en-smart-scan.webp"}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"CleanBit","item":"https://getcleanbit.app/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://getcleanbit.app/guides/"},{"@type":"ListItem","position":3,"name":"Claude Code, Cursor and Codex Eating Disk Space on Your Mac? Here's Where It Goes","item":"https://getcleanbit.app/guides/claude-code-cursor-codex-disk-space-mac/"}]}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Will deleting ~/.claude/projects/*.jsonl erase my Claude Code CLAUDE.md or project memory?","acceptedAnswer":{"@type":"Answer","text":"No, as long as you only delete the .jsonl session transcript files at the top level of each project folder under ~/.claude/projects and do not delete the memory/ subdirectory or CLAUDE.md files inside your repositories. Removing a .jsonl transcript only prevents resuming that specific past conversation."}},{"@type":"Question","name":"Why did my Mac fill up so fast while using Claude Code or Codex?","acceptedAnswer":{"@type":"Answer","text":"Three factors compound quickly: screenshots pasted into agent chats get stored as base64 data inside .jsonl transcripts; each git worktree created for parallel tasks often installs its own full copy of node_modules, Rust target, or Swift .build; and background tool runs can accumulate package caches (npm, uv, Cargo) or temporary Xcode builds."}},{"@type":"Question","name":"Does CleanBit clean Cursor caches or /private/tmp?","acceptedAnswer":{"@type":"Answer","text":"No. CleanBit currently does not have a dedicated Cursor cleaner rule, and because CleanBit runs inside Apple's Mac App Store App Sandbox without root access, it cannot read or delete files in /private/tmp outside your home folder. Use the manual commands in Section 3 for both."}},{"@type":"Question","name":"Can CleanBit delete my local Ollama or Hugging Face models by mistake?","acceptedAnswer":{"@type":"Answer","text":"No. Local model directories (~/.ollama/models, ~/.lmstudio/models, ~/.cache/huggingface/hub, and ~/.cache/torch) are marked Info Only in CleanBit—they are listed so you can see their size, and cannot be selected for deletion."}}]}</script>
   <script>
@@ -90,7 +90,7 @@
             <div class="article-meta">
               <span>CleanBit Developer</span>
               <span>·</span>
-              <span>Updated 2026-11-24</span>
+              <span>Updated 2026-11-25</span>
               <span>·</span>
               <span>8 min read</span>
             </div>
@@ -145,7 +145,7 @@ git worktree list</code></pre></div>
 <p>If a worktree branch is already merged and has no uncommitted changes, remove it cleanly through Git rather than <code>rm -rf</code>:</p>
 <div class="code-block"><div class="code-head"><span class="code-lang">bash</span><button type="button" class="code-copy" data-copy>Copy</button></div><pre><code>git worktree remove /path/to/old-worktree
 git worktree prune</code></pre></div>
-<p>For a complete walkthrough of checking unmerged branches, using <code>git worktree remove</code> and <code>git worktree prune</code>, and cleaning duplicated build trees inside parallel agent checkouts, see our dedicated guide on <a href="/guides/claude-code-worktrees-disk-space-mac/">finding and removing leftover Claude Code git worktrees</a>. To audit other large storage folders on macOS, see our guides on <a href="/guides/how-to-find-and-delete-old-node-modules-on-mac/">finding and deleting old <code>node_modules</code> folders on a Mac</a>, <a href="/guides/is-xcode-deriveddata-safe-to-delete/">cleaning Xcode <code>DerivedData</code> safely</a>, <a href="/guides/ios-devicesupport-and-simulators-disk-space-mac/">reclaiming space from <code>iOS DeviceSupport</code> and Xcode Simulators</a>, and <a href="/guides/is-it-safe-to-delete-library-caches-mac/">whether <code>~/Library/Caches</code> is safe to delete on a Mac</a>.</p>
+<p>For a complete walkthrough of checking unmerged branches, using <code>git worktree remove</code> and <code>git worktree prune</code>, and cleaning duplicated build trees inside parallel agent checkouts, see our dedicated guide on <a href="/guides/claude-code-worktrees-disk-space-mac/">finding and removing leftover Claude Code git worktrees</a>. To audit other large storage folders on macOS, see our guides on <a href="/guides/how-to-find-and-delete-old-node-modules-on-mac/">finding and deleting old <code>node_modules</code> folders on a Mac</a>, <a href="/guides/is-xcode-deriveddata-safe-to-delete/">cleaning Xcode <code>DerivedData</code> safely</a>, <a href="/guides/ios-devicesupport-and-simulators-disk-space-mac/">reclaiming space from <code>iOS DeviceSupport</code> and Xcode Simulators</a>, <a href="/guides/is-it-safe-to-delete-library-caches-mac/">whether <code>~/Library/Caches</code> is safe to delete on a Mac</a>, or our comparison of the <a href="/guides/best-disk-cleaners-mac-app-store/">best sandboxed disk cleaners on the Mac App Store</a>.</p>
 <aside class="callout callout-warning"><div class="callout-title">WARNING</div><p><strong>Be cautious about asking an AI coding agent to free disk space for you.</strong> In the same <code>r/ClaudeCode</code> thread mentioned above, a user reported that the agent misidentified a folder containing source code as build artifacts and deleted it. Always inspect paths yourself and prefer moving project directories to the Trash over running blind <code>rm -rf</code> commands.</p></aside>
 <h3 id="check-privatetmp-and-local-ai-models">Check <code>/private/tmp</code> and local AI models<a class="heading-anchor" href="#check-privatetmp-and-local-ai-models" aria-label="Link to section">#</a></h3>
 <ul><li><strong><code>/private/tmp</code></strong>: Some agent runs redirect temporary build outputs (like Xcode <code>DerivedData</code> or test sandboxes) into <code>/private/tmp</code>. Because <code>/private/tmp</code> sits outside your home folder, sandboxed Mac App Store apps cannot inspect or clean it. A normal macOS restart clears stale <code>/private/tmp</code> items, or you can inspect <code>/private/tmp</code> in Terminal when no builds are running.</li><li><strong>Local models</strong>: Reclaim Ollama models with <code>ollama list</code> followed by <code>ollama rm &lt;model&gt;</code>. For Hugging Face caches (<code>~/.cache/huggingface/hub</code>), use <code>hf cache scan</code> / <code>huggingface-cli delete-cache</code> so you don&#39;t accidentally re-download a 15 GB model you still use.</li></ul>
@@ -176,22 +176,22 @@ git worktree prune</code></pre></div>
           <section style="margin-top:44px">
         <h2 style="font-size:20px;margin:0 0 16px">Related guides</h2>
         <div class="grid-2">
-          <a class="card guide-card" href="/guides/is-it-safe-to-delete-library-caches-mac/">
+          <a class="card guide-card" href="/guides/is-xcode-deriveddata-safe-to-delete/">
+                <div>
+                  <div class="guide-meta"><span>Developer Storage</span><span>·</span><span>4 min read</span></div>
+                  <h3 style="margin-top:6px;font-size:16px">Is Xcode DerivedData Safe to Delete? What Happens and How to Clean It</h3>
+                </div>
+                <span class="guide-more">Read guide →</span>
+              </a><a class="card guide-card" href="/guides/is-it-safe-to-delete-library-caches-mac/">
                 <div>
                   <div class="guide-meta"><span>Mac Storage</span><span>·</span><span>9 min read</span></div>
                   <h3 style="margin-top:6px;font-size:16px">Is It Safe to Delete ~/Library/Caches on a Mac? How to Clear Cache Safely</h3>
                 </div>
                 <span class="guide-more">Read guide →</span>
-              </a><a class="card guide-card" href="/guides/how-to-find-and-delete-old-node-modules-on-mac/">
+              </a><a class="card guide-card" href="/guides/best-disk-cleaners-mac-app-store/">
                 <div>
-                  <div class="guide-meta"><span>Developer Storage</span><span>·</span><span>4 min read</span></div>
-                  <h3 style="margin-top:6px;font-size:16px">How to Find and Delete Old node_modules Folders on a Mac</h3>
-                </div>
-                <span class="guide-more">Read guide →</span>
-              </a><a class="card guide-card" href="/guides/claude-code-worktrees-disk-space-mac/">
-                <div>
-                  <div class="guide-meta"><span>AI &amp; Developer Storage</span><span>·</span><span>9 min read</span></div>
-                  <h3 style="margin-top:6px;font-size:16px">Claude Code Worktrees Filling Your Disk? How to Find and Remove Leftover Git Worktrees</h3>
+                  <div class="guide-meta"><span>Buying Guides</span><span>·</span><span>15 min read</span></div>
+                  <h3 style="margin-top:6px;font-size:16px">Best Disk Cleaners on the Mac App Store (2026): Sandboxed, No Root &amp; One-Time Purchase Options</h3>
                 </div>
                 <span class="guide-more">Read guide →</span>
               </a>
