@@ -991,7 +991,7 @@ export function renderHome(lang, guides, ctx) {
           `https://i.ytimg.com/vi/${ctx.config.youtubeVideoId}/hqdefault.jpg`,
           ctx.absUrl('/assets/og-cover.png')
         ],
-        uploadDate: '2026-11-21',
+        uploadDate: '2026-11-21T00:00:00Z',
         contentUrl: `https://www.youtube.com/watch?v=${ctx.config.youtubeVideoId}`,
         embedUrl: `https://www.youtube.com/embed/${ctx.config.youtubeVideoId}`
       }
