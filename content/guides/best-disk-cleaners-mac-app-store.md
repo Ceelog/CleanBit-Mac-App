@@ -4,7 +4,7 @@ description: Compare 7 sandboxed Mac App Store disk cleaners (2026)—including 
 target_query: best disk cleaner for mac
 category: Buying Guides
 date: 2026-11-25
-updated: 2026-11-25
+updated: 2026-11-26
 image: /assets/screens/en-smart-scan.webp
 competitor_list: true
 ai_disclosure: Written by the CleanBit developer with AI assistance. All Mac App Store prices, versions, and features were verified from public US Mac App Store listings on 2026-11-25.
@@ -120,7 +120,7 @@ Because Apple requires every Mac App Store app to run in the **App Sandbox**, al
 - **What they CAN safely inspect and clean:** Files inside your user home folder (`~`) that you grant access to—including `~/Downloads` (old `.dmg`/`.pkg` installers), `~/Library/Caches` and browser caches (see our guide on [whether `~/Library/Caches` is safe to delete](/guides/is-it-safe-to-delete-library-caches-mac/)), `~/Library/Logs`, Xcode (`~/Library/Developer`, covered in our [Xcode DerivedData guide](/guides/is-xcode-deriveddata-safe-to-delete/)), package manager caches, project build folders like [`node_modules`](/guides/how-to-find-and-delete-old-node-modules-on-mac/) and [Claude Code git worktrees](/guides/claude-code-worktrees-disk-space-mac/), large personal files, duplicates, and app leftovers.
 - **What they CANNOT touch (and why):** Protected macOS system directories (`/System/Library/Caches`, `/Library/Caches`), `/private/tmp`, and **APFS local snapshots** (often the real culprit behind an oversized "System Data" bar in System Settings). Those areas require root privileges or macOS's own `tmutil` management, and macOS normally purges APFS snapshots automatically when storage runs low.
 
-Want to inspect where your storage actually went before installing *any* app? Use our free, zero-install [Mac Disk Check audit script generator](/tools/disk-check/) to copy a read-only Terminal command (`du` and `find` only—zero deletions).
+Want to inspect where your storage actually went before installing *any* app? Use our free, zero-install [Mac Disk Check audit script generator](/tools/disk-check/) to copy a read-only Terminal command (`du` and `find` only—zero deletions). If you primarily clean Xcode, `node_modules`, Docker, and AI coding caches and want to compare CLI tools (`npkill`, `kondo`, Mole, `docker`/`simctl`) against GUI apps, see our dedicated [developer disk cleaners comparison for Mac (CLI & GUI)](/guides/best-developer-disk-cleaners-mac/).
 
 ## Frequently Asked Questions
 

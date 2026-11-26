@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Best Tools to Clean Up Developer Disk Space on a Mac (2026): Xcode, node_modules &amp; Docker (CLI &amp; GUI) — CleanBit</title>
+  <meta name="description" content="Compare the best CLI and GUI developer disk cleaners for Mac (2026) for Xcode DerivedData, node_modules, Docker, and AI caches—with safety tiers and real Mac data." />
+  <link rel="canonical" href="https://getcleanbit.app/guides/best-developer-disk-cleaners-mac/" />
+  <link rel="alternate" hreflang="en" href="https://getcleanbit.app/guides/best-developer-disk-cleaners-mac/" />
+  <link rel="alternate" hreflang="zh-Hans" href="https://getcleanbit.app/zh/guides/" />
+  <link rel="alternate" hreflang="ja" href="https://getcleanbit.app/ja/guides/" />
+  <link rel="alternate" hreflang="de" href="https://getcleanbit.app/de/guides/" />
+  <link rel="alternate" hreflang="x-default" href="https://getcleanbit.app/guides/best-developer-disk-cleaners-mac/" />
+  <link rel="icon" type="image/png" href="/assets/favicon.png" />
+  <link rel="apple-touch-icon" href="/assets/icon.png" />
+  <link rel="alternate" type="application/rss+xml" title="CleanBit Guides (English)" href="https://getcleanbit.app/feed.xml" />
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="CleanBit" />
+  <meta property="og:title" content="Best Tools to Clean Up Developer Disk Space on a Mac (2026): Xcode, node_modules &amp; Docker (CLI &amp; GUI) — CleanBit" />
+  <meta property="og:description" content="Compare the best CLI and GUI developer disk cleaners for Mac (2026) for Xcode DerivedData, node_modules, Docker, and AI caches—with safety tiers and real Mac data." />
+  <meta property="og:url" content="https://getcleanbit.app/guides/best-developer-disk-cleaners-mac/" />
+  <meta property="og:image" content="https://getcleanbit.app/assets/screens/en-artifacts.webp" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Best Tools to Clean Up Developer Disk Space on a Mac (2026): Xcode, node_modules &amp; Docker (CLI &amp; GUI) — CleanBit" />
+  <meta name="twitter:description" content="Compare the best CLI and GUI developer disk cleaners for Mac (2026) for Xcode DerivedData, node_modules, Docker, and AI caches—with safety tiers and real Mac data." />
+  <meta name="twitter:image" content="https://getcleanbit.app/assets/screens/en-artifacts.webp" />
+  <meta name="theme-color" content="#111419" />
+  <link rel="stylesheet" href="/styles.css?v=8ec2702e" />
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Best Tools to Clean Up Developer Disk Space on a Mac (2026): Xcode, node_modules & Docker (CLI & GUI)","description":"Compare the best CLI and GUI developer disk cleaners for Mac (2026) for Xcode DerivedData, node_modules, Docker, and AI caches—with safety tiers and real Mac data.","datePublished":"2026-11-26","dateModified":"2026-11-26","inLanguage":"en","author":{"@type":"Organization","name":"CleanBit Developer","url":"https://getcleanbit.app/"},"publisher":{"@type":"Organization","name":"CleanBit","logo":{"@type":"ImageObject","url":"https://getcleanbit.app/assets/icon.png"}},"mainEntityOfPage":"https://getcleanbit.app/guides/best-developer-disk-cleaners-mac/","image":"https://getcleanbit.app/assets/screens/en-artifacts.webp"}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"CleanBit","item":"https://getcleanbit.app/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://getcleanbit.app/guides/"},{"@type":"ListItem","position":3,"name":"Best Tools to Clean Up Developer Disk Space on a Mac (2026): Xcode, node_modules & Docker (CLI & GUI)","item":"https://getcleanbit.app/guides/best-developer-disk-cleaners-mac/"}]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is the safest way to clean developer disk space on a Mac without breaking projects?","acceptedAnswer":{"@type":"Answer","text":"Start with a read-only audit (du / docker system df / xcrun simctl runtime list, or a free visual scan) before deleting anything. Quit Xcode and stop active dev servers first, use first-party commands for Docker and Simulator runtimes, never delete directories containing Git-tracked files, and move project build artifacts (node_modules, target/, .build/) to the Trash rather than running blind rm -rf."}},{"@type":"Question","name":"Should I use a CLI tool like npkill / kondo or a GUI cleaner like CleanBit?","acceptedAnswer":{"@type":"Answer","text":"Use CLI tools (npkill, kondo, docker system prune, xcrun simctl) if you prefer Terminal workflows, want scriptable age filters, or need to prune Docker images and Simulator OS runtimes. Use a sandboxed Mac App Store GUI like CleanBit if you want one place to inspect Xcode caches, 12+ package managers, Git-safe build artifacts, AI coding sessions, and everyday Mac clutter with plain-language impact notes and Trash recovery—especially on a company-managed Mac."}},{"@type":"Question","name":"Can any Mac App Store disk cleaner shrink Docker Desktop's Docker.raw file?","acceptedAnswer":{"@type":"Answer","text":"No sandboxed Mac App Store app should delete Docker.raw directly, because removing that virtual disk image wipes all of your Docker images, containers, and volumes at once. CleanBit lists Docker Desktop's disk image as Info Only so you can see its size, and you should reclaim space inside Docker using docker system prune and docker builder prune (or Docker Desktop's Disk Usage UI)."}},{"@type":"Question","name":"How do I clean node_modules and target/ inside Claude Code or Codex git worktrees?","acceptedAnswer":{"@type":"Answer","text":"Each parallel git worktree creates its own untracked node_modules, Rust target/, or Swift .build/ directory. Check git worktree list and use git worktree remove <path> after merging, or delete only the disposable build folder inside paused worktrees. CleanBit's Build Artifacts module automatically scans ~/.claude/worktrees and ~/.codex/worktrees, parses .git gitdir: pointers to skip Git-tracked files, and moves selected build folders to the Trash."}},{"@type":"Question","name":"Is it safe to delete ~/Library/Developer/Xcode/DerivedData and old iOS DeviceSupport?","acceptedAnswer":{"@type":"Answer","text":"Yes—Xcode regenerates DerivedData on the next build and re-copies DeviceSupport symbols if you reconnect an older physical iOS device. Quit Xcode first, keep the 1–2 newest iOS DeviceSupport versions for devices you actively debug, and review Xcode/Archives carefully so you do not delete .xcarchive dSYM bundles needed for crash symbolication."}},{"@type":"Question","name":"What is free to use in CleanBit before paying?","acceptedAnswer":{"@type":"Answer","text":"Scanning, Space Analysis, Large Files, Duplicate Files inspection, and your first 2 cleans are free on the Mac App Store—no account signup required. Unlimited cleaning is available via $4.99/month, $19.99/year, or a $29.99 one-time lifetime purchase (US Mac App Store pricing verified 2026-11-26)."}}]}</script>
+  <script>
+  (function(){
+    try {
+      var q = new URLSearchParams(location.search);
+      var f = q.get('analytics');
+      if (f === 'off') localStorage.setItem('cb_no_analytics', '1');
+      else if (f === 'on') localStorage.removeItem('cb_no_analytics');
+    } catch (e) {}
+    var off = navigator.doNotTrack === '1' || window.doNotTrack === '1';
+    try { if (localStorage.getItem('cb_no_analytics') === '1') off = true; } catch (e) {}
+    if (off) return;
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    window.gtag = gtag;
+    gtag('js', new Date());
+    var s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtm.js?id=GTM-TFR7TV8Z';document.head.appendChild(s);
+  })();
+  </script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="/">
+        <img src="/assets/icon.png" alt="CleanBit icon" width="28" height="28" />
+        <span>CleanBit</span>
+      </a>
+      <nav class="nav" aria-label="Main navigation">
+        <a href="/#features">Features</a>
+        <a href="/#safety">Safety</a>
+        <a href="/guides/" class="active">Guides</a>
+        <a href="/tools/disk-check/" class="">Disk Check</a>
+        <a href="/#pricing">Pricing</a>
+        <a href="/support/" class="">Support</a>
+      </nav>
+      <div class="header-actions">
+        <div class="lang-strip" aria-label="Language switcher"><a href="/guides/best-developer-disk-cleaners-mac/" hreflang="en" class="is-current" aria-current="page">EN</a><a href="/zh/guides/" hreflang="zh-Hans">中文</a><a href="/ja/guides/" hreflang="ja">日本語</a><a href="/de/guides/" hreflang="de">DE</a></div>
+        <a class="pill pill-primary pill-sm" href="https://apps.apple.com/app/apple-store/id6829159531?pt=127116872&amp;ct=website-guides&amp;mt=8" target="_blank" rel="noopener noreferrer">Mac App Store</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+  <article class="article-shell">
+    <div class="container">
+      <div class="breadcrumbs">
+        <a href="/">CleanBit</a>
+        <span>/</span>
+        <a href="/guides/">Guides</a>
+        <span>/</span>
+        <span>Buying Guides</span>
+      </div>
+      <div class="article-grid">
+        <div>
+          <header class="article-header">
+            <div class="badge">Buying Guides</div>
+            <h1>Best Tools to Clean Up Developer Disk Space on a Mac (2026): Xcode, node_modules &amp; Docker (CLI &amp; GUI)</h1>
+            <p class="article-lead">Compare the best CLI and GUI developer disk cleaners for Mac (2026) for Xcode DerivedData, node_modules, Docker, and AI caches—with safety tiers and real Mac data.</p>
+            <div class="article-meta">
+              <span>CleanBit Developer</span>
+              <span>·</span>
+              <span>Updated 2026-11-26</span>
+              <span>·</span>
+              <span>16 min read</span>
+            </div>
+          </header>
+
+          <div class="prose">
+            <aside class="callout callout-note"><div class="callout-title">NOTE</div><p><strong>Disclosure:</strong> This comparison was written by the developer of <strong>CleanBit</strong>. Every open-source repository, license, release tag, and Mac App Store price below was verified from public GitHub and US Mac App Store listings on <strong>2026-11-26</strong>.</p></aside>
+<p><strong>Which developer disk cleanup tool should you use on a Mac?</strong> There is no single tool that handles everything safely, because Docker virtual disks and Xcode Simulator OS runtimes live outside normal user cache rules. If you want a <strong>Mac App Store sandboxed GUI</strong> that shows per-item impact notes, lists <code>node_modules</code> / Rust <code>target/</code> / Swift <code>.build/</code> with last-modified dates, skips Git-tracked files, moves build folders to the Trash, and offers a one-time lifetime purchase, start with <strong>CleanBit</strong> (<a href="https://apps.apple.com/app/apple-store/id6829159531?pt=127116872&amp;amp;ct=website-guides&amp;amp;mt=8" target="_blank" rel="noopener noreferrer">Download on the Mac App Store</a> — free scan and first 2 cleans free). If you prefer <strong>open-source CLI tools</strong> in your Terminal, pair <strong><code>npkill</code></strong> or <strong><code>kondo</code></strong> for project artifacts with first-party commands (<code>docker system prune</code>, <code>xcrun simctl</code>, <code>brew cleanup</code>, <code>pnpm store prune</code>)—or use <strong>Mole</strong> if you want a broad open-source CLI/app outside the Mac App Store. If you only clean Xcode caches, <strong>DevCleaner for Xcode</strong> is free on the Mac App Store.</p>
+<p>On one developer Mac we measured (read-only <code>du</code> across the home folder, excluding <code>~/Library</code>), developer and AI directories dwarfed everyday clutter: <strong>304 <code>node_modules</code> folders occupied 66.3 GB</strong>, <strong>8 <code>.venv</code> folders occupied 5.1 GB</strong>, <strong>7 <code>.build</code> folders occupied 2.9 GB</strong>, <strong><code>CoreSimulator/Devices</code> occupied 43.0 GB</strong>, <strong><code>iOS DeviceSupport</code> occupied 24.1 GB</strong>, <strong><code>DerivedData</code> occupied 15.3 GB</strong>, <strong><code>uv</code> cache occupied 8.0 GB</strong>, <strong><code>pnpm</code> store occupied 6.8 GB</strong>, <strong><code>~/.codex</code> occupied 5.2 GB</strong>, <strong><code>~/.claude</code> occupied 1.9 GB</strong>, and <strong><code>~/.cache/huggingface</code> occupied 17.0 GB</strong>. Remember that <code>du</code> reports total directory size, not how much is safe to remove blindly.</p>
+<aside class="callout callout-tip"><div class="callout-title">TIP</div><p><strong>Audit Read-Only First — or Scan Visually for Free:</strong> Want a zero-install, read-only Terminal command (<code>du</code> and <code>find</code> only, zero deletions) tailored to Xcode, Node, Rust, Docker, and AI coding tools? Try our free <a href="/tools/disk-check/">Mac Disk Check audit script generator</a>. Ready to inspect what is safely cleanable with Trash recovery? <strong><a href="https://apps.apple.com/app/apple-store/id6829159531?pt=127116872&amp;amp;ct=website-guides&amp;amp;mt=8" target="_blank" rel="noopener noreferrer">Download CleanBit on the Mac App Store →</a></strong></p></aside>
+<h2 id="quick-recommendations-by-developer-workflow">Quick Recommendations by Developer Workflow<a class="heading-anchor" href="#quick-recommendations-by-developer-workflow" aria-label="Link to section">#</a></h2>
+<ul><li><strong>Developers on company-managed Macs or anyone wanting a sandboxed GUI with Git-safe Trash recovery:</strong> <strong>CleanBit</strong> (Mac App Store, macOS 15+, free scan + 2 free cleans, $29.99 lifetime option) — Covers Xcode, 12+ package managers, Git-aware build artifacts (<code>node_modules</code>, <code>target</code>, <code>.build</code>, <code>.venv</code>, <code>Pods</code>), Claude Code/Codex sessions, plus everyday Mac clutter without root privileges.</li><li><strong>Terminal-first JS/TS &amp; polyglot developers cleaning project build directories:</strong> <strong><code>npkill</code></strong> (v1.0.0, MIT) for fast interactive TUI pruning, or <strong><code>kondo</code></strong> (v0.9, MIT) for Rust-speed multi-language cleanup with <code>--older</code> age filters.</li><li><strong>Docker images, build caches, Xcode Simulator OS runtimes &amp; <code>pnpm</code> stores:</strong> <strong>Built-in first-party CLIs</strong> (<code>docker system prune</code>, <code>xcrun simctl</code>, <code>brew cleanup</code>, <code>pnpm store prune</code>) — Always the safest and most accurate way to reclaim daemon-managed or hard-linked storage.</li><li><strong>Developers who want an all-in-one open-source CLI + native app outside the App Store:</strong> <strong>Mole</strong> (<code>tw93/Mole</code>, v1.74.0, GPLv3) — Fast Terminal workflow plus native app interface for broad cache and project cleanup.</li><li><strong>iOS/macOS developers who only need Xcode cleanup:</strong> <strong>DevCleaner for Xcode</strong> (v2.8.0, GPLv3, free on Mac App Store) — Focused solely on <code>~/Library/Developer</code>.</li><li><strong>Visualizing massive mystery folders (Docker disk images, datasets, raw builds):</strong> <strong>DaisyDisk</strong> (v4.34.3, $9.99 one-time on Mac App Store) — Fastest visual sunburst map when you want to inspect and delete manually.</li></ul>
+<h2 id="side-by-side-comparison-cli-gui-developer-disk-cleaners-verified-2026-11-26">Side-by-Side Comparison: CLI &amp; GUI Developer Disk Cleaners (Verified 2026-11-26)<a class="heading-anchor" href="#side-by-side-comparison-cli-gui-developer-disk-cleaners-verified-2026-11-26" aria-label="Link to section">#</a></h2>
+<div class="table-wrap"><table><thead><tr><th style="text-align:left">Tool (Type)</th><th style="text-align:left">Pricing &amp; License (Verified 2026-11-26)</th><th style="text-align:left">Distribution &amp; Privileges</th><th style="text-align:left">Deletion Safety &amp; Trash Recovery</th><th style="text-align:left">Xcode, Artifacts, Docker &amp; AI Coverage</th></tr></thead><tbody><tr><td style="text-align:left"><strong>CleanBit</strong> (GUI · v1.0.1)</td><td style="text-align:left">Free scan + 2 free cleans; <strong>$4.99/mo</strong>, <strong>$19.99/yr</strong>, or <strong>$29.99 lifetime</strong></td><td style="text-align:left"><strong>Mac App Store only</strong> (App Sandbox, no root, optional FDA)</td><td style="text-align:left">Three tiers (<em>Recommended</em>, <em>Review</em>, <em>Info Only</em>); skips Git-tracked dirs &amp; running apps; Review, artifacts &amp; AI sessions always move to <strong>Trash</strong></td><td style="text-align:left">Xcode, 12+ pkg managers, Git-safe <code>node_modules</code>/<code>target</code>/<code>.build</code>/<code>.venv</code>/<code>Pods</code>, Claude Code/Codex sessions; Docker image &amp; local AI models <strong>Info Only</strong></td></tr><tr><td style="text-align:left"><strong>First-Party CLIs</strong> (<code>docker</code>, <code>simctl</code>, <code>brew</code>, <code>pnpm</code>)</td><td style="text-align:left"><strong>Free</strong> (bundled with each tool)</td><td style="text-align:left">Native CLI / daemon APIs</td><td style="text-align:left">Tool-aware pruning (protects running containers, active runtimes, referenced hard links); permanent removal</td><td style="text-align:left">Best for <strong>Docker</strong> images/volumes, <strong>Simulator OS runtimes</strong>, Homebrew bottles, and <strong><code>pnpm</code> store</strong></td></tr><tr><td style="text-align:left"><strong>npkill</strong> (CLI · v1.0.0)</td><td style="text-align:left"><strong>Free</strong> · MIT open source</td><td style="text-align:left">npm / <code>npx npkill</code> (runs with user shell permissions)</td><td style="text-align:left">Interactive list with size &amp; last-modified date; deletes selected targets directly (<code>--dry-run</code> / risk indicators available)</td><td style="text-align:left"><code>node_modules</code> and multi-ecosystem build artifacts/caches (v1.0); no Xcode/Docker/everyday GUI</td></tr><tr><td style="text-align:left"><strong>kondo</strong> (CLI + optional GUI · v0.9)</td><td style="text-align:left"><strong>Free</strong> · MIT open source</td><td style="text-align:left">Cargo / Homebrew / GitHub binary (user permissions)</td><td style="text-align:left">Supports dry-run listing, <code>--older</code> age filter, and interactive confirmation; permanent delete by default</td><td style="text-align:left">Multi-language project artifacts (<code>node_modules</code>, Cargo <code>target</code>, Swift, Gradle, Maven, Python, Unity); no Xcode/Docker/AI</td></tr><tr><td style="text-align:left"><strong>Mole</strong> (<code>tw93/Mole</code> · CLI + App · v1.74.0)</td><td style="text-align:left"><strong>Free</strong> · GPLv3 open source</td><td style="text-align:left">Homebrew / GitHub direct download (outside App Sandbox)</td><td style="text-align:left">Interactive CLI (<code>mo</code>) &amp; native app; supports dry-run previews and project purge; deep system tasks may request elevated permissions</td><td style="text-align:left">Broad macOS caches, developer caches, project artifacts, and uninstall; no Mac App Store sandbox isolation</td></tr><tr><td style="text-align:left"><strong>DevCleaner for Xcode</strong> (GUI · v2.8.0)</td><td style="text-align:left"><strong>Free</strong> · GPLv3 open source (optional tip jar)</td><td style="text-align:left"><strong>Mac App Store</strong> (App Sandbox) or GitHub</td><td style="text-align:left">Clear Xcode breakdown with confirmation before removal</td><td style="text-align:left"><code>DerivedData</code>, <code>iOS DeviceSupport</code>, <code>Archives</code>, logs (<strong>Xcode only</strong>)</td></tr><tr><td style="text-align:left"><strong>DaisyDisk</strong> (GUI · v4.34.3)</td><td style="text-align:left"><strong>$9.99 one-time</strong></td><td style="text-align:left"><strong>Mac App Store</strong> (App Sandbox) or standalone direct download</td><td style="text-align:left">Sunburst map + collector bar confirmation; manual decisions (no cache safety rules or Git checks)</td><td style="text-align:left">Visualizes any granted folder size (including Docker disk images &amp; models); no automated dev/AI rules</td></tr></tbody></table></div>
+<aside class="callout callout-tip"><div class="callout-title">TIP</div><p><strong>Want to see how much space Xcode, package caches, <code>node_modules</code>, and AI tools occupy on your Mac before deleting anything?</strong> Scanning and space analysis in CleanBit are unlimited and free, and your first 2 cleans are free. <strong><a href="https://apps.apple.com/app/apple-store/id6829159531?pt=127116872&amp;amp;ct=website-guides&amp;amp;mt=8" target="_blank" rel="noopener noreferrer">Get CleanBit on the Mac App Store →</a></strong></p></aside>
+<h2 id="1-cleanbit-disk-space-cleaner-sandboxed-mac-app-store-gui">1. CleanBit: Disk Space Cleaner (Sandboxed Mac App Store GUI)<a class="heading-anchor" href="#1-cleanbit-disk-space-cleaner-sandboxed-mac-app-store-gui" aria-label="Link to section">#</a></h2>
+<p><strong>Best for:</strong> Developers and AI coding users who want a Mac App Store app (no root password, no background helper daemon) that combines visual inspection, Git-aware project artifact safety, Trash recovery, and everyday Mac cleanup in one interface.</p>
+<p>Instead of lumping disposable caches and project files under a single &quot;Clean&quot; button, CleanBit organizes developer and Mac storage into three explicit risk tiers:</p>
+<ul><li><strong>Smart Scan — Recommended (rebuilds automatically):</strong> Covers <strong>Xcode <code>DerivedData</code></strong>, <strong>Old <code>iOS DeviceSupport</code> Versions</strong> (automatically keeping the 2 most recently modified versions per platform), <strong>SwiftUI Preview Data</strong>, <strong>Caches Inside Simulator Devices</strong> (reading each simulator&#39;s <code>device.plist</code> so only shut-down simulators are cleaned while test apps and data stay intact), <strong>12+ package manager caches</strong> (<code>npm</code>, Yarn/Yarn Berry, Bun, <code>node-gyp</code>, <code>pip</code>, <code>uv</code>, Swift Package Manager, CocoaPods, Homebrew downloads, Go, Cargo, Gradle build cache—without touching dependency module caches), <strong>Old Claude Code Versions</strong> (preserving the active binary symlink and newest version), <strong>Claude Desktop Caches</strong>, browser caches, and user app caches (locking caches of running apps). On our measured developer Mac, the scan engine found 124.29 GB across Smart Scan rules and marked 66.43 GB as safely cleanable (including 16.42 GB <code>DerivedData</code>, 12.76 GB old <code>iOS DeviceSupport</code> with the 2 newest locked, 9.29 GB shut-down simulator caches with 15 active entries locked, and 8.58 GB <code>uv</code> cache).</li><li><strong>Build Artifacts &amp; AI Sessions — Review (never pre-selected; always moved to Trash):</strong> Scans visible home folders plus <code>~/.claude/worktrees</code> and <code>~/.codex/worktrees</code> for <code>node_modules</code>, Rust <code>target/</code>, Swift <code>.build/</code>, Python <code>.venv/</code>, <code>Pods</code>, and more. Each entry displays <strong>when the project was last modified</strong> (sorted by size) and CleanBit parses <code>.git</code> directories and worktree <code>gitdir:</code> pointers (Git index v2/v3/v4) to <strong>skip any folder containing Git-tracked files</strong>. The separate <strong>AI Sessions</strong> view filters top-level <code>.jsonl</code> transcripts in <code>~/.claude/projects</code> (skipping <code>memory/</code>) and <code>~/.codex/sessions</code> by age. Everything in Review moves to the Trash so you can put it back.</li><li><strong>Info Only (shown for visibility; never deletable):</strong> Displays sizes for <strong>Docker Desktop virtual disk images</strong>, hard-linked <strong><code>pnpm</code> stores</strong> (reminding you to use <code>pnpm store prune</code>), and local AI models (<strong>Hugging Face, Ollama, LM Studio, PyTorch</strong>) so you can see where 20–80 GB sits without risking accidental removal.</li></ul>
+![CleanBit Build Artifacts view showing node_modules, target, and .build folders with last-modified dates and Git-safe selection](/assets/screens/en-artifacts.webp &quot;CleanBit Build Artifacts shows each project&#39;s last-modified date, skips Git-tracked files, and moves removed folders to the Trash.&quot;)
+<p>Before anything is removed, CleanBit shows a confirmation sheet splitting what moves to the <strong>Trash</strong> versus what is <strong>permanently deleted</strong> (Recommended caches can also be switched to move to the Trash in Settings), and re-verifies each path and running-app lock right before deletion. File names, paths, and file contents never leave your Mac (CleanBit uses Firebase Analytics only for anonymous usage counts and MB-rounded totals per built-in rule ID).</p>
+<figure class="prose-figure"><img src="/assets/screens/en-confirm.webp" alt="CleanBit confirmation dialog separating Trash items from permanent deletions before cleanup" loading="lazy" decoding="async" /><figcaption>CleanBit separates items moving to the Trash from permanent deletions before you confirm.</figcaption></figure>
+<p><strong>Pricing (Verified 2026-11-26):</strong> Unlimited scanning and Space Analysis for free, plus your <strong>first 2 cleans free</strong>. Unlock unlimited cleaning via <strong>$4.99/month</strong>, <strong>$19.99/year</strong>, or <strong>$29.99 lifetime</strong> on the Mac App Store (9 languages, macOS 15+).</p>
+<p><strong>Who CleanBit is NOT for (honest boundaries):</strong></p>
+<ul><li><strong>Developers who want automated Docker pruning or Simulator OS runtime deletion:</strong> Because CleanBit runs inside Apple&#39;s App Sandbox with no root access, it lists Docker Desktop disk images as Info Only and cannot remove system-level Simulator runtimes under <code>/Library/Developer/CoreSimulator</code>. Pair it with <code>docker system prune</code> and <code>xcrun simctl runtime delete</code> below.</li><li><strong>Macs on macOS 14 Sonoma or earlier:</strong> CleanBit requires <strong>macOS 15 or later</strong>.</li><li><strong>Terminal-only or headless CI/SSH workflows:</strong> If you never want a GUI or want cleanup inside shell scripts, use <code>npkill</code>, <code>kondo</code>, or native CLIs.</li><li><strong>Cursor-specific cache automation, <code>/private/tmp</code>, or APFS local snapshots:</strong> CleanBit does not currently have a dedicated Cursor cleaner rule, and sandboxed apps cannot access <code>/private/tmp</code> or APFS snapshots.</li></ul>
+<h2 id="2-first-party-developer-clis-docker-xcrun-simctl-brew-pnpm">2. First-Party Developer CLIs (<code>docker</code>, <code>xcrun simctl</code>, <code>brew</code>, <code>pnpm</code>)<a class="heading-anchor" href="#2-first-party-developer-clis-docker-xcrun-simctl-brew-pnpm" aria-label="Link to section">#</a></h2>
+<p><strong>Best for:</strong> Reclaiming Docker images and build cache, multi-gigabyte Xcode Simulator OS runtimes, Homebrew downloads, and <code>pnpm</code> hard-linked stores—areas where third-party GUI cleaners either lack daemon visibility or risk breaking hard links.</p>
+<p>Start with <strong>read-only inspection</strong> before deleting anything:</p>
+<div class="code-block"><div class="code-head"><span class="code-lang">bash</span><button type="button" class="code-copy" data-copy>Copy</button></div><pre><code># 1. Inspect Docker images, containers, volumes, and build cache (read-only)
+docker system df
+
+# 2. List installed Xcode Simulator OS runtimes (often 7-10 GB each)
+xcrun simctl runtime list
+
+# 3. Preview what Homebrew would remove without deleting anything
+brew cleanup --prune=all -n</code></pre></div>
+<p>When you are ready to reclaim space safely:</p>
+<div class="code-block"><div class="code-head"><span class="code-lang">bash</span><button type="button" class="code-copy" data-copy>Copy</button></div><pre><code># Docker: remove stopped containers, unused networks, dangling images &amp; build cache
+# (add -a only if you want to remove unused tagged images; avoid --volumes unless intentional)
+docker system prune
+docker builder prune
+
+# Xcode: remove unavailable simulators &amp; runtimes unused for 30+ days
+xcrun simctl delete unavailable
+xcrun simctl runtime delete --notUsedSinceDays 30
+
+# Package managers: Homebrew old bottles &amp; unreferenced pnpm store packages
+brew cleanup --prune=all
+pnpm store prune</code></pre></div>
+<ul><li><strong>Strengths:</strong> Always accurate for daemon-managed storage (<code>docker</code>, <code>CoreSimulatorService</code>) and hard-linked stores (<code>pnpm</code>). Zero extra software to install, works identically on any macOS version, and leaves no third-party permissions behind.</li><li><strong>Trade-offs &amp; Limitations:</strong> You have to remember half a dozen different commands across ecosystems, there is no unified view of what is taking the most space across your Mac, and most CLI commands delete permanently rather than moving files to the Trash. For deeper walkthroughs, see our guides on <a href="/guides/is-xcode-deriveddata-safe-to-delete/">Xcode <code>DerivedData</code></a>, <a href="/guides/ios-devicesupport-and-simulators-disk-space-mac/"><code>iOS DeviceSupport</code> and Simulators</a>, and <a href="/guides/claude-code-worktrees-disk-space-mac/">leftover Claude Code git worktrees</a>.</li></ul>
+<h2 id="3-npkill-open-source-cli-v100-mit">3. npkill (Open-Source CLI — v1.0.0, MIT)<a class="heading-anchor" href="#3-npkill-open-source-cli-v100-mit" aria-label="Link to section">#</a></h2>
+<p><strong>Best for:</strong> JavaScript/TypeScript and full-stack developers who want the fastest interactive Terminal workflow to hunt down old <code>node_modules</code> and project artifacts without installing a desktop app.</p>
+<div class="code-block"><div class="code-head"><span class="code-lang">bash</span><button type="button" class="code-copy" data-copy>Copy</button></div><pre><code># Inspect and clean interactively inside a specific workspace directory
+cd ~/Repos
+npx npkill</code></pre></div>
+<ul><li><strong>Strengths:</strong> <code>voidcosmos/npkill</code> (9,600+ GitHub stars, MIT license, v1.0.0 released November 2026) runs straight from <code>npx</code> with zero setup, displays directory sizes and last-modified timestamps in a responsive keyboard-driven TUI, and expanded in v1.0 beyond <code>node_modules</code> to additional project artifact targets and caches.</li><li><strong>Trade-offs &amp; Limitations:</strong> Terminal-only and focused on project directories rather than Xcode (<code>DerivedData</code>, <code>DeviceSupport</code>, Simulators), browser/app caches, or AI coding transcripts. Deletions are direct rather than using macOS Trash recovery by default, so always double-check active dev servers and <code>git status</code> before pressing Space. See our full <a href="/guides/how-to-find-and-delete-old-node-modules-on-mac/">Mac <code>node_modules</code> cleanup guide</a> for <code>find</code> and <code>pnpm</code> caveats.</li></ul>
+<h2 id="4-kondo-open-source-cli-optional-gui-v09-mit">4. kondo (Open-Source CLI &amp; Optional GUI — v0.9, MIT)<a class="heading-anchor" href="#4-kondo-open-source-cli-optional-gui-v09-mit" aria-label="Link to section">#</a></h2>
+<p><strong>Best for:</strong> Polyglot developers juggling Rust (<code>target/</code>), Node (<code>node_modules</code>), Swift, Python, Java/Gradle, Go, or Unity repositories who want fast, scriptable age-based pruning.</p>
+<div class="code-block"><div class="code-head"><span class="code-lang">bash</span><button type="button" class="code-copy" data-copy>Copy</button></div><pre><code># Preview cleanable project artifacts older than 60 days (read-only)
+kondo --older 60d ~/Repos</code></pre></div>
+<ul><li><strong>Strengths:</strong> Written in Rust (<code>tbillington/kondo</code>, 2,600+ GitHub stars, MIT license, v0.9), <code>kondo</code> scans huge repository trees in seconds, recognizes dozens of language ecosystems automatically, and makes it easy to filter by project age (<code>--older</code>) or preview results before deleting.</li><li><strong>Trade-offs &amp; Limitations:</strong> Like <code>npkill</code>, <code>kondo</code> targets project build artifacts only—it does not manage Xcode caches in <code>~/Library/Developer</code>, Homebrew/uv/pip caches, Docker, Claude Code/Codex session logs, or everyday macOS caches. Deletions are permanent by default rather than moving folders to the Trash.</li></ul>
+<h2 id="5-mole-tw93mole-open-source-cli-native-app-v1740-gplv3">5. Mole (<code>tw93/Mole</code> — Open-Source CLI + Native App, v1.74.0, GPLv3)<a class="heading-anchor" href="#5-mole-tw93mole-open-source-cli-native-app-v1740-gplv3" aria-label="Link to section">#</a></h2>
+<p><strong>Best for:</strong> Developers on personal Macs who want a fast, actively maintained, free open-source all-in-one cleaner with both a Terminal CLI (<code>mo</code>) and a native app interface, and who are comfortable installing software outside the Mac App Store.</p>
+<ul><li><strong>Strengths:</strong> <code>tw93/Mole</code> (76,000+ GitHub stars, GPLv3, v1.74.0 released November 2026) combines system/app cache cleanup, developer cache &amp; project artifact purging, disk analysis, and app uninstallation into one lightweight open-source toolkit installable via Homebrew or GitHub. It supports dry-run previews and quick keyboard navigation for developers who live in the shell.</li><li><strong>Trade-offs &amp; Limitations:</strong> Distributed outside the Mac App Store (not sandboxed under Apple&#39;s App Sandbox), and deep system cleanup routines may prompt for elevated permissions. That makes it a stronger fit for personal developer machines than for locked-down corporate Macs that restrict unsigned/non-App-Store utilities or disallow elevated cleanup tools.</li></ul>
+<h2 id="6-devcleaner-for-xcode-free-open-source-mac-app-store-gui-v280-gplv3">6. DevCleaner for Xcode (Free Open-Source Mac App Store GUI — v2.8.0, GPLv3)<a class="heading-anchor" href="#6-devcleaner-for-xcode-free-open-source-mac-app-store-gui-v280-gplv3" aria-label="Link to section">#</a></h2>
+<p><strong>Best for:</strong> iOS, macOS, and Swift developers whose storage crunch is almost entirely inside <code>~/Library/Developer</code> and who want a free, inspectable Mac App Store utility.</p>
+<ul><li><strong>Strengths:</strong> Completely free and open source (<code>vashpan/xcode-dev-cleaner</code>, 1,600+ GitHub stars, GPLv3, v2.8.0, macOS 14+). It breaks down <code>DerivedData</code>, <code>iOS DeviceSupport</code>, <code>Archives</code>, and Xcode logs cleanly inside Apple&#39;s App Sandbox with zero upsells.</li><li><strong>Trade-offs &amp; Limitations:</strong> Focused exclusively on Xcode. It will not detect <code>node_modules</code>, Rust <code>target/</code>, Python <code>.venv/</code>, package manager caches (<code>npm</code>, <code>uv</code>, <code>Cargo</code>, <code>Homebrew</code>), Claude Code/Codex sessions, or everyday Mac clutter.</li></ul>
+<h2 id="7-daisydisk-mac-app-store-visual-disk-analyzer-v4343-999-one-time">7. DaisyDisk (Mac App Store Visual Disk Analyzer — v4.34.3, $9.99 One-Time)<a class="heading-anchor" href="#7-daisydisk-mac-app-store-visual-disk-analyzer-v4343-999-one-time" aria-label="Link to section">#</a></h2>
+<p><strong>Best for:</strong> Developers who want an ultra-fast visual map to spot huge single files—like a 60 GB <code>Docker.raw</code> disk image, forgotten LLM weights, or raw screen recordings—and decide manually what to delete.</p>
+<ul><li><strong>Strengths:</strong> At <strong>$9.99 one-time</strong> on the Mac App Store (v4.34.3, macOS 12+), DaisyDisk&#39;s interactive sunburst chart makes it effortless to drill from <code>/</code> down to the exact folder eating 50 GB.</li><li><strong>Trade-offs &amp; Limitations:</strong> DaisyDisk is a visualizer, not a rule-based developer cleaner. It will show you a 20 GB folder inside <code>~/Library</code> or a workspace, but it will not explain whether deleting that folder breaks an active simulator, lock running apps&#39; caches, or check whether files are tracked by Git. (See our broader <a href="/guides/best-disk-cleaners-mac-app-store/">Mac App Store disk cleaner comparison</a> for how DaisyDisk compares with CleanMyMac, Cleaner One Pro, and CleanBit.)</li></ul>
+<h2 id="a-practical-hybrid-cleanup-routine-for-mac-developers">A Practical Hybrid Cleanup Routine for Mac Developers<a class="heading-anchor" href="#a-practical-hybrid-cleanup-routine-for-mac-developers" aria-label="Link to section">#</a></h2>
+<p>Most Mac developers get the best results—and fewest broken builds—by combining <strong>one visual/sandboxed audit</strong> with <strong>two first-party CLI checks</strong> once a month:</p>
+<ol><li><strong>Check the big-picture footprint first (read-only):</strong> Run the <a href="/tools/disk-check/">Mac Disk Check audit script</a> or a free CleanBit Smart Scan to see whether your space went to Xcode, <code>node_modules</code> / worktrees, package caches, Docker, or local AI models.</li><li><strong>Reclaim daemon-managed &amp; hard-linked storage with first-party CLIs:</strong> Run <code>docker system df</code> → <code>docker system prune</code>, <code>xcrun simctl delete unavailable</code>, and <code>pnpm store prune</code> so Docker, CoreSimulator, and <code>pnpm</code> maintain their own internal indexes.</li><li><strong>Clean build artifacts and AI sessions with Trash recovery:</strong> Remove old <code>node_modules</code>, <code>target/</code>, <code>.build/</code>, and stale Claude Code / Codex transcripts (see our <a href="/guides/claude-code-cursor-codex-disk-space-mac/">Claude Code, Cursor, and Codex storage guide</a>) through CleanBit&#39;s Review tier (moved to Trash, skipping Git-tracked files) or carefully via <code>npkill</code> / <code>kondo</code> after checking <code>git status</code>.</li><li><strong>Leave system-managed storage to macOS:</strong> Never run blind <code>sudo rm -rf</code> on <code>/System/Library/Caches</code>, <code>/Library/Caches</code>, or APFS local snapshots—and check our guide on <a href="/guides/is-it-safe-to-delete-library-caches-mac/">whether <code>~/Library/Caches</code> is safe to delete</a> before clearing user caches manually.</li></ol>
+<h2 id="frequently-asked-questions">Frequently Asked Questions<a class="heading-anchor" href="#frequently-asked-questions" aria-label="Link to section">#</a></h2>
+<h3 id="what-is-the-safest-way-to-clean-developer-disk-space-on-a-mac-without-breaking-projects">What is the safest way to clean developer disk space on a Mac without breaking projects?<a class="heading-anchor" href="#what-is-the-safest-way-to-clean-developer-disk-space-on-a-mac-without-breaking-projects" aria-label="Link to section">#</a></h3>
+<p>Start with a read-only audit (<code>du</code> / <code>docker system df</code> / <code>xcrun simctl runtime list</code>, or a free visual scan) before deleting anything. Quit Xcode and stop active dev servers first, use first-party commands for Docker and Simulator runtimes, never delete directories containing Git-tracked files, and move project build artifacts (<code>node_modules</code>, <code>target/</code>, <code>.build/</code>) to the Trash rather than running blind <code>rm -rf</code>.</p>
+<h3 id="should-i-use-a-cli-tool-like-npkill-kondo-or-a-gui-cleaner-like-cleanbit">Should I use a CLI tool like <code>npkill</code> / <code>kondo</code> or a GUI cleaner like CleanBit?<a class="heading-anchor" href="#should-i-use-a-cli-tool-like-npkill-kondo-or-a-gui-cleaner-like-cleanbit" aria-label="Link to section">#</a></h3>
+<p>Use CLI tools (<code>npkill</code>, <code>kondo</code>, <code>docker system prune</code>, <code>xcrun simctl</code>) if you prefer Terminal workflows, want scriptable age filters, or need to prune Docker images and Simulator OS runtimes. Use a sandboxed Mac App Store GUI like <strong>CleanBit</strong> if you want one place to inspect Xcode caches, 12+ package managers, Git-safe build artifacts, AI coding sessions, and everyday Mac clutter with plain-language impact notes and Trash recovery—especially on a company-managed Mac.</p>
+<h3 id="can-any-mac-app-store-disk-cleaner-shrink-docker-desktops-dockerraw-file">Can any Mac App Store disk cleaner shrink Docker Desktop&#39;s <code>Docker.raw</code> file?<a class="heading-anchor" href="#can-any-mac-app-store-disk-cleaner-shrink-docker-desktops-dockerraw-file" aria-label="Link to section">#</a></h3>
+<p>No sandboxed Mac App Store app should delete <code>Docker.raw</code> directly, because removing that virtual disk image wipes all of your Docker images, containers, and volumes at once. CleanBit lists Docker Desktop&#39;s disk image as <strong>Info Only</strong> so you can see its size, and you should reclaim space inside Docker using <code>docker system prune</code> and <code>docker builder prune</code> (or Docker Desktop&#39;s Disk Usage UI).</p>
+<h3 id="how-do-i-clean-nodemodules-and-target-inside-claude-code-or-codex-git-worktrees">How do I clean <code>node_modules</code> and <code>target/</code> inside Claude Code or Codex git worktrees?<a class="heading-anchor" href="#how-do-i-clean-nodemodules-and-target-inside-claude-code-or-codex-git-worktrees" aria-label="Link to section">#</a></h3>
+<p>Each parallel <code>git worktree</code> creates its own untracked <code>node_modules</code>, Rust <code>target/</code>, or Swift <code>.build/</code> directory. Check <code>git worktree list</code> and use <code>git worktree remove &lt;path&gt;</code> after merging, or delete only the disposable build folder inside paused worktrees. CleanBit&#39;s Build Artifacts module automatically scans <code>~/.claude/worktrees</code> and <code>~/.codex/worktrees</code>, parses <code>.git</code> <code>gitdir:</code> pointers to skip Git-tracked files, and moves selected build folders to the Trash.</p>
+<h3 id="is-it-safe-to-delete-librarydeveloperxcodederiveddata-and-old-ios-devicesupport">Is it safe to delete <code>~/Library/Developer/Xcode/DerivedData</code> and old <code>iOS DeviceSupport</code>?<a class="heading-anchor" href="#is-it-safe-to-delete-librarydeveloperxcodederiveddata-and-old-ios-devicesupport" aria-label="Link to section">#</a></h3>
+<p>Yes—Xcode regenerates <code>DerivedData</code> on the next build and re-copies <code>DeviceSupport</code> symbols if you reconnect an older physical iOS device. Quit Xcode first, keep the 1–2 newest <code>iOS DeviceSupport</code> versions for devices you actively debug, and review <code>Xcode/Archives</code> carefully so you do not delete <code>.xcarchive</code> dSYM bundles needed for crash symbolication.</p>
+<h3 id="what-is-free-to-use-in-cleanbit-before-paying">What is free to use in CleanBit before paying?<a class="heading-anchor" href="#what-is-free-to-use-in-cleanbit-before-paying" aria-label="Link to section">#</a></h3>
+<p>Scanning, Space Analysis, Large Files, Duplicate Files inspection, and your <strong>first 2 cleans are free</strong> on the Mac App Store—no account signup required. Unlimited cleaning is available via $4.99/month, $19.99/year, or a $29.99 one-time lifetime purchase (US Mac App Store pricing verified 2026-11-26).</p>
+          </div>
+
+          <aside class="article-cta">
+            <div>
+              <h3>Prefer to inspect and clean visually?</h3>
+              <p>CleanBit is a sandboxed Mac App Store utility. Every item shows what it is and what happens if you remove it—scanning and your first 2 cleans are free.</p>
+            </div>
+            <a class="pill pill-primary" href="https://apps.apple.com/app/apple-store/id6829159531?pt=127116872&amp;ct=website-guides&amp;mt=8" target="_blank" rel="noopener noreferrer">Download on the Mac App Store</a>
+          </aside>
+
+          <p class="disclosure-note">Written by the CleanBit developer with AI assistance. Tool versions, licenses, and Mac App Store details were verified from public GitHub repositories and US Mac App Store listings on 2026-11-26.</p>
+          <section style="margin-top:44px">
+        <h2 style="font-size:20px;margin:0 0 16px">Related guides</h2>
+        <div class="grid-2">
+          <a class="card guide-card" href="/guides/is-xcode-deriveddata-safe-to-delete/">
+                <div>
+                  <div class="guide-meta"><span>Developer Storage</span><span>·</span><span>4 min read</span></div>
+                  <h3 style="margin-top:6px;font-size:16px">Is Xcode DerivedData Safe to Delete? What Happens and How to Clean It</h3>
+                </div>
+                <span class="guide-more">Read guide →</span>
+              </a><a class="card guide-card" href="/guides/ios-devicesupport-and-simulators-disk-space-mac/">
+                <div>
+                  <div class="guide-meta"><span>Developer Storage</span><span>·</span><span>6 min read</span></div>
+                  <h3 style="margin-top:6px;font-size:16px">iOS DeviceSupport and Simulators Taking 40 GB? What You Can Safely Remove</h3>
+                </div>
+                <span class="guide-more">Read guide →</span>
+              </a><a class="card guide-card" href="/guides/how-to-find-and-delete-old-node-modules-on-mac/">
+                <div>
+                  <div class="guide-meta"><span>Developer Storage</span><span>·</span><span>4 min read</span></div>
+                  <h3 style="margin-top:6px;font-size:16px">How to Find and Delete Old node_modules Folders on a Mac</h3>
+                </div>
+                <span class="guide-more">Read guide →</span>
+              </a>
+        </div>
+      </section>
+        </div>
+        <aside class="toc-aside" aria-label="Guide sidebar">
+      <nav class="toc-card" aria-label="Table of contents">
+        <div class="toc-title">On this page</div>
+        <ul class="toc-list">
+          <li class="toc-h2"><a href="#quick-recommendations-by-developer-workflow">Quick Recommendations by Developer Workflow</a></li><li class="toc-h2"><a href="#side-by-side-comparison-cli-gui-developer-disk-cleaners-verified-2026-11-26">Side-by-Side Comparison: CLI &amp; GUI Developer Disk Cleaners (Verified 2026-11-26)</a></li><li class="toc-h2"><a href="#1-cleanbit-disk-space-cleaner-sandboxed-mac-app-store-gui">1. CleanBit: Disk Space Cleaner (Sandboxed Mac App Store GUI)</a></li><li class="toc-h2"><a href="#2-first-party-developer-clis-docker-xcrun-simctl-brew-pnpm">2. First-Party Developer CLIs (docker, xcrun simctl, brew, pnpm)</a></li><li class="toc-h2"><a href="#3-npkill-open-source-cli-v100-mit">3. npkill (Open-Source CLI — v1.0.0, MIT)</a></li><li class="toc-h2"><a href="#4-kondo-open-source-cli-optional-gui-v09-mit">4. kondo (Open-Source CLI &amp; Optional GUI — v0.9, MIT)</a></li><li class="toc-h2"><a href="#5-mole-tw93mole-open-source-cli-native-app-v1740-gplv3">5. Mole (tw93/Mole — Open-Source CLI + Native App, v1.74.0, GPLv3)</a></li><li class="toc-h2"><a href="#6-devcleaner-for-xcode-free-open-source-mac-app-store-gui-v280-gplv3">6. DevCleaner for Xcode (Free Open-Source Mac App Store GUI — v2.8.0, GPLv3)</a></li><li class="toc-h2"><a href="#7-daisydisk-mac-app-store-visual-disk-analyzer-v4343-999-one-time">7. DaisyDisk (Mac App Store Visual Disk Analyzer — v4.34.3, $9.99 One-Time)</a></li><li class="toc-h2"><a href="#a-practical-hybrid-cleanup-routine-for-mac-developers">A Practical Hybrid Cleanup Routine for Mac Developers</a></li><li class="toc-h2"><a href="#frequently-asked-questions">Frequently Asked Questions</a></li><li class="toc-h3"><a href="#what-is-the-safest-way-to-clean-developer-disk-space-on-a-mac-without-breaking-projects">What is the safest way to clean developer disk space on a Mac without breaking projects?</a></li><li class="toc-h3"><a href="#should-i-use-a-cli-tool-like-npkill-kondo-or-a-gui-cleaner-like-cleanbit">Should I use a CLI tool like npkill / kondo or a GUI cleaner like CleanBit?</a></li><li class="toc-h3"><a href="#can-any-mac-app-store-disk-cleaner-shrink-docker-desktops-dockerraw-file">Can any Mac App Store disk cleaner shrink Docker Desktop&#39;s Docker.raw file?</a></li><li class="toc-h3"><a href="#how-do-i-clean-nodemodules-and-target-inside-claude-code-or-codex-git-worktrees">How do I clean nodemodules and target/ inside Claude Code or Codex git worktrees?</a></li><li class="toc-h3"><a href="#is-it-safe-to-delete-librarydeveloperxcodederiveddata-and-old-ios-devicesupport">Is it safe to delete ~/Library/Developer/Xcode/DerivedData and old iOS DeviceSupport?</a></li><li class="toc-h3"><a href="#what-is-free-to-use-in-cleanbit-before-paying">What is free to use in CleanBit before paying?</a></li>
+        </ul>
+      </nav>
+      <div class="toc-cta">
+        <div class="toc-cta-head">
+          <img src="/assets/icon.png" alt="CleanBit icon" width="28" height="28" />
+          <div>
+            <div class="toc-cta-eyebrow">Mac App Store · Sandboxed</div>
+            <div class="toc-cta-title">CleanBit for macOS</div>
+          </div>
+        </div>
+        <p class="toc-cta-body">Know what you’re removing before you confirm. Free scan &amp; first 2 cleans free.</p>
+        <a class="pill pill-primary pill-sm toc-cta-btn" href="https://apps.apple.com/app/apple-store/id6829159531?pt=127116872&amp;ct=website-guides&amp;mt=8" target="_blank" rel="noopener noreferrer">Download on App Store</a>
+        <div class="toc-cta-meta">macOS 15+ · 9 languages · One-time option</div>
+      </div>
+    </aside>
+      </div>
+    </div>
+  </article>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div>
+        <strong style="color:var(--text)">CleanBit</strong> · macOS 15+ · 9 languages · Available exclusively on the Mac App Store.
+        <div style="margin-top:6px">© 2026 Dongguan Aibeike AI Co., Ltd.</div>
+      </div>
+      <div class="footer-links">
+        <a href="/guides/">Guides</a>
+        <a href="/tools/disk-check/">Disk Check</a>
+        <a href="/support/">Support</a>
+        <a href="/privacy/">Privacy</a>
+        <a href="/terms/">Terms</a>
+        <a href="/feed.xml">RSS</a>
+        <a href="https://github.com/Ceelog/CleanBit-Mac-App" target="_blank" rel="noopener noreferrer">GitHub</a>
+        <a href="https://apps.apple.com/app/apple-store/id6829159531?pt=127116872&amp;ct=website-guides&amp;mt=8" target="_blank" rel="noopener noreferrer">Mac App Store</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+  (function(){
+    var frame = document.getElementById('showcase-frame');
+    var img = document.getElementById('showcase-img');
+    var cap = document.getElementById('showcase-caption');
+    document.querySelectorAll('[data-tab-btn]').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        document.querySelectorAll('[data-tab-btn]').forEach(function(b){ b.classList.remove('is-active'); b.setAttribute('aria-selected','false'); });
+        btn.classList.add('is-active');
+        btn.setAttribute('aria-selected','true');
+        if (img) { img.src = btn.dataset.src; img.alt = btn.dataset.alt; }
+        if (cap) cap.textContent = btn.dataset.caption;
+        if (frame) frame.setAttribute('data-tint', btn.dataset.tint);
+      });
+    });
+    document.querySelectorAll('[data-copy]').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        var pre = btn.closest('.code-block').querySelector('pre code');
+        if (!pre || !navigator.clipboard) return;
+        navigator.clipboard.writeText(pre.textContent || '').then(function(){
+          var old = btn.textContent;
+          btn.textContent = 'Copied';
+          setTimeout(function(){ btn.textContent = old; }, 1600);
+        });
+      });
+    });
+  })();
+  </script>
+  
+</body>
+</html>

@@ -26,7 +26,7 @@
   <meta name="twitter:image" content="https://getcleanbit.app/assets/screens/en-smart-scan.webp" />
   <meta name="theme-color" content="#111419" />
   <link rel="stylesheet" href="/styles.css?v=8ec2702e" />
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Is Xcode DerivedData Safe to Delete? What Happens and How to Clean It","description":"Yes, Xcode DerivedData is safe to delete. Learn what lives inside DerivedData, what actually happens after removing it, and how to clean Xcode caches safely.","datePublished":"2026-11-21","dateModified":"2026-11-25","inLanguage":"en","author":{"@type":"Organization","name":"CleanBit Developer","url":"https://getcleanbit.app/"},"publisher":{"@type":"Organization","name":"CleanBit","logo":{"@type":"ImageObject","url":"https://getcleanbit.app/assets/icon.png"}},"mainEntityOfPage":"https://getcleanbit.app/guides/is-xcode-deriveddata-safe-to-delete/","image":"https://getcleanbit.app/assets/screens/en-smart-scan.webp"}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Is Xcode DerivedData Safe to Delete? What Happens and How to Clean It","description":"Yes, Xcode DerivedData is safe to delete. Learn what lives inside DerivedData, what actually happens after removing it, and how to clean Xcode caches safely.","datePublished":"2026-11-21","dateModified":"2026-11-26","inLanguage":"en","author":{"@type":"Organization","name":"CleanBit Developer","url":"https://getcleanbit.app/"},"publisher":{"@type":"Organization","name":"CleanBit","logo":{"@type":"ImageObject","url":"https://getcleanbit.app/assets/icon.png"}},"mainEntityOfPage":"https://getcleanbit.app/guides/is-xcode-deriveddata-safe-to-delete/","image":"https://getcleanbit.app/assets/screens/en-smart-scan.webp"}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"CleanBit","item":"https://getcleanbit.app/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://getcleanbit.app/guides/"},{"@type":"ListItem","position":3,"name":"Is Xcode DerivedData Safe to Delete? What Happens and How to Clean It","item":"https://getcleanbit.app/guides/is-xcode-deriveddata-safe-to-delete/"}]}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Will deleting DerivedData delete my source code or Git history?","acceptedAnswer":{"@type":"Answer","text":"No. Your source code and .git repository live in your project directory, not in ~/Library/Developer/Xcode/DerivedData."}},{"@type":"Question","name":"How often should I clear Xcode DerivedData?","acceptedAnswer":{"@type":"Answer","text":"You don't need to clear it on a strict schedule. Clearing it once every few weeks—or whenever you finish a major project, upgrade Xcode, or see unexplained build glitches—is usually enough."}},{"@type":"Question","name":"Does deleting DerivedData break Swift Package Manager dependencies?","acceptedAnswer":{"@type":"Answer","text":"No, your package list is defined in Package.swift or your .xcodeproj and Package.resolved. Xcode will re-resolve and rebuild packages automatically the next time you open the project (an internet connection may be required if packages are not cached elsewhere)."}}]}</script>
   <script>
@@ -90,7 +90,7 @@
             <div class="article-meta">
               <span>CleanBit Developer</span>
               <span>·</span>
-              <span>Updated 2026-11-25</span>
+              <span>Updated 2026-11-26</span>
               <span>·</span>
               <span>4 min read</span>
             </div>
@@ -120,7 +120,7 @@
 rm -rf ~/Library/Developer/Xcode/DerivedData/*</code></pre></div>
 <h3 id="option-3-check-other-xcode-folders-carefully">Option 3: Check other Xcode folders carefully<a class="heading-anchor" href="#option-3-check-other-xcode-folders-carefully" aria-label="Link to section">#</a></h3>
 <div class="table-wrap"><table><thead><tr><th style="text-align:left">Folder</th><th style="text-align:left">Safe to delete?</th><th style="text-align:left">What happens</th></tr></thead><tbody><tr><td style="text-align:left"><code>DerivedData</code></td><td style="text-align:left">Yes (rebuilt automatically)</td><td style="text-align:left">Next build &amp; index takes longer</td></tr><tr><td style="text-align:left"><code>iOS DeviceSupport</code> (older versions)</td><td style="text-align:left">Usually yes</td><td style="text-align:left">Xcode re-copies symbols if you reconnect an older iOS device</td></tr><tr><td style="text-align:left"><code>CoreSimulator/Caches</code></td><td style="text-align:left">Yes (when simulators are shut down)</td><td style="text-align:left">Simulator regenerates caches as needed</td></tr><tr><td style="text-align:left"><code>Xcode/Archives</code></td><td style="text-align:left"><strong>Review carefully</strong></td><td style="text-align:left">Contains <code>.xcarchive</code> builds &amp; dSYMs used to symbolicate App Store crash logs—do not delete blindly</td></tr></tbody></table></div>
-<aside class="callout callout-note"><div class="callout-title">NOTE</div><p><code>DerivedData</code> is only one piece of developer storage. Before deleting <code>Archives</code>, make sure you no longer need the dSYM files for shipped app versions. For the even larger folders right next to <code>DerivedData</code>, see our guide on <a href="/guides/ios-devicesupport-and-simulators-disk-space-mac/">safely cleaning <code>iOS DeviceSupport</code> and Xcode Simulators</a>. You can also check <a href="/guides/is-it-safe-to-delete-library-caches-mac/">whether it is safe to delete <code>~/Library/Caches</code> on a Mac</a>, <a href="/guides/claude-code-cursor-codex-disk-space-mac/">where Claude Code, Cursor, and Codex store disk space on macOS</a>, <a href="/guides/how-to-find-and-delete-old-node-modules-on-mac/">cleaning old <code>node_modules</code> folders</a>, or our side-by-side comparison of the <a href="/guides/best-disk-cleaners-mac-app-store/">best sandboxed disk cleaners on the Mac App Store</a>.</p></aside>
+<aside class="callout callout-note"><div class="callout-title">NOTE</div><p><code>DerivedData</code> is only one piece of developer storage. Before deleting <code>Archives</code>, make sure you no longer need the dSYM files for shipped app versions. For the even larger folders right next to <code>DerivedData</code>, see our guide on <a href="/guides/ios-devicesupport-and-simulators-disk-space-mac/">safely cleaning <code>iOS DeviceSupport</code> and Xcode Simulators</a>. You can also check <a href="/guides/is-it-safe-to-delete-library-caches-mac/">whether it is safe to delete <code>~/Library/Caches</code> on a Mac</a>, <a href="/guides/claude-code-cursor-codex-disk-space-mac/">where Claude Code, Cursor, and Codex store disk space on macOS</a>, <a href="/guides/how-to-find-and-delete-old-node-modules-on-mac/">cleaning old <code>node_modules</code> folders</a>, or our side-by-side comparisons of the <a href="/guides/best-disk-cleaners-mac-app-store/">best sandboxed disk cleaners on the Mac App Store</a> and the <a href="/guides/best-developer-disk-cleaners-mac/">best CLI and GUI developer disk cleaners for Mac</a>.</p></aside>
 <h2 id="how-cleanbit-handles-xcode-storage">How CleanBit handles Xcode storage<a class="heading-anchor" href="#how-cleanbit-handles-xcode-storage" aria-label="Link to section">#</a></h2>
 <p>I&#39;m the developer of <strong>CleanBit</strong>, a sandboxed Mac App Store disk space cleaner for macOS 15+. CleanBit separates Xcode folders by risk instead of lumping them together:</p>
 <ul><li><strong>Recommended</strong> (rebuilds automatically): <code>Xcode DerivedData</code>, old <code>iOS DeviceSupport</code> versions (keeping the 2 most recent), SwiftUI Preview Data, and caches inside shut-down Simulator devices. Caches of apps that are currently running are blocked automatically.</li><li><strong>Review</strong> (not pre-selected, always moved to Trash): <code>Xcode Archives</code>, so you don&#39;t accidentally wipe shipped build archives.</li><li>Before confirming, CleanBit splits how much will be permanently deleted vs. moved to the Trash—and you can switch Recommended caches to Trash in Settings if you prefer.</li></ul>
@@ -146,22 +146,22 @@ rm -rf ~/Library/Developer/Xcode/DerivedData/*</code></pre></div>
           <section style="margin-top:44px">
         <h2 style="font-size:20px;margin:0 0 16px">Related guides</h2>
         <div class="grid-2">
-          <a class="card guide-card" href="/guides/is-it-safe-to-delete-library-caches-mac/">
+          <a class="card guide-card" href="/guides/ios-devicesupport-and-simulators-disk-space-mac/">
                 <div>
-                  <div class="guide-meta"><span>Mac Storage</span><span>·</span><span>9 min read</span></div>
-                  <h3 style="margin-top:6px;font-size:16px">Is It Safe to Delete ~/Library/Caches on a Mac? How to Clear Cache Safely</h3>
+                  <div class="guide-meta"><span>Developer Storage</span><span>·</span><span>6 min read</span></div>
+                  <h3 style="margin-top:6px;font-size:16px">iOS DeviceSupport and Simulators Taking 40 GB? What You Can Safely Remove</h3>
                 </div>
                 <span class="guide-more">Read guide →</span>
-              </a><a class="card guide-card" href="/guides/claude-code-cursor-codex-disk-space-mac/">
+              </a><a class="card guide-card" href="/guides/how-to-find-and-delete-old-node-modules-on-mac/">
                 <div>
-                  <div class="guide-meta"><span>AI &amp; Developer Storage</span><span>·</span><span>8 min read</span></div>
-                  <h3 style="margin-top:6px;font-size:16px">Claude Code, Cursor and Codex Eating Disk Space on Your Mac? Here&#39;s Where It Goes</h3>
+                  <div class="guide-meta"><span>Developer Storage</span><span>·</span><span>4 min read</span></div>
+                  <h3 style="margin-top:6px;font-size:16px">How to Find and Delete Old node_modules Folders on a Mac</h3>
                 </div>
                 <span class="guide-more">Read guide →</span>
-              </a><a class="card guide-card" href="/guides/best-disk-cleaners-mac-app-store/">
+              </a><a class="card guide-card" href="/guides/claude-code-worktrees-disk-space-mac/">
                 <div>
-                  <div class="guide-meta"><span>Buying Guides</span><span>·</span><span>15 min read</span></div>
-                  <h3 style="margin-top:6px;font-size:16px">Best Disk Cleaners on the Mac App Store (2026): Sandboxed, No Root &amp; One-Time Purchase Options</h3>
+                  <div class="guide-meta"><span>AI &amp; Developer Storage</span><span>·</span><span>9 min read</span></div>
+                  <h3 style="margin-top:6px;font-size:16px">Claude Code Worktrees Filling Your Disk? How to Find and Remove Leftover Git Worktrees</h3>
                 </div>
                 <span class="guide-more">Read guide →</span>
               </a>

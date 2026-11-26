@@ -4,7 +4,7 @@ description: Parallel Claude Code and Codex git worktrees duplicate node_modules
 target_query: claude code worktree
 category: AI & Developer Storage
 date: 2026-11-24
-updated: 2026-11-24
+updated: 2026-11-26
 image: /assets/screens/en-artifacts.webp
 ai_disclosure: Written by the CleanBit developer with AI assistance. All measurements were taken on a real developer Mac.
 ---
@@ -144,7 +144,7 @@ If your JS/TS projects use `pnpm`, also run `pnpm store prune` afterward so unre
 - **Prune right after merging**: Make `git worktree remove <path> && git worktree prune` part of your PR-merge habit instead of letting 20 parallel checkouts accumulate for months.
 - **Share package stores where possible**: `pnpm` hard-links packages from a single content-addressable store (`~/Library/pnpm`), dramatically reducing real disk consumption across multiple worktrees compared to standard `npm install` copies. (Note that `du` still counts each worktree's hard-linked `node_modules` unless deduplicated.)
 - **Share a Rust `CARGO_TARGET_DIR` (if appropriate)**: For Rust repos using parallel worktrees, pointing non-overlapping builds at a shared target cache—or running `cargo clean` when finishing a task—avoids keeping ten separate 15 GB `target/` folders on disk.
-- **Watch the rest of your AI & developer footprint**: Worktrees are only one half of agent storage. See our related guides on [tracking down Claude Code, Cursor, and Codex sessions and model caches](/guides/claude-code-cursor-codex-disk-space-mac/), [finding and deleting old `node_modules` folders on a Mac](/guides/how-to-find-and-delete-old-node-modules-on-mac/), [whether `~/Library/Caches` is safe to delete](/guides/is-it-safe-to-delete-library-caches-mac/), and [cleaning Xcode `DerivedData`](/guides/is-xcode-deriveddata-safe-to-delete/).
+- **Watch the rest of your AI & developer footprint**: Worktrees are only one half of agent storage. See our related guides on [tracking down Claude Code, Cursor, and Codex sessions and model caches](/guides/claude-code-cursor-codex-disk-space-mac/), [finding and deleting old `node_modules` folders on a Mac](/guides/how-to-find-and-delete-old-node-modules-on-mac/), [whether `~/Library/Caches` is safe to delete](/guides/is-it-safe-to-delete-library-caches-mac/), [cleaning Xcode `DerivedData`](/guides/is-xcode-deriveddata-safe-to-delete/), and our comparison of the [best CLI and GUI developer disk cleaners for Mac](/guides/best-developer-disk-cleaners-mac/).
 
 ## 5. Inspect worktree build artifacts visually with CleanBit (and honest limits)
 

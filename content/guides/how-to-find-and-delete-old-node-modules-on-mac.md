@@ -4,7 +4,7 @@ description: Measure how much space old node_modules folders take on macOS, remo
 target_query: delete node_modules mac
 category: Developer Storage
 date: 2026-11-21
-updated: 2026-11-24
+updated: 2026-11-26
 alt_slug: mac-delete-node-modules
 image: /assets/screens/en-artifacts.webp
 ai_disclosure: Written by the CleanBit developer with AI assistance. All measurements were taken on a real developer Mac.
@@ -76,7 +76,7 @@ I'm the developer of **CleanBit**, a sandboxed Mac App Store disk space cleaner 
 - Project build folders are categorized as **Review** (never pre-selected) and are always **moved to the Trash**, so you can put them back if you need to.
 - CleanBit also shows your `pnpm` store as **Info Only** (never deleted directly) and reminds you to use `pnpm store prune`.
 
-For other common macOS storage folders outside your project directories, see our guides on [whether `~/Library/Caches` is safe to delete](/guides/is-it-safe-to-delete-library-caches-mac/), [cleaning Xcode `DerivedData`](/guides/is-xcode-deriveddata-safe-to-delete/), and [reclaiming space from `iOS DeviceSupport` and Xcode Simulators](/guides/ios-devicesupport-and-simulators-disk-space-mac/).
+For other common macOS storage folders outside your project directories, see our guides on [whether `~/Library/Caches` is safe to delete](/guides/is-it-safe-to-delete-library-caches-mac/), [cleaning Xcode `DerivedData`](/guides/is-xcode-deriveddata-safe-to-delete/), [reclaiming space from `iOS DeviceSupport` and Xcode Simulators](/guides/ios-devicesupport-and-simulators-disk-space-mac/), or our side-by-side comparison of the [best CLI and GUI developer disk cleaners for Mac](/guides/best-developer-disk-cleaners-mac/).
 
 ![CleanBit Build Artifacts view showing project folders, last modified dates, and Git-safe selection](/assets/screens/en-artifacts.webp "CleanBit Build Artifacts lists project build folders with last-modified times and moves removed folders to the Trash.")
 
